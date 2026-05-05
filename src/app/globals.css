@@ -1,26 +1,178 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --font-archivo: "Archivo Black", sans-serif;
+    --font-manrope: "Manrope", sans-serif;
+    --font-jetbrains: "JetBrains Mono", monospace;
+
+    /* Core brand primitives */
+    --brand-red: #D81E2A;
+    --brand-red-hover: #B51822;
+    --brand-red-glow: rgba(216, 30, 42, 0.4);
+    --brand-jet: #0A0A0B;
+    --brand-jet-light: #111113;
+    --brand-graphite: #1E1E22;
+    --brand-graphite-light: #2A2A30;
+    --brand-ash: #3A3A42;
+    --brand-silver: #8A8A95;
+    --brand-smoke: #C4C4CC;
+    --brand-white: #F5F5F7;
+    --brand-cream: #E8E8EC;
+
+    /* Semantic surface tokens */
+    --surface-base: var(--brand-jet);
+    --surface-elevated: var(--brand-jet-light);
+    --surface-card: var(--brand-graphite);
+    --surface-card-hover: var(--brand-graphite-light);
+    --surface-border: var(--brand-ash);
+
+    /* Semantic text tokens */
+    --text-primary: var(--brand-white);
+    --text-secondary: var(--brand-smoke);
+    --text-tertiary: var(--brand-silver);
+    --text-muted: var(--brand-ash);
+
+    /* Motion tokens */
+    --duration-fast: 150ms;
+    --duration-base: 250ms;
+    --duration-slow: 400ms;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+  }
+
+  * {
+    @apply border-brand-graphite/30;
+  }
+
+  html {
+    @apply bg-brand-jet text-brand-white antialiased;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-brand-jet text-brand-white font-body text-body-md;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-brand-white tracking-tight;
+  }
+
+  h1 {
+    @apply text-display-lg md:text-display-xl;
+  }
+
+  h2 {
+    @apply text-display-md md:text-display-lg;
+  }
+
+  h3 {
+    @apply text-display-sm md:text-display-md;
+  }
+
+  p {
+    @apply text-brand-smoke;
+  }
+
+  a {
+    @apply text-brand-white transition-colors duration-200;
+  }
+
+  a:hover {
+    @apply text-brand-red;
+  }
+
+  code, pre {
+    @apply font-mono text-caption;
+  }
+
+  ::selection {
+    @apply bg-brand-red/30 text-brand-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-brand-jet;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-brand-graphite rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-brand-silver;
+  }
+
+  /* Focus visible ring for accessibility */
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-red ring-offset-2 ring-offset-brand-jet;
+  }
+
+  /* Remove default button styles */
+  button {
+    @apply cursor-pointer;
+  }
+
+  button:disabled {
+    @apply cursor-not-allowed opacity-50;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Utility: subtle gradient overlay for hero sections */
+  .gradient-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(10, 10, 11, 0) 0%,
+      rgba(10, 10, 11, 0.6) 60%,
+      rgba(10, 10, 11, 1) 100%
+    );
+  }
+
+  /* Utility: red accent line */
+  .accent-line {
+    @apply h-px w-16 bg-brand-red;
+  }
+
+  /* Utility: glass card effect */
+  .glass-card {
+    @apply bg-brand-graphite/80 backdrop-blur-md border border-brand-ash/40;
+  }
+
+  /* Utility: section container */
+  .section-container {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer utilities {
+  /* Text gradient utility */
+  .text-gradient-red {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #D81E2A 0%, #FF4D5A 100%);
+  }
+
+  /* Prevent layout shift from scrollbar */
+  .scrollbar-stable {
+    scrollbar-gutter: stable;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
