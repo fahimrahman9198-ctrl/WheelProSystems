@@ -134,7 +134,7 @@ export default function BookingPage() {
                     </li>
                   ))}
                 </ul>
-                <Button href="/contact" variant="primary" size="lg" rightIcon={<IconArrowRight />}>
+                <Button href="/booking/wizard" variant="primary" size="lg" rightIcon={<IconArrowRight />}>
                   Book Drop-Off Time
                 </Button>
               </div>
@@ -170,7 +170,7 @@ export default function BookingPage() {
                     </li>
                   ))}
                 </ul>
-                <Button href="/contact" variant="secondary" size="lg" rightIcon={<IconArrowRight />}>
+                <Button href="/booking/wizard" variant="secondary" size="lg" rightIcon={<IconArrowRight />}>
                   Book Mobile Service
                 </Button>
               </div>

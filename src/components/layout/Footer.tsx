@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const footerColumns = [
   {
@@ -75,9 +76,14 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link href="/" className="mb-4 flex items-center gap-3 hover:opacity-90 transition-opacity w-fit">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-red">
-                <span className="font-display text-sm text-brand-white">W</span>
-              </span>
+              <Image
+                src="/images/logo.PNG"
+                alt=""
+                height={40}
+                width={135}
+                style={{ height: '40px', width: 'auto' }}
+                className="object-contain brightness-0 invert"
+              />
               <span className="font-display text-body-md tracking-tight text-brand-white">
                 Western <span className="text-brand-red">Wheelcraft</span>
               </span>

@@ -1,9 +1,11 @@
 'use client';
 
 import { useState, useCallback, useRef, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
+import { saveQuote, calcPricing } from '@/lib/payment-utils';
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -267,6 +269,7 @@ function levelFromPct(pct: number): DamageLevel {
 // ── Main Page ────────────────────────────────────────────────────────────────
 
 export default function EstimatePage() {
+  const router = useRouter();
   const [step, setStep]           = useState(1);
   const [dir, setDir]             = useState(1);
   const [photos, setPhotos]       = useState<File[]>([]);
@@ -1098,7 +1101,21 @@ export default function EstimatePage() {
 
                       {/* CTAs */}
                       <div className="flex flex-col gap-3 sm:flex-row">
-                        <Button href="/booking" variant="primary" size="lg" rightIcon={<IconArrowRight />} className="flex-1 justify-center">
+                        <Button
+                          variant="primary"
+                          size="lg"
+                          rightIcon={<IconArrowRight />}
+                          className="flex-1 justify-center"
+                          onClick={() => {
+                            saveQuote({
+                              vehicle,
+                              damage,
+                              finish,
+                              pricing: calcPricing(damage, vehicle.wheelSize, finish.type, vehicle.region, vehicle.wheelCount),
+                            });
+                            router.push('/quote/checkout');
+                          }}
+                        >
                           Book This Service
                         </Button>
                         <Button href="tel:+16047106174" variant="secondary" size="lg" leftIcon={<IconPhone />} className="flex-1 justify-center">
