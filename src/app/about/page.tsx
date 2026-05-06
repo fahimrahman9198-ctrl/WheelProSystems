@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardTitle, CardDescription } from '@/components/ui/Card';
 import { FadeIn } from '@/components/ui/FadeIn';
@@ -179,20 +180,14 @@ export default function AboutPage() {
               </div>
             </FadeIn>
             <FadeIn delay={100}>
-              {/* Placeholder image */}
-              <div className="relative overflow-hidden rounded-3xl bg-brand-graphite aspect-[4/3] flex items-center justify-center">
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-graphite-light to-brand-graphite" />
-                <div className="relative text-center px-8">
-                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-red/20 text-brand-red">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                      <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="1.5" />
-                      <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" strokeWidth="1.5" />
-                      <path d="M21 15l-5-5L5 21" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-                    </svg>
-                  </div>
-                  <p className="font-body text-body-sm text-brand-silver">Shop Photo Placeholder</p>
-                  <p className="font-body text-caption text-brand-ash mt-1">3756 Napier St, Burnaby BC</p>
-                </div>
+              <div className="relative overflow-hidden rounded-3xl aspect-[4/3] shadow-card group">
+                <Image
+                  src="/images/wheel-detail.jpg"
+                  alt="Western Wheelcraft workshop — precision wheel refinishing"
+                  fill
+                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
             </FadeIn>
           </div>
@@ -307,24 +302,25 @@ export default function AboutPage() {
               </p>
             </div>
           </FadeIn>
+          <FadeIn delay={80}>
+            <div className="relative mb-8 overflow-hidden rounded-3xl aspect-[16/7] shadow-card group">
+              <Image
+                src="/images/team.jpg"
+                alt="The Western Wheelcraft team"
+                fill
+                className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 90vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-jet/50 via-transparent to-transparent" aria-hidden="true" />
+            </div>
+          </FadeIn>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {team.map((member, i) => (
               <FadeIn key={member.name} delay={i * 70}>
-                <div className="overflow-hidden rounded-2xl border border-brand-graphite bg-brand-graphite">
-                  {/* Photo placeholder */}
-                  <div className="flex aspect-square items-center justify-center bg-gradient-to-br from-brand-graphite-light to-brand-ash">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-red/20 text-brand-red">
-                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-                        <circle cx="12" cy="7" r="4" stroke="currentColor" strokeWidth="1.75" />
-                      </svg>
-                    </div>
-                  </div>
-                  <div className="p-5">
-                    <h3 className="font-display text-body-md text-brand-white">{member.name}</h3>
-                    <p className="font-body text-body-sm text-brand-red">{member.role}</p>
-                    <p className="mt-1 font-body text-caption text-brand-silver">{member.years}</p>
-                  </div>
+                <div className="rounded-2xl border border-brand-graphite bg-brand-graphite p-5">
+                  <h3 className="font-display text-body-md text-brand-white">{member.name}</h3>
+                  <p className="font-body text-body-sm text-brand-red">{member.role}</p>
+                  <p className="mt-1 font-body text-caption text-brand-silver">{member.years}</p>
                 </div>
               </FadeIn>
             ))}

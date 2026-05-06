@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { FadeIn } from '@/components/ui/FadeIn';
 
@@ -227,6 +228,28 @@ export default function RegionsPage() {
       {/* Section B — Mobile Fleet */}
       <section className="bg-brand-jet-light py-20">
         <div className="section-container">
+          <FadeIn>
+            <div className="relative mb-10 overflow-hidden rounded-3xl aspect-[21/9] shadow-card group">
+              <Image
+                src="/images/fleet-van.jpg"
+                alt="Western Wheelcraft mobile fleet service van"
+                fill
+                className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 90vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-brand-jet/70 via-brand-jet/20 to-transparent" aria-hidden="true" />
+              <div className="absolute inset-0 flex items-center p-8 md:p-12">
+                <div>
+                  <span className="mb-3 inline-flex items-center rounded-full bg-brand-red px-3 py-1.5 font-body text-caption font-bold text-brand-white">
+                    Mobile Fleet Service
+                  </span>
+                  <p className="font-display text-display-sm md:text-display-md text-brand-white">
+                    We Come to You
+                  </p>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
           <FadeIn>
             <div className="mb-4 flex items-center gap-4">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-red/10 text-brand-red">

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
@@ -50,12 +51,14 @@ export function Header() {
           className="flex items-center gap-3 hover:opacity-90 transition-opacity"
           onClick={() => setMobileOpen(false)}
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-red">
-            <span className="font-display text-sm text-brand-white">W</span>
-          </span>
-          <span className="font-display text-body-md tracking-tight text-brand-white">
-            Western <span className="text-brand-red">Wheelcraft</span>
-          </span>
+          <Image
+            src="/images/logo.PNG"
+            alt="Western Wheelcraft"
+            height={45}
+            width={150}
+            style={{ height: '45px', width: 'auto' }}
+            className="object-contain"
+          />
         </Link>
 
         <nav className="hidden items-center gap-0.5 md:flex" aria-label="Main navigation">

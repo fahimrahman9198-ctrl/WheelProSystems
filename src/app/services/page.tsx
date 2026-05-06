@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent, CardTitle, CardDescription } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -135,6 +136,14 @@ export default function ServicesPage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-brand-jet py-24">
+        <Image
+          src="/images/wheel-detail.jpg"
+          alt=""
+          fill
+          className="object-cover object-center"
+          preload
+        />
+        <div className="absolute inset-0 bg-brand-jet/85" aria-hidden="true" />
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-brand-red/5 blur-3xl" />
         </div>
@@ -193,6 +202,42 @@ export default function ServicesPage() {
               </FadeIn>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* OEM Work Showcase */}
+      <section className="bg-brand-jet py-16">
+        <div className="section-container">
+          <FadeIn>
+            <div className="grid items-center gap-8 md:grid-cols-2">
+              <div className="relative overflow-hidden rounded-3xl aspect-[4/3] shadow-card group">
+                <Image
+                  src="/images/before-after-porsche.jpg"
+                  alt="OEM colour-matched wheel refinishing on a Porsche"
+                  fill
+                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+              <div>
+                <div className="accent-line mb-5" aria-hidden="true" />
+                <h2 className="mb-4 font-display text-display-sm md:text-display-md text-brand-white">
+                  OEM Results, Every Time
+                </h2>
+                <p className="mb-4 font-body text-body-md text-brand-smoke leading-relaxed">
+                  Spectrophotometer-matched paint, factory-accurate processes, and meticulous
+                  prep work means your wheels are indistinguishable from the original — or better.
+                </p>
+                <p className="mb-6 font-body text-body-md text-brand-smoke leading-relaxed">
+                  Whether it&rsquo;s a Porsche, a daily driver, or a dealership fleet — the
+                  standard never changes.
+                </p>
+                <Button href="/quote" variant="primary" size="md" rightIcon={<IconArrowRight />}>
+                  Get a Free Quote
+                </Button>
+              </div>
+            </div>
+          </FadeIn>
         </div>
       </section>
 

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardTitle, CardDescription } from '@/components/ui/Card';
 import { FadeIn } from '@/components/ui/FadeIn';
@@ -122,6 +123,14 @@ export default function DealershipsPage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-brand-jet py-28">
+        <Image
+          src="/images/ferrari-vans.jpg"
+          alt=""
+          fill
+          className="object-cover object-center"
+          preload
+        />
+        <div className="absolute inset-0 bg-brand-jet/80" aria-hidden="true" />
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full bg-brand-red/5 blur-3xl" />
           <div className="absolute -left-20 bottom-0 h-[400px] w-[400px] rounded-full bg-brand-red/4 blur-3xl" />
@@ -244,6 +253,18 @@ export default function DealershipsPage() {
             <div className="mb-12 text-center">
               <div className="accent-line mx-auto mb-5" aria-hidden="true" />
               <h2 className="font-display text-display-md text-brand-white">What Our Partners Say</h2>
+            </div>
+          </FadeIn>
+          <FadeIn delay={60}>
+            <div className="relative mb-10 overflow-hidden rounded-3xl aspect-[21/9] shadow-card group">
+              <Image
+                src="/images/ferrari-shop.jpg"
+                alt="Ferrari at Western Wheelcraft's Burnaby shop"
+                fill
+                className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 90vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-jet/40 via-transparent to-transparent" aria-hidden="true" />
             </div>
           </FadeIn>
           <div className="grid gap-5 md:grid-cols-3">

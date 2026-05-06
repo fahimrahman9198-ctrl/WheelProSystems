@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/Card";
@@ -165,6 +166,14 @@ export default function HomePage() {
     <>
       {/* ── Hero ── */}
       <section className="relative overflow-hidden bg-brand-jet">
+        <Image
+          src="/images/hero-brand.jpg"
+          alt=""
+          fill
+          className="object-cover object-center"
+          preload
+        />
+        <div className="absolute inset-0 bg-brand-jet/80" aria-hidden="true" />
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 overflow-hidden"
@@ -278,6 +287,44 @@ export default function HomePage() {
               View All Services
             </Button>
           </div>
+        </div>
+      </section>
+
+      {/* ── Our Work ── */}
+      <section className="py-24 bg-brand-jet-light">
+        <div className="section-container">
+          <FadeIn>
+            <div className="mb-12 flex flex-col items-center gap-4 text-center">
+              <div className="accent-line" aria-hidden="true" />
+              <h2 className="font-display text-display-md md:text-display-lg text-brand-white">
+                Our Work
+              </h2>
+              <p className="max-w-xl font-body text-body-lg text-brand-smoke">
+                Results that speak for themselves. Every wheel leaves our shop looking factory-new — or better.
+              </p>
+            </div>
+          </FadeIn>
+          <FadeIn delay={80}>
+            <div className="relative overflow-hidden rounded-3xl aspect-[16/9] shadow-card group">
+              <Image
+                src="/images/before-after-porsche.jpg"
+                alt="Before and after wheel refinishing on a Porsche"
+                fill
+                className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 90vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-jet/60 via-transparent to-transparent" aria-hidden="true" />
+              <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+                <div>
+                  <p className="font-display text-display-sm text-brand-white">Porsche — Wheel Refinishing</p>
+                  <p className="font-body text-body-sm text-brand-smoke">OEM colour match · Curb rash repair</p>
+                </div>
+                <Button href="/services" variant="primary" size="sm" rightIcon={<IconArrowRight />}>
+                  See All Services
+                </Button>
+              </div>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
