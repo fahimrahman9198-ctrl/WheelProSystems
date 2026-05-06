@@ -53,12 +53,15 @@ export function Header() {
         >
           <Image
             src="/images/logo.PNG"
-            alt="Western Wheelcraft"
+            alt=""
             height={45}
             width={150}
             style={{ height: '45px', width: 'auto' }}
             className="object-contain brightness-0 invert"
           />
+          <span className="font-display text-body-md tracking-tight text-brand-white">
+            Western <span className="text-brand-red">Wheelcraft</span>
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-0.5 md:flex" aria-label="Main navigation">
