@@ -339,7 +339,7 @@ export default function AboutPage() {
               Drop in, call, or send photos. We&rsquo;ll have a quote to you within a few hours.
             </p>
             <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-              <Button href="/quote" variant="primary" size="lg" rightIcon={<IconArrowRight />}>
+              <Button href="/quote/estimate" variant="primary" size="lg" rightIcon={<IconArrowRight />}>
                 Get a Free Quote
               </Button>
               <Button href="/contact" variant="secondary" size="lg">

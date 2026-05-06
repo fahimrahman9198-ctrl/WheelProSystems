@@ -82,7 +82,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button href="/quote" variant="primary" size="sm" rightIcon={<IconPhone />}>
+          <Button href="/quote/estimate" variant="primary" size="sm" rightIcon={<IconPhone />}>
             Get a Quote
           </Button>
           <button

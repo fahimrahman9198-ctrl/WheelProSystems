@@ -162,7 +162,7 @@ export default function ServicesPage() {
             lifetime workmanship warranty and 35+ years of expertise.
           </p>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Button href="/quote" variant="primary" size="lg" rightIcon={<IconArrowRight />}>
+            <Button href="/quote/estimate" variant="primary" size="lg" rightIcon={<IconArrowRight />}>
               Get a Free Quote
             </Button>
             <Button href="/contact" variant="secondary" size="lg">
@@ -232,7 +232,7 @@ export default function ServicesPage() {
                   Whether it&rsquo;s a Porsche, a daily driver, or a dealership fleet — the
                   standard never changes.
                 </p>
-                <Button href="/quote" variant="primary" size="md" rightIcon={<IconArrowRight />}>
+                <Button href="/quote/estimate" variant="primary" size="md" rightIcon={<IconArrowRight />}>
                   Get a Free Quote
                 </Button>
               </div>
@@ -325,7 +325,7 @@ export default function ServicesPage() {
             <p className="mx-auto mb-8 max-w-md font-body text-body-lg text-brand-smoke">
               Send us a photo of your wheels and we&rsquo;ll recommend the right service and provide a free estimate.
             </p>
-            <Button href="/quote" variant="primary" size="lg" rightIcon={<IconArrowRight />}>
+            <Button href="/quote/estimate" variant="primary" size="lg" rightIcon={<IconArrowRight />}>
               Get Free Estimate
             </Button>
           </FadeIn>

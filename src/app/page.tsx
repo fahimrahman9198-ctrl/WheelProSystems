@@ -205,7 +205,7 @@ export default function HomePage() {
 
           <div className="flex flex-col items-center gap-4 sm:flex-row">
             <Button
-              href="/quote"
+              href="/quote/estimate"
               variant="primary"
               size="lg"
               rightIcon={<IconArrowRight />}
@@ -418,7 +418,7 @@ export default function HomePage() {
                   >
                     Call 604.710.6174
                   </Button>
-                  <Button href="/quote" variant="secondary" size="lg">
+                  <Button href="/quote/estimate" variant="secondary" size="lg">
                     Get a Free Quote
                   </Button>
                 </div>

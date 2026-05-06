@@ -314,7 +314,7 @@ export default function RegionsPage() {
               Tell us where you are and what you need — we&rsquo;ll confirm availability and schedule your service.
             </p>
             <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-              <Button href="/quote" variant="primary" size="lg" rightIcon={<IconArrowRight />}>
+              <Button href="/quote/estimate" variant="primary" size="lg" rightIcon={<IconArrowRight />}>
                 Get a Free Quote
               </Button>
               <Button href="/contact" variant="secondary" size="lg">
