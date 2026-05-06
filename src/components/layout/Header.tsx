@@ -57,7 +57,7 @@ export function Header() {
             height={45}
             width={150}
             style={{ height: '45px', width: 'auto' }}
-            className="object-contain"
+            className="object-contain brightness-0 invert"
           />
         </Link>
 
