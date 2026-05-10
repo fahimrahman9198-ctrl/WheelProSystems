@@ -31,6 +31,16 @@ interface FinishSelection {
   customColor: string;
 }
 
+interface ContactInfo {
+  fullName: string;
+  email: string;
+  phone: string;
+  location: string;
+  otherCity: string;
+  marketingConsent: boolean;
+  contactConsent: boolean;
+}
+
 // ── Data ─────────────────────────────────────────────────────────────────────
 
 const MAKES = [
@@ -56,11 +66,28 @@ const REGIONS = [
 ];
 
 const FINISHES = [
-  { value: 'oem',     label: 'OEM Color Match', description: 'Factory-accurate spectrophotometer match', premium: 50  },
-  { value: 'custom',  label: 'Custom Color',    description: 'Any colour of your choosing',              premium: 0   },
-  { value: 'chrome',  label: 'Chrome',          description: 'High-gloss mirror chrome finish',          premium: 100 },
-  { value: 'powder',  label: 'Powder Coat',     description: 'Durable electrostatically applied coat',  premium: 0   },
-  { value: 'two-tone',label: 'Two-Tone',        description: 'Dual-colour accent design',               premium: 75  },
+  { value: 'oem',      label: 'OEM Color Match', description: 'Factory-accurate spectrophotometer match', premium: 50  },
+  { value: 'custom',   label: 'Custom Color',    description: 'Any colour of your choosing',              premium: 0   },
+  { value: 'chrome',   label: 'Chrome',          description: 'High-gloss mirror chrome finish',          premium: 100 },
+  { value: 'powder',   label: 'Powder Coat',     description: 'Durable electrostatically applied coat',  premium: 0   },
+  { value: 'two-tone', label: 'Two-Tone',        description: 'Dual-colour accent design',               premium: 75  },
+];
+
+const LOCATION_GROUPS = [
+  {
+    group: 'Lower Mainland',
+    cities: ['Vancouver', 'Burnaby', 'Surrey', 'Richmond', 'Coquitlam', 'Port Coquitlam',
+             'Langley', 'North Vancouver', 'West Vancouver', 'Delta', 'New Westminster',
+             'Abbotsford', 'White Rock', 'Pitt Meadows', 'Maple Ridge'],
+  },
+  {
+    group: 'Vancouver Island',
+    cities: ['Victoria', 'Nanaimo', 'Duncan', 'Langford', 'Courtenay'],
+  },
+  {
+    group: 'Okanagan & Interior',
+    cities: ['Kelowna', 'Penticton', 'Vernon', 'West Kelowna', 'Kamloops'],
+  },
 ];
 
 const STEP_LABELS = [
@@ -68,8 +95,11 @@ const STEP_LABELS = [
   'Vehicle Info',
   'AI Analysis',
   'Select Finish',
+  'Your Details',
   'Your Quote',
 ];
+
+const TOTAL_STEPS = 6;
 
 // ── Pricing helpers ───────────────────────────────────────────────────────────
 
@@ -90,6 +120,17 @@ function getRegionFee(region: string): number {
 
 function getFinishPremium(type: string): number {
   return FINISHES.find(f => f.value === type)?.premium ?? 0;
+}
+
+function formatPhone(raw: string): string {
+  const digits = raw.replace(/\D/g, '').slice(0, 10);
+  if (digits.length <= 3) return digits;
+  if (digits.length <= 6) return `${digits.slice(0, 3)}.${digits.slice(3)}`;
+  return `${digits.slice(0, 3)}.${digits.slice(3, 6)}.${digits.slice(6)}`;
+}
+
+function isValidEmail(email: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 // ── Animation variants ────────────────────────────────────────────────────────
@@ -160,6 +201,30 @@ function IconWarning() {
     </svg>
   );
 }
+function IconMail() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" strokeWidth="1.75" strokeLinejoin="round" />
+      <path d="M22 6l-10 7L2 6" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+    </svg>
+  );
+}
+function IconMapPin() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" stroke="currentColor" strokeWidth="1.75" strokeLinejoin="round" />
+      <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="1.75" />
+    </svg>
+  );
+}
+function IconUser() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="12" cy="7" r="4" stroke="currentColor" strokeWidth="1.75" />
+    </svg>
+  );
+}
 
 // ── Shared UI ────────────────────────────────────────────────────────────────
 
@@ -167,7 +232,7 @@ function StepHeading({ step, title, subtitle }: { step: number; title: string; s
   return (
     <div className="mb-8">
       <p className="mb-1.5 font-body text-caption font-semibold uppercase tracking-widest text-brand-red">
-        Step {step} of 5
+        Step {step} of {TOTAL_STEPS}
       </p>
       <h1 className="mb-2 font-display text-display-sm md:text-display-md text-brand-white">{title}</h1>
       {subtitle && <p className="font-body text-body-md text-brand-smoke">{subtitle}</p>}
@@ -198,19 +263,35 @@ function SelectField({
 }
 
 function TextField({
-  label, value, onChange, placeholder, list,
-}: { label: string; value: string; onChange: (v: string) => void; placeholder?: string; list?: string }) {
+  label, value, onChange, placeholder, type = 'text', icon, error,
+}: {
+  label: string; value: string; onChange: (v: string) => void;
+  placeholder?: string; type?: string; icon?: React.ReactNode; error?: string;
+}) {
   return (
     <div className="flex flex-col gap-1.5">
       <label className="font-body text-body-sm font-semibold text-brand-white">{label}</label>
-      <input
-        type="text"
-        value={value}
-        onChange={e => onChange(e.target.value)}
-        placeholder={placeholder}
-        list={list}
-        className="w-full rounded-xl border border-brand-ash bg-brand-graphite px-4 py-3 font-body text-body-sm text-brand-white placeholder-brand-silver focus:border-brand-red focus:outline-none focus:ring-1 focus:ring-brand-red transition-colors duration-200"
-      />
+      <div className="relative">
+        {icon && (
+          <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-brand-silver">
+            {icon}
+          </span>
+        )}
+        <input
+          type={type}
+          value={value}
+          onChange={e => onChange(e.target.value)}
+          placeholder={placeholder}
+          className={cn(
+            'w-full rounded-xl border bg-brand-graphite px-4 py-3 font-body text-body-sm text-brand-white placeholder-brand-silver focus:outline-none focus:ring-1 transition-colors duration-200',
+            icon && 'pl-10',
+            error
+              ? 'border-brand-red focus:border-brand-red focus:ring-brand-red'
+              : 'border-brand-ash focus:border-brand-red focus:ring-brand-red'
+          )}
+        />
+      </div>
+      {error && <p className="font-body text-caption text-brand-red">{error}</p>}
     </div>
   );
 }
@@ -260,12 +341,6 @@ const DAMAGE_DESCRIPTIONS: Record<DamageLevel, string> = {
   heavy:  '70–95% — Structural damage, deep gouges',
 };
 
-function levelFromPct(pct: number): DamageLevel {
-  if (pct <= 30) return 'light';
-  if (pct <= 70) return 'medium';
-  return 'heavy';
-}
-
 // ── Main Page ────────────────────────────────────────────────────────────────
 
 export default function EstimatePage() {
@@ -285,6 +360,11 @@ export default function EstimatePage() {
   const [analyzed, setAnalyzed]   = useState(false);
   const [damage, setDamage]       = useState<WheelDamage[]>([]);
   const [finish, setFinish]       = useState<FinishSelection>({ type: 'oem', customColor: '#D81E2A' });
+  const [contact, setContact]     = useState<ContactInfo>({
+    fullName: '', email: '', phone: '', location: '', otherCity: '',
+    marketingConsent: false, contactConsent: false,
+  });
+  const [contactErrors, setContactErrors] = useState<Partial<Record<keyof ContactInfo, string>>>({});
   const fileRef = useRef<HTMLInputElement>(null);
 
   const go = (next: number) => {
@@ -335,7 +415,6 @@ export default function EstimatePage() {
     setAnalyzing(true);
     setAnalyzed(false);
     setTimeout(() => {
-      // Weighted random damage: mostly light, some medium, rare heavy
       const weights: DamageLevel[] = ['light','light','light','medium','medium','heavy'];
       const generated: WheelDamage[] = Array.from({ length: vehicle.wheelCount }, (_, i) => {
         const level = i === 0
@@ -356,6 +435,22 @@ export default function EstimatePage() {
     if (step === 3 && !analyzed) runAnalysis();
   }, [step, analyzed, runAnalysis]);
 
+  // ── Contact validation ──
+
+  function validateContact(): boolean {
+    const errors: Partial<Record<keyof ContactInfo, string>> = {};
+    if (!contact.fullName.trim()) errors.fullName = 'Full name is required';
+    if (!contact.email.trim()) errors.email = 'Email is required';
+    else if (!isValidEmail(contact.email)) errors.email = 'Enter a valid email address';
+    if (!contact.phone.trim()) errors.phone = 'Phone number is required';
+    else if (contact.phone.replace(/\D/g, '').length < 10) errors.phone = 'Enter a 10-digit phone number';
+    if (!contact.location) errors.location = 'Please select your city/region';
+    if (contact.location === 'other' && !contact.otherCity.trim()) errors.otherCity = 'Please enter your city';
+    if (!contact.contactConsent) errors.contactConsent = 'You must agree to be contacted about your quote';
+    setContactErrors(errors);
+    return Object.keys(errors).length === 0;
+  }
+
   // ── Pricing ──
 
   const hasHeavy       = damage.some(d => d.level === 'heavy');
@@ -364,12 +459,12 @@ export default function EstimatePage() {
   const fp = getFinishPremium(finish.type);
   const rf = getRegionFee(vehicle.region);
 
-  const wheelTotal  = billableWheels.reduce((sum, d) => sum + basePrice(d.level) + sp + fp, 0);
-  const discountPct = vehicle.wheelCount === 4 && billableWheels.length === 4 ? 0.1 : 0;
+  const wheelTotal    = billableWheels.reduce((sum, d) => sum + basePrice(d.level) + sp + fp, 0);
+  const discountPct   = vehicle.wheelCount === 4 && billableWheels.length === 4 ? 0.1 : 0;
   const afterDiscount = wheelTotal * (1 - discountPct);
-  const subtotal    = afterDiscount + rf;
-  const gst         = subtotal * 0.05;
-  const total       = subtotal + gst;
+  const subtotal      = afterDiscount + rf;
+  const gst           = subtotal * 0.05;
+  const total         = subtotal + gst;
 
   const years = Array.from({ length: 27 }, (_, i) => (2026 - i).toString());
 
@@ -382,14 +477,14 @@ export default function EstimatePage() {
         <div className="section-container py-4">
           <div className="mb-3 flex items-center justify-between">
             <p className="font-body text-caption text-brand-silver">
-              Step <span className="font-semibold text-brand-white">{step}</span> of 5
+              Step <span className="font-semibold text-brand-white">{step}</span> of {TOTAL_STEPS}
             </p>
             <p className="font-body text-caption text-brand-smoke">{STEP_LABELS[step - 1]}</p>
           </div>
           <div className="h-1 w-full overflow-hidden rounded-full bg-brand-graphite">
             <motion.div
               className="h-full rounded-full bg-brand-red"
-              animate={{ width: `${(step / 5) * 100}%` }}
+              animate={{ width: `${(step / TOTAL_STEPS) * 100}%` }}
               transition={transition}
             />
           </div>
@@ -440,7 +535,6 @@ export default function EstimatePage() {
                     subtitle="Add 2–4 photos of your wheels. Include close-ups of any damage and a full-wheel shot."
                   />
 
-                  {/* Drop zone */}
                   <div
                     onClick={() => fileRef.current?.click()}
                     onDragOver={onDragOver}
@@ -477,7 +571,6 @@ export default function EstimatePage() {
                     />
                   </div>
 
-                  {/* Photo thumbnails */}
                   {photoUrls.length > 0 && (
                     <motion.div
                       initial={{ opacity: 0, y: 12 }}
@@ -514,7 +607,6 @@ export default function EstimatePage() {
                     </motion.div>
                   )}
 
-                  {/* Counter & tip */}
                   <div className="mt-4 flex items-center justify-between">
                     <p className="font-body text-body-sm text-brand-silver">
                       {photos.length === 0
@@ -552,7 +644,6 @@ export default function EstimatePage() {
                         {years.map(y => <option key={y} value={y}>{y}</option>)}
                       </SelectField>
 
-                      {/* Make with autocomplete */}
                       <div className="relative flex flex-col gap-1.5">
                         <label className="font-body text-body-sm font-semibold text-brand-white">Make</label>
                         <input
@@ -617,7 +708,6 @@ export default function EstimatePage() {
                       ))}
                     </SelectField>
 
-                    {/* Wheel count stepper */}
                     <div className="flex flex-col gap-1.5">
                       <label className="font-body text-body-sm font-semibold text-brand-white">Number of Wheels</label>
                       <div className="flex items-center gap-4">
@@ -669,7 +759,6 @@ export default function EstimatePage() {
                         exit={{ opacity: 0 }}
                         className="flex flex-col items-center gap-8 py-16"
                       >
-                        {/* Animated scanner */}
                         <div className="relative flex h-32 w-32 items-center justify-center">
                           <div className="absolute inset-0 rounded-full border-2 border-brand-red/20" />
                           <motion.div
@@ -682,9 +771,7 @@ export default function EstimatePage() {
                             animate={{ rotate: -360 }}
                             transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
                           />
-                          <div className="z-10 text-brand-red">
-                            <IconSpark />
-                          </div>
+                          <div className="z-10 text-brand-red"><IconSpark /></div>
                         </div>
                         <div className="text-center">
                           <p className="font-display text-display-sm text-brand-white">Analysing your photos…</p>
@@ -692,7 +779,6 @@ export default function EstimatePage() {
                             Detecting damage severity and surface condition
                           </p>
                         </div>
-                        {/* Scanning lines */}
                         <div className="w-full max-w-sm space-y-2">
                           {['Scanning wheel surfaces…', 'Measuring damage depth…', 'Calculating repair scope…'].map((msg, i) => (
                             <motion.div
@@ -719,7 +805,6 @@ export default function EstimatePage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={transition}
                       >
-                        {/* Summary banner */}
                         <div className="mb-6 rounded-2xl border border-brand-red/20 bg-brand-graphite px-5 py-4">
                           <div className="flex items-start gap-3">
                             <div className="mt-0.5 text-brand-red"><IconSpark /></div>
@@ -744,7 +829,6 @@ export default function EstimatePage() {
                           </div>
                         </div>
 
-                        {/* Per-wheel breakdown */}
                         <div className="flex flex-col gap-4">
                           {damage.map((w, i) => (
                             <motion.div
@@ -767,7 +851,6 @@ export default function EstimatePage() {
                                 </span>
                               </div>
 
-                              {/* Severity bar */}
                               <div className="mb-4">
                                 <div className="mb-1 flex justify-between font-body text-caption text-brand-silver">
                                   <span>Damage severity</span>
@@ -783,7 +866,6 @@ export default function EstimatePage() {
                                 </div>
                               </div>
 
-                              {/* Adjust damage level */}
                               <div>
                                 <p className="mb-2 font-body text-caption text-brand-silver">AI incorrect? Adjust below:</p>
                                 <div className="flex gap-2">
@@ -866,15 +948,12 @@ export default function EstimatePage() {
                             : 'border-brand-graphite bg-brand-graphite hover:border-brand-ash'
                         )}
                       >
-                        {/* Radio dot */}
                         <div className={cn(
                           'flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors duration-200',
                           finish.type === f.value ? 'border-brand-red bg-brand-red' : 'border-brand-ash bg-transparent'
                         )}>
                           {finish.type === f.value && <div className="h-2 w-2 rounded-full bg-white" />}
                         </div>
-
-                        {/* Finish swatch */}
                         <div className={cn(
                           'h-10 w-10 shrink-0 rounded-xl border border-brand-ash/60',
                           f.value === 'oem'      ? 'bg-gradient-to-br from-brand-silver to-brand-ash'
@@ -885,14 +964,12 @@ export default function EstimatePage() {
                         )}
                           style={f.value === 'custom' ? { backgroundColor: finish.customColor } : {}}
                         />
-
                         <div className="flex-1">
                           <div className="flex items-baseline gap-2">
                             <p className="font-display text-body-md text-brand-white">{f.label}</p>
                             <p className="font-body text-caption text-brand-silver">{f.description}</p>
                           </div>
                         </div>
-
                         <div className="shrink-0 text-right">
                           {f.premium > 0
                             ? <p className="font-display text-body-sm text-brand-red">+${f.premium}/wheel</p>
@@ -902,7 +979,6 @@ export default function EstimatePage() {
                     ))}
                   </div>
 
-                  {/* Custom color picker */}
                   <AnimatePresence>
                     {finish.type === 'custom' && (
                       <motion.div
@@ -914,20 +990,17 @@ export default function EstimatePage() {
                         <div className="rounded-2xl border border-brand-graphite bg-brand-graphite p-5">
                           <p className="mb-3 font-body text-body-sm font-semibold text-brand-white">Pick Your Color</p>
                           <div className="flex items-center gap-4">
-                            <div className="relative">
-                              <input
-                                type="color"
-                                value={finish.customColor}
-                                onChange={e => setFinish(s => ({ ...s, customColor: e.target.value }))}
-                                className="h-12 w-12 cursor-pointer rounded-xl border-2 border-brand-ash bg-transparent p-0.5"
-                              />
-                            </div>
+                            <input
+                              type="color"
+                              value={finish.customColor}
+                              onChange={e => setFinish(s => ({ ...s, customColor: e.target.value }))}
+                              className="h-12 w-12 cursor-pointer rounded-xl border-2 border-brand-ash bg-transparent p-0.5"
+                            />
                             <div>
                               <p className="font-display text-body-sm text-brand-white">{finish.customColor.toUpperCase()}</p>
                               <p className="font-body text-caption text-brand-silver">Custom colours are exact-matched</p>
                             </div>
                           </div>
-                          {/* Quick colour palette */}
                           <div className="mt-4 flex flex-wrap gap-2">
                             {['#0A0A0B','#D81E2A','#1E3A5F','#F5F5F7','#C0C0C0','#FFD700','#1C6B35','#7B2FBE'].map(c => (
                               <button
@@ -950,16 +1023,184 @@ export default function EstimatePage() {
                   <NavButtons
                     onBack={() => go(3)}
                     onNext={() => go(5)}
-                    nextLabel="See My Quote"
+                    nextLabel="Continue"
                   />
                 </div>
               )}
 
-              {/* ── STEP 5: Instant Quote ── */}
+              {/* ── STEP 5: Contact Info (NEW) ── */}
               {step === 5 && (
                 <div>
                   <StepHeading
                     step={5}
+                    title="Almost there!"
+                    subtitle="Where should we send your quote? We'll email your detailed estimate and follow up to answer any questions."
+                  />
+
+                  <div className="flex flex-col gap-5">
+                    {/* Name */}
+                    <TextField
+                      label="Full Name"
+                      value={contact.fullName}
+                      onChange={v => setContact(c => ({ ...c, fullName: v }))}
+                      placeholder="Jane Smith"
+                      icon={<IconUser />}
+                      error={contactErrors.fullName}
+                    />
+
+                    {/* Email */}
+                    <TextField
+                      label="Email Address"
+                      value={contact.email}
+                      onChange={v => setContact(c => ({ ...c, email: v }))}
+                      placeholder="jane@example.com"
+                      type="email"
+                      icon={<IconMail />}
+                      error={contactErrors.email}
+                    />
+
+                    {/* Phone */}
+                    <TextField
+                      label="Phone Number"
+                      value={contact.phone}
+                      onChange={v => setContact(c => ({ ...c, phone: formatPhone(v) }))}
+                      placeholder="604.555.1234"
+                      type="tel"
+                      icon={<IconPhone />}
+                      error={contactErrors.phone}
+                    />
+
+                    {/* Location */}
+                    <div className="flex flex-col gap-1.5">
+                      <label className="font-body text-body-sm font-semibold text-brand-white">
+                        <span className="flex items-center gap-2">
+                          <IconMapPin />
+                          City / Location
+                        </span>
+                      </label>
+                      <div className="relative">
+                        <select
+                          value={contact.location}
+                          onChange={e => setContact(c => ({ ...c, location: e.target.value, otherCity: '' }))}
+                          className={cn(
+                            'w-full appearance-none rounded-xl border bg-brand-graphite px-4 py-3 font-body text-body-sm text-brand-white focus:outline-none focus:ring-1 transition-colors duration-200 pr-10',
+                            contactErrors.location
+                              ? 'border-brand-red focus:border-brand-red focus:ring-brand-red'
+                              : 'border-brand-ash focus:border-brand-red focus:ring-brand-red'
+                          )}
+                        >
+                          <option value="" disabled>Select your city…</option>
+                          {LOCATION_GROUPS.map(group => (
+                            <optgroup key={group.group} label={`── ${group.group} ──`}>
+                              {group.cities.map(city => (
+                                <option key={city} value={city}>{city}</option>
+                              ))}
+                            </optgroup>
+                          ))}
+                          <option value="other">Other…</option>
+                        </select>
+                        <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-brand-silver">
+                          <IconChevronDown />
+                        </span>
+                      </div>
+                      {contactErrors.location && (
+                        <p className="font-body text-caption text-brand-red">{contactErrors.location}</p>
+                      )}
+                    </div>
+
+                    {/* Other city text input */}
+                    <AnimatePresence>
+                      {contact.location === 'other' && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="overflow-hidden"
+                        >
+                          <TextField
+                            label="Your City"
+                            value={contact.otherCity}
+                            onChange={v => setContact(c => ({ ...c, otherCity: v }))}
+                            placeholder="e.g. Prince George"
+                            error={contactErrors.otherCity}
+                          />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    {/* Consent checkboxes */}
+                    <div className="mt-2 flex flex-col gap-3 rounded-2xl border border-brand-graphite bg-brand-graphite p-5">
+                      {/* Marketing consent — optional */}
+                      <label className="flex cursor-pointer items-start gap-3">
+                        <div
+                          onClick={() => setContact(c => ({ ...c, marketingConsent: !c.marketingConsent }))}
+                          className={cn(
+                            'mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors duration-150',
+                            contact.marketingConsent
+                              ? 'border-brand-red bg-brand-red'
+                              : 'border-brand-ash bg-transparent hover:border-brand-silver'
+                          )}
+                        >
+                          {contact.marketingConsent && <IconCheck />}
+                        </div>
+                        <span className="font-body text-body-sm text-brand-smoke">
+                          Yes, I&rsquo;d like tips, seasonal offers, and wheel care advice via email{' '}
+                          <span className="text-brand-silver">(optional)</span>
+                        </span>
+                      </label>
+
+                      {/* Contact consent — required */}
+                      <label className="flex cursor-pointer items-start gap-3">
+                        <div
+                          onClick={() => {
+                            setContact(c => ({ ...c, contactConsent: !c.contactConsent }));
+                            if (!contact.contactConsent) {
+                              setContactErrors(e => ({ ...e, contactConsent: undefined }));
+                            }
+                          }}
+                          className={cn(
+                            'mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors duration-150',
+                            contact.contactConsent
+                              ? 'border-brand-red bg-brand-red'
+                              : contactErrors.contactConsent
+                                ? 'border-brand-red bg-transparent'
+                                : 'border-brand-ash bg-transparent hover:border-brand-silver'
+                          )}
+                        >
+                          {contact.contactConsent && <IconCheck />}
+                        </div>
+                        <div>
+                          <span className="font-body text-body-sm text-brand-smoke">
+                            I agree to be contacted about my quote{' '}
+                            <span className="text-brand-red">*</span>
+                          </span>
+                          {contactErrors.contactConsent && (
+                            <p className="mt-0.5 font-body text-caption text-brand-red">{contactErrors.contactConsent}</p>
+                          )}
+                        </div>
+                      </label>
+                    </div>
+
+                    <p className="font-body text-caption text-brand-silver">
+                      We respect your privacy. Your details are used only to send your quote and follow up. We never sell your data.
+                    </p>
+                  </div>
+
+                  <NavButtons
+                    onBack={() => go(4)}
+                    onNext={() => {
+                      if (validateContact()) go(6);
+                    }}
+                    nextLabel="Get My Quote →"
+                  />
+                </div>
+              )}
+
+              {/* ── STEP 6: Instant Quote ── */}
+              {step === 6 && (
+                <div>
+                  <StepHeading
+                    step={6}
                     title="Your Instant Quote"
                   />
 
@@ -978,7 +1219,6 @@ export default function EstimatePage() {
                   )}
 
                   {billableWheels.length === 0 ? (
-                    /* All wheels are heavy — manual review only */
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -990,19 +1230,27 @@ export default function EstimatePage() {
                       <h2 className="mb-2 font-display text-display-sm text-brand-white">Manual Review Required</h2>
                       <p className="mb-6 font-body text-body-md text-brand-smoke">
                         All wheels have heavy damage — our technicians need to assess in person before quoting.
+                        We&rsquo;ve received your contact info and will reach out to <strong className="text-brand-white">{contact.email}</strong> shortly.
                       </p>
                       <Button href="tel:+16047106174" variant="primary" size="lg" leftIcon={<IconPhone />}>
                         Call 604.710.6174
                       </Button>
                     </motion.div>
                   ) : (
-                    /* Normal quote */
                     <motion.div
                       initial={{ opacity: 0, y: 16 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={transition}
                     >
-                      {/* Vehicle summary pill */}
+                      {/* Personalised greeting */}
+                      <div className="mb-5 rounded-2xl border border-brand-graphite bg-brand-graphite px-5 py-4">
+                        <p className="font-body text-body-sm text-brand-smoke">
+                          Hi <strong className="text-brand-white">{contact.fullName.split(' ')[0]}</strong> — here&rsquo;s your personalised estimate.
+                          A copy will be sent to <strong className="text-brand-white">{contact.email}</strong>.
+                        </p>
+                      </div>
+
+                      {/* Vehicle summary pills */}
                       <div className="mb-6 flex flex-wrap items-center gap-2">
                         {[
                           `${vehicle.year} ${vehicle.make} ${vehicle.model}`,
@@ -1016,14 +1264,13 @@ export default function EstimatePage() {
                         ))}
                       </div>
 
-                      {/* Price breakdown card */}
+                      {/* Price breakdown */}
                       <div className="mb-6 overflow-hidden rounded-3xl border border-brand-graphite bg-brand-graphite shadow-card">
                         <div className="border-b border-brand-graphite-light px-6 py-4">
                           <p className="font-display text-body-md text-brand-white">Price Breakdown</p>
                         </div>
 
                         <div className="px-6 py-5">
-                          {/* Per-wheel rows */}
                           <div className="mb-4 flex flex-col gap-3">
                             {billableWheels.map((w, i) => (
                               <div key={i} className="flex items-center justify-between">
@@ -1064,7 +1311,7 @@ export default function EstimatePage() {
                             )}
                             {rf > 0 && (
                               <div className="flex justify-between font-body text-body-sm text-brand-smoke">
-                                <span>Region surcharge ({REGIONS.find(r => r.value === vehicle.region)?.label})</span>
+                                <span>Region surcharge</span>
                                 <span>+${rf.toLocaleString()}</span>
                               </div>
                             )}
@@ -1081,7 +1328,6 @@ export default function EstimatePage() {
                             </div>
                           </div>
 
-                          {/* Total */}
                           <div className="mt-4 flex items-baseline justify-between rounded-2xl bg-brand-graphite-light px-5 py-4">
                             <p className="font-display text-display-sm text-brand-white">Total</p>
                             <p className="font-display text-display-md text-brand-white">
@@ -1125,10 +1371,10 @@ export default function EstimatePage() {
 
                       <div className="mt-4 text-center">
                         <button
-                          onClick={() => go(4)}
+                          onClick={() => go(5)}
                           className="font-body text-body-sm text-brand-silver underline hover:text-brand-white transition-colors"
                         >
-                          ← Adjust finish selection
+                          ← Edit contact details
                         </button>
                       </div>
                     </motion.div>
