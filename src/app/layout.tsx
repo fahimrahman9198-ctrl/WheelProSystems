@@ -1,103 +1,54 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo_Black, Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-
-const archivoBlack = Archivo_Black({
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-archivo",
-  preload: true,
-});
-
-const manrope = Manrope({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-manrope",
-  preload: true,
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-jetbrains",
-  preload: true,
-});
+import { Navbar } from "@/components/site/Navbar";
+import { Footer } from "@/components/site/Footer";
+import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: {
-    default: "Western Wheelcraft | Premium Wheel Refinishing Since 1989",
-    template: "%s | Western Wheelcraft",
+    default: "WheelPro Demo | Interactive Wheel Repair Business System Demo",
+    template: "%s | WheelPro Demo",
   },
   description:
-    "Western Wheelcraft Ltd. — BC's trusted wheel refinishing experts since 1989. Curb-rash repair, scratch & gouge refinishing, custom finishes, and OEM color matching. Mobile fleet service across Lower Mainland, Vancouver Island & Interior BC.",
+    "WheelPro Demo is a fictional interactive demo by WheelPro Systems showing quote, booking, payment, dashboard, dealer portal, and automation workflows for wheel repair and mobile service businesses.",
   keywords: [
-    "wheel refinishing",
-    "curb rash repair",
-    "wheel repair Vancouver",
-    "OEM color matching",
-    "custom wheel finish",
-    "mobile wheel repair",
-    "Western Wheelcraft",
-    "Burnaby wheel repair",
-    "Victoria wheel repair",
+    "wheel repair booking system",
+    "rim repair quote system",
+    "mobile wheel repair website",
+    "wheel refinishing automation",
+    "dealer portal for wheel repair",
+    "mobile service business dashboard",
+    "quote-to-booking system",
+    "service business automation",
   ],
-  authors: [{ name: "Western Wheelcraft Ltd." }],
-  creator: "Western Wheelcraft Ltd.",
-  publisher: "Western Wheelcraft Ltd.",
-  metadataBase: new URL("https://westernwheelcraft.ca"),
+  authors: [{ name: siteConfig.founder }],
+  creator: siteConfig.agencyName,
+  publisher: siteConfig.agencyName,
   openGraph: {
     type: "website",
-    locale: "en_CA",
-    url: "https://westernwheelcraft.ca",
-    siteName: "Western Wheelcraft",
-    title: "Western Wheelcraft | Premium Wheel Refinishing Since 1989",
+    locale: "en_US",
+    siteName: siteConfig.demoName,
+    title: "WheelPro Demo | Interactive Wheel Repair Business System Demo",
     description:
-      "BC's trusted wheel refinishing experts. Mobile fleet service across Lower Mainland, Vancouver Island & Interior BC.",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Western Wheelcraft — Premium Wheel Refinishing",
-      },
-    ],
+      "A fictional demo environment showing quote, booking, payment, dashboard, dealer portal, and automation workflows for wheel repair businesses.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Western Wheelcraft | Premium Wheel Refinishing Since 1989",
+    title: "WheelPro Demo | Interactive Wheel Repair Business System Demo",
     description:
-      "BC's trusted wheel refinishing experts. Mobile fleet service across Lower Mainland, Vancouver Island & Interior BC.",
-    images: ["/og-image.jpg"],
+      "Interactive fictional demo by WheelPro Systems for wheel repair and mobile service business workflows.",
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
   },
   icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.svg", type: "image/svg+xml" },
-    ],
-    apple: [{ url: "/apple-touch-icon.png" }],
+    icon: [{ url: "/favicon.ico", sizes: "any" }],
   },
-  manifest: "/site.webmanifest",
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0A0A0B" },
-    { media: "(prefers-color-scheme: light)", color: "#0A0A0B" },
-  ],
+  themeColor: "#05070D",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -109,13 +60,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en-CA"
-      className={`${archivoBlack.variable} ${manrope.variable} ${jetbrainsMono.variable} dark`}
-      suppressHydrationWarning
-    >
-      <body className="min-h-screen bg-brand-jet text-brand-white antialiased flex flex-col">
-        <Header />
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <body className="flex min-h-screen flex-col bg-[#05070D] text-[#F5F7FA] antialiased">
+        <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
       </body>
