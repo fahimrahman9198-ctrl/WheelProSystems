@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { AnimatedGridBackground } from "@/components/site/AnimatedGridBackground";
 import { CTAButton } from "@/components/site/CTAButton";
-import { DashboardMockup } from "@/components/site/DashboardMockup";
 import { FeaturePill } from "@/components/site/FeaturePill";
 import { SystemFlow } from "@/components/site/SystemFlow";
 
@@ -31,9 +30,6 @@ export function HeroSection() {
             <CTAButton href="/book" className="w-full sm:w-auto">
               Book a Free Growth Audit
             </CTAButton>
-            <CTAButton href="/demo" variant="secondary" className="w-full sm:w-auto">
-              View Live Demo
-            </CTAButton>
           </div>
           <p className="mt-6 max-w-xl text-sm leading-6 text-steel-400">
             Most service businesses do not have a lead problem. They have a system problem.
@@ -46,7 +42,6 @@ export function HeroSection() {
           className="space-y-4"
         >
           <SystemFlow />
-          <DashboardMockup />
         </motion.div>
       </div>
     </section>

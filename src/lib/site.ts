@@ -22,7 +22,7 @@ export function isPlaceholderBookingUrl(url: string) {
 export const agencyNavLinks = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
-  { label: "AI Systems", href: "/ai" },
+  { label: "AI Integration", href: "/ai" },
   { label: "Industries", href: "/industries" },
   { label: "View Demo", href: "/demo" },
   { label: "Book Audit", href: "/book" },
