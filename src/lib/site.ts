@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "WheelPro Demo",
+  name: "WheelPro Systems",
   demoName: "WheelPro Demo",
   agencyName: "WheelPro Systems",
   domain: "Domain coming soon",
@@ -19,16 +19,27 @@ export function isPlaceholderBookingUrl(url: string) {
   return url === siteConfig.bookingPlaceholder;
 }
 
-export const navLinks = [
+export const agencyNavLinks = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
-  { label: "Quote Demo", href: "/quote" },
-  { label: "Booking Demo", href: "/booking" },
-  { label: "Dashboard", href: "/dashboard" },
-  { label: "Dealer Portal", href: "/dealer-portal" },
-  { label: "Automation", href: "/automation" },
+  { label: "AI Systems", href: "/ai" },
+  { label: "Industries", href: "/industries" },
+  { label: "View Demo", href: "/demo" },
   { label: "Book Audit", href: "/book" },
 ];
+
+export const demoNavLinks = [
+  { label: "Demo Home", href: "/demo" },
+  { label: "Quote", href: "/demo/quote" },
+  { label: "Booking", href: "/demo/booking" },
+  { label: "Dashboard", href: "/demo/dashboard" },
+  { label: "Dealer Portal", href: "/demo/dealer-portal" },
+  { label: "Admin", href: "/demo/admin" },
+  { label: "Automation", href: "/demo/automation" },
+];
+
+// Alias for backward compatibility
+export const navLinks = agencyNavLinks;
 
 export const systemFlow = ["Photo lead", "AI quote assist", "Booking", "Deposit", "Dashboard", "Follow-up"] as const;
 

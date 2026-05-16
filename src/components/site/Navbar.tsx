@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { CTAButton } from "@/components/site/CTAButton";
 import { cn } from "@/lib/utils";
-import { navLinks, siteConfig } from "@/lib/site";
+import { agencyNavLinks, siteConfig } from "@/lib/site";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -17,13 +17,13 @@ export function Navbar() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
           <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-cyan-300/40 bg-electric-500/15 font-mono text-sm font-bold text-cyan-200">
-            WD
+            WS
           </span>
-          <span className="font-semibold text-white">{siteConfig.demoName}</span>
+          <span className="font-semibold text-white">{siteConfig.agencyName}</span>
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
-          {navLinks.map((link) => {
+          {agencyNavLinks.map((link) => {
             const active = pathname === link.href || (link.href !== "/" && pathname.startsWith(`${link.href}/`));
             return (
               <Link
@@ -43,8 +43,8 @@ export function Navbar() {
         </nav>
 
         <div className="hidden lg:block">
-          <CTAButton href="/quote" className="min-h-10 px-4 py-2">
-            Try Quote Demo
+          <CTAButton href="/book" className="min-h-10 px-4 py-2">
+            Book Audit
           </CTAButton>
         </div>
 
@@ -62,7 +62,7 @@ export function Navbar() {
       {open && (
         <div className="border-t border-white/10 bg-lab-950 lg:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-4" aria-label="Mobile navigation">
-            {navLinks.map((link) => (
+            {agencyNavLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -72,8 +72,8 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <CTAButton href="/quote" className="mt-3 w-full">
-              Try Quote Demo
+            <CTAButton href="/book" className="mt-3 w-full">
+              Book Audit
             </CTAButton>
           </nav>
         </div>

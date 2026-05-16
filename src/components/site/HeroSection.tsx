@@ -31,8 +31,8 @@ export function HeroSection() {
             <CTAButton href="/book" className="w-full sm:w-auto">
               Book a Free Growth Audit
             </CTAButton>
-            <CTAButton href="/systems" variant="secondary" className="w-full sm:w-auto">
-              Explore the System
+            <CTAButton href="/demo" variant="secondary" className="w-full sm:w-auto">
+              View Live Demo
             </CTAButton>
           </div>
           <p className="mt-6 max-w-xl text-sm leading-6 text-steel-400">

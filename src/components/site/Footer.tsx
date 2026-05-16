@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Mail } from "lucide-react";
-import { DemoDisclaimer } from "@/components/site/DemoDisclaimer";
-import { navLinks, siteConfig } from "@/lib/site";
+import { agencyNavLinks, siteConfig } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -10,12 +9,12 @@ export function Footer() {
         <div>
           <Link href="/" className="flex w-fit items-center gap-3">
             <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-cyan-300/40 bg-electric-500/15 font-mono text-sm font-bold text-cyan-200">
-              WD
+              WS
             </span>
-            <span className="font-semibold text-white">{siteConfig.demoName}</span>
+            <span className="font-semibold text-white">{siteConfig.agencyName}</span>
           </Link>
           <p className="mt-4 max-w-md text-sm leading-6 text-steel-300">
-            Interactive demo system by {siteConfig.agencyName}, built to demonstrate quote, booking, payment, dashboard, dealer portal, and automation capabilities.
+            AI-powered systems for service businesses — quote intake, booking flows, payment collection, dashboards, and automation. Built to turn scattered leads into booked jobs.
           </p>
           <a href={`mailto:${siteConfig.email}`} className="mt-5 inline-flex items-center gap-2 text-sm text-cyan-300 hover:text-white">
             <Mail className="h-4 w-4" aria-hidden="true" />
@@ -24,9 +23,9 @@ export function Footer() {
         </div>
 
         <div>
-          <h2 className="font-mono text-xs uppercase tracking-[0.18em] text-steel-400">Explore</h2>
+          <h2 className="font-mono text-xs uppercase tracking-[0.18em] text-steel-400">Navigation</h2>
           <ul className="mt-4 space-y-3">
-            {navLinks.map((link) => (
+            {agencyNavLinks.map((link) => (
               <li key={link.href}>
                 <Link href={link.href} className="text-sm text-steel-300 hover:text-white">
                   {link.label}
@@ -44,13 +43,15 @@ export function Footer() {
                 Book a Free Growth Audit
               </Link>
             </li>
+            <li>
+              <Link href="/demo" className="text-sm text-steel-300 hover:text-white">
+                View Interactive Demo
+              </Link>
+            </li>
             <li className="text-sm text-steel-300">{siteConfig.domain}</li>
             <li className="text-sm text-steel-400">{siteConfig.motto}</li>
           </ul>
         </div>
-      </div>
-      <div className="mx-auto mt-8 max-w-7xl">
-        <DemoDisclaimer />
       </div>
       <div className="mx-auto mt-10 flex max-w-7xl flex-col gap-3 border-t border-white/10 pt-6 text-xs text-steel-500 sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; {new Date().getFullYear()} {siteConfig.agencyName}. All rights reserved.</p>
