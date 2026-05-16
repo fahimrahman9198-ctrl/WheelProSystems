@@ -4,11 +4,11 @@ import Link from "next/link";
 import { BarChart3, CalendarDays, FileText, Settings, Users } from "lucide-react";
 
 const links = [
-  { label: "Dashboard", href: "/admin", icon: BarChart3 },
-  { label: "Bookings", href: "/admin/bookings", icon: CalendarDays },
-  { label: "Invoices", href: "/admin/invoices", icon: FileText },
-  { label: "Customers", href: "/admin/customers", icon: Users },
-  { label: "Settings", href: "/admin/settings", icon: Settings },
+  { label: "Dashboard", href: "/demo/admin", icon: BarChart3 },
+  { label: "Bookings", href: "/demo/admin/bookings", icon: CalendarDays },
+  { label: "Invoices", href: "/demo/admin/invoices", icon: FileText },
+  { label: "Customers", href: "/demo/admin/customers", icon: Users },
+  { label: "Settings", href: "/demo/admin/settings", icon: Settings },
 ];
 
 export function Sidebar() {

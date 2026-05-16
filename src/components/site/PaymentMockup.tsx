@@ -25,7 +25,7 @@ export function PaymentMockup() {
           ))}
         </div>
         <button className="mt-6 w-full rounded-lg border border-electric-400 bg-electric-500 px-5 py-3 text-sm font-semibold text-white">Pay Demo Deposit</button>
-        <div className="mt-4"><CTAButton href="/dashboard" variant="secondary" className="w-full">View Customer Dashboard</CTAButton></div>
+        <div className="mt-4"><CTAButton href="/demo/dashboard" variant="secondary" className="w-full">View Customer Dashboard</CTAButton></div>
       </section>
     </div>
   );

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Bot, Brain, CalendarCheck, LineChart, MessageSquare, ShieldCheck, Sparkles, Zap } from "lucide-react";
-import { industries, offerItems, problems, siteConfig, systemFlow } from "@/lib/site";
+import { ArrowRight, Bot, Brain, CalendarCheck, LineChart, MessageSquare, ShieldCheck, Sparkles } from "lucide-react";
+import { offerItems, problems, systemFlow } from "@/lib/site";
 import { HeroSection } from "@/components/site/HeroSection";
 
 export const metadata: Metadata = {

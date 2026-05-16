@@ -35,7 +35,7 @@ export function BookingDemoFlow() {
           <h3 className="mt-2 text-xl font-semibold text-white">Mobile curb rash repair</h3>
           <p className="mt-3 text-sm text-steel-300">Window: Thursday, 10:00 AM - 12:00 PM</p>
           <p className="mt-2 text-sm text-steel-300">Status: Ready for payment demo</p>
-          <div className="mt-6"><CTAButton href="/payment">Open Payment Demo</CTAButton></div>
+          <div className="mt-6"><CTAButton href="/demo/payment">Open Payment Demo</CTAButton></div>
         </aside>
       </div>
     </div>

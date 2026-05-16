@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Mail } from "lucide-react";
-import { ContactForm } from "@/app/contact/ContactForm";
+import { ContactForm } from "@/app/(site)/contact/ContactForm";
 import { PageHeader } from "@/components/site/PageHeader";
 import { siteConfig } from "@/lib/site";
 
