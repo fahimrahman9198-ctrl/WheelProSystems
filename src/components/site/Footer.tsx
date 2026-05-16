@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Mail } from "lucide-react";
 import { agencyNavLinks, siteConfig } from "@/lib/site";
 
@@ -8,9 +9,14 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
         <div>
           <Link href="/" className="flex w-fit items-center gap-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-cyan-300/40 bg-electric-500/15 font-mono text-sm font-bold text-cyan-200">
-              WS
-            </span>
+            <div className="relative h-9 w-9 flex-shrink-0">
+              <Image
+                src={siteConfig.logoUrl}
+                alt="WheelPro Systems"
+                fill
+                className="object-contain"
+              />
+            </div>
             <span className="font-semibold text-white">{siteConfig.agencyName}</span>
           </Link>
           <p className="mt-4 max-w-md text-sm leading-6 text-steel-300">

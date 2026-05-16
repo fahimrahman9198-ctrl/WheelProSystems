@@ -9,6 +9,7 @@ export const siteConfig = {
   motto: "Turn Your Business Into a System",
   demoMotto: "Turn a Wheel Service Business Into a System",
   bookingPlaceholder: "PASTE_GOOGLE_CALENDAR_BOOKING_LINK_HERE",
+  logoUrl: "/images/wheelpro-logo.png",
 };
 
 export function getBookingUrl() {
