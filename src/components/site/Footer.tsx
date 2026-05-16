@@ -43,11 +43,6 @@ export function Footer() {
                 Book a Free Growth Audit
               </Link>
             </li>
-            <li>
-              <Link href="/demo" className="text-sm text-steel-300 hover:text-white">
-                View Interactive Demo
-              </Link>
-            </li>
             <li className="text-sm text-steel-300">{siteConfig.domain}</li>
             <li className="text-sm text-steel-400">{siteConfig.motto}</li>
           </ul>

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { CalendarDays, Mail } from "lucide-react";
 import { CTAButton } from "@/components/site/CTAButton";
-import { DemoDisclaimer } from "@/components/site/DemoDisclaimer";
 import { getBookingUrl, isPlaceholderBookingUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -27,7 +26,6 @@ export default function BookAuditPage() {
             <CTAButton href={isPlaceholder ? `mailto:${siteConfig.email}?subject=Free%20Growth%20Audit` : bookingUrl} external={!isPlaceholder}>
               Schedule My Free Growth Audit
             </CTAButton>
-            <CTAButton href="/demo/quote" variant="secondary">Try the Quote Demo</CTAButton>
           </div>
           {isPlaceholder && <p className="mt-4 text-sm text-steel-400">Add your real calendar link with <code className="text-cyan-300">NEXT_PUBLIC_BOOKING_URL</code>.</p>}
         </div>
@@ -45,7 +43,6 @@ export default function BookAuditPage() {
           </a>
         </div>
       </div>
-      <div className="mx-auto mt-12 max-w-7xl"><DemoDisclaimer /></div>
     </section>
   );
 }

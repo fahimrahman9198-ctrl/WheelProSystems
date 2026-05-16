@@ -24,7 +24,6 @@ export const agencyNavLinks = [
   { label: "Services", href: "/services" },
   { label: "AI Integration", href: "/ai" },
   { label: "Industries", href: "/industries" },
-  { label: "View Demo", href: "/demo" },
   { label: "Book Audit", href: "/book" },
 ];
 
