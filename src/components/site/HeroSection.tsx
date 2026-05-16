@@ -22,10 +22,10 @@ export function HeroSection() {
             <FeaturePill>Quote, booking, payment, follow-up</FeaturePill>
           </div>
           <h1 className="max-w-4xl text-5xl font-semibold leading-[1.02] text-white md:text-7xl">
-            Turn Your Business Into a System
+            Turn Your Service Business Into a System
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-steel-200">
-            WheelPro Systems builds AI-powered websites, booking flows, payment systems, dashboards, and automation tools for mobile service businesses that want fewer missed leads and more booked jobs.
+            WheelPro Systems builds AI-powered websites, booking flows, payment systems, dashboards, and automation tools for mobile and service businesses that want fewer missed leads and more booked jobs.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <CTAButton href="/book" className="w-full sm:w-auto">

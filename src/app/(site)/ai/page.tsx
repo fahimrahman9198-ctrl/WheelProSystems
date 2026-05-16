@@ -6,9 +6,9 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { SectionHeader } from "@/components/site/SectionHeader";
 
 export const metadata: Metadata = {
-  title: "Systems",
+  title: "AI Systems",
   description:
-    "Explore frontend mockups of quote request workflows, booking flows, payment integrations, customer dashboards, admin dashboards, B2B portals, and AI lead qualification.",
+    "AI-powered systems for service businesses — quote intake, booking flows, payment collection, dashboards, lead qualification, and automation. See how every workflow connects.",
 };
 
 const modules = [

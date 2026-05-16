@@ -1,72 +1,114 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Bot, CalendarCheck, CreditCard, LayoutDashboard, MailCheck, ShieldCheck } from "lucide-react";
-import { industries, offerItems, problems, services, siteConfig, systemFlow } from "@/lib/site";
+import { ArrowRight, Bot, Brain, CalendarCheck, LineChart, MessageSquare, ShieldCheck, Sparkles, Zap } from "lucide-react";
+import { industries, offerItems, problems, siteConfig, systemFlow } from "@/lib/site";
+import { HeroSection } from "@/components/site/HeroSection";
 
 export const metadata: Metadata = {
-  title: "WheelPro Systems | AI Booking & Automation Systems for Mobile Service Businesses",
+  title: "WheelPro Systems | AI Systems for Service Businesses",
   description:
-    "WheelPro Systems builds AI-powered websites, quote flows, booking systems, payment integrations, dashboards, and automation tools for mobile service businesses.",
+    "AI-powered booking, quote, payment, and automation systems for service businesses. Stop losing leads to slow follow-up and manual workflows.",
 };
+
+const aiCapabilities = [
+  {
+    icon: Brain,
+    title: "AI Lead Qualification",
+    description: "Inbound leads categorized, scored, and routed automatically.",
+  },
+  {
+    icon: Sparkles,
+    title: "AI Photo Quote Analysis",
+    description: "Customers upload photos, AI estimates pricing in under 60 seconds.",
+  },
+  {
+    icon: MessageSquare,
+    title: "AI Customer Follow-Up",
+    description: "Missed quotes re-engaged with personalized AI messages.",
+  },
+  {
+    icon: CalendarCheck,
+    title: "AI Schedule Intelligence",
+    description: "AI manages booking density, route optimization, and capacity forecasting.",
+  },
+  {
+    icon: LineChart,
+    title: "AI Revenue Insights",
+    description: "Real-time dashboards with AI-flagged problems and suggested fixes.",
+  },
+  {
+    icon: Bot,
+    title: "AI Customer Communications",
+    description: "Unified inbox with AI-drafted responses across calls, texts, emails, and DMs.",
+  },
+];
+
+const extendedIndustries = [
+  {
+    title: "Wheel Refinishing",
+    description: "Quote-first systems for refinishing, repair requests, photo intake, booking, deposits, and repeat dealer workflows.",
+    fit: "Primary fit",
+    featured: true,
+  },
+  {
+    title: "Mobile Detailing",
+    description: "Packages, booking, deposits, reminders, upgrades, and customer follow-up for detailers who need better intake and repeat bookings.",
+    fit: "Mobile workflow",
+    featured: false,
+  },
+  {
+    title: "Fleet Services",
+    description: "B2B service requests, unit tracking, account portals, recurring work, invoice visibility, and operational dashboards.",
+    fit: "B2B operations",
+    featured: false,
+  },
+  {
+    title: "Mobile Mechanics",
+    description: "Service request qualification, route-friendly booking, deposits, customer updates, and repair workflow visibility.",
+    fit: "Road-based service",
+    featured: false,
+  },
+  {
+    title: "HVAC / Home Services",
+    description: "Scheduling, quote intake, technician dispatch, payment collection, and customer communication for home service operators.",
+    fit: "Home service ops",
+    featured: false,
+  },
+  {
+    title: "Dealership Service Vendors",
+    description: "Dealer-facing portals and structured request flows for vendors who need organized intake, approvals, status updates, and invoices.",
+    fit: "Repeat accounts",
+    featured: false,
+  },
+  {
+    title: "Plumbing",
+    description: "Emergency and scheduled service intake, quote flows, payment collection, and customer follow-up for plumbing operators.",
+    fit: "Trade services",
+    featured: false,
+  },
+  {
+    title: "Other Mobile Service Businesses",
+    description: "If your business quotes jobs, schedules appointments, and needs faster follow-up — this system model applies.",
+    fit: "Broad fit",
+    featured: false,
+  },
+];
 
 export default function HomePage() {
   return (
     <>
-      <section className="relative overflow-hidden px-4 py-20 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(47,140,255,0.18),transparent_36%)]" />
-        <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-          <div>
-            <div className="mb-6 flex flex-wrap gap-2">
-              {["AI systems for mobile service businesses", "Quote, booking, payment, follow-up"].map((pill) => (
-                <span key={pill} className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-steel-200">
-                  {pill}
-                </span>
-              ))}
-            </div>
-            <h1 className="max-w-4xl text-5xl font-semibold leading-[1.02] text-white md:text-7xl">
-              Turn Your Business Into a System
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-steel-200">
-              WheelPro Systems builds AI-powered websites, booking flows, payment systems, dashboards, and automation tools for mobile service businesses that want fewer missed leads and more booked jobs.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link className="inline-flex items-center justify-center gap-2 rounded-lg border border-electric-500/70 bg-electric-500 px-5 py-3 text-sm font-semibold text-white shadow-[0_0_32px_rgba(47,140,255,0.28)]" href="/book">
-                Book a Free Growth Audit <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-semibold text-white" href="/systems">
-                Explore the System <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-            <p className="mt-6 max-w-xl text-sm leading-6 text-steel-400">
-              Most service businesses do not have a lead problem. They have a system problem.
-            </p>
-          </div>
+      <HeroSection />
 
-          <div className="rounded-2xl border border-white/10 bg-[#070B12]/90 p-5 shadow-[0_28px_100px_rgba(0,0,0,0.45)]">
-            <p className="font-mono text-xs uppercase tracking-[0.16em] text-cyan-300">System flow</p>
-            <div className="mt-5 grid gap-3">
-              {systemFlow.map((step, index) => (
-                <div key={step} className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.04] p-4">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-cyan-300/10 font-mono text-sm text-cyan-300">
-                    {index + 1}
-                  </span>
-                  <span className="font-semibold text-white">{step}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+      {/* Tagline strip */}
+      <section className="border-y border-white/10 bg-white/[0.025] px-4 py-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-center text-sm text-steel-400">
+            Built for <span className="text-steel-200">wheel refinishing</span> • <span className="text-steel-200">mobile detailing</span> • <span className="text-steel-200">fleet service</span> • <span className="text-steel-200">mobile mechanics</span> • <span className="text-steel-200">HVAC</span> • <span className="text-steel-200">dealership vendors</span>
+          </p>
         </div>
       </section>
 
-      <section className="grid gap-3 border-y border-white/10 bg-white/[0.025] px-4 py-5 sm:px-6 lg:grid-cols-4 lg:px-8">
-        {["Built for mobile service workflows", "Designed for quote-based service businesses", "Lead response, booking, payment, follow-up", "Founder-led, no fake claims"].map((item) => (
-          <div key={item} className="mx-auto flex w-full max-w-7xl items-center gap-3 text-sm text-steel-200">
-            <ShieldCheck className="h-4 w-4 shrink-0 text-cyan-300" />
-            <span>{item}</span>
-          </div>
-        ))}
-      </section>
-
+      {/* Problems */}
       <section className="px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="font-mono text-xs uppercase tracking-[0.18em] text-cyan-300">The real bottleneck</p>
@@ -84,6 +126,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Core offer */}
       <section className="border-y border-white/10 bg-lab-900/60 px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="font-mono text-xs uppercase tracking-[0.18em] text-cyan-300">Core offer</p>
@@ -101,43 +144,57 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* System flow */}
       <section className="px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-cyan-300">Services</p>
-            <h2 className="mt-3 text-3xl font-semibold leading-tight text-white md:text-5xl">
-              Practical systems, not generic website packages.
-            </h2>
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.18em] text-cyan-300">System flow</p>
+              <h2 className="mt-3 text-3xl font-semibold leading-tight text-white md:text-5xl">
+                One connected process, start to finish.
+              </h2>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-[#070B12]/90 p-5 shadow-[0_28px_100px_rgba(0,0,0,0.45)]">
+              <div className="grid gap-3">
+                {systemFlow.map((step, index) => (
+                  <div key={step} className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.04] p-4">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-cyan-300/10 font-mono text-sm text-cyan-300">
+                      {index + 1}
+                    </span>
+                    <span className="font-semibold text-white">{step}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            {services.slice(0, 4).map((service) => (
-              <article key={service.title} className="rounded-xl border border-white/10 bg-white/[0.04] p-6">
-                <h3 className="text-xl font-semibold text-white">{service.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-steel-300">{service.result}</p>
+        </div>
+      </section>
+
+      {/* AI Section */}
+      <section className="border-y border-white/10 bg-lab-900/60 px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-cyan-300">AI that runs the work</p>
+          <h2 className="mt-3 max-w-3xl text-3xl font-semibold leading-tight text-white md:text-5xl">
+            Not just AI features. AI that operates the system.
+          </h2>
+          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {aiCapabilities.map(({ icon: Icon, title, description }) => (
+              <article key={title} className="rounded-xl border border-white/10 bg-white/[0.04] p-6">
+                <Icon className="mb-4 h-6 w-6 text-cyan-300" aria-hidden="true" />
+                <h3 className="text-xl font-semibold text-white">{title}</h3>
+                <p className="mt-3 text-sm leading-6 text-steel-300">{description}</p>
               </article>
             ))}
           </div>
+          <div className="mt-8">
+            <Link href="/ai" className="inline-flex items-center gap-2 text-sm font-medium text-cyan-300 hover:text-white">
+              See all AI capabilities <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </div>
       </section>
 
-      <section className="border-y border-white/10 bg-white/[0.025] px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
-          {[
-            { icon: Bot, label: "AI lead summaries" },
-            { icon: CalendarCheck, label: "Booking workflow" },
-            { icon: CreditCard, label: "Deposit/payment prompts" },
-            { icon: MailCheck, label: "Follow-up automation" },
-            { icon: LayoutDashboard, label: "Admin dashboard" },
-            { icon: ShieldCheck, label: "B2B portal preview" },
-          ].map(({ icon: Icon, label }) => (
-            <div key={label} className="rounded-xl border border-white/10 bg-white/[0.04] p-5">
-              <Icon className="mb-4 h-5 w-5 text-cyan-300" />
-              <h3 className="font-semibold text-white">{label}</h3>
-            </div>
-          ))}
-        </div>
-      </section>
-
+      {/* Industries */}
       <section className="px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="font-mono text-xs uppercase tracking-[0.18em] text-cyan-300">Industries</p>
@@ -145,10 +202,19 @@ export default function HomePage() {
             Built first for service businesses that operate on wheels.
           </h2>
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {industries.slice(0, 3).map((industry) => (
-              <article key={industry.title} className="rounded-xl border border-white/10 bg-white/[0.04] p-6">
+            {extendedIndustries.map((industry) => (
+              <article
+                key={industry.title}
+                className={`rounded-xl border p-6 ${
+                  industry.featured
+                    ? "border-cyan-300/30 bg-cyan-300/[0.06] lg:col-span-full"
+                    : "border-white/10 bg-white/[0.04]"
+                }`}
+              >
                 <p className="font-mono text-xs uppercase tracking-[0.14em] text-cyan-300">{industry.fit}</p>
-                <h3 className="mt-4 text-2xl font-semibold text-white">{industry.title}</h3>
+                <h3 className={`mt-4 font-semibold text-white ${industry.featured ? "text-3xl" : "text-2xl"}`}>
+                  {industry.title}
+                </h3>
                 <p className="mt-4 text-sm leading-6 text-steel-300">{industry.description}</p>
               </article>
             ))}
@@ -156,16 +222,20 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Built by an Operator */}
       <section className="px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl rounded-2xl border border-cyan-300/30 bg-[linear-gradient(135deg,rgba(47,140,255,0.18),rgba(255,255,255,0.035))] p-8 md:p-12">
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-cyan-300">Founder-led</p>
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-cyan-300">Built by an operator</p>
           <h2 className="mt-4 max-w-4xl text-3xl font-semibold text-white md:text-5xl">
-            Direct systems thinking from {siteConfig.founder}.
+            Systems built from real workflows, not stock playbooks.
           </h2>
           <p className="mt-5 max-w-3xl text-base leading-7 text-steel-200">
-            WheelPro Systems turns scattered calls, manual quotes, missed follow-ups, and outdated websites into one connected digital system.
+            Every workflow in WheelPro Systems exists because the manual version broke something. Missed quotes. Lost follow-ups. Calls that never got returned. We build what we&apos;d actually use to run a high-volume service business — not what looks good in a sales deck.
           </p>
-          <Link className="mt-8 inline-flex items-center justify-center gap-2 rounded-lg border border-electric-500/70 bg-electric-500 px-5 py-3 text-sm font-semibold text-white" href="/book">
+          <Link
+            className="mt-8 inline-flex items-center justify-center gap-2 rounded-lg border border-electric-500/70 bg-electric-500 px-5 py-3 text-sm font-semibold text-white shadow-[0_0_32px_rgba(47,140,255,0.28)]"
+            href="/book"
+          >
             Book a Free Growth Audit <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

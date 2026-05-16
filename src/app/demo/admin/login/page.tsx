@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function AdminLoginRedirectPage() {
-  redirect("/systems");
+  redirect("/ai");
 }

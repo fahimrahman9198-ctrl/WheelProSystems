@@ -62,7 +62,7 @@ export function QuoteDemoForm() {
           <p>Urgency: {urgency}</p>
           <p>Photo count: {photos}</p>
         </div>
-        <div className="mt-6"><CTAButton href="/booking">Continue to Booking Demo</CTAButton></div>
+        <div className="mt-6"><CTAButton href="/demo/booking">Continue to Booking Demo</CTAButton></div>
       </aside>
     </div>
   );

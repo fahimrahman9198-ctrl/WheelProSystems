@@ -27,7 +27,7 @@ export default function BookAuditPage() {
             <CTAButton href={isPlaceholder ? `mailto:${siteConfig.email}?subject=Free%20Growth%20Audit` : bookingUrl} external={!isPlaceholder}>
               Schedule My Free Growth Audit
             </CTAButton>
-            <CTAButton href="/quote" variant="secondary">Try the Quote Demo</CTAButton>
+            <CTAButton href="/demo/quote" variant="secondary">Try the Quote Demo</CTAButton>
           </div>
           {isPlaceholder && <p className="mt-4 text-sm text-steel-400">Add your real calendar link with <code className="text-cyan-300">NEXT_PUBLIC_BOOKING_URL</code>.</p>}
         </div>
