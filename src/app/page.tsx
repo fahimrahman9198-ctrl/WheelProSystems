@@ -36,7 +36,7 @@ export default function HomePage() {
           <div className="mx-auto flex flex-col items-center text-center">
             <div className="mb-6 flex flex-wrap justify-center gap-2">
               {["AI systems for mobile service businesses", "Quote, booking, payment, follow-up"].map((pill) => (
-                <span key={pill} className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-steel-200">
+                <span key={pill} className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-steel-200 transition-colors duration-200 hover:border-cyan-300/40 hover:bg-white/[0.08] hover:text-white">
                   {pill}
                 </span>
               ))}
@@ -48,11 +48,11 @@ export default function HomePage() {
               WheelPro Systems builds AI-powered websites, booking flows, payment systems, dashboards, and automation tools for mobile service businesses that want fewer missed leads and more booked jobs.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link className="inline-flex items-center justify-center gap-2 rounded-lg border border-electric-500/70 bg-electric-500 px-5 py-3 text-sm font-semibold text-white shadow-[0_0_32px_rgba(47,140,255,0.28)]" href="/book">
-                Book a Free Growth Audit <ArrowRight className="h-4 w-4" />
+              <Link className="group inline-flex items-center justify-center gap-2 rounded-lg border border-electric-500/70 bg-electric-500 px-5 py-3 text-sm font-semibold text-white shadow-[0_0_32px_rgba(47,140,255,0.28)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-electric-400 hover:shadow-[0_0_42px_rgba(47,140,255,0.45)]" href="/book">
+                Book a Free Growth Audit <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
               </Link>
-              <Link className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-semibold text-white" href="/systems">
-                Explore the System <ArrowRight className="h-4 w-4" />
+              <Link className="group inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:border-cyan-300/40 hover:bg-white/[0.08]" href="/systems">
+                Explore the System <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
               </Link>
             </div>
             <p className="mt-6 max-w-xl text-sm leading-6 text-steel-400">
@@ -79,7 +79,7 @@ export default function HomePage() {
           </h2>
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {problems.map((problem) => (
-              <article key={problem.title} className="rounded-xl border border-white/10 bg-white/[0.04] p-6">
+              <article key={problem.title} className="rounded-xl border border-white/10 bg-white/[0.04] p-6 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-white/[0.07] hover:shadow-[0_18px_50px_rgba(47,140,255,0.18)]">
                 <h3 className="text-xl font-semibold text-white">{problem.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-steel-300">{problem.copy}</p>
               </article>
@@ -96,8 +96,8 @@ export default function HomePage() {
           </h2>
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {offerItems.map((item) => (
-              <div key={item} className="rounded-xl border border-white/10 bg-white/[0.04] p-5">
-                <ShieldCheck className="mb-4 h-5 w-5 text-cyan-300" />
+              <div key={item} className="group rounded-xl border border-white/10 bg-white/[0.04] p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-white/[0.07] hover:shadow-[0_18px_50px_rgba(47,140,255,0.18)]">
+                <ShieldCheck className="mb-4 h-5 w-5 text-cyan-300 transition-transform duration-200 group-hover:scale-110" />
                 <h3 className="text-base font-semibold text-white">{item}</h3>
               </div>
             ))}
@@ -115,7 +115,7 @@ export default function HomePage() {
           </div>
           <div className="grid gap-4 md:grid-cols-2">
             {services.slice(0, 4).map((service) => (
-              <article key={service.title} className="rounded-xl border border-white/10 bg-white/[0.04] p-6">
+              <article key={service.title} className="rounded-xl border border-white/10 bg-white/[0.04] p-6 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-white/[0.07] hover:shadow-[0_18px_50px_rgba(47,140,255,0.18)]">
                 <h3 className="text-xl font-semibold text-white">{service.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-steel-300">{service.result}</p>
               </article>
@@ -134,8 +134,8 @@ export default function HomePage() {
             { icon: LayoutDashboard, label: "Admin dashboard" },
             { icon: ShieldCheck, label: "B2B portal preview" },
           ].map(({ icon: Icon, label }) => (
-            <div key={label} className="rounded-xl border border-white/10 bg-white/[0.04] p-5">
-              <Icon className="mb-4 h-5 w-5 text-cyan-300" />
+            <div key={label} className="group rounded-xl border border-white/10 bg-white/[0.04] p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-white/[0.07] hover:shadow-[0_18px_50px_rgba(47,140,255,0.18)]">
+              <Icon className="mb-4 h-5 w-5 text-cyan-300 transition-transform duration-200 group-hover:scale-110" />
               <h3 className="font-semibold text-white">{label}</h3>
             </div>
           ))}
@@ -150,7 +150,7 @@ export default function HomePage() {
           </h2>
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {industries.slice(0, 3).map((industry) => (
-              <article key={industry.title} className="rounded-xl border border-white/10 bg-white/[0.04] p-6">
+              <article key={industry.title} className="rounded-xl border border-white/10 bg-white/[0.04] p-6 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-white/[0.07] hover:shadow-[0_18px_50px_rgba(47,140,255,0.18)]">
                 <p className="font-mono text-xs uppercase tracking-[0.14em] text-cyan-300">{industry.fit}</p>
                 <h3 className="mt-4 text-2xl font-semibold text-white">{industry.title}</h3>
                 <p className="mt-4 text-sm leading-6 text-steel-300">{industry.description}</p>
@@ -169,8 +169,8 @@ export default function HomePage() {
           <p className="mt-5 max-w-3xl text-base leading-7 text-steel-200">
             WheelPro Systems turns scattered calls, manual quotes, missed follow-ups, and outdated websites into one connected digital system.
           </p>
-          <Link className="mt-8 inline-flex items-center justify-center gap-2 rounded-lg border border-electric-500/70 bg-electric-500 px-5 py-3 text-sm font-semibold text-white" href="/book">
-            Book a Free Growth Audit <ArrowRight className="h-4 w-4" />
+          <Link className="group mt-8 inline-flex items-center justify-center gap-2 rounded-lg border border-electric-500/70 bg-electric-500 px-5 py-3 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-electric-400 hover:shadow-[0_0_42px_rgba(47,140,255,0.45)]" href="/book">
+            Book a Free Growth Audit <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
         </div>
       </section>
