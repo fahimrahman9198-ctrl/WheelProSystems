@@ -41,7 +41,7 @@ export function Footer() {
           <ul className="mt-4 space-y-3">
             <li>
               <Link href="/book" className="text-sm text-steel-300 hover:text-white">
-                Book a Free Growth Audit
+                Book a Free Wheel Shop System Audit
               </Link>
             </li>
             <li>

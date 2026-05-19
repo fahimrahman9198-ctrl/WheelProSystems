@@ -45,7 +45,7 @@ export function Navbar() {
 
         <div className="hidden lg:block">
           <CTAButton href="/book" className="min-h-10 px-4 py-2">
-            Book a Free Audit
+            Book Free Audit
           </CTAButton>
         </div>
 
@@ -74,7 +74,7 @@ export function Navbar() {
               </Link>
             ))}
             <CTAButton href="/book" className="mt-3 w-full">
-              Book a Free Audit
+              Book Free Audit
             </CTAButton>
           </nav>
         </div>

@@ -2,23 +2,24 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
+import { StickyAuditCTA } from "@/components/site/StickyAuditCTA";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "WheelPro Systems | AI Booking & Automation Systems for Mobile Service Businesses",
+    default: "AI Booking Systems for Wheel Repair & Rim Refinishing Shops | WheelPro Systems",
     template: "%s | WheelPro Systems",
   },
   description:
-    "WheelPro Systems builds AI-powered websites, quote flows, booking systems, payment integrations, dashboards, and automation workflows for mobile service businesses.",
+    "WheelPro Systems builds AI-powered quote forms, booking flows, deposit collection, dashboards, and follow-up automation for wheel repair and rim refinishing businesses.",
   keywords: [
     "WheelPro Systems",
-    "AI systems for mobile service businesses",
-    "AI automation for service businesses",
+    "AI booking systems for wheel repair shops",
+    "wheel shop automation",
     "wheel repair booking system",
     "rim repair quote system",
-    "mobile wheel repair website",
+    "rim repair website",
     "wheel refinishing automation",
     "dealer portal for wheel repair",
     "mobile service business dashboard",
@@ -33,15 +34,17 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteConfig.url,
     siteName: siteConfig.agencyName,
-    title: "WheelPro Systems | AI Booking & Automation Systems for Mobile Service Businesses",
+    title: "AI Booking Systems for Wheel Repair & Rim Refinishing Shops",
     description:
-      "AI-powered websites, quote tools, booking flows, payment integrations, dashboards, portals, and automation systems for mobile service businesses.",
+      "AI-powered quote forms, booking flows, deposit collection, dashboards, dealer portals, and follow-up automation for wheel repair businesses.",
+    images: [{ url: "/images/logo.PNG", width: 443, height: 400, alt: "WheelPro Systems logo" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "WheelPro Systems | AI Booking & Automation Systems",
+    title: "AI Booking Systems for Wheel Repair Shops",
     description:
-      "WheelPro Systems builds connected quote, booking, payment, dashboard, portal, and automation systems for mobile service businesses.",
+      "Photo quotes, booking, deposits, dashboards, dealer portals, and follow-up automation for wheel repair shops.",
+    images: ["/images/logo.PNG"],
   },
   robots: {
     index: true,
@@ -52,29 +55,59 @@ export const metadata: Metadata = {
   },
 };
 
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: siteConfig.agencyName,
-  url: siteConfig.url,
-  email: siteConfig.email,
-  founder: {
-    "@type": "Person",
-    name: siteConfig.founder,
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: siteConfig.agencyName,
+    url: siteConfig.url,
+    email: siteConfig.email,
+    description:
+      "AI booking, quote, dashboard, and automation systems for wheel repair and refinishing businesses.",
+    founder: {
+      "@type": "Person",
+      name: siteConfig.founder,
+    },
   },
-  description:
-    "AI-powered websites, quote flows, booking systems, payment integrations, dashboards, portals, and automation workflows for mobile service businesses.",
-  areaServed: "North America",
-  serviceType: [
-    "AI-powered websites",
-    "Booking systems",
-    "Quote workflows",
-    "Payment integrations",
-    "Business dashboards",
-    "Automation workflows",
-    "Client and dealer portals",
-  ],
-};
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteConfig.agencyName,
+    url: siteConfig.url,
+    description:
+      "AI-powered booking systems, quote workflows, dashboards, and automation for wheel repair businesses.",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "AI Booking Systems for Wheel Repair Shops",
+    provider: {
+      "@type": "Organization",
+      name: siteConfig.agencyName,
+      url: siteConfig.url,
+    },
+    areaServed: ["Canada", "United States"],
+    serviceType: [
+      "Website development",
+      "Booking automation",
+      "Quote workflow automation",
+      "Dashboard systems",
+      "AI business automation",
+    ],
+    description:
+      "AI-powered quote forms, booking flows, deposit collection, dashboards, dealer portals, and follow-up automation for wheel repair and refinishing businesses.",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: siteConfig.agencyName,
+    url: siteConfig.url,
+    email: siteConfig.email,
+    areaServed: ["Canada", "United States"],
+    description:
+      "Specialized AI systems agency for wheel repair, rim repair, mobile wheel repair, and wheel refinishing businesses.",
+  },
+];
 
 export const viewport: Viewport = {
   themeColor: "#05070D",
@@ -97,6 +130,7 @@ export default function RootLayout({
         />
         <Navbar />
         <main className="flex-1">{children}</main>
+        <StickyAuditCTA />
         <Footer />
       </body>
     </html>

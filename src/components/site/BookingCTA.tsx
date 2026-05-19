@@ -7,8 +7,8 @@ type BookingCTAProps = {
 };
 
 export function BookingCTA({
-  title = "Book a Free Growth Audit",
-  copy = "A focused 20-minute call to review your quote, booking, and follow-up process.",
+  title = "Book a Free Wheel Shop System Audit",
+  copy = "A focused audit of your wheel repair quote flow, booking process, deposit friction, dashboard visibility, and follow-up system.",
 }: BookingCTAProps) {
   const bookingUrl = getBookingUrl();
   const isPlaceholder = isPlaceholderBookingUrl(bookingUrl);
@@ -32,7 +32,7 @@ export function BookingCTA({
             external={!isPlaceholder}
             className="w-full sm:w-auto"
           >
-            Book a Free Growth Audit
+            Book a Free Wheel Shop System Audit
           </CTAButton>
         </div>
       </div>
