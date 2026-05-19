@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Bot, CalendarCheck, CreditCard, LayoutDashboard, MailCheck, ShieldCheck } from "lucide-react";
-import { industries, offerItems, problems, services, siteConfig, systemFlow } from "@/lib/site";
+import { industries, offerItems, problems, services, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "WheelPro Systems | AI Booking & Automation Systems for Mobile Service Businesses",
@@ -32,7 +32,7 @@ export default function HomePage() {
     <>
       <section className="relative overflow-hidden px-4 py-20 sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(47,140,255,0.18),transparent_36%)]" />
-        <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+        <div className="relative mx-auto max-w-7xl">
           <div>
             <div className="mb-6 flex flex-wrap gap-2">
               {["AI systems for mobile service businesses", "Quote, booking, payment, follow-up"].map((pill) => (
@@ -58,20 +58,6 @@ export default function HomePage() {
             <p className="mt-6 max-w-xl text-sm leading-6 text-steel-400">
               Most service businesses do not have a lead problem. They have a system problem.
             </p>
-          </div>
-
-          <div className="rounded-2xl border border-white/10 bg-[#070B12]/90 p-5 shadow-[0_28px_100px_rgba(0,0,0,0.45)]">
-            <p className="font-mono text-xs uppercase tracking-[0.16em] text-cyan-300">System flow</p>
-            <div className="mt-5 grid gap-3">
-              {systemFlow.map((step, index) => (
-                <div key={step} className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.04] p-4">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-cyan-300/10 font-mono text-sm text-cyan-300">
-                    {index + 1}
-                  </span>
-                  <span className="font-semibold text-white">{step}</span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
