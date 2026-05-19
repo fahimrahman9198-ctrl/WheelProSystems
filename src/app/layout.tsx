@@ -5,13 +5,17 @@ import { Footer } from "@/components/site/Footer";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: "WheelPro Demo | Interactive Wheel Repair Business System Demo",
-    template: "%s | WheelPro Demo",
+    default: "WheelPro Systems | AI Booking & Automation Systems for Mobile Service Businesses",
+    template: "%s | WheelPro Systems",
   },
   description:
-    "WheelPro Demo is a fictional interactive demo by WheelPro Systems showing quote, booking, payment, dashboard, dealer portal, and automation workflows for wheel repair and mobile service businesses.",
+    "WheelPro Systems builds AI-powered websites, quote flows, booking systems, payment integrations, dashboards, and automation workflows for mobile service businesses.",
   keywords: [
+    "WheelPro Systems",
+    "AI systems for mobile service businesses",
+    "AI automation for service businesses",
     "wheel repair booking system",
     "rim repair quote system",
     "mobile wheel repair website",
@@ -27,16 +31,17 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: siteConfig.demoName,
-    title: "WheelPro Demo | Interactive Wheel Repair Business System Demo",
+    url: siteConfig.url,
+    siteName: siteConfig.agencyName,
+    title: "WheelPro Systems | AI Booking & Automation Systems for Mobile Service Businesses",
     description:
-      "A fictional demo environment showing quote, booking, payment, dashboard, dealer portal, and automation workflows for wheel repair businesses.",
+      "AI-powered websites, quote tools, booking flows, payment integrations, dashboards, portals, and automation systems for mobile service businesses.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "WheelPro Demo | Interactive Wheel Repair Business System Demo",
+    title: "WheelPro Systems | AI Booking & Automation Systems",
     description:
-      "Interactive fictional demo by WheelPro Systems for wheel repair and mobile service business workflows.",
+      "WheelPro Systems builds connected quote, booking, payment, dashboard, portal, and automation systems for mobile service businesses.",
   },
   robots: {
     index: true,
@@ -45,6 +50,30 @@ export const metadata: Metadata = {
   icons: {
     icon: [{ url: "/favicon.ico", sizes: "any" }],
   },
+};
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: siteConfig.agencyName,
+  url: siteConfig.url,
+  email: siteConfig.email,
+  founder: {
+    "@type": "Person",
+    name: siteConfig.founder,
+  },
+  description:
+    "AI-powered websites, quote flows, booking systems, payment integrations, dashboards, portals, and automation workflows for mobile service businesses.",
+  areaServed: "North America",
+  serviceType: [
+    "AI-powered websites",
+    "Booking systems",
+    "Quote workflows",
+    "Payment integrations",
+    "Business dashboards",
+    "Automation workflows",
+    "Client and dealer portals",
+  ],
 };
 
 export const viewport: Viewport = {
@@ -62,6 +91,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body className="flex min-h-screen flex-col bg-[#05070D] text-[#F5F7FA] antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

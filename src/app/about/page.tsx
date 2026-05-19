@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 const principles = [
   "Systems beat basic websites because the sale does not end at the homepage.",
   "Quote-based service businesses need cleaner intake, faster response, and clearer next steps.",
-  "Demo environments should be clearly marked as fictional and transparent.",
   "The best build removes operational friction before adding extra complexity.",
+  "Every page, form, dashboard, and automation should support a real business workflow.",
 ];
 
 export default function AboutPage() {
@@ -24,7 +24,7 @@ export default function AboutPage() {
       <PageHeader eyebrow="About WheelPro Systems" title="Founder-led systems for mobile service businesses." copy="WheelPro Systems helps mobile service businesses connect lead capture, quote intake, booking, payment, dashboards, and follow-up into one practical system." />
       <section className="px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <SectionHeader eyebrow="Founder" title={siteConfig.founder} copy="WheelPro Demo exists as a transparent sales asset: a fictional, reusable environment for showing how a modern wheel repair or mobile service workflow can feel before a custom build is scoped." />
+          <SectionHeader eyebrow="Founder" title={siteConfig.founder} copy="WheelPro Systems is a focused systems studio for mobile service businesses that need better quote intake, booking, payments, dashboards, portals, and follow-up." />
           <div className="rounded-lg border border-white/10 bg-white/[0.04] p-6 md:p-8">
             <h2 className="text-2xl font-semibold text-white">Why systems beat basic websites</h2>
             <p className="mt-4 text-base leading-7 text-steel-300">

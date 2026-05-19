@@ -30,12 +30,12 @@ export function ContactForm() {
       </label>
       {submitted && (
         <p className="mt-4 rounded-lg border border-success-400/25 bg-success-400/10 p-3 text-sm text-success-400">
-          Demo form submitted locally. For real contact, email {siteConfig.email}.
+          Thanks. For direct contact, email {siteConfig.email}.
         </p>
       )}
       <button className="mt-5 inline-flex items-center gap-2 rounded-lg border border-electric-400 bg-electric-500 px-5 py-3 text-sm font-semibold text-white">
         <Send className="h-4 w-4" aria-hidden="true" />
-        Send Demo Message
+        Send Message
       </button>
     </form>
   );

@@ -8,16 +8,16 @@ import { services } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Example wheel refinishing, rim repair, mobile wheel repair, fleet, dealer, and photo quote workflows in the WheelPro Demo system.",
+    "Wheel refinishing, rim repair, mobile wheel repair, fleet, dealer, and photo quote workflows WheelPro Systems can organize.",
 };
 
 export default function ServicesPage() {
   return (
     <>
-      <PageHeader eyebrow="Services" title="Example services a modern wheel repair system can organize." copy="These are fictional demo services for showing how quote, booking, dashboard, dealer portal, and automation workflows could support a wheel refinishing or mobile rim repair business." />
+      <PageHeader eyebrow="Services" title="Service workflows a modern wheel repair system can organize." copy="WheelPro Systems structures quote intake, booking, dashboards, dealer portals, and automation around the real workflows of wheel refinishing, rim repair, and mobile service businesses." />
       <section className="px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <SectionHeader title="Service workflow catalog" copy="Each service is written as demo content. No real services, pricing, or service territory is implied." />
+          <SectionHeader title="Service workflow catalog" copy="Each service category shows how customer intake, quote context, scheduling, payment prompts, and follow-up can be organized into one clear system." />
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => (
               <article key={service.title} className="rounded-lg border border-white/10 bg-white/[0.04] p-6">

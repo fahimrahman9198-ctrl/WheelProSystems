@@ -8,7 +8,7 @@ import { SectionHeader } from "@/components/site/SectionHeader";
 export const metadata: Metadata = {
   title: "Systems",
   description:
-    "Explore frontend mockups of quote request workflows, booking flows, payment integrations, customer dashboards, admin dashboards, B2B portals, and AI lead qualification.",
+    "Explore quote request workflows, booking flows, payment integrations, customer dashboards, admin dashboards, B2B portals, and AI lead qualification systems.",
 };
 
 const modules = [
@@ -60,9 +60,9 @@ export default function SystemsPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Systems demo"
-        title="Show the workflow before the full product exists."
-        copy="These are frontend mockups designed to communicate the operating system WheelPro Systems can build: intake, booking, payments, dashboards, portals, and AI-assisted qualification."
+        eyebrow="Systems"
+        title="Connected workflows for quote-based service businesses."
+        copy="WheelPro Systems connects intake, booking, payments, dashboards, portals, and AI-assisted qualification into one practical operating layer."
         cta="Book a Free Growth Audit"
       />
 
@@ -71,7 +71,7 @@ export default function SystemsPage() {
           <SectionHeader
             eyebrow="Product modules"
             title="Each module solves a real operational gap."
-            copy="The systems page is intentionally visual. It helps a business owner see how scattered tasks become one connected process."
+            copy="Each module helps a business owner see how scattered tasks become one connected process."
           />
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
             {modules.map(({ icon: Icon, title, copy, points }) => (

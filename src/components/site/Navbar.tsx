@@ -20,7 +20,7 @@ export function Navbar() {
           <span className="flex h-10 w-10 items-center justify-center">
             <Logo className="h-10 w-10" />
           </span>
-          <span className="font-semibold text-white">{siteConfig.demoName}</span>
+          <span className="font-semibold text-white">{siteConfig.agencyName}</span>
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
@@ -44,8 +44,8 @@ export function Navbar() {
         </nav>
 
         <div className="hidden lg:block">
-          <CTAButton href="/quote" className="min-h-10 px-4 py-2">
-            Try Quote Demo
+          <CTAButton href="/book" className="min-h-10 px-4 py-2">
+            Book a Free Audit
           </CTAButton>
         </div>
 
@@ -73,8 +73,8 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <CTAButton href="/quote" className="mt-3 w-full">
-              Try Quote Demo
+            <CTAButton href="/book" className="mt-3 w-full">
+              Book a Free Audit
             </CTAButton>
           </nav>
         </div>

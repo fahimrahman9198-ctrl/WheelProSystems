@@ -15,7 +15,7 @@ export default function ContactPage() {
       <PageHeader
         eyebrow="Contact"
         title="Talk to WheelPro Systems about your service workflow."
-        copy="Use the form as a local demo interaction, or email directly to discuss quote, booking, dashboard, and follow-up systems."
+        copy="Send a message or email directly to discuss quote, booking, dashboard, payment, portal, and follow-up systems."
       />
       <section className="px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.75fr_1.25fr]">

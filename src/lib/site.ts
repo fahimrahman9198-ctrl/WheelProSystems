@@ -1,18 +1,29 @@
 export const siteConfig = {
-  name: "WheelPro Demo",
+  name: "WheelPro Systems",
   demoName: "WheelPro Demo",
   agencyName: "WheelPro Systems",
-  domain: "Domain coming soon",
+  domain: "wheelprosystems.com",
   url: "https://wheelprosystems.com",
   founder: "Fahim Rahman",
-  email: "fahim@wheelprosystems.com",
+  email: "info@wheelprosystems.com",
   motto: "Turn Your Business Into a System",
   demoMotto: "Turn a Wheel Service Business Into a System",
+  bookingUrl: "https://calendar.app.google/94ijJXv2UUuFyzRp8",
   bookingPlaceholder: "PASTE_GOOGLE_CALENDAR_BOOKING_LINK_HERE",
 };
 
+export const sitemapRoutes = [
+  "",
+  "/services",
+  "/systems",
+  "/industries",
+  "/about",
+  "/contact",
+  "/book",
+] as const;
+
 export function getBookingUrl() {
-  return process.env.NEXT_PUBLIC_BOOKING_URL || siteConfig.bookingPlaceholder;
+  return process.env.NEXT_PUBLIC_BOOKING_URL || siteConfig.bookingUrl;
 }
 
 export function isPlaceholderBookingUrl(url: string) {
@@ -22,12 +33,10 @@ export function isPlaceholderBookingUrl(url: string) {
 export const navLinks = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
-  { label: "Quote Demo", href: "/quote" },
-  { label: "Booking Demo", href: "/booking" },
-  { label: "Dashboard", href: "/dashboard" },
-  { label: "Dealer Portal", href: "/dealer-portal" },
-  { label: "Automation", href: "/automation" },
-  { label: "Book Audit", href: "/book" },
+  { label: "Systems", href: "/systems" },
+  { label: "Industries", href: "/industries" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const systemFlow = ["Photo lead", "AI quote assist", "Booking", "Deposit", "Dashboard", "Follow-up"] as const;
@@ -70,7 +79,7 @@ export const services = [
   },
   {
     title: "Custom refinishing / color change",
-    description: "Demo intake for finish inspiration, color preference, wheel count, and approval checkpoints.",
+    description: "Structured intake for finish inspiration, color preference, wheel count, and approval checkpoints.",
     problem: "Custom finish jobs need more context before quoting.",
     build: "Finish preferences, reference notes, and approval checkpoints.",
     result: "A clearer path for higher-consideration requests.",
@@ -84,7 +93,7 @@ export const services = [
   },
   {
     title: "Admin & User Dashboards",
-    description: "Mock dashboards for customer status, internal pipeline, revenue previews, invoices, and follow-up tasks.",
+    description: "Dashboards for customer status, internal pipeline, revenue previews, invoices, and follow-up tasks.",
     problem: "Leads, bookings, payments, and follow-ups are hard to see in one place.",
     build: "Dashboards for lead status, service pipeline, revenue signals, and customer history.",
     result: "Owners get clearer control over the moving parts that create booked jobs.",
@@ -145,14 +154,14 @@ export const demoMetrics = [
   { label: "New leads", value: "18", delta: "+4 today" },
   { label: "Pending quotes", value: "11", delta: "3 need follow-up" },
   { label: "Booked jobs", value: "27", delta: "This month" },
-  { label: "Demo deposits", value: "$4.8k", delta: "Mock preview" },
+  { label: "Deposits", value: "$4.8k", delta: "Preview" },
 ];
 
 export const automationSteps = [
   { title: "New quote request auto-response", copy: "Confirms the request, explains next steps, and tells the customer photos are being reviewed." },
   { title: "Missed quote follow-up", copy: "Checks in when a quote is opened but no booking happens." },
   { title: "Appointment reminder", copy: "Sends date, time window, prep notes, and location confirmation before service." },
-  { title: "Deposit reminder", copy: "Prompts customers to secure the appointment with a demo deposit link." },
+  { title: "Deposit reminder", copy: "Prompts customers to secure the appointment with a deposit link." },
   { title: "Review request", copy: "Shows how a post-job message could ask for feedback without inventing public reviews." },
   { title: "Re-engagement follow-up", copy: "Brings old quote requests back into the pipeline with a useful check-in." },
 ];

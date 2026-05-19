@@ -5,7 +5,7 @@
 - Build a public marketing website for WheelPro Systems.
 - Provide pages for Home, Services, Systems, Industries, About, Book, and Contact.
 - Use `NEXT_PUBLIC_BOOKING_URL` for the live booking link.
-- Use `fahim@wheelprosystems.com` for direct email contact.
+- Use `info@wheelprosystems.com` for direct email contact.
 - Include a core offer block named "AI Growth System for Mobile Service Businesses."
 - Include a visual workflow: Lead -> Quote -> Booking -> Payment -> Follow-Up.
 - Include frontend-only mockups for quote, booking, payment, dashboards, B2B portals, and AI lead qualification.
@@ -84,7 +84,7 @@ Book:
 
 Contact:
 
-- Use `fahim@wheelprosystems.com`.
+- Use `info@wheelprosystems.com`.
 - Use `wheelprosystems.com`.
 - No personal phone or address.
 

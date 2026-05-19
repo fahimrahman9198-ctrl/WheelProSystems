@@ -7,6 +7,24 @@ export const metadata: Metadata = {
   title: "WheelPro Systems | AI Booking & Automation Systems for Mobile Service Businesses",
   description:
     "WheelPro Systems builds AI-powered websites, quote flows, booking systems, payment integrations, dashboards, and automation tools for mobile service businesses.",
+  keywords: [
+    "AI systems for mobile service businesses",
+    "wheel repair booking system",
+    "mobile service business automation",
+    "quote-to-booking system",
+    "AI quote workflow",
+    "service business dashboard",
+    "booking and payment system",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "WheelPro Systems | AI Booking & Automation Systems",
+    description:
+      "Connected websites, quote flows, booking systems, payment integrations, dashboards, and automation workflows for mobile service businesses.",
+    url: "/",
+  },
 };
 
 export default function HomePage() {
