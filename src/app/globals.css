@@ -47,14 +47,22 @@
   }
 
   html {
-    @apply bg-brand-jet text-brand-white antialiased;
+    @apply text-brand-white antialiased;
     scroll-behavior: smooth;
+    background-color: #0B1426;
   }
 
   body {
-    @apply bg-brand-jet text-brand-white font-body text-body-md;
+    @apply text-brand-white font-body text-body-md;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #0B1426;
+    background-image:
+      radial-gradient(ellipse 90% 55% at 50% -10%, rgba(47, 140, 255, 0.22), transparent 60%),
+      radial-gradient(ellipse 60% 45% at 85% 20%, rgba(103, 232, 249, 0.12), transparent 65%),
+      radial-gradient(ellipse 70% 50% at 10% 65%, rgba(47, 140, 255, 0.10), transparent 65%),
+      linear-gradient(180deg, #0E1A30 0%, #0A1326 45%, #070F1F 100%);
+    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -99,7 +107,7 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-brand-jet;
+    background-color: #0B1426;
   }
 
   ::-webkit-scrollbar-thumb {
