@@ -33,8 +33,8 @@ export default function HomePage() {
       <section className="relative overflow-hidden px-4 py-20 sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(47,140,255,0.18),transparent_36%)]" />
         <div className="relative mx-auto max-w-7xl">
-          <div>
-            <div className="mb-6 flex flex-wrap gap-2">
+          <div className="mx-auto flex flex-col items-center text-center">
+            <div className="mb-6 flex flex-wrap justify-center gap-2">
               {["AI systems for mobile service businesses", "Quote, booking, payment, follow-up"].map((pill) => (
                 <span key={pill} className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-steel-200">
                   {pill}
