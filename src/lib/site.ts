@@ -9,6 +9,7 @@ export const siteConfig = {
   motto: "Turn Your Business Into a System",
   demoMotto: "Turn a Wheel Service Business Into a System",
   bookingPlaceholder: "PASTE_GOOGLE_CALENDAR_BOOKING_LINK_HERE",
+  logoUrl: "/images/wheelpro-logo.png",
 };
 
 export function getBookingUrl() {
@@ -106,31 +107,36 @@ export const industries = [
     title: "Wheel Refinishing",
     description: "Quote-first systems for refinishing, repair requests, photo intake, booking, deposits, and repeat dealer workflows.",
     fit: "Best first fit",
-  },
-  {
-    title: "Rim Repair",
-    description: "Photo-based quote flows and job status systems for repair teams handling alloy wheel damage, bends, finishes, and mobile service routes.",
-    fit: "Core niche",
+    image: "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1600&q=70",
+    imageAlt: "Close-up of an automotive alloy wheel",
   },
   {
     title: "Mobile Detailing",
     description: "Packages, booking, deposits, reminders, upgrades, and customer follow-up for detailers who need better intake and repeat bookings.",
     fit: "Mobile workflow",
+    image: "https://images.unsplash.com/photo-1632823471565-1ecdf5c1b1f6?auto=format&fit=crop&w=1600&q=70",
+    imageAlt: "Hands polishing the exterior of a car",
   },
   {
     title: "Fleet Service",
     description: "B2B service requests, unit tracking, account portals, recurring work, invoice visibility, and operational dashboards.",
     fit: "B2B operations",
+    image: "https://images.unsplash.com/photo-1601158935942-52255782d322?auto=format&fit=crop&w=1600&q=70",
+    imageAlt: "A row of fleet service trucks",
   },
   {
     title: "Mobile Mechanics",
     description: "Service request qualification, route-friendly booking, deposits, customer updates, and repair workflow visibility.",
     fit: "Road-based service",
+    image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1600&q=70",
+    imageAlt: "Mechanic working under the hood of a vehicle",
   },
   {
     title: "Dealership Vendors",
     description: "Dealer-facing portals and structured request flows for vendors who need organized intake, approvals, status updates, and invoices.",
     fit: "Repeat accounts",
+    image: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1600&q=70",
+    imageAlt: "Vehicles parked at a dealership lot",
   },
 ];
 

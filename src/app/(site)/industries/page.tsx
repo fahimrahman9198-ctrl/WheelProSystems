@@ -17,7 +17,7 @@ export default function IndustriesPage() {
       <PageHeader
         eyebrow="Industries"
         title="Purpose-built for businesses that operate on the road."
-        copy="Wheel refinishing is the strongest first niche, but the same connected system model applies across mobile detailing, fleet service, mobile mechanics, and dealership vendor workflows."
+        copy="Wheel refinishing is the strongest first fit. The same connected system model applies to mobile detailing, fleet service, mobile mechanics, and dealership vendor workflows."
         cta="Book a Free Growth Audit"
       />
       <section className="px-4 py-20 sm:px-6 lg:px-8">

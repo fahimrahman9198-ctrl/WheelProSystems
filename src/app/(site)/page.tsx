@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Bot, Brain, CalendarCheck, LineChart, MessageSquare, ShieldCheck, Sparkles } from "lucide-react";
-import { offerItems, problems, systemFlow } from "@/lib/site";
+import { offerItems, systemFlow } from "@/lib/site";
 import { HeroSection } from "@/components/site/HeroSection";
 
 export const metadata: Metadata = {
@@ -43,54 +44,46 @@ const aiCapabilities = [
   },
 ];
 
-const extendedIndustries = [
+const homeIndustries = [
   {
     title: "Wheel Refinishing",
     description: "Quote-first systems for refinishing, repair requests, photo intake, booking, deposits, and repeat dealer workflows.",
     fit: "Primary fit",
     featured: true,
+    image: "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1920&q=70",
+    imageAlt: "Close-up of an automotive alloy wheel",
   },
   {
     title: "Mobile Detailing",
     description: "Packages, booking, deposits, reminders, upgrades, and customer follow-up for detailers who need better intake and repeat bookings.",
     fit: "Mobile workflow",
     featured: false,
+    image: "https://images.unsplash.com/photo-1632823471565-1ecdf5c1b1f6?auto=format&fit=crop&w=1600&q=70",
+    imageAlt: "Hands polishing the exterior of a car",
   },
   {
-    title: "Fleet Services",
+    title: "Fleet Service",
     description: "B2B service requests, unit tracking, account portals, recurring work, invoice visibility, and operational dashboards.",
     fit: "B2B operations",
     featured: false,
+    image: "https://images.unsplash.com/photo-1601158935942-52255782d322?auto=format&fit=crop&w=1600&q=70",
+    imageAlt: "A row of fleet service trucks",
   },
   {
     title: "Mobile Mechanics",
     description: "Service request qualification, route-friendly booking, deposits, customer updates, and repair workflow visibility.",
     fit: "Road-based service",
     featured: false,
+    image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1600&q=70",
+    imageAlt: "Mechanic working under the hood of a vehicle",
   },
   {
-    title: "HVAC / Home Services",
-    description: "Scheduling, quote intake, technician dispatch, payment collection, and customer communication for home service operators.",
-    fit: "Home service ops",
-    featured: false,
-  },
-  {
-    title: "Dealership Service Vendors",
+    title: "Dealership Vendors",
     description: "Dealer-facing portals and structured request flows for vendors who need organized intake, approvals, status updates, and invoices.",
     fit: "Repeat accounts",
     featured: false,
-  },
-  {
-    title: "Plumbing",
-    description: "Emergency and scheduled service intake, quote flows, payment collection, and customer follow-up for plumbing operators.",
-    fit: "Trade services",
-    featured: false,
-  },
-  {
-    title: "Other Mobile Service Businesses",
-    description: "If your business quotes jobs, schedules appointments, and needs faster follow-up — this system model applies.",
-    fit: "Broad fit",
-    featured: false,
+    image: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1600&q=70",
+    imageAlt: "Vehicles parked at a dealership lot",
   },
 ];
 
@@ -103,26 +96,8 @@ export default function HomePage() {
       <section className="border-y border-white/10 bg-white/[0.025] px-4 py-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="text-center text-sm text-steel-400">
-            Built for <span className="text-steel-200">wheel refinishing</span> • <span className="text-steel-200">mobile detailing</span> • <span className="text-steel-200">fleet service</span> • <span className="text-steel-200">mobile mechanics</span> • <span className="text-steel-200">HVAC</span> • <span className="text-steel-200">dealership vendors</span>
+            Built for <span className="text-steel-200">wheel refinishing</span> • <span className="text-steel-200">mobile detailing</span> • <span className="text-steel-200">fleet service</span> • <span className="text-steel-200">mobile mechanics</span> • <span className="text-steel-200">dealership vendors</span>
           </p>
-        </div>
-      </section>
-
-      {/* Problems */}
-      <section className="px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-cyan-300">The real bottleneck</p>
-          <h2 className="mt-3 max-w-3xl text-3xl font-semibold leading-tight text-white md:text-5xl">
-            Scattered tools turn interested leads into unfinished conversations.
-          </h2>
-          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {problems.map((problem) => (
-              <article key={problem.title} className="rounded-xl border border-white/10 bg-white/[0.04] p-6">
-                <h3 className="text-xl font-semibold text-white">{problem.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-steel-300">{problem.copy}</p>
-              </article>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -202,20 +177,30 @@ export default function HomePage() {
             Built first for service businesses that operate on wheels.
           </h2>
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {extendedIndustries.map((industry) => (
+            {homeIndustries.map((industry) => (
               <article
                 key={industry.title}
-                className={`rounded-xl border p-6 ${
+                className={`group relative isolate overflow-hidden rounded-xl border p-6 ${
                   industry.featured
                     ? "border-cyan-300/30 bg-cyan-300/[0.06] lg:col-span-full"
                     : "border-white/10 bg-white/[0.04]"
                 }`}
               >
+                <div className="absolute inset-0 -z-10 transition-transform duration-700 group-hover:scale-105">
+                  <Image
+                    src={industry.image}
+                    alt={industry.imageAlt}
+                    fill
+                    sizes={industry.featured ? "100vw" : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
+                    className="object-cover opacity-50"
+                  />
+                </div>
+                <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[rgba(5,7,13,0.82)] via-[rgba(5,7,13,0.75)] to-[rgba(5,7,13,0.92)]" />
                 <p className="font-mono text-xs uppercase tracking-[0.14em] text-cyan-300">{industry.fit}</p>
-                <h3 className={`mt-4 font-semibold text-white ${industry.featured ? "text-3xl" : "text-2xl"}`}>
+                <h3 className={`mt-4 font-semibold text-white ${industry.featured ? "text-3xl md:text-4xl" : "text-2xl"}`}>
                   {industry.title}
                 </h3>
-                <p className="mt-4 text-sm leading-6 text-steel-300">{industry.description}</p>
+                <p className="mt-4 max-w-2xl text-sm leading-6 text-steel-200">{industry.description}</p>
               </article>
             ))}
           </div>
