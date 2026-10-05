@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero sample — Job Arc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#0a0a0b; --ink-2:#3f3f46; --ink-3:#71717a; --line:#e4e4e7; --subtle:#f5f5f6; --navy:#1e2433; --accent:#2f5bff; --ok:#16a34a; --ok-bg:#e8f7ee; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#fff; color:var(--ink-2); font-family:Geist, system-ui, sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  .nav { position:absolute; inset:0 0 auto; height:72px; display:flex; align-items:center; gap:32px; padding:0 48px; z-index:6; }
+  .nav b { color:var(--ink); font-weight:600; letter-spacing:-.03em; font-size:17px; }
+  .nav nav { margin:0 auto; display:flex; gap:32px; font-size:15px; }
+  .nav a.cta { background:var(--ink); color:#fff; border-radius:99px; padding:12px 20px; font-size:15px; text-decoration:none; }
+  .hero { position:relative; height:100vh; min-height:760px; overflow:hidden; }
+  .copy { position:absolute; left:48px; top:50%; transform:translateY(-54%); width:620px; z-index:3; }
+  .label { font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); font-weight:500; margin:0 0 22px; }
+  h1 { margin:0; color:var(--ink); font-weight:600; font-size:clamp(44px,4.9vw,72px); line-height:1; letter-spacing:-.045em; }
+  .sub { font-size:19px; line-height:1.55; margin:26px 0 36px; max-width:44ch; }
+  .actions { display:flex; align-items:center; gap:24px; }
+  .arrow { display:inline-flex; align-items:center; gap:14px; height:52px; padding:6px 20px 6px 6px; background:var(--subtle); border-radius:99px; color:var(--ink); font-weight:500; text-decoration:none; }
+  .arrow i { width:40px; height:40px; border-radius:10px; background:var(--ink); display:grid; place-items:center; color:#fff; font-style:normal; }
+  .ghost { color:var(--ink); font-weight:500; text-decoration:underline; text-decoration-color:#d4d4d8; text-underline-offset:.3em; }
+
+  /* the quarter-circle track */
+  #track { position:absolute; inset:0; width:100%; height:100%; z-index:1; pointer-events:none; }
+  .badge { position:absolute; left:0; top:0; width:60px; height:60px; margin:-30px 0 0 -30px; border-radius:50%; background:var(--navy); color:#fff; display:grid; place-items:center; z-index:2; box-shadow:0 10px 24px -6px rgba(10,10,11,.35); will-change:transform, opacity; }
+  .badge.src { background:#fff; color:var(--navy); box-shadow:0 0 0 1px var(--line), 0 10px 24px -6px rgba(10,10,11,.25); }
+  .badge svg { width:24px; height:24px; }
+  .badge .tag { position:absolute; top:100%; margin-top:8px; left:50%; transform:translateX(-50%); font-size:11px; font-weight:500; color:var(--ink-2); white-space:nowrap; background:#fff; border:1px solid var(--line); border-radius:99px; padding:2px 8px; }
+  .fly { position:absolute; left:0; top:0; z-index:5; width:24px; height:24px; margin:-12px 0 0 -12px; border-radius:50%; background:var(--navy); color:#fff; display:grid; place-items:center; pointer-events:none; }
+  .fly svg { width:12px; height:12px; }
+
+  /* job card sits inside the arc */
+  .job { position:absolute; z-index:4; right:40px; bottom:40px; width:320px; background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px; box-shadow:0 2px 4px rgba(10,10,11,.04), 0 24px 48px -16px rgba(10,10,11,.18); }
+  .job header { display:flex; justify-content:space-between; align-items:flex-start; gap:10px; padding-bottom:12px; border-bottom:1px solid var(--line); margin-bottom:6px; }
+  .job header b { display:block; color:var(--ink); font-size:14px; font-weight:600; letter-spacing:-.01em; }
+  .job header small { display:block; color:var(--ink-3); font-size:12px; margin-top:2px; }
+  .srcchip { display:inline-flex; align-items:center; gap:5px; font-size:11px; padding:3px 8px; border-radius:99px; background:var(--subtle); color:var(--ink-2); white-space:nowrap; }
+  .srcchip svg { width:12px; height:12px; }
+  .steps { list-style:none; margin:0; padding:0; }
+  .steps li { display:flex; align-items:center; gap:10px; padding:5px 0; font-size:13px; color:var(--ink-3); transition:color .4s; }
+  .steps li .dot { width:26px; height:26px; border-radius:50%; border:1.5px solid var(--line); color:#a1a1aa; display:grid; place-items:center; flex:none; transition:background .4s, border-color .4s, box-shadow .4s, color .4s; }
+  .steps li .dot svg { width:13px; height:13px; }
+  .steps li time { margin-left:auto; font-family:'Geist Mono', monospace; font-size:11px; opacity:0; transition:opacity .4s; }
+  .steps li.done { color:var(--ink); }
+  .steps li.done .dot { background:var(--ok); border-color:var(--ok); color:#fff; }
+  .steps li.done time { opacity:1; }
+  .steps li.now .dot { border-color:var(--accent); color:var(--accent); box-shadow:0 0 0 4px #eaf0ff; }
+  .job footer { margin-top:8px; padding-top:10px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--ink-3); }
+  .paid { font-size:11px; padding:3px 9px; border-radius:99px; background:var(--subtle); color:var(--ink-2); transition:background .4s, color .4s; }
+  .paid.on { background:var(--ok-bg); color:var(--ok); }
+
+  .sample { position:fixed; left:12px; bottom:12px; font:500 11px 'Geist Mono', monospace; color:var(--ink-3); background:#fff; border:1px solid var(--line); border-radius:6px; padding:4px 8px; z-index:9; }
+
+  @media (max-width: 900px) {
+    .nav nav { display:none; } .nav { padding:0 20px; }
+    .copy { position:relative; left:auto; top:auto; transform:none; width:auto; padding:120px 20px 0; }
+    .hero { height:auto; min-height:0; padding-bottom:440px; }
+    .job { right:14px; bottom:16px; width:206px; padding:11px; border-radius:14px; }
+    .job header { padding-bottom:8px; margin-bottom:2px; }
+    .job header b { font-size:13px; }
+    .job header small, .steps li time, .job footer #jobId { display:none; }
+    .srcchip { font-size:10px; padding:2px 6px; }
+    .steps li { font-size:12px; padding:3px 0; gap:8px; }
+    .steps li .dot { width:22px; height:22px; }
+    .steps li .dot svg { width:11px; height:11px; }
+    .job footer { margin-top:4px; padding-top:7px; justify-content:flex-end; }
+    .badge { width:48px; height:48px; margin:-24px 0 0 -24px; }
+    .badge svg { width:20px; height:20px; }
+    .badge .tag { display:none; }
+    .sample { display:none; }
+  }
+</style>
+</head>
+<body>
+<div class="hero" id="hero">
+  <div class="nav"><b>● WheelPro</b><nav><span>Services</span><span>Results</span><span>Case study</span><span>FAQ</span></nav><a class="cta" href="#">Book a meeting</a></div>
+
+  <div class="copy">
+    <p class="label">Built only for wheel refinishers</p>
+    <h1>One-stop solution for wheel refinishing businesses.</h1>
+    <p class="sub">Leads from your website and Gmail get captured, quoted, followed up, invoiced and paid, all in one system.</p>
+    <div class="actions"><a class="arrow" href="#"><i>→</i>Book a meeting</a><a class="ghost" href="#">See how it works</a></div>
+  </div>
+
+  <svg id="track" aria-hidden="true"></svg>
+
+  <div class="job" id="job" aria-live="polite">
+    <header>
+      <span><b id="jobName"></b><small id="jobDesc"></small></span>
+      <span class="srcchip" id="jobSrc"></span>
+    </header>
+    <ol class="steps" id="steps"></ol>
+    <footer><span id="jobId"></span><span class="paid" id="paid">Unpaid</span></footer>
+  </div>
+
+</div>
+<span class="sample">SAMPLE · hero concept "Job Arc"</span>
+
+<script>
+const NS = 'http://www.w3.org/2000/svg';
+const hero = document.getElementById('hero'), track = document.getElementById('track'), jobEl = document.getElementById('job');
+
+// Placeholder glyphs; swap for the official Gmail mark in the real build.
+const ICONS = {
+  website: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+  gmail: '<rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M3 6.5l9 6.5 9-6.5"/>',
+  quote: '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
+  email: '<path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/>',
+  invoice: '<path d="M5 2h14v20l-3-2-2 2-2-2-2 2-2-2-3 2z"/><path d="M9 7h6M9 11h6M9 15h4"/>',
+  payment: '<rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20M6 15h4"/>',
+  check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+};
+const icon = (k, w = 1.8) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${ICONS[k]}</svg>`;
+
+// Sample jobs alternate between the two lead sources.
+const JOBS = [
+  { id: 1044, name: 'Jordan M.', desc: '4 × 20″ · Satin Bronze', src: 'website', srcName: 'Website form' },
+  { id: 1045, name: 'Priya S.', desc: '2 × 19″ · Gloss Black', src: 'gmail', srcName: 'Gmail' },
+];
+const STEP_LABELS = ['Lead captured', 'Quote sent', 'Follow-up emailed', 'Invoice sent', 'Paid'];
+const STEP_TIMES = ['08:14', '09:02', 'Tue 09:00', 'Thu 16:20', 'Thu 16:41'];
+// The stream of icons on the arc: per job, its lead source then the four tools.
+const SEQ = JOBS.flatMap((j, ji) => [
+  { k: j.src, tag: j.srcName, job: ji, step: 0, src: true },
+  { k: 'quote', tag: 'Quote', job: ji, step: 1 },
+  { k: 'email', tag: 'Follow-up', job: ji, step: 2 },
+  { k: 'invoice', tag: 'Invoice', job: ji, step: 3 },
+  { k: 'payment', tag: 'Payment', job: ji, step: 4 },
+]);
+
+// ---- job card ----
+const stepsEl = document.getElementById('steps');
+const STEP_ICONS = ['website', 'quote', 'email', 'invoice', 'payment'];
+stepsEl.innerHTML = STEP_LABELS.map((l, i) => `<li><span class="dot">${icon(STEP_ICONS[i], 2)}</span><span class="lbl">${l}</span><time>${STEP_TIMES[i]}</time></li>`).join('');
+const rows = [...stepsEl.children];
+function showJob(ji) {
+  const j = JOBS[ji];
+  document.getElementById('jobName').textContent = j.name;
+  document.getElementById('jobDesc').textContent = j.desc;
+  document.getElementById('jobSrc').innerHTML = `${icon(j.src)}${j.srcName}`;
+  document.getElementById('jobId').textContent = `Job #${j.id} · Sample`;
+  const paid = document.getElementById('paid');
+  paid.textContent = 'Unpaid'; paid.classList.remove('on');
+  rows[0].querySelector('.dot').innerHTML = icon(j.src, 2);  // first step shows where the lead came from
+  rows.forEach(r => r.classList.remove('done', 'now'));
+  rows[0].classList.add('now');
+}
+function tick(item) {
+  if (item.step === 0) {
+    showJob(item.job);
+    jobEl.animate([{ transform: 'translateY(6px)', opacity: .6 }, { transform: 'none', opacity: 1 }], { duration: 500, easing: 'cubic-bezier(.16,1,.3,1)' });
+  }
+  rows.forEach(r => r.classList.remove('now'));
+  rows[item.step].classList.add('done');
+  if (rows[item.step + 1]) rows[item.step + 1].classList.add('now');
+  if (item.step === 4) { const p = document.getElementById('paid'); p.textContent = 'Paid ✓'; p.classList.add('on'); }
+}
+
+// ---- geometry: quarter circle centred on the hero's bottom-right corner ----
+let W, H, R, C, mobile;
+const START = 274, END = 211;
+const pt = (deg, r = R) => { const a = deg * Math.PI / 180; return [C[0] + r * Math.cos(a), C[1] + r * Math.sin(a)]; };
+
+const N = 4;  // icons on the arc at once
+const badges = Array.from({ length: N }, (_, i) => {
+  const el = document.createElement('div');
+  el.className = 'badge'; hero.appendChild(el);
+  return { el, i, lastP: null, item: null };
+});
+let next = 0;
+function assign(b) {
+  b.item = SEQ[next++ % SEQ.length];
+  b.el.className = 'badge' + (b.item.src ? ' src' : '');
+  b.el.innerHTML = icon(b.item.k) + `<span class="tag">${b.item.tag}</span>`;
+}
+// the badge furthest along arrives first, so it carries the first item
+[...badges].sort((a, b) => b.i - a.i).forEach(assign);
+
+function layout() {
+  W = hero.clientWidth; H = hero.clientHeight; mobile = W < 900;
+  R = mobile ? W * 1.02 : Math.min(W * 0.44, H * 0.74);
+  C = [W, H];
+  track.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  const band = mobile ? 64 : 96;
+  track.innerHTML = `
+    <defs>
+      <linearGradient id="bandG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3f4f5"/><stop offset="1" stop-color="#e9eaed"/></linearGradient>
+      <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="${mobile ? 6 : 9}"/></filter>
+    </defs>
+    <circle cx="${C[0]}" cy="${C[1]}" r="${R}" fill="none" stroke="url(#bandG)" stroke-width="${band}"/>
+    <circle cx="${C[0]}" cy="${C[1]}" r="${R + band / 2}" fill="none" stroke="#e7e8eb"/>
+    <circle cx="${C[0]}" cy="${C[1]}" r="${R - band / 2}" fill="none" stroke="#eceef0"/>
+    <circle cx="${C[0]}" cy="${C[1]}" r="${R}" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="2 10" opacity=".9"/>
+    <g id="trails" filter="url(#blur)"></g>`;
+  const trails = track.querySelector('#trails');
+  badges.forEach(b => { b.trail = Array.from({ length: 8 }, (_, k) => { const c = document.createElementNS(NS, 'circle'); c.setAttribute('r', (mobile ? 22 : 28) - k); c.setAttribute('fill', '#1e2433'); trails.appendChild(c); return c; }); });
+}
+layout(); addEventListener('resize', layout);
+
+function flyToCard(item, x, y) {
+  const f = document.createElement('div');
+  f.className = 'fly'; f.innerHTML = icon(item.k); hero.appendChild(f);
+  const hr = hero.getBoundingClientRect(), rr = rows[item.step].getBoundingClientRect();
+  const tx = rr.left - hr.left + 10, ty = rr.top - hr.top + rr.height / 2;
+  f.animate([
+    { transform: `translate(${x}px, ${y}px) scale(2.4)`, opacity: 1, filter: 'blur(0px)' },
+    { transform: `translate(${tx}px, ${ty}px) scale(1.1)`, opacity: .9, filter: 'blur(0px)', offset: .75 },
+    { transform: `translate(${tx}px, ${ty}px) scale(.4)`, opacity: 0, filter: 'blur(6px)' },
+  ], { duration: 950, easing: 'cubic-bezier(.65,0,.35,1)' }).finished.then(() => { f.remove(); tick(item); });
+}
+
+// ---- motion: icons roll along the arc; one arrives every ~2.6s ----
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const LAP = 10400;
+const t0 = performance.now();
+showJob(0);
+function frame(now) {
+  const t = reduce ? 0 : (now - t0) / LAP;
+  for (const b of badges) {
+    const p = (t + b.i / N) % 1;
+    const ang = START - p * (START - END);
+    const [x, y] = pt(ang);
+    const fade = Math.min(1, p / 0.06, (1 - p) / 0.06);
+    b.el.style.transform = `translate(${x}px, ${y}px) scale(${0.85 + 0.15 * fade})`;
+    b.el.style.opacity = fade;
+    b.trail.forEach((c, k) => { const [tx, ty] = pt(ang + (k + 1) * (mobile ? 2.4 : 1.8)); c.setAttribute('cx', tx); c.setAttribute('cy', ty); c.setAttribute('opacity', (0.28 * (1 - k / 8) * fade).toFixed(3)); });
+    if (!reduce && b.lastP !== null && p < b.lastP && b.lastP > 0.9) { flyToCard(b.item, ...pt(END)); assign(b); }
+    b.lastP = p;
+  }
+  if (!reduce) requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+if (reduce) [0, 1, 2].forEach(s => tick(SEQ[s]));
+</script>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WheelPro — Archivo + Abril study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Archivo:wdth,wght@75..125,400..800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --night: #071421;
+      --night-2: #0d2234;
+      --white: #f7fbff;
+      --mist: #c7d6e2;
+      --line: rgba(247,251,255,.2);
+      --sky: #64b9ff;
+      --blue: #315bff;
+      --green: #35c37b;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { min-height: 100%; }
+
+    body {
+      margin: 0;
+      background: var(--night);
+      color: var(--white);
+      font-family: "Archivo", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    ::selection { background: var(--sky); color: var(--night); }
+
+    :focus-visible {
+      outline: 2px solid var(--sky);
+      outline-offset: 4px;
+    }
+
+    .study {
+      position: relative;
+      min-height: 100svh;
+      overflow: hidden;
+      isolation: isolate;
+      background: var(--night);
+    }
+
+    .study::before {
+      content: "";
+      position: absolute;
+      z-index: -2;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(7,20,33,.18) 0%, rgba(7,20,33,.5) 52%, var(--night) 100%),
+        url("../public/photos/model-y.jpg") center 62% / cover no-repeat;
+      filter: saturate(.7) contrast(1.08);
+      transform: scale(1.035);
+    }
+
+    .study::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(7,20,33,.9), transparent 40%, rgba(7,20,33,.76));
+      pointer-events: none;
+    }
+
+    .nav {
+      width: min(calc(100% - 56px), 1400px);
+      height: 82px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 750;
+      letter-spacing: -.03em;
+    }
+
+    .mark {
+      position: relative;
+      width: 28px;
+      aspect-ratio: 1;
+      border: 7px solid currentColor;
+      border-radius: 50%;
+    }
+
+    .mark::after {
+      content: "";
+      position: absolute;
+      inset: 3px;
+      border: 1px solid var(--night);
+      border-radius: 50%;
+    }
+
+    .font-note {
+      margin-left: auto;
+      color: var(--mist);
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .hero {
+      width: min(calc(100% - 56px), 1400px);
+      min-height: calc(100svh - 82px);
+      margin: auto;
+      padding: 66px 0 44px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 48px;
+    }
+
+    .copy {
+      position: relative;
+      z-index: 3;
+      max-width: 1080px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .copy h1 {
+      margin: 0;
+      font-family: "Abril Fatface", serif;
+      font-size: clamp(64px, 8.5vw, 122px);
+      font-weight: 400;
+      line-height: .9;
+      letter-spacing: -.028em;
+      text-wrap: balance;
+    }
+
+    .copy h1 .sans {
+      display: block;
+      margin-bottom: 10px;
+      font-family: "Archivo", sans-serif;
+      color: var(--mist);
+      font-size: clamp(24px, 2.7vw, 42px);
+      font-stretch: 90%;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: -.035em;
+    }
+
+    .lede {
+      max-width: 640px;
+      margin: 25px auto 0;
+      color: var(--mist);
+      font-size: clamp(17px, 1.3vw, 20px);
+      line-height: 1.5;
+      letter-spacing: -.012em;
+    }
+
+    .actions {
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .button {
+      min-height: 54px;
+      padding: 7px 22px 7px 7px;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--white);
+      color: var(--night);
+      font-size: 15px;
+      font-weight: 650;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+      transition: transform 180ms ease;
+    }
+
+    .button span {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .button svg,
+    .text-link svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+    }
+
+    .button:hover { transform: translateY(-2px); }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid rgba(247,251,255,.55);
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .media-stage {
+      position: relative;
+      align-self: end;
+      min-height: 295px;
+      margin-top: 4px;
+    }
+
+    .screen {
+      position: absolute;
+      left: 50%;
+      bottom: -18px;
+      width: min(68vw, 940px);
+      transform: translateX(-50%);
+      background: var(--white);
+      box-shadow: 0 32px 80px -34px rgba(0,0,0,.9);
+      clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 0 100%);
+    }
+
+    .screen img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 6.25;
+      object-fit: cover;
+      object-position: center 17%;
+    }
+
+    .photo-card {
+      position: absolute;
+      left: 2%;
+      bottom: 14px;
+      z-index: 2;
+      width: 190px;
+      padding: 8px;
+      border: 1px solid rgba(247,251,255,.34);
+      background: rgba(7,20,33,.88);
+    }
+
+    .photo-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .photo-card p {
+      margin: 8px 2px 2px;
+      color: var(--mist);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .payment-card {
+      position: absolute;
+      right: 1%;
+      bottom: 26px;
+      z-index: 2;
+      width: 250px;
+      padding: 17px 18px 16px;
+      background: var(--white);
+      color: var(--night);
+      clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 0 100%);
+      box-shadow: 0 24px 55px -26px rgba(0,0,0,.9);
+    }
+
+    .payment-card small {
+      color: #5a6470;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .payment-card strong {
+      display: block;
+      margin-top: 7px;
+      font-family: "Abril Fatface", serif;
+      font-size: 31px;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -.02em;
+    }
+
+    .payment-card p {
+      margin: 13px 0 0;
+      padding-top: 11px;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #d6dce2;
+      color: #58616a;
+      font-size: 12px;
+    }
+
+    .payment-card b { color: #087a46; }
+
+    @media (max-width: 900px) {
+      .hero { gap: 54px; }
+      .media-stage { min-height: 360px; }
+      .screen { width: 96%; bottom: 10px; }
+      .photo-card { left: 0; bottom: 0; width: 160px; }
+      .payment-card { right: 0; bottom: 2px; }
+    }
+
+    @media (max-width: 620px) {
+      .nav, .hero { width: min(calc(100% - 32px), 1400px); }
+      .nav { height: 72px; }
+      .font-note { font-size: 12px; }
+      .hero { min-height: auto; padding: 50px 0 24px; gap: 44px; }
+      .copy { text-align: left; }
+      .copy h1 { font-size: clamp(58px, 17.2vw, 76px); }
+      .copy h1 .sans { font-size: 26px; line-height: 1.06; }
+      .lede { margin-left: 0; }
+      .actions { align-items: flex-start; justify-content: flex-start; flex-direction: column; gap: 18px; }
+      .media-stage { min-height: 530px; }
+      .screen {
+        top: 0;
+        bottom: auto;
+        width: 118%;
+      }
+      .screen img { aspect-ratio: 4 / 3; object-position: center; }
+      .photo-card { top: 248px; bottom: auto; width: 132px; }
+      .payment-card { right: 0; bottom: 18px; width: 225px; }
+    }
+  </style>
+</head>
+<body>
+  <section class="study">
+    <nav class="nav" aria-label="Sample navigation">
+      <a class="brand" href="#"><span class="mark" aria-hidden="true"></span>WheelPro</a>
+      <span class="font-note">Archivo + Abril Fatface</span>
+    </nav>
+
+    <div class="hero">
+      <div class="copy">
+        <h1><span class="sans">Wheel craft,</span>without the chaos.</h1>
+        <p class="lede">Quotes, follow-ups, invoices and card payments in one place—so you can stay focused on the wheels in front of you.</p>
+        <div class="actions">
+          <a class="button" href="#">
+            <span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            See WheelPro in action
+          </a>
+          <a class="text-link" href="#">
+            Book a meeting
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 7h10v10M7 17 17 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="media-stage" aria-label="WheelPro quote and payment example">
+        <div class="screen"><img src="../public/screens/quote.jpg" alt="WheelPro quote interface"></div>
+        <div class="photo-card">
+          <img src="../public/photos/rash-lip.jpg" alt="Close-up of curb rash on a wheel">
+          <p>Photos received · Jordan M.</p>
+        </div>
+        <div class="payment-card">
+          <small>Job Q-1044 · Deposit</small>
+          <strong>Paid.</strong>
+          <p><span>Visa ·· 4242</span><b>$150.00 ✓</b></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

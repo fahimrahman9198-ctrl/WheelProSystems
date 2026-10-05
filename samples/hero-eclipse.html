@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero sample · Eclipse wheel</title>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@600&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: Switzer; src: url("../app/fonts/switzer-variable.woff2") format("woff2"); font-weight: 100 900; }
+  :root { --ink:#0a0a0b; --ink-2:#3f3f46; --ink-3:#71717a; --line:#e4e4e7; --accent:#2f5bff; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; color: var(--ink-2); font-family: Switzer, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  .nav { position: fixed; inset: 0 0 auto; height: 72px; display: flex; align-items: center; gap: 32px; padding: 0 168px; z-index: 20; background: rgba(255,255,255,.85); backdrop-filter: blur(10px); }
+  .nav b { color: var(--ink); font-weight: 600; font-size: 17px; }
+  .nav nav { margin: 0 auto; display: flex; gap: 32px; font-size: 15px; }
+  .nav .cta { background: var(--ink); color: #fff; padding: 12px 20px; font-size: 15px; }
+  .hero { position: relative; height: 100vh; min-height: 760px; overflow: hidden; }
+  .copy { position: absolute; left: 168px; top: 50%; transform: translateY(-46%); width: 680px; z-index: 5; }
+  .label { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; }
+  h1 { font-family: "Saira Semi Condensed", sans-serif; font-weight: 600; font-size: clamp(44px, 5.2vw, 76px); line-height: 1.02; color: var(--ink); margin: 22px 0 0; }
+  .sub { font-size: 19px; line-height: 1.6; margin-top: 26px; max-width: 44ch; }
+  .btn { display: inline-flex; align-items: center; gap: 14px; height: 52px; padding: 6px 26px 6px 6px; background: var(--ink); color: #fff; font-weight: 600; margin-top: 34px; }
+  .btn i { width: 40px; height: 40px; background: var(--accent); display: grid; place-items: center; font-style: normal; color: #fff; }
+  svg#sys { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .planet { position: absolute; left: 0; top: 0; width: 44px; height: 44px; margin: -22px 0 0 -22px; z-index: 4; pointer-events: none; will-change: transform; }
+  .planet .orb { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: #fff; border: 1.6px solid var(--pc); color: var(--pc); }
+  .planet .orb svg { width: 20px; height: 20px; }
+  .planet.done .orb { background: var(--pc); color: #fff; }
+  .planet.now .orb { box-shadow: 0 0 0 7px color-mix(in srgb, var(--pc) 16%, transparent); }
+  .planet .lbl { position: absolute; top: 100%; left: 50%; margin-top: 8px; transform: translateX(-50%); font-size: 12.5px; font-weight: 500; white-space: nowrap; color: var(--ink-3); }
+  .planet.done .lbl { color: var(--ink); }
+  .planet.now .lbl { color: var(--pc); }
+  .comet { position: absolute; left: 0; top: 0; width: 20px; height: 20px; margin: -10px 0 0 -10px; border-radius: 50%; z-index: 6; pointer-events: none; box-shadow: 0 0 18px var(--pc); background: var(--pc); }
+  .trail { position: absolute; left: 0; top: 0; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; z-index: 5; pointer-events: none; background: var(--pc); filter: blur(3px); }
+  .below { height: 140vh; background: #f5f5f6; display: grid; place-items: center; color: var(--ink-3); font-size: 14px; }
+  .sample { position: fixed; left: 16px; bottom: 12px; z-index: 30; font: 500 11px Switzer, sans-serif; letter-spacing: .08em; color: var(--ink-3); text-transform: uppercase; background: #fff; padding: 4px 8px; border: 1px solid var(--line); }
+  @media (max-width: 900px) {
+    .nav { padding: 0 20px; } .nav nav { display: none; }
+    .hero { height: auto; min-height: 0; padding-bottom: 360px; }
+    .copy { position: relative; left: auto; top: auto; transform: none; width: auto; padding: 120px 20px 0; }
+    .planet { width: 34px; height: 34px; margin: -17px 0 0 -17px; }
+    .planet .orb svg { width: 15px; height: 15px; }
+    .planet:not(.now) .lbl { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="nav"><b>● WheelPro</b><nav><span>Services</span><span>Why WheelPro</span><span>Case study</span><span>FAQ</span></nav><span class="cta">Book a meeting</span></div>
+
+<section class="hero" id="hero">
+  <svg id="sys" aria-hidden="true"></svg>
+  <div class="copy">
+    <div class="label">Built only for wheel refinishers</div>
+    <h1>One-stop solution<br>for wheel refinishing<br>businesses</h1>
+    <p class="sub">Leads from your website and Gmail get captured, quoted, followed up, invoiced and paid, all in one system.</p>
+    <span class="btn"><i>→</i>Book a meeting</span>
+  </div>
+</section>
+<div class="below">Scroll down and back up: the wheel and both orbits swirl with the page</div>
+<span class="sample">Sample · Eclipse wheel</span>
+
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const hero = document.getElementById("hero"), svg = document.getElementById("sys");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const ICONS = {
+  web: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+  quote: '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
+  email: '<path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/>',
+  inv: '<path d="M5 2h14v20l-3-2-2 2-2-2-2 2-2-2-3 2z"/><path d="M9 7h6M9 11h6M9 15h4"/>',
+  pay: '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/>',
+};
+const icon = (k) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[k]}</svg>`;
+
+// two orbits: inner clockwise, outer counter-clockwise. Steps repeat around the
+// full circle so the visible quarter always has planets in it.
+const ORBITS = [
+  { dir: 1, period: 60, steps: [["Lead captured", "web", "#2f5bff", "done"], ["Quote sent", "quote", "#7c3aed", "done"]], copies: 4 },
+  { dir: -1, period: 80, steps: [["Follow-up", "email", "#d97706", "now"], ["Invoice sent", "inv", "#0d9488", ""], ["Paid", "pay", "#16a34a", ""]], copies: 4 },
+];
+
+let W, H, CX, CY, mobile, rWheel, radii;
+const planets = [];
+ORBITS.forEach((o, oi) => {
+  const n = o.steps.length * o.copies;
+  for (let k = 0; k < n; k++) {
+    const [label, ic, color, st] = o.steps[k % o.steps.length];
+    const el = document.createElement("div");
+    el.className = `planet ${st}`;
+    el.style.setProperty("--pc", color);
+    el.innerHTML = `<span class="orb">${icon(ic)}</span><span class="lbl">${label}</span>`;
+    hero.appendChild(el);
+    planets.push({ el, oi, base: (k / n) * 360, color });
+  }
+});
+
+let wheelG, orbitEls = [];
+function layout() {
+  W = hero.clientWidth; H = hero.clientHeight; mobile = W < 900;
+  rWheel = mobile ? 150 : 270;
+  // wheel centred on the corner: a quarter of the rim and tire shows
+  CX = W; CY = H;
+  radii = mobile ? [225, 310] : [380, 520];
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  let g = "";
+  // soft blue halo
+  for (let k = 0; k < 10; k++) g += `<circle cx="${CX}" cy="${CY}" r="${rWheel + 6 + k * (mobile ? 8 : 12)}" fill="none" stroke="#2f5bff" stroke-width="${mobile ? 8 : 12}" opacity="${(0.15 * (1 - k / 10)).toFixed(3)}"/>`;
+  // orbits
+  radii.forEach((r, i) => (g += `<circle class="orbit" data-i="${i}" cx="${CX}" cy="${CY}" r="${r}" fill="none" stroke="#c4c4ca" stroke-width="1.5" stroke-dasharray="2 9"/>`));
+  // the wheel: tire + clean rim like the logo (drawn at 200px, scaled)
+  const s = rWheel / 200;
+  let spokes = "", lugs = "";
+  for (let i = 0; i < 5; i++) {
+    const a = (i * 72 - 90) * Math.PI / 180;
+    spokes += `<line x1="${38 * Math.cos(a)}" y1="${38 * Math.sin(a)}" x2="${118 * Math.cos(a)}" y2="${118 * Math.sin(a)}"/>`;
+    const b = a + Math.PI / 5;
+    lugs += `<circle cx="${26 * Math.cos(b)}" cy="${26 * Math.sin(b)}" r="3.4" fill="#fff" stroke="none"/>`;
+  }
+  let tread = "";
+  for (let i = 0; i < 48; i++) {
+    const a = (i * 7.5) * Math.PI / 180;
+    tread += `<line x1="${186 * Math.cos(a)}" y1="${186 * Math.sin(a)}" x2="${198 * Math.cos(a)}" y2="${198 * Math.sin(a)}"/>`;
+  }
+  g += `<g id="wheel" transform="translate(${CX} ${CY}) scale(${s})">
+      <circle r="200" fill="#0b0c0e"/>
+      <g stroke="#1f2126" stroke-width="3">${tread}</g>
+      <circle r="168" fill="none" stroke="#24262b" stroke-width="2"/>
+      <circle r="140" fill="#0e0f12"/>
+      <g fill="none" stroke="#fff" stroke-linecap="round">
+        <circle r="138" stroke-width="7"/>
+        <circle r="124" stroke-width="1.5" stroke-opacity=".35"/>
+        <g stroke-width="12">${spokes}</g>
+        <circle r="38" stroke-width="7"/>
+      </g>
+      <circle r="12" fill="#fff"/>
+      ${lugs}
+      <circle r="200" fill="none" stroke="#2f5bff" stroke-opacity=".55" stroke-width="2"/>
+    </g>`;
+  svg.innerHTML = g;
+  wheelG = svg.querySelector("#wheel");
+  orbitEls = [...svg.querySelectorAll(".orbit")];
+}
+layout();
+addEventListener("resize", layout);
+
+const pt = (r, deg) => { const a = deg * Math.PI / 180; return [CX + r * Math.cos(a), CY + r * Math.sin(a)]; };
+
+// ---- scroll drives the wheel: down = forward, up = backward (smoothed) ----
+let target = scrollY, eased = scrollY;
+addEventListener("scroll", () => (target = scrollY), { passive: true });
+
+// ---- comets land on the visible "now" planet every few seconds ----
+let nextComet = 1200;
+function launchComet(t) {
+  const now = planets.filter((p) => p.el.classList.contains("now"));
+  const vis = now.map((p) => ({ p, a: angleOf(p, t) })).filter(({ a }) => a > 200 && a < 255);
+  if (!vis.length) return;
+  const { p } = vis[0];
+  const c = document.createElement("div"); c.className = "comet"; c.style.setProperty("--pc", p.color); hero.appendChild(c);
+  const trail = Array.from({ length: 7 }, (_, k) => { const d = document.createElement("span"); d.className = "trail"; d.style.setProperty("--pc", p.color); d.style.opacity = (0.35 * (1 - k / 7)).toFixed(2); hero.appendChild(d); return d; });
+  comets.push({ c, trail, p, t0: t, hist: [] });
+}
+const comets = [];
+const SWIRL = 0.25; // degrees of orbit turn per pixel scrolled
+const orbitTurn = (oi, t) => ORBITS[oi].dir * ((t / 1000) * (360 / ORBITS[oi].period) + eased * SWIRL);
+const angleOf = (p, t) => {
+  const a = p.base + orbitTurn(p.oi, t) + 180;
+  return ((a % 360) + 360) % 360;
+};
+
+let t = 0, last = performance.now();
+function frame(now) {
+  const dt = Math.min(64, now - last); last = now;
+  if (!reduce && !document.hidden) t += dt;
+
+  eased += (target - eased) * (reduce ? 1 : 0.12);
+  wheelG.setAttribute("transform", `translate(${CX} ${CY}) scale(${rWheel / 200}) rotate(${(eased * 0.35).toFixed(2)})`);
+
+  orbitEls.forEach((el, i) => el.setAttribute("transform", `rotate(${orbitTurn(i, t).toFixed(2)} ${CX} ${CY})`));
+  planets.forEach((p) => {
+    const [x, y] = pt(radii[p.oi], angleOf(p, t));
+    p.el.style.transform = `translate(${x}px, ${y}px)`;
+  });
+
+  if (!reduce && t > nextComet) { launchComet(t); nextComet = t + 3200; }
+  for (let i = comets.length - 1; i >= 0; i--) {
+    const cm = comets[i];
+    const k = Math.min(1, (t - cm.t0) / 1400), e = 1 - Math.pow(1 - k, 3);
+    const [tx, ty] = pt(radii[cm.p.oi], angleOf(cm.p, t));
+    const sx = W - 40, sy = 40;
+    const x = sx + (tx - sx) * e, y = sy + (ty - sy) * e - Math.sin(e * Math.PI) * 60;
+    cm.hist.unshift([x, y]); cm.hist.length = Math.min(cm.hist.length, 15);
+    cm.c.style.transform = `translate(${x}px, ${y}px)`;
+    cm.trail.forEach((d, j) => { const h = cm.hist[Math.min(cm.hist.length - 1, (j + 1) * 2)]; d.style.transform = `translate(${h[0]}px, ${h[1]}px)`; });
+    if (k >= 1) {
+      cm.c.remove(); cm.trail.forEach((d) => d.remove()); comets.splice(i, 1);
+      cm.p.el.querySelector(".orb").animate([{ transform: "scale(1.35)" }, { transform: "scale(1)" }], { duration: 600, easing: "cubic-bezier(.16,1,.3,1)" });
+    }
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

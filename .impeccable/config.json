@@ -1,0 +1,110 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "geist",
+        "createdAt": "2026-10-04T05:27:06.560Z",
+        "reason": "user confirmed: approved DESIGN-SYSTEM.md recommendation of Geist on 2026-10-03"
+      },
+      {
+        "rule": "overused-font",
+        "value": "geist mono",
+        "createdAt": "2026-10-04T05:27:06.575Z",
+        "reason": "user confirmed: approved DESIGN-SYSTEM.md recommendation of Geist Mono on 2026-10-03"
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "samples/hero-hub.html"
+        ],
+        "createdAt": "2026-10-04T05:27:06.590Z",
+        "reason": "Claude: uppercase only on short labels (eyebrow, SAMPLE tag), per DESIGN-SYSTEM label style"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "design-samples/screens.html"
+        ],
+        "createdAt": "2026-10-04T06:37:45.597Z",
+        "reason": "Claude: source for rasterised product-UI mockup images; dense app UI text is intentional and is exported at 2x"
+      },
+      {
+        "rule": "tiny-text",
+        "value": "*",
+        "files": [
+          "design-samples/screens.html"
+        ],
+        "createdAt": "2026-10-04T06:37:45.613Z",
+        "reason": "Claude: source for rasterised product-UI mockup images; dense app UI text is intentional and is exported at 2x"
+      },
+      {
+        "rule": "ai-color-palette",
+        "value": "*",
+        "files": [
+          "design-samples/screens.html"
+        ],
+        "createdAt": "2026-10-04T07:08:57.105Z",
+        "reason": "Claude: source for rasterised product-UI mockups; browser chrome, nested app panels and dense app UI mimic real software screens"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "design-samples/screens.html"
+        ],
+        "createdAt": "2026-10-04T07:08:57.122Z",
+        "reason": "Claude: source for rasterised product-UI mockups; browser chrome, nested app panels and dense app UI mimic real software screens"
+      },
+      {
+        "rule": "gpt-thin-border-wide-shadow",
+        "value": "*",
+        "files": [
+          "design-samples/screens.html"
+        ],
+        "createdAt": "2026-10-04T07:08:57.141Z",
+        "reason": "Claude: source for rasterised product-UI mockups; browser chrome, nested app panels and dense app UI mimic real software screens"
+      },
+      {
+        "rule": "nested-cards",
+        "value": "*",
+        "files": [
+          "design-samples/screens.html"
+        ],
+        "createdAt": "2026-10-04T07:08:57.162Z",
+        "reason": "Claude: source for rasterised product-UI mockups; browser chrome, nested app panels and dense app UI mimic real software screens"
+      },
+      {
+        "rule": "shape-assembled-illustration",
+        "value": "*",
+        "files": [
+          "design-samples/screens.html"
+        ],
+        "createdAt": "2026-10-04T07:08:57.181Z",
+        "reason": "Claude: source for rasterised product-UI mockups; browser chrome, nested app panels and dense app UI mimic real software screens"
+      },
+      {
+        "rule": "wide-tracking",
+        "value": "*",
+        "files": [
+          "design-samples/screens.html"
+        ],
+        "createdAt": "2026-10-04T07:08:57.200Z",
+        "reason": "Claude: source for rasterised product-UI mockups; browser chrome, nested app panels and dense app UI mimic real software screens"
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "samples/hero-eclipse.html"
+        ],
+        "createdAt": "2026-10-05T03:07:28.415Z",
+        "reason": "Claude: uppercase only on short labels (eyebrow, SAMPLE tag) in a throwaway sample page"
+      }
+    ]
+  }
+}

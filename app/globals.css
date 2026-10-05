@@ -1,0 +1,602 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #ffffff;
+  --bg-subtle: #f5f5f6;
+  --bg-muted: #ededef;
+  --line: #e4e4e7;
+  --line-strong: #d4d4d8;
+  --ink: #0a0a0b;
+  --ink-2: #3f3f46;
+  --ink-3: #71717a;
+  --dark: #0b0b0d;
+  --dark-2: #18181b;
+  --dark-line: #27272a;
+  --on-dark: #fafafa;
+  --on-dark-2: #a1a1aa;
+  --accent: #2f5bff;
+  --accent-soft: #eaf0ff;
+  --success: #16a34a;
+  --success-soft: #e8f7ee;
+  --warn: #d97706;
+  --warn-soft: #fef3e2;
+  --danger: #dc2626;
+
+  --shadow-sm: 0 1px 2px rgba(10, 10, 11, 0.04), 0 2px 8px rgba(10, 10, 11, 0.04);
+  --shadow-md: 0 2px 4px rgba(10, 10, 11, 0.04), 0 12px 32px -8px rgba(10, 10, 11, 0.12);
+  --shadow-lg: 0 4px 8px rgba(10, 10, 11, 0.04), 0 32px 64px -16px rgba(10, 10, 11, 0.18);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-subtle: var(--bg-subtle);
+  --color-muted: var(--bg-muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-dark: var(--dark);
+  --color-dark-2: var(--dark-2);
+  --color-dark-line: var(--dark-line);
+  --color-on-dark: var(--on-dark);
+  --color-on-dark-2: var(--on-dark-2);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-danger: var(--danger);
+
+  --font-sans: var(--font-switzer), Arial, sans-serif;
+  --font-mono: var(--font-switzer), Arial, sans-serif;
+
+  --radius-xs: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 88px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink-2);
+  font-family: var(--font-switzer), Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--ink);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 0;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+@media (min-width: 768px) {
+  .wrap {
+    padding-inline: 32px;
+  }
+}
+@media (min-width: 1024px) {
+  .wrap {
+    padding-inline: 48px;
+  }
+}
+
+.t-display {
+  font-family: var(--font-display), var(--font-switzer), sans-serif;
+  font-size: clamp(2.5rem, 5.2vw, 4.75rem);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+.t-h1 {
+  font-family: var(--font-display), var(--font-switzer), sans-serif;
+  font-size: clamp(2rem, 3.8vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+.t-h2 {
+  font-family: var(--font-display), var(--font-switzer), sans-serif;
+  font-size: clamp(1.625rem, 2.6vw, 2.375rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+.t-h3 {
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+.t-stat {
+  font-size: clamp(3.5rem, 9vw, 7.5rem);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+.t-body-lg {
+  font-size: clamp(1.125rem, 1.4vw, 1.25rem);
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+}
+.t-label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+.t-mono {
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+  font-variant-numeric: tabular-nums;
+}
+
+.section {
+  padding-block: 96px;
+}
+@media (min-width: 1024px) {
+  .section {
+    padding-block: 160px;
+  }
+}
+
+.strip-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 120px, #000 calc(100% - 120px), transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 120px, #000 calc(100% - 120px), transparent);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---- Hero: job arc ---- */
+.arc-badge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  width: 48px;
+  height: 48px;
+  margin: -24px 0 0 -24px;
+  border-radius: 0;
+  background: #1e2433;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 10px 24px -6px rgba(10, 10, 11, 0.35);
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+.arc-badge.src {
+  background: #fff;
+  color: #1e2433;
+  box-shadow: 0 0 0 1px var(--line), 0 10px 24px -6px rgba(10, 10, 11, 0.25);
+}
+.arc-badge svg {
+  width: 20px;
+  height: 20px;
+}
+.arc-badge .tag {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .arc-badge {
+    width: 60px;
+    height: 60px;
+    margin: -30px 0 0 -30px;
+  }
+  .arc-badge svg {
+    width: 24px;
+    height: 24px;
+  }
+  .arc-badge .tag {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-top: 8px;
+    transform: translateX(-50%);
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-2);
+    white-space: nowrap;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 0;
+  }
+}
+.arc-fly {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  border-radius: 0;
+  background: #1e2433;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.arc-fly svg {
+  width: 12px;
+  height: 12px;
+}
+
+.job-card .src-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 6px;
+  font-size: 10px;
+  white-space: nowrap;
+  color: var(--ink-2);
+  background: var(--bg-subtle);
+  border-radius: 0;
+}
+.job-card .src-chip svg {
+  width: 12px;
+  height: 12px;
+}
+.job-card .step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+  font-size: 12px;
+  color: var(--ink-3);
+  transition: color 0.4s;
+}
+.job-card .step .dot {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 0;
+  border: 1.5px solid var(--line);
+  color: #a1a1aa;
+  transition: background 0.4s, border-color 0.4s, box-shadow 0.4s, color 0.4s;
+}
+.job-card .step .dot svg {
+  width: 11px;
+  height: 11px;
+}
+.job-card .step time {
+  display: none;
+  margin-left: auto;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.job-card .step.done {
+  color: var(--ink);
+}
+.job-card .step.done .dot {
+  background: var(--success);
+  border-color: var(--success);
+  color: #fff;
+}
+.job-card .step.done time {
+  opacity: 1;
+}
+.job-card .step.now .dot {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+.job-card .paid-chip {
+  padding: 3px 9px;
+  font-size: 11px;
+  color: var(--ink-2);
+  background: var(--bg-subtle);
+  border-radius: 0;
+  transition: background 0.4s, color 0.4s;
+}
+.job-card .paid-chip.on {
+  background: var(--success-soft);
+  color: var(--success);
+}
+@media (min-width: 1024px) {
+  .job-card .src-chip {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+  .job-card .step {
+    gap: 10px;
+    padding: 5px 0;
+    font-size: 13px;
+  }
+  .job-card .step .dot {
+    width: 26px;
+    height: 26px;
+  }
+  .job-card .step .dot svg {
+    width: 13px;
+    height: 13px;
+  }
+  .job-card .step time {
+    display: block;
+  }
+}
+
+/* ---- Reference style: outlined second line, cut corners ---- */
+/* Keyword accent switched off: keywords render as normal solid heading text.
+   Re-enable by restoring the outline styles here. */
+.t-outline {
+  color: inherit;
+}
+.on-dark-text {
+  --outline: var(--on-dark);
+  --outline-fill: var(--dark);
+}
+
+/* All boxes and buttons are plain rectangles (cut-corner style removed). */
+
+/* ---- Hero: step rings ---- */
+.ring {
+  fill: none;
+  stroke: #dcdde1;
+  stroke-width: 1;
+  stroke-dasharray: 3 7;
+  transition: stroke 0.5s;
+}
+.ring.now {
+  stroke: var(--accent);
+  stroke-dasharray: none;
+}
+.ring.done {
+  stroke: #a7dcb9;
+  stroke-dasharray: none;
+}
+.ring-node {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  margin: -16px 0 0 -16px;
+  pointer-events: none;
+  will-change: transform;
+}
+.ring-node .ic {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  background: #fff;
+  border: 1px solid var(--line-strong);
+  color: #a1a1aa;
+  transition: background 0.4s, border-color 0.4s, color 0.4s, box-shadow 0.4s;
+}
+.ring-node .ic svg {
+  width: 15px;
+  height: 15px;
+}
+.ring-node .lbl {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-left: 8px;
+  transform: translateY(-50%);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--ink-3);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2px 6px;
+  transition: color 0.4s;
+}
+.ring-node.now .ic {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+.ring-node.now .lbl {
+  color: var(--accent);
+}
+.ring-node.done .ic {
+  background: var(--success);
+  border-color: var(--success);
+  color: #fff;
+}
+.ring-node.done .lbl {
+  color: var(--ink);
+}
+@media (max-width: 1023px) {
+  .ring-node {
+    width: 26px;
+    height: 26px;
+    margin: -13px 0 0 -13px;
+  }
+  .ring-node .ic {
+    width: 26px;
+    height: 26px;
+  }
+  .ring-node .ic svg {
+    width: 12px;
+    height: 12px;
+  }
+  .ring-node:not(.now) .lbl {
+    display: none;
+  }
+}
+
+
+/* ---- Hero: eclipse wheel ---- */
+.hero-wheel {
+  position: absolute;
+  z-index: 2;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+  filter: drop-shadow(0 20px 40px rgba(10, 10, 11, 0.25));
+}
+.orbit-line {
+  fill: none;
+  stroke: #c4c4ca;
+  stroke-width: 1.5;
+  stroke-dasharray: 2 9;
+}
+.orbit-planet {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  pointer-events: none;
+  will-change: transform;
+}
+.orbit-planet .orb {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #fff;
+  border: 1.6px solid var(--pc);
+  color: var(--pc);
+  transition: background 0.4s, color 0.4s, box-shadow 0.4s;
+}
+.orbit-planet .orb svg {
+  width: 20px;
+  height: 20px;
+}
+.orbit-planet.done .orb {
+  background: var(--pc);
+  color: #fff;
+}
+.orbit-planet.now .orb {
+  box-shadow: 0 0 0 7px color-mix(in srgb, var(--pc) 16%, transparent);
+}
+.orbit-planet .lbl {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-top: 8px;
+  transform: translateX(-50%);
+  font-size: 12.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--ink-3);
+}
+.orbit-planet.done .lbl {
+  color: var(--ink);
+}
+.orbit-planet.now .lbl {
+  color: var(--pc);
+}
+.orbit-comet {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 6;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  border-radius: 50%;
+  background: var(--pc);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 18px var(--pc);
+  pointer-events: none;
+}
+.orbit-comet svg {
+  width: 12px;
+  height: 12px;
+}
+.orbit-trail {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  background: var(--pc);
+  filter: blur(3px);
+  pointer-events: none;
+}
+@media (max-width: 1023px) {
+  .orbit-planet {
+    width: 34px;
+    height: 34px;
+    margin: -17px 0 0 -17px;
+  }
+  .orbit-planet .orb svg {
+    width: 15px;
+    height: 15px;
+  }
+  .orbit-planet:not(.now) .lbl {
+    display: none;
+  }
+}
