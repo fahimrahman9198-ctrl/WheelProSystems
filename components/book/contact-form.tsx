@@ -14,7 +14,7 @@ const pains = [
 ];
 
 const field =
-  "h-[52px] w-full rounded-md border border-line-strong bg-white px-4 text-[16px] text-ink transition-[border-color,box-shadow] placeholder:text-ink-3 hover:border-ink-3 focus:border-ink focus:shadow-[0_0_0_3px_rgba(47,91,255,.15)] focus:outline-none aria-[invalid=true]:border-danger";
+  "h-[52px] w-full rounded-md border border-line-strong bg-white px-4 text-[16px] text-ink transition-[border-color,box-shadow] placeholder:text-ink-3 hover:border-ink-3 focus:border-ink focus:shadow-[0_0_0_3px_rgba(154,91,30,.18)] focus:outline-none aria-[invalid=true]:border-danger";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");

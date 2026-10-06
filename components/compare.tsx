@@ -60,30 +60,30 @@ const Chip = ({ dot, children }: { dot?: string; children: ReactNode }) => (
   </span>
 );
 
-const BLUE = "#4f7bff",
+const BRONZE = "#c98a4b",
   GREEN = "#22c55e",
   GREY = "#52525b";
 
 const rows: { key: string; today: string; wp: string; proof: ReactNode }[] = [
   {
-    key: "First reply",
-    today: "Whenever you get off the tools, often hours later",
-    wp: "Within seconds, with the next step already explained",
+    key: "Response time",
+    today: "Hours, depending on when you're free",
+    wp: "Seconds, at any time of day",
     proof: (
       <div>
         <Line t="08:14" dot={GREY} end="Jordan M.">
           Photos received from your website form
         </Line>
-        <Line t="08:14" dot={BLUE} end="Instant">
+        <Line t="08:14" dot={BRONZE} end="Instant">
           Auto-reply sent: “Got your photos, quote within 2 hours”
         </Line>
       </div>
     ),
   },
   {
-    key: "Quote details",
-    today: "Back and forth for size, photos and finish",
-    wp: "Photos, size, damage and finish in the first message",
+    key: "Job information",
+    today: "Collected across several messages",
+    wp: "Complete from the first submission",
     proof: (
       <div className="flex flex-wrap items-center gap-4">
         <div className="flex gap-2">
@@ -112,12 +112,12 @@ const rows: { key: string; today: string; wp: string; proof: ReactNode }[] = [
     ),
   },
   {
-    key: "Follow-up",
-    today: "When you remember, if you remember",
-    wp: "Day 1 and day 3, sent automatically",
+    key: "Quote follow-up",
+    today: "Manual and often missed",
+    wp: "Scheduled and sent automatically",
     proof: (
       <div className="flex flex-wrap gap-2">
-        <Chip dot={BLUE}>Quote sent · Mon</Chip>
+        <Chip dot={BRONZE}>Quote sent · Mon</Chip>
         <Chip>Reminder · Tue</Chip>
         <Chip>Last call · Thu</Chip>
         <Chip dot={GREEN}>Approved · Thu 10:12</Chip>
@@ -125,24 +125,24 @@ const rows: { key: string; today: string; wp: string; proof: ReactNode }[] = [
     ),
   },
   {
-    key: "Booking",
-    today: "A verbal yes and an empty bay on Saturday",
-    wp: "Deposit paid before the time is held",
+    key: "Bookings",
+    today: "Confirmed by word of mouth",
+    wp: "Confirmed with a paid deposit",
     proof: (
       <div>
         <Line dot={GREEN} end="$150.00">
           Deposit paid · Visa ·· 4242
         </Line>
-        <Line dot={BLUE} end="Thu 9:00">
+        <Line dot={BRONZE} end="Thu 9:00">
           Mobile visit booked · Surrey
         </Line>
       </div>
     ),
   },
   {
-    key: "Getting paid",
-    today: "Retyped invoices and e-transfer reminders",
-    wp: "Invoice from the quote, paid by card in one tap",
+    key: "Invoicing",
+    today: "Retyped from scratch",
+    wp: "Generated from the approved quote",
     proof: (
       <div>
         <Line dot={GREY} end="$1,029.00">
@@ -231,7 +231,7 @@ function ScrollStep({
   const tick = useTransform(
     progress,
     [s + SPAN * 0.4, s + SPAN * 0.6],
-    ["#27272a", "#4f7bff"],
+    ["#27272a", "#c98a4b"],
   );
   const proofOpacity = useTransform(
     progress,
@@ -312,7 +312,7 @@ function StaticRow({
         {r.today}
       </p>
       <p className="mt-2 flex items-start gap-3 text-[19px] leading-snug font-medium text-on-dark">
-        <span className="mt-1 grid size-5 shrink-0 place-items-center rounded-xs bg-[#4f7bff]">
+        <span className="mt-1 grid size-5 shrink-0 place-items-center rounded-xs bg-[#c98a4b]">
           <Tick />
         </span>
         {r.wp}
@@ -360,7 +360,7 @@ function PinnedCompare({ heading }: { heading: ReactNode }) {
                     <div className="relative h-px flex-1 bg-dark-line">
                       <motion.span
                         style={{ scaleX: bar }}
-                        className="absolute inset-0 origin-left bg-[#4f7bff]"
+                        className="absolute inset-0 origin-left bg-[#c98a4b]"
                       />
                     </div>
                   </div>
@@ -381,9 +381,9 @@ function PinnedCompare({ heading }: { heading: ReactNode }) {
                           <span
                             className={`grid size-4 place-items-center rounded-xs transition-colors duration-500 ${
                               done
-                                ? "bg-[#4f7bff]"
+                                ? "bg-[#c98a4b]"
                                 : i === active
-                                  ? "border border-[#4f7bff]"
+                                  ? "border border-[#c98a4b]"
                                   : "border border-[#3f3f46]"
                             }`}
                           >
@@ -417,15 +417,15 @@ export function Compare() {
   const pinned = desktop && !reduce;
   const heading = (
     <>
-      <p className="t-label text-[#71717a]">What changes</p>
+      <p className="t-label text-[#71717a]">Day one</p>
       <h2 className="t-h1 on-dark-text mt-4 !text-on-dark">
-        What <span className="t-outline">changes</span>
+        What <span className="t-outline">improves</span>
         <br />
         from day one
       </h2>
       <p className="t-body-lg mt-6 max-w-[44ch]">
-        Nothing about how you fix wheels changes. What changes is everything
-        that happens before the wheel reaches your bay.
+        Your repair process doesn't change. The admin around it does, from the
+        first enquiry to the final payment.
       </p>
     </>
   );

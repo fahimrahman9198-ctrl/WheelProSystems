@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport: Viewport = { themeColor: "#ffffff" };
+export const viewport: Viewport = { themeColor: "#fcfbf8" };
 
 const jsonLd = {
   "@context": "https://schema.org",

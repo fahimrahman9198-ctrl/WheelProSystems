@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowButton, GhostLink } from "../ui/button";
 import { easeOut } from "../ui/motion";
 import { startDial } from "./dial";
@@ -9,16 +9,35 @@ import { startDial } from "./dial";
 const headline = ["One-stop", "solution", "for", "wheel", "refinishing", "businesses"];
 const outlined = new Set([3, 4, 5]);
 
+// The description, split so the words for each dial step can react when the
+// needle reaches that step (s = step number in dial.ts, 0 = plain text).
+const sub: [string, number][] = [
+  ["Leads", 1],
+  [" from your website and Gmail get ", 0],
+  ["captured", 1],
+  [", ", 0],
+  ["quoted", 2],
+  [", ", 0],
+  ["followed up", 3],
+  [", ", 0],
+  ["invoiced", 4],
+  [" and ", 0],
+  ["paid", 5],
+  [", all in one system.", 0],
+];
+
 export function Hero() {
   const reduce = useReducedMotion();
   const pinRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const dialRef = useRef<SVGSVGElement>(null);
+  const ringsRef = useRef<HTMLCanvasElement>(null);
   const liveRef = useRef<HTMLParagraphElement>(null);
+  const [step, setStep] = useState(0);
 
   useEffect(() => {
-    if (!pinRef.current || !heroRef.current || !dialRef.current || !liveRef.current) return;
-    return startDial(heroRef.current, pinRef.current, dialRef.current, liveRef.current, !!reduce);
+    if (!pinRef.current || !heroRef.current || !dialRef.current || !ringsRef.current || !liveRef.current) return;
+    return startDial(heroRef.current, pinRef.current, dialRef.current, ringsRef.current, liveRef.current, !!reduce, setStep);
   }, [reduce]);
 
   // Same first render on server and client; reduced motion just skips the tween.
@@ -34,8 +53,9 @@ export function Hero() {
       <section
         id="top"
         ref={heroRef}
-        className="relative h-[860px] overflow-hidden lg:sticky lg:top-0 lg:h-[100svh] lg:min-h-[720px]"
+        className="relative h-[100svh] min-h-[760px] overflow-hidden bg-hero lg:sticky lg:top-0 lg:h-[100svh] lg:min-h-[720px]"
       >
+        <canvas ref={ringsRef} className="pointer-events-none absolute inset-0 z-0 h-full w-full" aria-hidden="true" />
         <svg ref={dialRef} className="pointer-events-none absolute inset-0 z-[1] h-full w-full" aria-hidden="true" />
 
         <div className="wrap relative z-[3] pt-[128px] lg:flex lg:h-full lg:items-center lg:pt-[40px]">
@@ -58,8 +78,15 @@ export function Hero() {
                 </span>
               ))}
             </h1>
-            <motion.p {...rise(0.45)} className="t-body-lg mt-7 max-w-[44ch] text-ink-2">
-              Leads from your website and Gmail get captured, quoted, followed up, invoiced and paid, all in one system.
+            <motion.p {...rise(0.45)} className="t-body-lg hl mt-7 max-w-[44ch] text-ink-2" data-on={step > 0}>
+              {sub.map(([text, s], i) => (
+                <span
+                  key={i}
+                  className={s ? `hl-w ${s === step ? "is-now" : s < step ? "is-done" : "is-next"}` : undefined}
+                >
+                  {text}
+                </span>
+              ))}
             </motion.p>
             <motion.div {...rise(0.55)} className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-5">
               <ArrowButton href="#book">Book a meeting</ArrowButton>
@@ -69,6 +96,7 @@ export function Hero() {
         </div>
 
         <p ref={liveRef} className="sr-only" aria-live="polite" />
+
       </section>
     </div>
   );

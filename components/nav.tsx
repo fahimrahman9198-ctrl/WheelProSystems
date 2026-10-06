@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { LogoLockup } from "@/components/ui/logo";
 
 const links = [
@@ -19,18 +18,9 @@ export function Logo() {
 }
 
 export function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const on = () => setScrolled(window.scrollY > 8);
-    on();
-    window.addEventListener("scroll", on, { passive: true });
-    return () => window.removeEventListener("scroll", on);
-  }, []);
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-[background,border-color,backdrop-filter] duration-300 ${
-        scrolled ? "border-line bg-white/85 backdrop-blur-md" : "border-transparent bg-white/0"
-      }`}
+      className="nav-glass fixed inset-x-0 top-0 z-50"
     >
       <div className="wrap flex h-[72px] items-center gap-4 md:gap-8">
         <Logo />

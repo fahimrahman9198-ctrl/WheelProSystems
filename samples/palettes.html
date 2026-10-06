@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Palette Options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  @font-face { font-family: Switzer; src: url("../app/fonts/switzer-variable.woff2") format("woff2"); font-weight: 100 900; }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: Switzer, Arial, sans-serif; background: #e9e9ec; color: #111; padding: 32px 16px 64px; }
+  .page { max-width: 1180px; margin: 0 auto; }
+  .page > h1 { font: 600 28px/1.1 "Saira Semi Condensed", sans-serif; letter-spacing: -0.01em; }
+  .page > p { color: #555; margin-top: 8px; max-width: 70ch; line-height: 1.5; }
+  .grid { display: grid; gap: 24px; margin-top: 28px; }
+  @media (min-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
+
+  .pal { background: var(--bg); color: var(--ink); border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+  .head { display: flex; justify-content: space-between; align-items: baseline; padding: 18px 22px; border-bottom: 1px solid var(--line); }
+  .head b { font: 600 20px "Saira Semi Condensed", sans-serif; }
+  .head span { font-size: 13px; color: var(--ink-3); }
+  .hero { padding: 28px 22px 24px; }
+  .label { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+  .h { font: 700 40px/0.98 "Saira Semi Condensed", sans-serif; letter-spacing: -0.02em; margin-top: 10px; }
+  .h .o { color: transparent; -webkit-text-stroke: 1.2px var(--ink); }
+  .sub { color: var(--ink-2); font-size: 15px; line-height: 1.55; margin-top: 12px; max-width: 46ch; }
+  .row { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; align-items: center; }
+  .btn { height: 42px; padding: 0 16px; border-radius: 6px; font: 500 14px Switzer, sans-serif; display: inline-flex; align-items: center; border: 0; }
+  .btn.p { background: var(--ink); color: var(--bg); }
+  .btn.a { background: var(--accent); color: #fff; }
+  .btn.g { background: transparent; color: var(--ink); border: 1px solid var(--line-strong); }
+  .panel { margin: 0 22px; background: var(--subtle); border-radius: 8px; padding: 16px; display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+  .card { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
+  .card small { font-size: 12px; color: var(--ink-3); }
+  .card strong { display: block; font: 600 22px "Saira Semi Condensed", sans-serif; margin-top: 4px; }
+  .card .ft { display: flex; justify-content: space-between; margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line-strong); font-size: 12px; color: var(--ink-2); }
+  .ok { color: var(--success); font-weight: 600; }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip { height: 26px; padding: 0 10px; border-radius: 4px; font-size: 12px; display: inline-flex; align-items: center; gap: 6px; background: var(--muted); color: var(--ink-2); }
+  .chip.ac { background: var(--accent-soft); color: var(--accent); }
+  .chip i { width: 6px; height: 6px; border-radius: 2px; background: currentColor; }
+  .dark { margin-top: 18px; background: var(--dark); color: #fafafa; padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .dark p { font: 600 18px "Saira Semi Condensed", sans-serif; }
+  .dark em { color: #8a8a93; font-size: 13px; display: block; font-family: Switzer, sans-serif; font-weight: 400; }
+  .sw { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
+  @media (min-width: 560px) { .sw { grid-template-columns: repeat(8, 1fr); } }
+  .sw div { padding: 10px 8px; font-size: 10.5px; line-height: 1.35; color: var(--ink-2); }
+  .sw div::before { content: ""; display: block; height: 30px; border-radius: 4px; background: var(--c); border: 1px solid rgba(0,0,0,.08); margin-bottom: 6px; }
+  .sw b { display: block; font-weight: 600; color: var(--ink); }
+  .why { padding: 14px 22px 18px; font-size: 13px; line-height: 1.5; color: var(--ink-2); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>Near-white palette options</h1>
+  <p>Four light palettes for wheelprosystems.com, each shown on a mock of the real site: heading with the outline line, buttons, a status card, chips and a dark band. The dark sections stay dark in every option. Palette data started from ui-ux-pro-max's "B2B Service" and "Automotive" palettes, then tuned for contrast.</p>
+  <div class="grid" id="grid"></div>
+</div>
+<script>
+const P = [
+  { name: "A · Paper", tag: "Warm white + satin bronze",
+    why: "Warm, crafted feel. The bronze accent nods to the finishes your clients sell (Satin Bronze in the demo quote). Feels premium and workshop-made rather than techy.",
+    c: { bg:"#FCFBF8", subtle:"#F5F3EE", muted:"#ECE9E2", line:"#E6E2DA", "line-strong":"#D6D1C6", ink:"#14130F", "ink-2":"#45423B", "ink-3":"#6E6A61", accent:"#9A5B1E", "accent-soft":"#F5EBDD", success:"#15803D", dark:"#15130F" } },
+  { name: "B · Chrome", tag: "Cool steel white + deep blue",
+    why: "Closest to the current site, but with a faint cool tint so the whites read as polished metal. A deeper blue for a trusted B2B software feel. Safest change.",
+    c: { bg:"#FBFCFD", subtle:"#F3F5F8", muted:"#E9EDF2", line:"#E1E6EC", "line-strong":"#CBD3DD", ink:"#0B1220", "ink-2":"#334155", "ink-3":"#5B6B80", accent:"#1D4ED8", "accent-soft":"#E6EDFC", success:"#15803D", dark:"#0B1220" } },
+  { name: "C · Primer", tag: "Pure neutral white + racing red",
+    why: "Straight neutral greys like a primed wheel before paint. A single racing red accent gives automotive energy. Boldest of the four; red must stay rare (CTAs only), so it doesn't read as errors.",
+    c: { bg:"#FFFFFF", subtle:"#F6F6F5", muted:"#EEEEEC", line:"#E5E5E2", "line-strong":"#D4D4D0", ink:"#111111", "ink-2":"#404040", "ink-3":"#6B6B6B", accent:"#C8102E", "accent-soft":"#FBE9EC", success:"#15803D", dark:"#111111" } },
+  { name: "D · Clear coat", tag: "Green-tinted white + petrol teal",
+    why: "A barely-there green tint like fresh clear coat. Calm and modern, and the teal ties in with the hero's green paid zone. Most distinctive among competitors.",
+    c: { bg:"#FAFCFB", subtle:"#F2F6F4", muted:"#E7EEEA", line:"#DDE6E1", "line-strong":"#C7D3CC", ink:"#0E1513", "ink-2":"#36443F", "ink-3":"#5F6E68", accent:"#0F766E", "accent-soft":"#E2F1EF", success:"#15803D", dark:"#0E1513" } },
+];
+const show = ["bg","subtle","muted","line","ink","ink-3","accent","dark"];
+document.getElementById("grid").innerHTML = P.map(p => {
+  const vars = Object.entries(p.c).map(([k,v]) => `--${k}:${v}`).join(";");
+  return `<section class="pal" style="${vars}">
+    <div class="head"><b>${p.name}</b><span>${p.tag}</span></div>
+    <div class="hero">
+      <p class="label">The platform</p>
+      <h2 class="h">From first enquiry<br><span class="o">to final payment</span></h2>
+      <p class="sub">Lead capture, quoting, follow-ups, invoicing and payments in one connected system.</p>
+      <div class="row"><span class="btn p">Book a meeting</span><span class="btn a">See it in action</span><span class="btn g">Pricing</span></div>
+    </div>
+    <div class="panel">
+      <div class="card"><small>Job status · Jordan M.</small><strong>Quote sent</strong><div class="ft"><span>Q-1044</span><span class="ok">$1,029.00</span></div></div>
+      <div class="card"><small>Services</small><div class="chips" style="margin-top:8px"><span class="chip ac"><i></i>Quotation</span><span class="chip"><i></i>Leads</span><span class="chip"><i></i>Invoicing</span></div></div>
+    </div>
+    <div class="dark"><p>What improves<em style="font-style:normal">from day one</em></p><span class="btn a">Book a meeting</span></div>
+    <div class="sw">${show.map(k => `<div style="--c:${p.c[k]}"><b>${k}</b>${p.c[k]}</div>`).join("")}</div>
+    <p class="why">${p.why}</p>
+  </section>`;
+}).join("");
+</script>
+</body>
+</html>

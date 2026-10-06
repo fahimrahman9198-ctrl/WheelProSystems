@@ -98,10 +98,10 @@ export function Services() {
   const s = services[active];
 
   return (
-    <section id="services" className="section bg-white">
+    <section id="services" className="section bg-bg">
       <div className="wrap">
         <Reveal>
-          <SectionIntro label="Services" title={<>Five tools<br /><span className="t-outline">One system</span></>} sub="This is what your shop runs on: real screens from a sample shop, from the first lead to money in the bank." />
+          <SectionIntro label="The platform" title={<>From first enquiry<br /><span className="t-outline">to final payment</span></>} sub="Lead capture, quoting, follow-ups, invoicing and payments in one connected system, so every job moves forward without the admin." />
         </Reveal>
 
         <div ref={ref} className="mt-14 md:mt-20">

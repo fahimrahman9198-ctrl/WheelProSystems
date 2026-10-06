@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hero Cursor Distilled</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+  @font-face { font-family: Switzer; src: url("../app/fonts/switzer-variable.woff2") format("woff2"); font-weight: 100 900; }
+  :root {
+    --bg: #fcfbf8; --bg-subtle: #f5f3ee; --bg-muted: #ece9e2; --line: #e6e2da; --line-strong: #d6d1c6;
+    --ink: #14130f; --ink-2: #45423b; --ink-3: #6e6a61; --accent: #9a5b1e; --success: #15803d;
+    --font-display: "Saira Semi Condensed";
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { background: var(--bg); color: var(--ink); font-family: Switzer, Arial, sans-serif; }
+  .hero { position: relative; height: 100svh; min-height: 680px; overflow: hidden; }
+  #fx { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
+  .dial { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+  .nav { position: absolute; top: 0; left: 0; right: 0; z-index: 3; display: flex; justify-content: space-between; align-items: center; padding: 18px 48px;
+    background: linear-gradient(180deg, rgba(252,251,248,.74), rgba(252,251,248,.52));
+    -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.75), inset 0 -1px 0 rgba(255,255,255,.4), 0 10px 30px -18px rgba(20,19,15,.22); }
+  .logo { font-weight: 700; font-size: 19px; letter-spacing: -0.01em; }
+  .logo span { font-weight: 400; }
+  .nav a.b { background: var(--ink); color: var(--bg); text-decoration: none; height: 44px; padding: 0 20px; border-radius: 6px; display: inline-flex; align-items: center; font-size: 15px; font-weight: 500; }
+  .copy { position: relative; z-index: 2; height: 100%; display: flex; align-items: center; padding: 40px 48px 0; max-width: 1104px; margin: 0 auto; pointer-events: none; }
+  .copy > div { max-width: 720px; }
+  .copy a { pointer-events: auto; }
+  .label { font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 24px; }
+  h1 { font-family: var(--font-display), sans-serif; font-size: clamp(2.5rem, 5.2vw, 4.75rem); font-weight: 600; line-height: 1.02; }
+  .sub { font-size: clamp(1.125rem, 1.4vw, 1.25rem); line-height: 1.55; letter-spacing: -0.01em; color: var(--ink-2); margin-top: 28px; max-width: 44ch; }
+  .cta { display: flex; gap: 24px; align-items: center; margin-top: 40px; }
+  .btn { display: inline-flex; align-items: center; gap: 14px; background: var(--ink); color: #fff; text-decoration: none; height: 52px; padding: 0 22px 0 6px; border-radius: 6px; font-weight: 500; font-size: 16px; }
+  .btn i { width: 40px; height: 40px; border-radius: 4px; background: var(--accent); display: grid; place-items: center; font-style: normal; }
+  .ghost { color: var(--ink); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--line-strong); padding-bottom: 2px; }
+
+  .switch { position: fixed; z-index: 10; left: 50%; bottom: 20px; transform: translateX(-50%); width: min(760px, calc(100% - 32px));
+    background: rgba(20,19,15,.92); color: #fbf9f4; border-radius: 12px; padding: 8px; box-shadow: 0 12px 40px -10px rgba(20,19,15,.4); }
+  .tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+  .tabs button { flex: 1 0 auto; height: 40px; padding: 0 14px; border: 0; border-radius: 6px; background: transparent; color: #aaa49a; font: 500 14px Switzer, sans-serif; cursor: pointer; white-space: nowrap; }
+  .tabs button[aria-selected="true"] { background: #fbf9f4; color: #14130f; }
+  .tabs button:hover:not([aria-selected="true"]) { color: #fbf9f4; }
+  .desc { font-size: 13px; line-height: 1.45; color: #cfc9be; padding: 10px 10px 6px; }
+  .desc b { color: #fbf9f4; font-weight: 600; }
+
+  @media (max-width: 1023px) {
+    .nav { padding: 16px 20px; }
+    .copy { align-items: flex-start; padding: 128px 20px 0; }
+    .dial { opacity: .5; }
+  }
+
+  
+.dial-stroke,
+.dial-thin,
+.dial-line {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.dial-stroke {
+  stroke-opacity: 0.72;
+}
+.dial-thin {
+  stroke-opacity: 0.3;
+  stroke-dasharray: 3 5;
+}
+.dial-line {
+  stroke: var(--ink-3);
+}
+.dial-tread {
+  stroke: var(--ink);
+  stroke-opacity: 0.2;
+}
+.dial-tick {
+  stroke: var(--ink);
+  stroke-opacity: 0.35;
+}
+.dial-tick.major {
+  stroke-opacity: 0.8;
+}
+.dial-tick.red {
+  stroke: #e5484d;
+  transition: stroke 0.4s;
+}
+.dial-red {
+  fill: none;
+  stroke: #e5484d;
+  stroke-width: 3;
+  transition: stroke 0.4s;
+}
+.dial-ok .dial-tick.red,
+.dial-ok .dial-red {
+  stroke: var(--success);
+}
+.dial-num {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  fill: var(--ink-2);
+}
+.dial-needle {
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+.dial-curve.big {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  fill: var(--ink);
+}
+.dial-curve.small {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  fill: var(--ink-3);
+}
+.dial-curve.small .rp {
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0;
+  fill: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+
+</style>
+</head>
+<body>
+<section class="hero">
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <svg class="dial" preserveAspectRatio="xMaxYMax meet" aria-hidden="true" aria-hidden="true" viewBox="0 0 1440 900"><g><g><path d="M-380.0 0.0A380 380 0 0 1 -0.0 -380.0" transform="translate(1430 866)" class="dial-line"></path><path d="M-37.8 -384.1A386 386 0 0 1 -0.0 -386.0" transform="translate(1430 866)" class="dial-red"></path><line x1="1072.0" y1="866.0" x2="1050.0" y2="866.0" class="dial-tick major"></line><text x="1026.0" y="871.0" text-anchor="middle" class="dial-num">0</text><line x1="1059.4" y1="847.8" x2="1050.5" y2="847.4" class="dial-tick"></line><line x1="1060.8" y1="829.6" x2="1051.8" y2="828.8" class="dial-tick"></line><line x1="1063.0" y1="811.6" x2="1054.1" y2="810.2" class="dial-tick"></line><line x1="1078.9" y1="796.2" x2="1057.3" y2="791.9" class="dial-tick major"></line><text x="1033.8" y="792.2" text-anchor="middle" class="dial-num">1</text><line x1="1070.1" y1="775.9" x2="1061.4" y2="773.7" class="dial-tick"></line><line x1="1075.0" y1="758.3" x2="1066.4" y2="755.7" class="dial-tick"></line><line x1="1080.7" y1="741.0" x2="1072.2" y2="738.0" class="dial-tick"></line><line x1="1099.3" y1="729.0" x2="1078.9" y2="720.6" class="dial-tick major"></line><text x="1056.8" y="716.4" text-anchor="middle" class="dial-num">2</text><line x1="1094.6" y1="707.4" x2="1086.5" y2="703.5" class="dial-tick"></line><line x1="1102.8" y1="691.1" x2="1094.9" y2="686.9" class="dial-tick"></line><line x1="1111.8" y1="675.3" x2="1104.1" y2="670.6" class="dial-tick"></line><line x1="1132.3" y1="667.1" x2="1114.0" y2="654.9" class="dial-tick major"></line><text x="1094.1" y="646.5" text-anchor="middle" class="dial-num">3</text><line x1="1132.0" y1="645.0" x2="1124.8" y2="639.6" class="dial-tick"></line><line x1="1143.2" y1="630.6" x2="1136.3" y2="624.9" class="dial-tick"></line><line x1="1155.1" y1="616.9" x2="1148.4" y2="610.8" class="dial-tick"></line><line x1="1176.9" y1="612.9" x2="1161.3" y2="597.3" class="dial-tick major"></line><text x="1144.3" y="585.3" text-anchor="middle" class="dial-num">4</text><line x1="1180.9" y1="591.1" x2="1174.8" y2="584.4" class="dial-tick"></line><line x1="1194.6" y1="579.2" x2="1188.9" y2="572.3" class="dial-tick"></line><line x1="1209.0" y1="568.0" x2="1203.6" y2="560.8" class="dial-tick"></line><line x1="1231.1" y1="568.3" x2="1218.9" y2="550.0" class="dial-tick major"></line><text x="1205.5" y="535.1" text-anchor="middle" class="dial-num">5</text><line x1="1239.3" y1="547.8" x2="1234.6" y2="540.1" class="dial-tick"></line><line x1="1255.1" y1="538.8" x2="1250.9" y2="530.9" class="dial-tick"></line><line x1="1271.4" y1="530.6" x2="1267.5" y2="522.5" class="dial-tick"></line><line x1="1293.0" y1="535.3" x2="1284.6" y2="514.9" class="dial-tick major"></line><text x="1275.4" y="497.8" text-anchor="middle" class="dial-num">6</text><line x1="1305.0" y1="516.7" x2="1302.0" y2="508.2" class="dial-tick"></line><line x1="1322.3" y1="511.0" x2="1319.7" y2="502.4" class="dial-tick"></line><line x1="1339.9" y1="506.1" x2="1337.7" y2="497.4" class="dial-tick"></line><line x1="1360.2" y1="514.9" x2="1355.9" y2="493.3" class="dial-tick major"></line><text x="1351.2" y="474.8" text-anchor="middle" class="dial-num">7</text><line x1="1375.6" y1="499.0" x2="1374.2" y2="490.1" class="dial-tick"></line><line x1="1393.6" y1="496.8" x2="1392.8" y2="487.8" class="dial-tick red"></line><line x1="1411.8" y1="495.4" x2="1411.4" y2="486.5" class="dial-tick red"></line><line x1="1430.0" y1="508.0" x2="1430.0" y2="486.0" class="dial-tick major red"></line><text x="1430.0" y="467.0" text-anchor="middle" class="dial-num">8</text></g><line class="dial-needle" x1="1116.1" y1="856.8" x2="992.2" y2="853.1"></line><path id="dial-2a" d="M-375.4 315.0A490 490 0 0 1 315.0 -375.4" transform="translate(1430 866)" fill="none"></path><text class="dial-curve big"><textPath href="#dial-2a" text-anchor="middle" startOffset="38.82%">Waiting for a lead</textPath></text><path id="dial-2b" d="M-353.9 297.0A462 462 0 0 1 297.0 -353.9" transform="translate(1430 866)" fill="none"></path><text class="dial-curve small"><textPath href="#dial-2b" text-anchor="middle" startOffset="38.82%">SYSTEM IDLE<tspan dx="10" class="rp">150</tspan><tspan dx="4">R/MIN</tspan></textPath></text></g><g transform="translate(1430.0 866.0) rotate(0.0)"><circle r="300.0" class="dial-stroke"></circle><circle r="270.0" class="dial-stroke"></circle><circle r="240.0" class="dial-stroke"></circle><circle r="229.5" class="dial-stroke"></circle><circle r="81.0" class="dial-stroke"></circle><circle r="57.0" class="dial-stroke"></circle><circle r="21.0" class="dial-stroke"></circle><circle r="219.0" class="dial-thin"></circle><path d="M108.8 22.1L202.7 23.1A204.0 204.0 0 0 1 159.7 127.0L92.6 61.3A111.0 111.0 0 0 0 108.8 22.1Z" class="dial-stroke"></path><circle cx="94.5" cy="0.0" r="3.3" class="dial-stroke"></circle><path d="M61.3 92.6L127.0 159.7A204.0 204.0 0 0 1 23.1 202.7L22.1 108.8A111.0 111.0 0 0 0 61.3 92.6Z" class="dial-stroke"></path><circle cx="66.8" cy="66.8" r="3.3" class="dial-stroke"></circle><path d="M-22.1 108.8L-23.1 202.7A204.0 204.0 0 0 1 -127.0 159.7L-61.3 92.6A111.0 111.0 0 0 0 -22.1 108.8Z" class="dial-stroke"></path><circle cx="0.0" cy="94.5" r="3.3" class="dial-stroke"></circle><path d="M-92.6 61.3L-159.7 127.0A204.0 204.0 0 0 1 -202.7 23.1L-108.8 22.1A111.0 111.0 0 0 0 -92.6 61.3Z" class="dial-stroke"></path><circle cx="-66.8" cy="66.8" r="3.3" class="dial-stroke"></circle><path d="M-108.8 -22.1L-202.7 -23.1A204.0 204.0 0 0 1 -159.7 -127.0L-92.6 -61.3A111.0 111.0 0 0 0 -108.8 -22.1Z" class="dial-stroke"></path><circle cx="-94.5" cy="0.0" r="3.3" class="dial-stroke"></circle><path d="M-61.3 -92.6L-127.0 -159.7A204.0 204.0 0 0 1 -23.1 -202.7L-22.1 -108.8A111.0 111.0 0 0 0 -61.3 -92.6Z" class="dial-stroke"></path><circle cx="-66.8" cy="-66.8" r="3.3" class="dial-stroke"></circle><path d="M22.1 -108.8L23.1 -202.7A204.0 204.0 0 0 1 127.0 -159.7L61.3 -92.6A111.0 111.0 0 0 0 22.1 -108.8Z" class="dial-stroke"></path><circle cx="-0.0" cy="-94.5" r="3.3" class="dial-stroke"></circle><path d="M92.6 -61.3L159.7 -127.0A204.0 204.0 0 0 1 202.7 -23.1L108.8 -22.1A111.0 111.0 0 0 0 92.6 -61.3Z" class="dial-stroke"></path><circle cx="66.8" cy="-66.8" r="3.3" class="dial-stroke"></circle><circle cx="22.9" cy="-31.6" r="6.6" class="dial-stroke"></circle><circle cx="37.1" cy="12.1" r="6.6" class="dial-stroke"></circle><circle cx="0.0" cy="39.0" r="6.6" class="dial-stroke"></circle><circle cx="-37.1" cy="12.1" r="6.6" class="dial-stroke"></circle><circle cx="-22.9" cy="-31.6" r="6.6" class="dial-stroke"></circle><line x1="269.8" y1="9.4" x2="299.8" y2="10.5" class="dial-tread"></line><line x1="268.5" y1="28.2" x2="298.4" y2="31.4" class="dial-tread"></line><line x1="265.9" y1="46.9" x2="295.4" y2="52.1" class="dial-tread"></line><line x1="262.0" y1="65.3" x2="291.1" y2="72.6" class="dial-tread"></line><line x1="256.8" y1="83.4" x2="285.3" y2="92.7" class="dial-tread"></line><line x1="250.3" y1="101.1" x2="278.2" y2="112.4" class="dial-tread"></line><line x1="242.7" y1="118.4" x2="269.6" y2="131.5" class="dial-tread"></line><line x1="233.8" y1="135.0" x2="259.8" y2="150.0" class="dial-tread"></line><line x1="223.8" y1="151.0" x2="248.7" y2="167.8" class="dial-tread"></line><line x1="212.8" y1="166.2" x2="236.4" y2="184.7" class="dial-tread"></line><line x1="200.6" y1="180.7" x2="222.9" y2="200.7" class="dial-tread"></line><line x1="187.6" y1="194.2" x2="208.4" y2="215.8" class="dial-tread"></line><line x1="173.6" y1="206.8" x2="192.8" y2="229.8" class="dial-tread"></line><line x1="158.7" y1="218.4" x2="176.3" y2="242.7" class="dial-tread"></line><line x1="143.1" y1="229.0" x2="159.0" y2="254.4" class="dial-tread"></line><line x1="126.8" y1="238.4" x2="140.8" y2="264.9" class="dial-tread"></line><line x1="109.8" y1="246.7" x2="122.0" y2="274.1" class="dial-tread"></line><line x1="92.3" y1="253.7" x2="102.6" y2="281.9" class="dial-tread"></line><line x1="74.4" y1="259.5" x2="82.7" y2="288.4" class="dial-tread"></line><line x1="56.1" y1="264.1" x2="62.4" y2="293.4" class="dial-tread"></line><line x1="37.6" y1="267.4" x2="41.8" y2="297.1" class="dial-tread"></line><line x1="18.8" y1="269.3" x2="20.9" y2="299.3" class="dial-tread"></line><line x1="0.0" y1="270.0" x2="0.0" y2="300.0" class="dial-tread"></line><line x1="-18.8" y1="269.3" x2="-20.9" y2="299.3" class="dial-tread"></line><line x1="-37.6" y1="267.4" x2="-41.8" y2="297.1" class="dial-tread"></line><line x1="-56.1" y1="264.1" x2="-62.4" y2="293.4" class="dial-tread"></line><line x1="-74.4" y1="259.5" x2="-82.7" y2="288.4" class="dial-tread"></line><line x1="-92.3" y1="253.7" x2="-102.6" y2="281.9" class="dial-tread"></line><line x1="-109.8" y1="246.7" x2="-122.0" y2="274.1" class="dial-tread"></line><line x1="-126.8" y1="238.4" x2="-140.8" y2="264.9" class="dial-tread"></line><line x1="-143.1" y1="229.0" x2="-159.0" y2="254.4" class="dial-tread"></line><line x1="-158.7" y1="218.4" x2="-176.3" y2="242.7" class="dial-tread"></line><line x1="-173.6" y1="206.8" x2="-192.8" y2="229.8" class="dial-tread"></line><line x1="-187.6" y1="194.2" x2="-208.4" y2="215.8" class="dial-tread"></line><line x1="-200.6" y1="180.7" x2="-222.9" y2="200.7" class="dial-tread"></line><line x1="-212.8" y1="166.2" x2="-236.4" y2="184.7" class="dial-tread"></line><line x1="-223.8" y1="151.0" x2="-248.7" y2="167.8" class="dial-tread"></line><line x1="-233.8" y1="135.0" x2="-259.8" y2="150.0" class="dial-tread"></line><line x1="-242.7" y1="118.4" x2="-269.6" y2="131.5" class="dial-tread"></line><line x1="-250.3" y1="101.1" x2="-278.2" y2="112.4" class="dial-tread"></line><line x1="-256.8" y1="83.4" x2="-285.3" y2="92.7" class="dial-tread"></line><line x1="-262.0" y1="65.3" x2="-291.1" y2="72.6" class="dial-tread"></line><line x1="-265.9" y1="46.9" x2="-295.4" y2="52.1" class="dial-tread"></line><line x1="-268.5" y1="28.2" x2="-298.4" y2="31.4" class="dial-tread"></line><line x1="-269.8" y1="9.4" x2="-299.8" y2="10.5" class="dial-tread"></line><line x1="-269.8" y1="-9.4" x2="-299.8" y2="-10.5" class="dial-tread"></line><line x1="-268.5" y1="-28.2" x2="-298.4" y2="-31.4" class="dial-tread"></line><line x1="-265.9" y1="-46.9" x2="-295.4" y2="-52.1" class="dial-tread"></line><line x1="-262.0" y1="-65.3" x2="-291.1" y2="-72.6" class="dial-tread"></line><line x1="-256.8" y1="-83.4" x2="-285.3" y2="-92.7" class="dial-tread"></line><line x1="-250.3" y1="-101.1" x2="-278.2" y2="-112.4" class="dial-tread"></line><line x1="-242.7" y1="-118.4" x2="-269.6" y2="-131.5" class="dial-tread"></line><line x1="-233.8" y1="-135.0" x2="-259.8" y2="-150.0" class="dial-tread"></line><line x1="-223.8" y1="-151.0" x2="-248.7" y2="-167.8" class="dial-tread"></line><line x1="-212.8" y1="-166.2" x2="-236.4" y2="-184.7" class="dial-tread"></line><line x1="-200.6" y1="-180.7" x2="-222.9" y2="-200.7" class="dial-tread"></line><line x1="-187.6" y1="-194.2" x2="-208.4" y2="-215.8" class="dial-tread"></line><line x1="-173.6" y1="-206.8" x2="-192.8" y2="-229.8" class="dial-tread"></line><line x1="-158.7" y1="-218.4" x2="-176.3" y2="-242.7" class="dial-tread"></line><line x1="-143.1" y1="-229.0" x2="-159.0" y2="-254.4" class="dial-tread"></line><line x1="-126.8" y1="-238.4" x2="-140.8" y2="-264.9" class="dial-tread"></line><line x1="-109.8" y1="-246.7" x2="-122.0" y2="-274.1" class="dial-tread"></line><line x1="-92.3" y1="-253.7" x2="-102.6" y2="-281.9" class="dial-tread"></line><line x1="-74.4" y1="-259.5" x2="-82.7" y2="-288.4" class="dial-tread"></line><line x1="-56.1" y1="-264.1" x2="-62.4" y2="-293.4" class="dial-tread"></line><line x1="-37.6" y1="-267.4" x2="-41.8" y2="-297.1" class="dial-tread"></line><line x1="-18.8" y1="-269.3" x2="-20.9" y2="-299.3" class="dial-tread"></line><line x1="-0.0" y1="-270.0" x2="-0.0" y2="-300.0" class="dial-tread"></line><line x1="18.8" y1="-269.3" x2="20.9" y2="-299.3" class="dial-tread"></line><line x1="37.6" y1="-267.4" x2="41.8" y2="-297.1" class="dial-tread"></line><line x1="56.1" y1="-264.1" x2="62.4" y2="-293.4" class="dial-tread"></line><line x1="74.4" y1="-259.5" x2="82.7" y2="-288.4" class="dial-tread"></line><line x1="92.3" y1="-253.7" x2="102.6" y2="-281.9" class="dial-tread"></line><line x1="109.8" y1="-246.7" x2="122.0" y2="-274.1" class="dial-tread"></line><line x1="126.8" y1="-238.4" x2="140.8" y2="-264.9" class="dial-tread"></line><line x1="143.1" y1="-229.0" x2="159.0" y2="-254.4" class="dial-tread"></line><line x1="158.7" y1="-218.4" x2="176.3" y2="-242.7" class="dial-tread"></line><line x1="173.6" y1="-206.8" x2="192.8" y2="-229.8" class="dial-tread"></line><line x1="187.6" y1="-194.2" x2="208.4" y2="-215.8" class="dial-tread"></line><line x1="200.6" y1="-180.7" x2="222.9" y2="-200.7" class="dial-tread"></line><line x1="212.8" y1="-166.2" x2="236.4" y2="-184.7" class="dial-tread"></line><line x1="223.8" y1="-151.0" x2="248.7" y2="-167.8" class="dial-tread"></line><line x1="233.8" y1="-135.0" x2="259.8" y2="-150.0" class="dial-tread"></line><line x1="242.7" y1="-118.4" x2="269.6" y2="-131.5" class="dial-tread"></line><line x1="250.3" y1="-101.1" x2="278.2" y2="-112.4" class="dial-tread"></line><line x1="256.8" y1="-83.4" x2="285.3" y2="-92.7" class="dial-tread"></line><line x1="262.0" y1="-65.3" x2="291.1" y2="-72.6" class="dial-tread"></line><line x1="265.9" y1="-46.9" x2="295.4" y2="-52.1" class="dial-tread"></line><line x1="268.5" y1="-28.2" x2="298.4" y2="-31.4" class="dial-tread"></line><line x1="269.8" y1="-9.4" x2="299.8" y2="-10.5" class="dial-tread"></line></g></svg>
+  <div class="nav"><div class="logo">WheelPro <span>Systems</span></div><a class="b" href="#">Book a meeting</a></div>
+  <div class="copy"><div>
+    <p class="label">Built only for wheel refinishers</p>
+    <h1>One-stop solution<br />for wheel refinishing<br />businesses</h1>
+    <p class="sub">Leads from your website and Gmail get captured, quoted, followed up, invoiced and paid, all in one system.</p>
+    <div class="cta"><a class="btn" href="#"><i>→</i>Book a meeting</a><a class="ghost" href="#">See how it works</a></div>
+  </div></div>
+</section>
+
+<div class="switch">
+  <div class="tabs" role="tablist" aria-label="Background effect"></div>
+  <p class="desc" id="desc"></p>
+</div>
+
+<script>
+const EFFECTS = [
+  { id: "cross", name: "A · Drafting crosshair", desc: "<b>Drafting crosshair.</b> Two hairlines cross at the mouse, like a drafting table, with small bronze marks where they meet the edges. Nothing else." },
+  { id: "rulers", name: "B · Edge rulers", desc: "<b>Edge rulers.</b> The paper stays empty. Faint rulers on the left and bottom edges; a bronze marker on each tracks the mouse." },
+  { id: "echo", name: "C · Scale echo", desc: "<b>Scale echo.</b> One faint arc, centred on the speedometer, follows the mouse outward like an extra ring of the dial scale. A bronze dot marks the mouse." },
+  { id: "sweep", name: "D · Light sweep", desc: "<b>Light sweep.</b> A single soft band of light, like the sheen on satin paint, slides across the paper after the mouse." },
+  { id: "tilt", name: "E · Dial parallax", desc: "<b>Dial parallax.</b> Nothing is added. The speedometer drawing drifts a few pixels against the mouse, so the hero feels layered." },
+];
+
+const hero = document.querySelector(".hero");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let canvas = document.getElementById("fx");
+let W = 0, H = 0, dpr = 1, raf = 0, stop = () => {};
+
+// Shared pointer: real mouse when present, otherwise a slow automatic drift.
+const ptr = { x: 0, y: 0, sx: 0, sy: 0, px: 0, py: 0, speed: 0, last: -1e9 };
+hero.addEventListener("pointermove", (e) => {
+  const r = hero.getBoundingClientRect();
+  ptr.x = e.clientX - r.left; ptr.y = e.clientY - r.top; ptr.last = performance.now();
+});
+function tickPointer(t) {
+  if (t - ptr.last > 2500) {
+    const s = t / 1000;
+    ptr.x = W * (0.62 + 0.25 * Math.sin(s * 0.35));
+    ptr.y = H * (0.5 + 0.3 * Math.sin(s * 0.53 + 1));
+  }
+  ptr.px = ptr.sx; ptr.py = ptr.sy;
+  ptr.sx += (ptr.x - ptr.sx) * 0.12; ptr.sy += (ptr.y - ptr.sy) * 0.12;
+  const v = Math.hypot(ptr.sx - ptr.px, ptr.sy - ptr.py);
+  ptr.speed += (Math.min(v / 30, 1) - ptr.speed) * 0.08;
+}
+
+function freshCanvas() {
+  const c = document.createElement("canvas");
+  c.id = "fx"; c.setAttribute("aria-hidden", "true");
+  canvas.replaceWith(c); canvas = c;
+}
+function size(scale) {
+  W = hero.clientWidth; H = hero.clientHeight; dpr = Math.min(devicePixelRatio || 1, 2) * scale;
+  canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+}
+
+// ---------- WebGL helpers (effects 1 and 2) ----------
+const VERT = "attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}";
+const NOISE = `
+precision highp float;
+uniform vec2 R; uniform float T; uniform vec2 M; uniform float S;
+float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+  return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
+float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*n(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return v;}
+const vec3 PAPER=vec3(.988,.984,.973), CREAM=vec3(.925,.906,.871), BRONZE=vec3(.604,.357,.118);
+`;
+const FRAG_PAINT = NOISE + `
+void main(){
+  vec2 uv=gl_FragCoord.xy/R.y, mp=M/R.y, d=uv-mp;
+  float a=(1.3+S*6.5)*exp(-dot(d,d)*6.);
+  float c=cos(a), s=sin(a);
+  vec2 p=(mp+mat2(c,-s,s,c)*d)*1.7;
+  vec2 q=vec2(fbm(p+T*.03), fbm(p+vec2(5.2,1.3)-T*.025));
+  vec2 r=vec2(fbm(p+3.*q+vec2(1.7,9.2)+T*.04), fbm(p+3.*q+vec2(8.3,2.8)));
+  float f=fbm(p+3.*r);
+  vec3 col=mix(PAPER, CREAM*.97, smoothstep(.3,.8,f));
+  col=mix(col, BRONZE, smoothstep(.56,.95,f)*.36);
+  gl_FragColor=vec4(col,1.);
+}`;
+const FRAG_COAT = NOISE + `
+float peel(vec2 p){return n(p)+.5*n(p*2.3+3.1);}
+void main(){
+  vec2 uv=gl_FragCoord.xy/R.y, mp=M/R.y, d=uv-mp;
+  vec2 p=uv*110.;
+  float e=.06, h0=peel(p);
+  vec3 N=normalize(vec3((h0-peel(p+vec2(e,0.)))*1.2,(h0-peel(p+vec2(0.,e)))*1.2,1.));
+  vec3 L=normalize(vec3(-d,.32)), H=normalize(L+vec3(0,0,1));
+  float glow=exp(-dot(d,d)*6.);
+  float spec=pow(max(dot(N,H),0.),70.);
+  float band=exp(-pow(dot(d,normalize(vec2(1.,-.55))),2.)*55.)*exp(-dot(d,d)*1.4);
+  vec3 col=PAPER-vec3(.028,.032,.04)*(1.-glow);
+  col+=vec3(1.,.95,.86)*(spec*glow*.5+band*.05);
+  col=mix(col,BRONZE,glow*.05);
+  gl_FragColor=vec4(col,1.);
+}`;
+function glEffect(frag) {
+  size(0.6);
+  const gl = canvas.getContext("webgl", { antialias: false, premultipliedAlpha: false });
+  if (!gl) return null;
+  const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.error(gl.getShaderInfoLog(s)); return s; };
+  const pr = gl.createProgram();
+  gl.attachShader(pr, sh(gl.VERTEX_SHADER, VERT)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, frag));
+  gl.linkProgram(pr); gl.useProgram(pr);
+  gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,3,-1,-1,3]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  const U = (k) => gl.getUniformLocation(pr, k);
+  const uR = U("R"), uT = U("T"), uM = U("M"), uS = U("S");
+  return (t) => {
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    gl.uniform2f(uR, canvas.width, canvas.height);
+    gl.uniform1f(uT, t / 1000);
+    gl.uniform2f(uM, ptr.sx * dpr, (H - ptr.sy) * dpr);
+    gl.uniform1f(uS, ptr.speed);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  };
+}
+
+// ---------- Canvas 2D effects (3, 4, 5) ----------
+function mist() {
+  size(1); const g = canvas.getContext("2d");
+  const sprite = document.createElement("canvas"); sprite.width = sprite.height = 64;
+  const sg = sprite.getContext("2d"), rg = sg.createRadialGradient(32, 32, 0, 32, 32, 32);
+  rg.addColorStop(0, "rgba(154,91,30,.3)"); rg.addColorStop(.5, "rgba(170,120,70,.1)"); rg.addColorStop(1, "rgba(170,120,70,0)");
+  sg.fillStyle = rg; sg.fillRect(0, 0, 64, 64);
+  const P = [];
+  return (t) => {
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    const dx = ptr.sx - ptr.px, dy = ptr.sy - ptr.py, v = Math.hypot(dx, dy);
+    const n = Math.min(14, Math.round(v * 0.6)) + (t - ptr.last > 2500 ? 2 : 0);
+    for (let i = 0; i < n && P.length < 1400; i++) {
+      const k = Math.random();
+      P.push({ x: ptr.px + dx * k + (Math.random() - .5) * 10, y: ptr.py + dy * k + (Math.random() - .5) * 10,
+        vx: dx * .08 + (Math.random() - .5) * 1.2, vy: dy * .08 + (Math.random() - .5) * 1.2 - .1,
+        r: 10 + Math.random() * 34, life: 1, decay: .006 + Math.random() * .01 });
+    }
+    for (let i = P.length - 1; i >= 0; i--) {
+      const p = P[i]; p.x += p.vx; p.y += p.vy; p.vx *= .96; p.vy *= .96; p.r *= 1.006; p.life -= p.decay;
+      if (p.life <= 0) { P.splice(i, 1); continue; }
+      g.globalAlpha = p.life * p.life * .4; g.drawImage(sprite, p.x - p.r, p.y - p.r, p.r * 2, p.r * 2);
+    }
+    g.globalAlpha = 1;
+  };
+}
+
+function grid() {
+  size(1); const g = canvas.getContext("2d"); const gap = 30, R2 = 2 * 170 * 170;
+  return () => {
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    for (let y = gap / 2; y < H; y += gap) for (let x = gap / 2; x < W; x += gap) {
+      const dx = ptr.sx - x, dy = ptr.sy - y, f = Math.exp(-(dx * dx + dy * dy) / R2);
+      const px = x + dx * f * .19, py = y + dy * f * .19, r = .8 + f * 1.8;
+      g.fillStyle = f > .02 ? `rgba(${Math.round(110 + 44 * f)},${Math.round(106 - 15 * f)},${Math.round(97 - 67 * f)},${.08 + .32 * f})` : "rgba(110,106,97,.08)";
+      g.beginPath(); g.arc(px, py, r, 0, 6.2832); g.fill();
+    }
+  };
+}
+
+function flakes() {
+  size(1); const g = canvas.getContext("2d");
+  const N = Math.round(Math.min(1800, W * H / 700)), F = [];
+  for (let i = 0; i < N; i++) F.push({ x: Math.random() * W, y: Math.random() * H, hx: 0, hy: 0, vx: 0, vy: 0,
+    s: .8 + Math.random() * 1.8, ph: Math.random() * 6.28, tone: Math.random() });
+  F.forEach((f) => { f.hx = f.x; f.hy = f.y; });
+  return (t) => {
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    const s = t / 1000;
+    for (const f of F) {
+      f.hx += Math.sin(s * .2 + f.ph) * .05; f.hy += .03 + Math.cos(s * .17 + f.ph) * .03;
+      if (f.hy > H + 4) { f.hy = -4; f.y = -4; }
+      const dx = f.x - ptr.sx, dy = f.y - ptr.sy, d = Math.hypot(dx, dy) || 1, near = Math.max(0, 1 - d / 200);
+      f.vx += dx / d * near * 1.6 + (f.hx - f.x) * .02; f.vy += dy / d * near * 1.6 + (f.hy - f.y) * .02;
+      f.vx *= .86; f.vy *= .86; f.x += f.vx; f.y += f.vy;
+      const glint = near * Math.pow(Math.abs(Math.sin(f.ph + s * 2.4 + d * .04)), 3);
+      g.fillStyle = glint > .05 ? `rgba(255,236,200,${.35 + glint * .65})`
+        : f.tone > .55 ? "rgba(154,91,30,.28)" : "rgba(110,106,97,.22)";
+      const z = f.s + glint * 1.6; g.fillRect(f.x, f.y, z, z);
+    }
+  };
+}
+
+
+// ---------- Clean set (6-10) ----------
+function glow() {
+  size(1); const g = canvas.getContext("2d"); const q = { x: ptr.sx, y: ptr.sy };
+  return () => {
+    q.x += (ptr.sx - q.x) * .06; q.y += (ptr.sy - q.y) * .06;
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    const r = Math.max(W, H) * .42, rg = g.createRadialGradient(q.x, q.y, 0, q.x, q.y, r);
+    rg.addColorStop(0, "rgba(154,91,30,.13)"); rg.addColorStop(.45, "rgba(154,91,30,.05)"); rg.addColorStop(1, "rgba(154,91,30,0)");
+    g.fillStyle = rg; g.fillRect(0, 0, W, H);
+  };
+}
+
+function reveal() {
+  size(1); const g = canvas.getContext("2d");
+  const off = document.createElement("canvas"); off.width = canvas.width; off.height = canvas.height;
+  const o = off.getContext("2d"); o.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const gap = 40;
+  o.strokeStyle = "rgba(110,106,97,.32)"; o.lineWidth = .6; o.beginPath();
+  for (let x = gap / 2; x < W; x += gap) { o.moveTo(x, 0); o.lineTo(x, H); }
+  for (let y = gap / 2; y < H; y += gap) { o.moveTo(0, y); o.lineTo(W, y); }
+  o.stroke();
+  o.strokeStyle = "rgba(110,106,97,.14)"; o.lineWidth = .5; o.beginPath();
+  for (let x = gap / 2 + gap / 2; x < W; x += gap) { o.moveTo(x, 0); o.lineTo(x, H); }
+  for (let y = gap; y < H; y += gap) { o.moveTo(0, y); o.lineTo(W, y); }
+  o.stroke();
+  return () => {
+    g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, canvas.width, canvas.height);
+    g.globalCompositeOperation = "source-over"; g.drawImage(off, 0, 0);
+    g.globalCompositeOperation = "destination-in";
+    const x = ptr.sx * dpr, y = ptr.sy * dpr, r = 260 * dpr, rg = g.createRadialGradient(x, y, 0, x, y, r);
+    rg.addColorStop(0, "rgba(0,0,0,1)"); rg.addColorStop(.55, "rgba(0,0,0,.45)"); rg.addColorStop(1, "rgba(0,0,0,0)");
+    g.fillStyle = rg; g.fillRect(0, 0, canvas.width, canvas.height);
+    g.globalCompositeOperation = "source-over";
+  };
+}
+
+function lines() {
+  size(1); const g = canvas.getContext("2d"); const gap = 28, step = 10;
+  return () => {
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H); g.lineWidth = .8;
+    for (let y = gap / 2; y < H; y += gap) {
+      const dyl = y - ptr.sy, sideY = Math.exp(-(dyl * dyl) / (2 * 90 * 90));
+      g.strokeStyle = `rgba(${Math.round(110 + 44 * sideY)},${Math.round(106 - 15 * sideY)},${Math.round(97 - 67 * sideY)},${.13 + .22 * sideY})`;
+      g.beginPath();
+      for (let x = 0; x <= W + step; x += step) {
+        const dx = x - ptr.sx, f = Math.exp(-(dx * dx) / (2 * 130 * 130)) * sideY;
+        const yy = y + Math.sign(dyl || 1) * f * 26;
+        x ? g.lineTo(x, yy) : g.moveTo(x, yy);
+      }
+      g.stroke();
+    }
+  };
+}
+
+function rings() {
+  size(1); const g = canvas.getContext("2d");
+  const sc = Math.min(W / 1440, H / 900), cx = W - 1440 * sc + 1430 * sc, cy = H - 900 * sc + 866 * sc;
+  const r0 = 470 * sc, step = 26, rMax = Math.hypot(cx, cy) + 20;
+  return (t) => {
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    const pd = Math.hypot(ptr.sx - cx, ptr.sy - cy), pa = Math.atan2(ptr.sy - cy, ptr.sx - cx);
+    for (let r = r0; r < rMax; r += step) {
+      const k = Math.exp(-((r - pd) ** 2) / (2 * 26 * 26));
+      g.lineWidth = .8 + k * .6;
+      g.strokeStyle = `rgba(110,106,97,${.045 + .035 * k})`;
+      g.beginPath(); g.arc(cx, cy, r, Math.PI, Math.PI * 1.5); g.stroke();
+      if (k > .03) {
+        g.strokeStyle = `rgba(154,91,30,${.38 * k})`;
+        g.beginPath(); g.arc(cx, cy, r, pa - .22, pa + .22); g.stroke();
+      }
+    }
+  };
+}
+
+function needles() {
+  size(1); const g = canvas.getContext("2d"); const gap = 38, P = [];
+  for (let y = gap / 2; y < H; y += gap) for (let x = gap / 2; x < W; x += gap) P.push({ x, y, a: -Math.PI / 4 });
+  return () => {
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H); g.lineCap = "round";
+    for (const p of P) {
+      const dx = ptr.sx - p.x, dy = ptr.sy - p.y, d = Math.hypot(dx, dy), k = Math.exp(-(d * d) / (2 * 180 * 180));
+      let target = Math.atan2(dy, dx), diff = ((target - p.a + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
+      p.a += diff * .12;
+      const L = 4 + k * 4, c = Math.cos(p.a) * L, s = Math.sin(p.a) * L;
+      g.lineWidth = 1 + k * .4;
+      g.strokeStyle = k > .05 ? `rgba(${Math.round(110 + 44 * k)},${Math.round(106 - 15 * k)},${Math.round(97 - 67 * k)},${.1 + .45 * k})` : "rgba(110,106,97,.1)";
+      g.beginPath(); g.moveTo(p.x - c, p.y - s); g.lineTo(p.x + c, p.y + s); g.stroke();
+    }
+  };
+}
+
+
+// ---------- Distilled set (A-E) ----------
+function dialCentre() {
+  const sc = Math.min(W / 1440, H / 900);
+  return { sc, cx: W - 1440 * sc + 1430 * sc, cy: H - 900 * sc + 866 * sc };
+}
+function cross() {
+  size(1); const g = canvas.getContext("2d");
+  return () => {
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    const x = Math.round(ptr.sx) + .5, y = Math.round(ptr.sy) + .5, gap = 14;
+    g.strokeStyle = "rgba(20,19,15,.11)"; g.lineWidth = 1; g.beginPath();
+    g.moveTo(x, 0); g.lineTo(x, y - gap); g.moveTo(x, y + gap); g.lineTo(x, H);
+    g.moveTo(0, y); g.lineTo(x - gap, y); g.moveTo(x + gap, y); g.lineTo(W, y); g.stroke();
+    g.strokeStyle = "rgba(154,91,30,.8)"; g.lineWidth = 1.5; g.beginPath();
+    g.moveTo(x, H); g.lineTo(x, H - 8); g.moveTo(0, y); g.lineTo(8, y); g.moveTo(W, y); g.lineTo(W - 8, y); g.stroke();
+  };
+}
+function rulers() {
+  size(1); const g = canvas.getContext("2d"); const top = 80;
+  return () => {
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    g.strokeStyle = "rgba(20,19,15,.16)"; g.lineWidth = 1; g.beginPath();
+    for (let y = top + 10; y < H; y += 10) { const L = (y - top) % 50 === 0 ? 10 : 5; g.moveTo(0, y + .5); g.lineTo(L, y + .5); }
+    for (let x = 10; x < W; x += 10) { const L = x % 50 === 0 ? 10 : 5; g.moveTo(x + .5, H); g.lineTo(x + .5, H - L); }
+    g.stroke();
+    const y = Math.max(top, ptr.sy), x = ptr.sx;
+    g.fillStyle = "rgba(154,91,30,.9)";
+    g.beginPath(); g.moveTo(0, y - 5); g.lineTo(16, y); g.lineTo(0, y + 5); g.fill();
+    g.beginPath(); g.moveTo(x - 5, H); g.lineTo(x, H - 16); g.lineTo(x + 5, H); g.fill();
+  };
+}
+function echo() {
+  size(1); const g = canvas.getContext("2d"); const { sc, cx, cy } = dialCentre(); let r = 0;
+  return () => {
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    const pd = Math.hypot(ptr.sx - cx, ptr.sy - cy), pa = Math.atan2(ptr.sy - cy, ptr.sx - cx);
+    r += (Math.max(pd, 440 * sc) - r) * .12;
+    g.strokeStyle = "rgba(20,19,15,.13)"; g.lineWidth = 1;
+    g.beginPath(); g.arc(cx, cy, r, Math.PI, Math.PI * 1.5); g.stroke();
+    g.beginPath();
+    for (let a = 180; a <= 270.01; a += 2.8125) {
+      const t = a * Math.PI / 180, L = Math.round((a - 180) / 2.8125) % 4 === 0 ? 9 : 4;
+      g.moveTo(cx + Math.cos(t) * r, cy + Math.sin(t) * r); g.lineTo(cx + Math.cos(t) * (r - L), cy + Math.sin(t) * (r - L));
+    }
+    g.stroke();
+    const a = Math.min(Math.PI * 1.5, Math.max(Math.PI, pa < 0 ? pa + Math.PI * 2 : pa));
+    g.fillStyle = "rgba(154,91,30,.9)"; g.beginPath(); g.arc(cx + Math.cos(a) * r, cy + Math.sin(a) * r, 3.5, 0, 6.2832); g.fill();
+  };
+}
+function sweep() {
+  size(1); const g = canvas.getContext("2d"); let x = ptr.sx;
+  return () => {
+    x += (ptr.sx - x) * .05;
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    g.globalCompositeOperation = "source-over"; g.fillStyle = "rgba(20,19,15,.035)"; g.fillRect(0, 0, W, H);
+    const k = W * .16, lg = g.createLinearGradient(x - k - H * .35, 0, x + k + H * .35, H);
+    lg.addColorStop(0, "rgba(0,0,0,0)"); lg.addColorStop(.5, "rgba(0,0,0,1)"); lg.addColorStop(1, "rgba(0,0,0,0)");
+    g.globalCompositeOperation = "destination-out"; g.fillStyle = lg; g.fillRect(0, 0, W, H);
+    g.globalCompositeOperation = "source-over";
+  };
+}
+function tilt() {
+  size(1); const g = canvas.getContext("2d"); g.clearRect(0, 0, canvas.width, canvas.height);
+  const dial = document.querySelector(".dial"); let ox = 0, oy = 0;
+  return () => {
+    const tx = -((ptr.sx / W) - .5) * 18, ty = -((ptr.sy / H) - .5) * 12;
+    ox += (tx - ox) * .08; oy += (ty - oy) * .08;
+    dial.style.transform = `translate(${ox.toFixed(2)}px, ${oy.toFixed(2)}px)`;
+  };
+}
+
+const MAKERS = { cross, rulers, echo, sweep, tilt };
+
+function run(id) {
+  cancelAnimationFrame(raf); freshCanvas(); document.querySelector(".dial").style.transform = "";
+  ptr.sx = ptr.x = ptr.x || hero.clientWidth * .62; ptr.sy = ptr.y = ptr.y || hero.clientHeight * .5;
+  const draw = MAKERS[id]();
+  if (!draw) return;
+  const loop = (t) => { if (!document.hidden) { tickPointer(t); draw(t); } if (!reduce) raf = requestAnimationFrame(loop); };
+  raf = requestAnimationFrame(loop);
+}
+
+const tabs = document.querySelector(".tabs"), desc = document.getElementById("desc");
+let current = new URLSearchParams(location.search).get("fx") || "cross";
+function select(id) {
+  current = id;
+  tabs.querySelectorAll("button").forEach((b) => b.setAttribute("aria-selected", b.dataset.id === id));
+  desc.innerHTML = EFFECTS.find((e) => e.id === id).desc;
+  history.replaceState(null, "", "?fx=" + id);
+  run(id);
+}
+EFFECTS.forEach((e) => {
+  const b = document.createElement("button"); b.role = "tab"; b.dataset.id = e.id; b.textContent = e.name;
+  b.onclick = () => select(e.id); tabs.appendChild(b);
+});
+let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => run(current), 150); });
+select(current);
+</script>
+</body>
+</html>
