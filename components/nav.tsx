@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { LogoLockup } from "@/components/ui/logo";
 
 const links = [
   { href: "#services", label: "Services" },
@@ -11,20 +12,8 @@ const links = [
 
 export function Logo() {
   return (
-    <a href="#top" className="flex items-center gap-2 text-[17px] font-semibold tracking-[-0.03em] text-ink" aria-label="WheelPro Systems, back to top">
-      <svg viewBox="0 0 24 24" className="size-6" aria-hidden="true">
-        <circle cx="12" cy="12" r="11" fill="currentColor" />
-        <circle cx="12" cy="12" r="7.5" fill="none" stroke="#fff" strokeWidth="1.6" />
-        <circle cx="12" cy="12" r="2.2" fill="#fff" />
-        <g stroke="#fff" strokeWidth="1.6" strokeLinecap="round">
-          <path d="M12 9.6V5" />
-          <path d="M14.3 11.3l4.3-1.4" />
-          <path d="M13.4 14l2.7 3.6" />
-          <path d="M10.6 14l-2.7 3.6" />
-          <path d="M9.7 11.3L5.4 9.9" />
-        </g>
-      </svg>
-      WheelPro
+    <a href="#top" className="flex items-center text-ink" aria-label="WheelPro Systems, back to top">
+      <LogoLockup className="h-[22px] w-auto md:h-6" />
     </a>
   );
 }
