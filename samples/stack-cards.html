@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Stacking Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  @font-face { font-family: Switzer; src: url("../app/fonts/switzer-variable.woff2") format("woff2"); font-weight: 100 900; }
+  :root {
+    --bg: #fcfbf8; --subtle: #f5f3ee; --muted: #ece9e2; --line: #e6e2da; --line-strong: #d6d1c6;
+    --ink: #14130f; --ink-2: #45423b; --ink-3: #6e6a61; --accent: #9a5b1e; --accent-2: #c98a4b;
+    --dark: #15130f; --dark-2: #1f1c17; --dark-line: #2e2a23; --on-dark: #fbf9f4; --on-dark-2: #b3ada2; --mute: #8a8478;
+    --display: "Saira Semi Condensed", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: Switzer, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  ::selection { background: rgb(154 91 30 / .22); }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+  @media (min-width: 768px) { .wrap { padding: 0 48px; } }
+
+  .switch { position: fixed; z-index: 50; left: 50%; bottom: 18px; transform: translateX(-50%); display: flex; gap: 4px; padding: 6px; border-radius: 10px;
+    background: rgb(20 19 15 / .92); box-shadow: 0 12px 30px -12px rgb(20 19 15 / .5); max-width: calc(100% - 24px); overflow-x: auto; }
+  .switch a { color: #b3ada2; text-decoration: none; font: 500 13px Switzer, sans-serif; padding: 9px 12px; border-radius: 6px; white-space: nowrap; }
+  .switch a:hover { color: #fbf9f4; }
+  .note { font-size: 13px; color: var(--ink-3); padding-top: 32px; border-bottom: 1px solid var(--line); padding-bottom: 14px; }
+  .note b { color: var(--accent); font-weight: 600; }
+
+  section.v { padding: 40px 0 120px; }
+  .head { padding: 72px 0 56px; display: grid; gap: 20px; }
+  @media (min-width: 1024px) { .head { grid-template-columns: 6fr 5fr; align-items: end; gap: 64px; } }
+  .head h2 { font: 600 clamp(2.2rem, 4.4vw, 3.75rem)/1.0 var(--display); letter-spacing: -0.01em; text-wrap: balance; }
+  .head p { font-size: clamp(1.05rem, 1.25vw, 1.15rem); line-height: 1.65; color: var(--ink-2); max-width: 54ch; }
+
+  /* ---- the stack mechanic (shared) ---- */
+  .stack { position: relative; }
+  .card { position: sticky; top: calc(96px + var(--i) * 16px); transform-origin: 50% 0; will-change: transform; margin-bottom: 28px; }
+  .card:last-child { margin-bottom: 0; }
+  .card .shade { position: absolute; inset: 0; border-radius: inherit; background: #000; opacity: 0; pointer-events: none; transition: opacity .1s linear; }
+  @media (max-width: 767px) { .card { top: calc(72px + var(--i) * 10px); } }
+
+  .t { font: 500 clamp(2.6rem, 6vw, 5.2rem)/0.98 var(--display); letter-spacing: -0.015em; }
+  .t span { display: block; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { font-size: 12.5px; font-weight: 500; padding: 7px 12px; border-radius: 999px; white-space: nowrap; }
+  .lead { display: grid; grid-template-columns: 22px 1fr; gap: 12px; font-size: 16px; line-height: 1.65; max-width: 62ch; }
+  .lead svg { margin-top: 4px; }
+  .metric b { display: block; font: 700 clamp(2.4rem, 4.2vw, 3.6rem)/1 var(--display); letter-spacing: -0.01em; }
+  .metric span { font-size: 13px; }
+
+  /* ===== V1 Graphite (closest to the reference) ===== */
+  #v1 .card { border-radius: 22px; background: linear-gradient(160deg, #26221c, #15130f 60%); color: var(--on-dark-2); min-height: min(76vh, 600px);
+    padding: clamp(28px, 4vw, 56px); display: grid; grid-template-rows: 1fr auto; gap: 40px; box-shadow: 0 -18px 40px -24px rgb(0 0 0 / .45); border: 1px solid #2a261f; }
+  #v1 .t span:first-child { color: var(--on-dark); } #v1 .t span:last-child { color: #7d776c; }
+  #v1 .top { display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; }
+  #v1 .metric { text-align: right; } #v1 .metric b { color: var(--accent-2); } #v1 .metric span { color: var(--mute); }
+  #v1 .bottom { display: grid; gap: 22px; }
+  #v1 .chip { border: 1px solid #36312a; color: #cfc9be; }
+  #v1 .lead { color: #d7d1c6; }
+  @media (max-width: 767px) { #v1 .top { flex-direction: column; } #v1 .metric { text-align: left; } }
+
+  /* ===== V2 Paper (light, blueprint) ===== */
+  #v2 { background: var(--subtle); }
+  #v2 .card { border-radius: 18px; background: #fff; border: 1px solid var(--line); min-height: min(72vh, 560px); overflow: hidden;
+    box-shadow: 0 -20px 40px -30px rgb(20 19 15 / .35); display: grid; grid-template-rows: auto 1fr; }
+  #v2 .ruler { height: 34px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; padding: 0 clamp(20px, 3vw, 40px);
+    font: 600 12px Switzer, sans-serif; color: var(--ink-3); letter-spacing: .04em;
+    background: repeating-linear-gradient(90deg, var(--line-strong) 0 1px, transparent 1px 12px) 0 100% / 100% 6px no-repeat; }
+  #v2 .ruler i { font-style: normal; color: var(--accent); }
+  #v2 .in { padding: clamp(26px, 3.6vw, 48px) clamp(20px, 3vw, 40px); display: grid; gap: 32px; }
+  @media (min-width: 1024px) { #v2 .in { grid-template-columns: 7fr 5fr; align-items: end; } }
+  #v2 .t span:first-child { color: var(--ink); } #v2 .t span:last-child { color: #a39d92; }
+  #v2 .chip { background: var(--subtle); color: var(--ink-2); }
+  #v2 .lead { color: var(--ink-2); margin-top: 24px; }
+  #v2 .chips { margin-top: 28px; }
+  #v2 .proof { display: grid; gap: 10px; }
+  #v2 .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 10px; border: 1px solid var(--line); font-size: 14px; color: var(--ink-2); background: var(--bg); }
+  #v2 .row b { font: 600 16px var(--display); color: var(--ink); }
+  #v2 .row.hi { border-color: rgb(154 91 30 / .35); background: #fbf5ec; }
+  #v2 .row.ok b { color: #15803d; }
+  #v2 .metric { padding-top: 10px; } #v2 .metric b { color: var(--accent); } #v2 .metric span { color: var(--ink-3); }
+
+  /* ===== V3 Product (text + real screen) ===== */
+  #v3 .card { border-radius: 22px; background: var(--dark); color: var(--on-dark-2); min-height: min(78vh, 640px); padding: clamp(24px, 3.4vw, 48px);
+    display: grid; gap: 36px; border: 1px solid #2a261f; box-shadow: 0 -18px 40px -24px rgb(0 0 0 / .45); }
+  @media (min-width: 1024px) { #v3 .card { grid-template-columns: 5fr 6fr; align-items: stretch; } }
+  #v3 .txt { display: flex; flex-direction: column; justify-content: space-between; gap: 28px; }
+  #v3 .t { font-size: clamp(2.4rem, 4.6vw, 4.2rem); } #v3 .t span:first-child { color: var(--on-dark); } #v3 .t span:last-child { color: #7d776c; }
+  #v3 .chip { border: 1px solid #36312a; color: #cfc9be; }
+  #v3 .lead { color: #d7d1c6; font-size: 15.5px; }
+  #v3 .screen { border-radius: 14px; background: #f3f1ec; overflow: hidden; position: relative; min-height: 260px; }
+  #v3 .screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% 40%; }
+  #v3 .pill { position: absolute; left: 16px; bottom: 16px; background: rgb(21 19 15 / .9); color: var(--on-dark); font-size: 13px; padding: 10px 14px; border-radius: 10px; display: flex; gap: 10px; align-items: center; backdrop-filter: blur(8px); }
+  #v3 .pill b { font: 600 15px var(--display); color: var(--accent-2); }
+
+  /* ===== V4 Tonal (metric-led, warming palette) ===== */
+  #v4 .card { border-radius: 22px; min-height: min(70vh, 540px); padding: clamp(26px, 4vw, 56px); color: var(--on-dark); display: grid; gap: 28px;
+    box-shadow: 0 -20px 40px -24px rgb(0 0 0 / .4); background: var(--c); }
+  @media (min-width: 1024px) { #v4 .card { grid-template-columns: 5fr 6fr; align-items: end; } }
+  #v4 .big { font: 700 clamp(4rem, 11vw, 9.5rem)/0.86 var(--display); letter-spacing: -0.02em; }
+  #v4 .big.long { font-size: clamp(3rem, 6.6vw, 6.2rem); white-space: nowrap; }
+  #v4 .big small { display: block; font: 500 15px Switzer, sans-serif; letter-spacing: 0; margin-top: 14px; opacity: .75; }
+  #v4 .t { font-size: clamp(2rem, 3.4vw, 3rem); } #v4 .t span:last-child { opacity: .62; }
+  #v4 .side { display: grid; gap: 22px; }
+  #v4 .chip { background: rgb(255 255 255 / .08); color: rgb(251 249 244 / .88); border: 1px solid rgb(255 255 255 / .12); }
+  #v4 .lead { color: rgb(251 249 244 / .82); }
+  #v4 .stage { font: 600 13px Switzer, sans-serif; opacity: .72; letter-spacing: .02em; }
+
+  @media (prefers-reduced-motion: reduce) { .card { transform: none !important; } }
+</style>
+</head>
+<body>
+
+<nav class="switch" aria-label="Variations"><a href="#v1">1 · Graphite</a><a href="#v2">2 · Paper blueprint</a><a href="#v3">3 · Product screens</a><a href="#v4">4 · Tonal metrics</a></nav>
+
+<template id="spark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v20M2 12h20M4.9 4.9l14.2 14.2M19.1 4.9 4.9 19.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></template>
+
+<!-- content is generated from one data list so all four styles say the same thing -->
+<section class="v" id="v1"><div class="wrap"><p class="note"><b>1 · Graphite.</b> Closest to your reference: dark graphite cards, two-tone titles, capability tags and a bronze result.</p>
+  <div class="head"><h2>Everything between the enquiry and the payment</h2><p>WheelPro is shop management software built for wheel repair and refinishing businesses. Five connected tools take each job from first contact to money in the bank, so your team spends its time on wheels, not admin.</p></div>
+  <div class="stack"></div></div></section>
+
+<section class="v" id="v2"><div class="wrap"><p class="note"><b>2 · Paper blueprint.</b> Light cards with a ruler edge like your speedometer, plus live-looking product rows.</p>
+  <div class="head"><h2>One system, five stages of every job</h2><p>From the first website enquiry to the final card payment, WheelPro runs the admin around your repair work: lead capture, quoting, follow-up, deposits and invoicing in one place.</p></div>
+  <div class="stack"></div></div></section>
+
+<section class="v" id="v3"><div class="wrap"><p class="note"><b>3 · Product screens.</b> Each card pairs the capability with the real WheelPro screen for that stage.</p>
+  <div class="head"><h2>See each stage of the job, in the system</h2><p>Every card is a real screen from WheelPro, the shop management system for wheel repair and refinishing businesses, shown with a sample shop and sample job.</p></div>
+  <div class="stack"></div></div></section>
+
+<section class="v" id="v4"><div class="wrap"><p class="note"><b>4 · Tonal metrics.</b> The result leads each card, and the colour warms from graphite to bronze as the job moves to paid.</p>
+  <div class="head"><h2>The numbers that change on day one</h2><p>WheelPro is shop management software for wheel repair and refinishing businesses. Here is what each stage of the job looks like once it runs through one system.</p></div>
+  <div class="stack"></div></div></section>
+
+<div style="height:30vh"></div>
+
+<script>
+const D = [
+  { a: "Lead", b: "Capture", stage: "Enquiry", tags: ["Website forms", "Gmail sync", "Photo uploads", "Instant auto-reply", "Lead inbox"],
+    p: "Every enquiry from your website and Gmail lands in one lead inbox with the customer’s photos, vehicle and contact details. A branded auto-reply confirms receipt and sets a quote time, day or night, so you respond first and win more jobs.",
+    m: "Seconds", mc: "to first reply", img: "leads", rows: [["New lead · Website form", "08:14"], ["4 photos · 4 × 21″ alloys", "Saved"], ["Auto-reply sent", "Instant", "hi"]] },
+  { a: "Instant", b: "Quotations", stage: "Quote", tags: ["Guided quote form", "Damage photos", "Size and finish", "Finish chart", "One-tap send"],
+    p: "A guided request form captures wheel size, damage photos and the finish the customer wants before you open it. Price from your own finish chart and service list, then send a branded quote the customer can approve from their phone.",
+    m: "1 message", mc: "to price the job", img: "quote", rows: [["Q-1044 · Satin Bronze", "4 × 21″"], ["Curb rash repair × 2", "$980.00"], ["Quote sent · GST included", "$1,029.00", "hi"]] },
+  { a: "Automated", b: "Follow-ups", stage: "Follow-up", tags: ["Quote reminders", "Appointment reminders", "Review requests", "Auto-stop on approval"],
+    p: "Scheduled reminders go out on day 1 and day 3 and stop the moment a customer approves. Appointment reminders reduce no-shows, and review requests after every job build your Google rating without writing a single email.",
+    m: "Day 1 + 3", mc: "automatic follow-ups", img: "email", rows: [["Quote reminder · Day 1", "09:00"], ["Quote reminder · Day 3", "Scheduled"], ["Quote approved · reminders stopped", "Thu", "hi"]] },
+  { a: "Secured", b: "Bookings", stage: "Booking", tags: ["Card deposits", "Stripe payouts", "Booking calendar", "Shop and mobile jobs"],
+    p: "Customers approve a quote by paying a deposit by card, paid out to your bank through Stripe. Bay time and mobile visits are only held for committed jobs, and every booking shows its payment status at a glance.",
+    m: "$150", mc: "deposit before booking", img: "pay", rows: [["Mobile visit · Surrey", "Thu 9:00"], ["Deposit · Visa ·· 4242", "$150.00"], ["Booking confirmed", "Paid", "hi"]] },
+  { a: "Invoicing", b: "& Payments", stage: "Paid", tags: ["Quote-to-invoice", "Tax and branding", "Card and Apple Pay", "Paid status"],
+    p: "The approved quote becomes an invoice with your tax, branding and deposit already applied. Customers settle the balance by card or Apple Pay in one tap, and the job is marked paid automatically, with nothing to retype or chase.",
+    m: "1 tap", mc: "to pay the balance", img: "invoice", rows: [["INV-0412 · from Q-1044", "$1,029.00"], ["Deposit applied", "−$150.00"], ["Balance paid · Apple Pay", "$879.00", "ok"]] },
+];
+const spark = document.getElementById("spark").innerHTML;
+const chips = (t) => `<div class="chips">${t.map((x) => `<span class="chip">${x}</span>`).join("")}</div>`;
+const title = (d) => `<h3 class="t"><span>${d.a}</span><span>${d.b}</span></h3>`;
+const lead = (d, color) => `<p class="lead"><span style="color:${color}">${spark}</span><span>${d.p}</span></p>`;
+const tones = ["#1b1813", "#2a2118", "#3d2b1b", "#5a3b1e", "#7c4c1d"];
+
+const R = {
+  v1: (d) => `<div class="top">${title(d)}<div class="metric"><b>${d.m}</b><span>${d.mc}</span></div></div>
+    <div class="bottom">${chips(d.tags)}${lead(d, "#c98a4b")}</div>`,
+  v2: (d, i) => `<div class="ruler"><span>${d.stage.toUpperCase()}</span><i>${i + 1} of 5</i></div>
+    <div class="in"><div>${title(d)}${chips(d.tags)}${lead(d, "#9a5b1e")}</div>
+    <div class="proof">${d.rows.map(([l, v, k]) => `<div class="row ${k || ""}"><span>${l}</span><b>${v}</b></div>`).join("")}
+    <div class="metric"><b>${d.m}</b><span>${d.mc}</span></div></div></div>`,
+  v3: (d) => `<div class="txt">${title(d)}<div style="display:grid;gap:20px">${chips(d.tags)}${lead(d, "#c98a4b")}</div></div>
+    <div class="screen"><img src="../public/screens/${d.img}.svg" alt="WheelPro ${d.a} ${d.b} screen" loading="lazy" /><div class="pill">${d.mc.replace(/^./, (c) => c.toUpperCase())} <b>${d.m}</b></div></div>`,
+  v4: (d, i) => `<div class="big${d.m.length > 5 ? " long" : ""}">${d.m}<small>${d.mc}</small></div>
+    <div class="side"><p class="stage">${d.stage}</p>${title(d)}${chips(d.tags)}${lead(d, "#e8b77f")}</div>`,
+};
+for (const id of Object.keys(R)) {
+  document.querySelector(`#${id} .stack`).innerHTML = D.map((d, i) =>
+    `<article class="card" style="--i:${i};${id === "v4" ? `--c:${tones[i]}` : ""}">${R[id](d, i)}<span class="shade"></span></article>`).join("");
+}
+
+// Stack effect: as later cards slide over a card, it shrinks a little and dims.
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const stacks = [...document.querySelectorAll(".stack")].map((s) => [...s.querySelectorAll(".card")]);
+function frame() {
+  const vh = innerHeight;
+  for (const cards of stacks) {
+    const tops = cards.map((c) => c.getBoundingClientRect().top);
+    cards.forEach((c, i) => {
+      let depth = 0;
+      for (let j = i + 1; j < cards.length; j++) {
+        const stick = cards[j]._stick ?? (cards[j]._stick = parseFloat(getComputedStyle(cards[j]).top));
+        depth += Math.min(1, Math.max(0, 1 - (tops[j] - stick) / (vh * 0.75)));
+      }
+      c.style.transform = reduce ? "" : `scale(${1 - depth * 0.035})`;
+      c.querySelector(".shade").style.opacity = Math.min(0.5, depth * 0.16);
+    });
+  }
+  requestAnimationFrame(frame);
+}
+addEventListener("resize", () => stacks.flat().forEach((c) => (c._stick = undefined)));
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

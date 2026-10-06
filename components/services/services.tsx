@@ -104,7 +104,7 @@ export function Services() {
           <SectionIntro label="The platform" title={<>From first enquiry<br /><span className="t-outline">to final payment</span></>} sub="Lead capture, quoting, follow-ups, invoicing and payments in one connected system, so every job moves forward without the admin." />
         </Reveal>
 
-        <div ref={ref} className="mt-14 md:mt-20">
+        <div ref={ref} className="mt-10 md:mt-14">
           <div className="flex justify-center">
             <div className="relative max-w-full">
               <div

@@ -172,11 +172,11 @@ p {
 }
 
 .section {
-  padding-block: 96px;
+  padding-block: 80px;
 }
 @media (min-width: 1024px) {
   .section {
-    padding-block: 160px;
+    padding-block: 112px;
   }
 }
 
@@ -255,6 +255,106 @@ html.lenis body {
 .hl .is-now {
   color: var(--accent);
   background-size: 100% 2px;
+}
+
+/* ---- "One system" deck: pinned stage, product cards dealt onto a stack ---- */
+.deck-track {
+  height: 460vh;
+}
+.deck-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.deck-bg {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  pointer-events: none;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(5rem, 17vw, 17rem);
+  line-height: 0.84;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--ink);
+  will-change: filter, opacity;
+}
+.deck-cards {
+  position: relative;
+  flex: 1;
+}
+.deck-card {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: min(420px, 84vw);
+  height: min(540px, calc(100% - 40px));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--dark);
+  color: var(--on-dark);
+  box-shadow: 0 34px 70px -28px rgb(20 19 15 / 0.6);
+  transform: translateY(120vh);
+  will-change: transform;
+}
+.deck-side {
+  position: relative;
+  z-index: 30;
+  order: -1;
+  max-width: 560px;
+  padding: 96px 20px 0;
+}
+@media (min-width: 1280px) {
+  .deck-side {
+    position: absolute;
+    left: 56px;
+    bottom: 56px;
+    max-width: 340px;
+    padding: 0;
+  }
+  .deck-card {
+    height: min(560px, 74svh);
+  }
+}
+/* Reduced motion: no pinning, cards in a column. */
+.deck-track[data-static] {
+  height: auto;
+}
+.deck-track[data-static] .deck-stage {
+  position: relative;
+  height: auto;
+  overflow: visible;
+  padding-bottom: 80px;
+}
+.deck-track[data-static] .deck-bg {
+  position: relative;
+  opacity: 0.12;
+  padding-top: 48px;
+}
+.deck-track[data-static] .deck-cards {
+  display: grid;
+  gap: 24px;
+  justify-items: center;
+  margin-top: 32px;
+}
+.deck-track[data-static] .deck-card {
+  position: relative;
+  inset: auto;
+  height: 540px;
+  transform: none;
+}
+.deck-track[data-static] .deck-side {
+  position: relative;
+  left: auto;
+  bottom: auto;
 }
 
 /* ---- Hero: rev dial ---- */

@@ -49,7 +49,7 @@ export function Hero() {
 
   // On desktop the hero pins while the needle climbs through the job steps.
   return (
-    <div ref={pinRef} className="relative lg:h-[230svh]">
+    <div ref={pinRef} className="relative lg:h-[150svh]">
       <section
         id="top"
         ref={heroRef}

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Card Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  @font-face { font-family: Switzer; src: url("../app/fonts/switzer-variable.woff2") format("woff2"); font-weight: 100 900; }
+  :root {
+    --bg: #fcfbf8; --subtle: #f5f3ee; --line: #e6e2da; --line-strong: #d6d1c6;
+    --ink: #14130f; --ink-2: #45423b; --ink-3: #6e6a61; --accent: #9a5b1e; --accent-2: #c98a4b;
+    --dark: #15130f; --on-dark: #fbf9f4; --on-dark-2: #b3ada2; --mute: #8a8478; --green: #15803d;
+    --display: "Saira Semi Condensed", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: Switzer, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  .switch { position: fixed; z-index: 50; left: 50%; bottom: 18px; transform: translateX(-50%); display: flex; gap: 4px; padding: 6px; border-radius: 10px;
+    background: rgb(20 19 15 / .92); box-shadow: 0 12px 30px -12px rgb(20 19 15 / .5); max-width: calc(100% - 24px); overflow-x: auto; }
+  .switch a { color: #b3ada2; text-decoration: none; font: 500 13px Switzer, sans-serif; padding: 9px 12px; border-radius: 6px; white-space: nowrap; }
+  .switch a:hover { color: #fbf9f4; }
+  .note { max-width: 1200px; margin: 0 auto; padding: 40px 20px 14px; font-size: 13px; color: var(--ink-3); border-bottom: 1px solid var(--line); }
+  .note b { color: var(--accent); font-weight: 600; }
+  @media (min-width: 768px) { .note { padding-inline: 48px; } }
+
+  /* ---------- deck mechanic (shared) ---------- */
+  .deck { position: relative; height: 560vh; }
+  .stage { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+  .bg { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; pointer-events: none;
+    font: 800 clamp(5rem, 17vw, 17rem)/0.84 var(--display); letter-spacing: -0.03em; text-transform: uppercase; will-change: filter, opacity; }
+  .side { position: absolute; left: clamp(20px, 4vw, 56px); bottom: clamp(24px, 6vh, 56px); max-width: 330px; z-index: 30; }
+  .side p { font-size: 14px; line-height: 1.6; }
+  .side .count { font: 600 14px var(--display); margin-bottom: 10px; letter-spacing: .04em; }
+  .tab { position: absolute; right: 0; top: 50%; transform: translateY(-50%); writing-mode: vertical-rl; padding: 18px 9px; font: 600 11px Switzer, sans-serif; letter-spacing: .12em; text-transform: uppercase; z-index: 30; border-radius: 6px 0 0 6px; }
+  .cards { position: absolute; inset: 0; }
+  .card { position: absolute; left: 50%; top: 50%; width: min(400px, 80vw); min-height: min(540px, 72svh); margin-left: calc(min(400px, 80vw) / -2); margin-top: calc(min(540px, 72svh) / -2);
+    border-radius: 6px; padding: 28px 26px 22px; display: flex; flex-direction: column; will-change: transform; transform: translateY(130vh); }
+  .card h3 { font: 800 clamp(2rem, 3.2vw, 2.65rem)/0.92 var(--display); text-transform: uppercase; letter-spacing: -0.01em; }
+  .card .sum { font-size: 13.5px; line-height: 1.5; margin-top: 12px; max-width: 30ch; }
+  .card .foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
+  .card ul { list-style: none; padding: 0; font-size: 13.5px; line-height: 1.55; font-weight: 500; }
+  .card .n { font: 700 54px/0.8 var(--display); letter-spacing: -0.02em; }
+  @media (max-width: 767px) { .side { right: 20px; max-width: none; } .side p { display: none; } .tab { display: none; } }
+
+  /* ---------- 1 · Paper deck ---------- */
+  #d1 .stage { background: #e9e7e2; }
+  #d1 .bg { color: var(--ink); }
+  #d1 .card { background: linear-gradient(165deg, #f7f6f2 0%, #dcd8cf 100%); color: var(--ink); box-shadow: 0 30px 60px -28px rgb(20 19 15 / .55), 0 2px 0 rgb(255 255 255 / .6) inset; }
+  #d1 .sum { color: var(--ink-2); } #d1 .n { color: var(--ink); }
+  #d1 .tab { background: var(--accent); color: #fff; }
+  #d1 .side p { color: var(--ink-2); }
+
+  /* ---------- 2 · Graphite deck ---------- */
+  #d2 .stage { background: var(--dark); }
+  #d2 .bg { color: #4a4238; }
+  #d2 .card { background: linear-gradient(165deg, #2c2720 0%, #17140f 100%); color: var(--on-dark); border: 1px solid #3a342b; box-shadow: 0 34px 70px -24px rgb(0 0 0 / .8); }
+  #d2 .card h3 { color: var(--on-dark); } #d2 .sum { color: var(--on-dark-2); } #d2 ul { color: #d7d1c6; } #d2 .n { color: var(--accent-2); }
+  #d2 .tab { background: var(--accent-2); color: var(--dark); }
+  #d2 .side { color: var(--on-dark-2); } #d2 .side .count { color: var(--on-dark); }
+
+  /* ---------- 3 · Job ticket deck ---------- */
+  #d3 .stage { background: var(--subtle); }
+  #d3 .bg { color: var(--accent); }
+  #d3 .card { background: #fffdf8; color: var(--ink); padding: 0; border-radius: 4px; box-shadow: 0 28px 60px -30px rgb(20 19 15 / .55);
+    background-image: radial-gradient(circle at 0 92px, var(--subtle) 9px, transparent 10px), radial-gradient(circle at 100% 92px, var(--subtle) 9px, transparent 10px); }
+  #d3 .tk-head { display: flex; justify-content: space-between; padding: 22px 24px 0; font: 600 12px Switzer, sans-serif; letter-spacing: .06em; color: var(--ink-3); text-transform: uppercase; height: 92px; border-bottom: 1.5px dashed var(--line-strong); }
+  #d3 .tk-head b { color: var(--ink); font: 700 20px var(--display); letter-spacing: 0; display: block; margin-top: 4px; }
+  #d3 .tk-body { padding: 22px 24px; display: flex; flex-direction: column; flex: 1; }
+  #d3 .rows { margin-top: 18px; border-top: 1px solid var(--line); }
+  #d3 .rows div { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; color: var(--ink-2); }
+  #d3 .rows b { font: 600 15px var(--display); color: var(--ink); }
+  #d3 .ticks { height: 34px; margin-top: auto; background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 5px, var(--ink) 5px 6px, transparent 6px 10px); opacity: .85; border-radius: 1px; }
+  #d3 .tk-foot { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 12px; }
+  #d3 .n { color: var(--accent); }
+  #d3 .stamp { position: absolute; right: 22px; top: 118px; transform: rotate(-12deg); border: 3px solid var(--green); color: var(--green); font: 800 34px var(--display); letter-spacing: .06em; padding: 2px 12px; border-radius: 6px; opacity: .85; }
+  #d3 .tab { background: var(--ink); color: var(--bg); }
+  #d3 .side p { color: var(--ink-2); }
+
+  /* ---------- 4 · Product deck ---------- */
+  #d4 .stage { background: var(--bg); }
+  #d4 .bg { color: var(--ink); }
+  #d4 .card { padding: 0; overflow: hidden; background: var(--dark); color: var(--on-dark); border-radius: 14px; box-shadow: 0 34px 70px -28px rgb(20 19 15 / .6); }
+  #d4 .shot { height: 54%; min-height: 250px; position: relative; background: #f1efe9; overflow: hidden; }
+  #d4 .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 22% 30%; }
+  #d4 .cap { padding: 20px 22px 18px; display: flex; flex-direction: column; flex: 1; }
+  #d4 h3 { font-size: clamp(1.7rem, 2.6vw, 2.15rem); }
+  #d4 .sum { color: var(--on-dark-2); } #d4 ul { color: #d7d1c6; font-size: 13px; } #d4 .n { color: var(--accent-2); font-size: 44px; }
+  #d4 .tab { background: var(--accent); color: #fff; }
+  #d4 .side p { color: var(--ink-2); }
+
+  /* reduced motion: no pin, cards in a simple column */
+  .static .deck { height: auto; }
+  .static .stage { position: relative; height: auto; overflow: visible; padding: 60px 20px; }
+  .static .bg { position: relative; filter: none !important; opacity: .15 !important; }
+  .static .cards { position: relative; display: grid; gap: 24px; justify-items: center; margin-top: 24px; }
+  .static .card { position: relative; left: auto; top: auto; margin: 0; transform: none !important; }
+  .static .side { position: relative; left: auto; bottom: auto; margin-top: 24px; }
+</style>
+</head>
+<body>
+<nav class="switch" aria-label="Variations"><a href="#v1">1 · Paper deck</a><a href="#v2">2 · Graphite deck</a><a href="#v3">3 · Job tickets</a><a href="#v4">4 · Product deck</a></nav>
+
+<div id="v1"><p class="note"><b>1 · Paper deck.</b> Closest to the reference: soft paper cards dealt onto a stack over a giant blurred headline.</p>
+<section class="deck" id="d1" data-bg="From lead<br>to paid"></section></div>
+<div id="v2"><p class="note"><b>2 · Graphite deck.</b> The same motion in your dark band, with bronze numbers.</p>
+<section class="deck" id="d2" data-bg="The admin<br>you stop"></section></div>
+<div id="v3"><p class="note"><b>3 · Job tickets.</b> Each card is a workshop job ticket for the same job, and the last one is stamped Paid.</p>
+<section class="deck" id="d3" data-bg="One job<br>five steps"></section></div>
+<div id="v4"><p class="note"><b>4 · Product deck.</b> Each card shows the real WheelPro screen for that stage of the job.</p>
+<section class="deck" id="d4" data-bg="One<br>system"></section></div>
+<div style="height:40vh"></div>
+
+<script>
+const D = [
+  { t: "Lead<br>capture", s: "Every website and Gmail enquiry lands in one inbox with photos and details, and gets an instant reply.", tags: ["Website forms", "Gmail sync", "Instant auto-reply"],
+    time: "Mon 08:14", rows: [["Source", "Website form"], ["Photos", "4 received"], ["First reply", "08:14"]], img: "leads" },
+  { t: "Instant<br>quotes", s: "Wheel size, damage photos and finish arrive up front. Price from your finish chart and send in one tap.", tags: ["Guided quote form", "Finish chart", "One-tap send"],
+    time: "Mon 08:40", rows: [["Wheels", "4 × 21″"], ["Finish", "Satin Bronze"], ["Quote Q-1044", "$1,029.00"]], img: "quote" },
+  { t: "Automated<br>follow-up", s: "Reminders go out on day 1 and day 3 and stop the moment the customer approves.", tags: ["Quote reminders", "Appointment reminders", "Review requests"],
+    time: "Tue 09:00", rows: [["Reminder 1", "Day 1"], ["Reminder 2", "Day 3"], ["Status", "Approved"]], img: "email" },
+  { t: "Secured<br>bookings", s: "Customers approve with a card deposit, so bay time and mobile visits are only held for committed jobs.", tags: ["Card deposits", "Stripe payouts", "Booking calendar"],
+    time: "Thu 10:12", rows: [["Visit", "Mobile · Surrey"], ["Deposit", "Visa ·· 4242"], ["Paid", "$150.00"]], img: "pay" },
+  { t: "Invoices &<br>payments", s: "The approved quote becomes the invoice. The balance is paid by card or Apple Pay in one tap.", tags: ["Quote-to-invoice", "Card and Apple Pay", "Paid status"],
+    time: "Sat 15:30", rows: [["Invoice", "INV-0412"], ["Deposit applied", "−$150.00"], ["Balance paid", "$879.00"]], img: "invoice" },
+];
+const N = D.length;
+const lede = "WheelPro is shop management software for wheel repair and refinishing businesses. Five connected tools take every job from the first enquiry to money in the bank.";
+const card = {
+  d1: (d, i) => `<h3>${d.t}</h3><p class="sum">${d.s}</p><div class="foot"><ul>${d.tags.map((x) => `<li>${x}</li>`).join("")}</ul><span class="n">0${i + 1}</span></div>`,
+  d2: (d, i) => card.d1(d, i),
+  d3: (d, i) => `<div class="tk-head"><span>Job ticket<b>Q-1044 · Jordan M.</b></span><span style="text-align:right">${d.time}<b>0${i + 1}/05</b></span></div>
+    <div class="tk-body"><h3>${d.t}</h3><p class="sum" style="color:var(--ink-2)">${d.s}</p>
+    <div class="rows">${d.rows.map(([a, b]) => `<div><span>${a}</span><b>${b}</b></div>`).join("")}</div>
+    <div class="ticks" style="margin-top:22px"></div></div>${i === N - 1 ? '<span class="stamp">PAID</span>' : ""}`,
+  d4: (d, i) => `<div class="shot"><img src="../public/screens/${d.img}.svg" alt="WheelPro ${d.t.replace("<br>", " ")} screen" /></div>
+    <div class="cap"><h3>${d.t.replace("<br>", " ")}</h3><p class="sum">${d.s}</p><div class="foot"><ul>${d.tags.map((x) => `<li>${x}</li>`).join("")}</ul><span class="n">0${i + 1}</span></div></div>`,
+};
+const tabText = { d1: "WheelPro", d2: "WheelPro", d3: "Job flow", d4: "WheelPro" };
+// resting pose of each card: small rotations and offsets so the stack looks hand-dealt
+const rest = [[-4, -18, 6], [3, 14, -4], [-2, -8, 10], [5, 18, -6], [-1, 0, 0]];
+const enter = [[-16, -60], [14, 70], [-12, -40], [18, 80], [-8, 0]];
+
+const decks = [...document.querySelectorAll(".deck")].map((el) => {
+  el.innerHTML = `<div class="stage"><div class="bg">${el.dataset.bg}</div><div class="cards">${D.map((d, i) => `<article class="card" style="z-index:${i + 1}">${card[el.id](d, i)}</article>`).join("")}</div>
+    <div class="side"><p class="count">01 / 05</p><p>${lede}</p></div><div class="tab">${tabText[el.id]}</div></div>`;
+  return { el, bg: el.querySelector(".bg"), cards: [...el.querySelectorAll(".card")], count: el.querySelector(".count") };
+});
+
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (reduce) document.body.classList.add("static");
+const ease = (x) => 1 - Math.pow(1 - x, 3);
+const clamp = (x) => Math.min(1, Math.max(0, x));
+function frame() {
+  const vh = innerHeight, sx = Math.min(1, innerWidth / 1000);
+  for (const k of decks) {
+    const r = k.el.getBoundingClientRect();
+    const p = clamp(-r.top / (k.el.offsetHeight - vh));
+    const seg = 1 / (N + 0.4);
+    let shown = 0;
+    k.cards.forEach((c, i) => {
+      const e = ease(clamp((p - i * seg) / (seg * 0.85)));
+      if (e > 0.5) shown = i + 1;
+      const [rr, rx, ry] = rest[i], [er, ex] = enter[i];
+      const rot = er + (rr - er) * e, x = (ex + (rx - ex) * e) * sx, y = (1 - e) * vh * 1.15 + ry * e;
+      c.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg)`;
+    });
+    const blur = clamp(p * 4) * 12;
+    k.bg.style.filter = `blur(${blur}px)`;
+    k.bg.style.opacity = 1 - clamp(p * 4) * 0.55;
+    k.count.textContent = `0${Math.max(1, shown)} / 05`;
+  }
+  requestAnimationFrame(frame);
+}
+if (!reduce) requestAnimationFrame(frame);
+</script>
+</body>
+</html>

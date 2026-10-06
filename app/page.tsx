@@ -3,7 +3,7 @@ import { CaseStudy } from "@/components/case-study";
 import { Faq } from "@/components/faq";
 import { Hero } from "@/components/hero/hero";
 import { Logo, Nav } from "@/components/nav";
-import { Compare } from "@/components/compare";
+import { Deck } from "@/components/deck";
 import { Services } from "@/components/services/services";
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
       <main>
         <Hero />
         <Services />
-        <Compare />
+        <Deck />
         <CaseStudy />
         <Faq />
         <Book />

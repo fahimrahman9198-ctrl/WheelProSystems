@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Improves Variations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  @font-face { font-family: Switzer; src: url("../app/fonts/switzer-variable.woff2") format("woff2"); font-weight: 100 900; }
+  :root {
+    --bg: #fcfbf8; --subtle: #f5f3ee; --muted: #ece9e2; --line: #e6e2da; --line-strong: #d6d1c6;
+    --ink: #14130f; --ink-2: #45423b; --ink-3: #6e6a61; --accent: #9a5b1e; --accent-2: #c98a4b;
+    --dark: #15130f; --dark-2: #1f1c17; --dark-line: #2e2a23; --on-dark: #fbf9f4; --on-dark-2: #b3ada2; --success: #15803d;
+    --display: "Saira Semi Condensed", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font-family: Switzer, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  ::selection { background: rgb(154 91 30 / .22); }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+  @media (min-width: 768px) { .wrap { padding: 0 48px; } }
+  h2 { font-family: var(--display); font-weight: 600; font-size: clamp(2.1rem, 4vw, 3.5rem); line-height: 1.02; letter-spacing: -0.01em; text-wrap: balance; }
+  .lede { font-size: clamp(1.06rem, 1.3vw, 1.2rem); line-height: 1.6; color: var(--ink-2); max-width: 60ch; margin-top: 20px; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* variant switcher (sample only) */
+  .switch { position: fixed; z-index: 20; left: 50%; bottom: 18px; transform: translateX(-50%); display: flex; gap: 4px; padding: 6px; border-radius: 10px;
+    background: rgb(20 19 15 / .92); box-shadow: 0 12px 30px -12px rgb(20 19 15 / .5); max-width: calc(100% - 24px); overflow-x: auto; }
+  .switch a { color: #b3ada2; text-decoration: none; font: 500 13px Switzer, sans-serif; padding: 9px 12px; border-radius: 6px; white-space: nowrap; }
+  .switch a:hover { color: #fbf9f4; }
+  .tag { font: 500 12px Switzer, sans-serif; color: var(--ink-3); padding: 28px 0 0; }
+  .tag b { color: var(--accent); font-weight: 600; }
+  section.v { padding: 104px 0; scroll-margin-top: 0; }
+  @media (max-width: 767px) { section.v { padding: 72px 0; } }
+  .sep { height: 1px; background: var(--line); }
+
+  /* ============ A · The job ticket (timeline) ============ */
+  #a { background: var(--bg); }
+  .a-head { display: grid; gap: 24px; }
+  @media (min-width: 1024px) { .a-head { grid-template-columns: 5fr 6fr; align-items: end; gap: 64px; } .a-head .lede { margin-top: 0; } }
+  .a-ticket { display: inline-flex; gap: 18px; flex-wrap: wrap; margin-top: 44px; padding: 14px 18px; border: 1px solid var(--line-strong); border-radius: 8px; background: #fff; font-size: 14px; color: var(--ink-2); }
+  .a-ticket b { color: var(--ink); font-weight: 600; }
+  .a-list { list-style: none; padding: 0; margin-top: 40px; position: relative; }
+  .a-item { display: grid; grid-template-columns: 92px 28px 1fr; gap: 0 18px; padding-bottom: 44px; position: relative; }
+  .a-item::before { content: ""; position: absolute; top: 10px; bottom: -6px; width: 1px; background: var(--line-strong); left: 123px; }
+  .a-item:last-child::before { display: none; }
+  .a-time { text-align: right; font: 600 15px var(--display); color: var(--ink); padding-top: 2px; }
+  .a-time small { display: block; font: 500 12px Switzer, sans-serif; color: var(--ink-3); margin-top: 2px; }
+  .a-dot { width: 13px; height: 13px; border-radius: 3px; background: var(--bg); border: 2px solid var(--accent); margin: 6px auto 0; position: relative; z-index: 1; }
+  .a-item:last-child .a-dot { background: var(--success); border-color: var(--success); }
+  .a-body h3 { font: 600 clamp(1.35rem, 2vw, 1.65rem)/1.15 var(--display); }
+  .a-was { margin-top: 10px; font-size: 15px; color: var(--ink-3); }
+  .a-was s { text-decoration-color: rgb(154 91 30 / .6); text-decoration-thickness: 1.5px; }
+  .a-now { margin-top: 6px; font-size: 17px; line-height: 1.5; color: var(--ink); font-weight: 500; max-width: 58ch; }
+  .a-more { margin-top: 8px; font-size: 15px; line-height: 1.65; color: var(--ink-2); max-width: 62ch; }
+  .a-proof { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 7px 11px; border-radius: 6px; background: var(--subtle); font-size: 13px; color: var(--ink-2); }
+  .a-proof i { width: 6px; height: 6px; border-radius: 2px; background: var(--accent); }
+  .a-proof.ok i { background: var(--success); } .a-proof .num { color: var(--ink); font-weight: 600; }
+  @media (max-width: 640px) {
+    .a-item { grid-template-columns: 22px 1fr; } .a-time { grid-column: 2; text-align: left; order: -1; margin-bottom: 6px; }
+    .a-dot { grid-row: 1 / span 2; margin-top: 4px; } .a-item::before { left: 10px; }
+    .a-time small { display: inline; margin-left: 6px; }
+  }
+
+  /* ============ B · Two shops, same week (split) ============ */
+  #b { background: var(--subtle); }
+  .b-head { text-align: center; max-width: 760px; margin: 0 auto; } .b-head .lede { margin-inline: auto; }
+  .b-grid { margin-top: 56px; display: grid; grid-template-columns: 1fr; border-radius: 12px 12px 0 0; overflow: hidden; box-shadow: 0 30px 60px -40px rgb(20 19 15 / .45); }
+  @media (min-width: 900px) { .b-grid { grid-template-columns: 1fr 1fr; } }
+  .b-col { padding: 34px 32px 10px; }
+  .b-col.off { background: var(--dark); color: var(--on-dark-2); }
+  .b-col.on { background: #fff; }
+  .b-col h3 { font: 600 22px var(--display); display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+  .b-col.off h3 { color: var(--on-dark); border-color: var(--dark-line); }
+  .b-col h3 span { font: 500 13px Switzer, sans-serif; color: var(--ink-3); }
+  .b-col.off h3 span { color: #8a8478; }
+  .b-row { padding: 22px 0; border-bottom: 1px solid var(--line); min-height: 132px; }
+  .b-col.off .b-row { border-color: var(--dark-line); }
+  .b-row:last-child { border-bottom: 0; }
+  .b-when { font: 600 13px Switzer, sans-serif; letter-spacing: .02em; color: var(--ink-3); }
+  .b-col.off .b-when { color: #8a8478; }
+  .b-what { font: 600 19px/1.25 var(--display); margin-top: 6px; color: var(--ink); }
+  .b-col.off .b-what { color: var(--on-dark); }
+  .b-why { font-size: 14.5px; line-height: 1.6; margin-top: 6px; color: var(--ink-2); }
+  .b-col.off .b-why { color: var(--on-dark-2); }
+  .b-flag { display: inline-block; margin-top: 10px; font: 600 12px Switzer, sans-serif; padding: 4px 8px; border-radius: 4px; }
+  .off .b-flag { background: rgb(229 72 77 / .14); color: #f08a8d; }
+  .on .b-flag { background: rgb(21 128 61 / .1); color: var(--success); }
+  .b-tally { display: grid; grid-template-columns: 1fr 1fr; }
+  .b-tally div { padding: 22px 32px 28px; font: 600 15px Switzer, sans-serif; }
+  .b-tally .off { background: var(--dark-2); color: var(--on-dark); } .b-tally .on { background: #f9f3ea; color: var(--ink); }
+  .b-tally b { display: block; font: 600 34px/1 var(--display); margin-bottom: 6px; }
+  .b-tally .off b { color: #f08a8d; } .b-tally .on b { color: var(--accent); }
+  @media (max-width: 899px) { .b-row { min-height: 0; } .b-tally { grid-template-columns: 1fr; } }
+
+  /* ============ C · Spec sheet (blueprint table) ============ */
+  #c { background: var(--bg); position: relative; }
+  .c-frame { position: relative; margin-top: 52px; border: 1px solid var(--ink); border-radius: 2px; background: #fff; }
+  .c-frame::before, .c-frame::after { content: ""; position: absolute; width: 14px; height: 14px; border: 1px solid var(--accent); }
+  .c-frame::before { left: -8px; top: -8px; border-right: 0; border-bottom: 0; }
+  .c-frame::after { right: -8px; bottom: -8px; border-left: 0; border-top: 0; }
+  .c-titlebar { display: grid; grid-template-columns: 1fr auto auto; gap: 24px; padding: 14px 20px; border-bottom: 1px solid var(--ink); font-size: 13px; color: var(--ink-2); }
+  .c-titlebar b { color: var(--ink); font: 600 15px var(--display); letter-spacing: .02em; }
+  .c-table { width: 100%; border-collapse: collapse; }
+  .c-table th { text-align: left; font: 600 12px Switzer, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); padding: 12px 20px; border-bottom: 1px solid var(--line-strong); }
+  .c-table td { vertical-align: top; padding: 22px 20px; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.55; color: var(--ink-2); }
+  .c-table tr:last-child td { border-bottom: 0; }
+  .c-stage { font: 600 19px/1.2 var(--display); color: var(--ink); white-space: nowrap; }
+  .c-stage small { display: block; font: 500 12px Switzer, sans-serif; color: var(--ink-3); margin-top: 4px; }
+  .c-before { color: var(--ink-3); }
+  .c-after strong { color: var(--ink); font-weight: 600; display: block; margin-bottom: 4px; }
+  .c-out { text-align: right; white-space: nowrap; }
+  .c-out b { display: block; font: 700 clamp(1.6rem, 2.6vw, 2.25rem)/1 var(--display); color: var(--accent); letter-spacing: -0.01em; }
+  .c-out span { font-size: 12.5px; color: var(--ink-3); }
+  .c-scale { display: flex; justify-content: space-between; margin-top: 18px; font: 500 12px Switzer, sans-serif; color: var(--ink-3); }
+  @media (max-width: 860px) {
+    .c-table thead { display: none; } .c-table, .c-table tbody, .c-table tr, .c-table td { display: block; width: 100%; }
+    .c-table tr { padding: 18px 20px; border-bottom: 1px solid var(--line); } .c-table td { padding: 4px 0; border: 0; }
+    .c-out { text-align: left; margin-top: 8px; } .c-titlebar { grid-template-columns: 1fr; gap: 4px; }
+    .c-before::before { content: "Before: "; font-weight: 600; color: var(--ink-2); }
+  }
+
+  /* ============ D · The admin you stop doing (dark, struck list) ============ */
+  #d { background: var(--bg); padding-left: 12px; padding-right: 12px; }
+  @media (min-width: 768px) { #d { padding-left: 24px; padding-right: 24px; } }
+  .d-band { background: var(--dark); color: var(--on-dark-2); border-radius: 12px; padding: 96px 0 52px; overflow: hidden; }
+  .d-band h2 { color: var(--on-dark); }
+  .d-band .lede { color: var(--on-dark-2); }
+  .d-list { list-style: none; padding: 0; margin-top: 56px; border-top: 1px solid var(--dark-line); }
+  .d-item { display: grid; gap: 14px 48px; padding: 34px 0; border-bottom: 1px solid var(--dark-line); }
+  @media (min-width: 1024px) { .d-item { grid-template-columns: 7fr 5fr; align-items: start; } }
+  .d-chore { font: 600 clamp(1.7rem, 3.4vw, 2.9rem)/1.08 var(--display); color: var(--on-dark); position: relative; display: inline; letter-spacing: -0.005em;
+    background: linear-gradient(var(--accent-2), var(--accent-2)) no-repeat 0 58% / 0% 3px; transition: background-size 1s cubic-bezier(.16,1,.3,1), color 1s; }
+  .d-item.in .d-chore { background-size: 100% 3px; color: #8a8478; }
+  .d-now { font-size: 16px; line-height: 1.65; padding-top: 6px; }
+  .d-now b { display: block; font: 600 13px Switzer, sans-serif; color: var(--accent-2); margin-bottom: 6px; letter-spacing: .02em; }
+  .d-now em { font-style: normal; color: var(--on-dark); }
+  .d-end { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; padding: 44px 0 0; }
+  .d-end p { font: 600 clamp(1.7rem, 3.4vw, 2.9rem)/1.05 var(--display); color: var(--on-dark); }
+  .d-end p span { color: var(--accent-2); }
+  .d-btn { display: inline-flex; align-items: center; gap: 12px; background: var(--on-dark); color: var(--ink); text-decoration: none; height: 52px; padding: 0 20px 0 6px; border-radius: 6px; font-weight: 500; }
+  .d-btn i { width: 40px; height: 40px; border-radius: 4px; background: var(--accent); color: #fff; display: grid; place-items: center; font-style: normal; }
+  @media (prefers-reduced-motion: reduce) { .d-chore { transition: none; } }
+</style>
+</head>
+<body>
+
+<nav class="switch" aria-label="Variations">
+  <a href="#a">A · Job ticket</a><a href="#b">B · Two shops</a><a href="#c">C · Spec sheet</a><a href="#d">D · Admin you stop doing</a>
+</nav>
+
+<!-- ======================= A ======================= -->
+<section class="v" id="a">
+  <div class="wrap">
+    <p class="tag"><b>A · The job ticket.</b> One real job told as a timeline, so the improvements read as a story.</p>
+    <div class="sep" style="margin:16px 0 56px"></div>
+    <div class="a-head">
+      <h2>One wheel job,<br />start to finish</h2>
+      <p class="lede">WheelPro is shop management software for wheel repair and refinishing businesses, in the shop or mobile. It doesn’t change how you fix a wheel. It runs the admin around it: replying to leads, collecting photos and wheel details, sending quotes, following up, taking deposits and getting invoices paid. Here’s one job, the way it runs now.</p>
+    </div>
+    <div class="a-ticket"><span><b>Jordan M.</b></span><span>4 × 21″ alloys</span><span>Curb rash on two wheels</span><span>Satin Bronze refinish</span><span>Mobile · Surrey</span></div>
+
+    <ol class="a-list">
+      <li class="a-item">
+        <div class="a-time num">Mon 08:14<small>Enquiry in</small></div><div class="a-dot"></div>
+        <div class="a-body">
+          <h3>A reply in seconds, not hours</h3>
+          <p class="a-was"><s>You’d reply after work, often hours later, by which time they’d messaged two other shops.</s></p>
+          <p class="a-now">The moment the form arrives, Jordan gets a reply: photos received, a quote within 2 hours, and what happens next.</p>
+          <p class="a-more">It works the same for enquiries that land in your Gmail. Every lead is saved with contact details and photos, so nothing gets buried in your inbox, at night or on a weekend.</p>
+          <span class="a-proof"><i></i>Auto-reply sent <span class="num">08:14</span></span>
+        </div>
+      </li>
+      <li class="a-item">
+        <div class="a-time num">Mon 08:40<small>Quote out</small></div><div class="a-dot"></div>
+        <div class="a-body">
+          <h3>Everything you need to price it, first time</h3>
+          <p class="a-was"><s>Three or four messages back and forth for the wheel size, damage photos and finish.</s></p>
+          <p class="a-now">The quote form already asked for photos, wheel size, damage and finish, so you price the job from the first message.</p>
+          <p class="a-more">Pick finishes from your own chart with swatches, add line items and send the quote in one tap. The customer sees it on their phone with a button to approve.</p>
+          <span class="a-proof"><i></i>Q-1044 sent <span class="num">$1,029.00</span></span>
+        </div>
+      </li>
+      <li class="a-item">
+        <div class="a-time num">Tue 09:00<small>Follow-up</small></div><div class="a-dot"></div>
+        <div class="a-body">
+          <h3>Quiet quotes get a nudge, automatically</h3>
+          <p class="a-was"><s>Quotes went quiet, and you chased them when you remembered, if you remembered.</s></p>
+          <p class="a-now">A friendly reminder goes out on day 1 and again on day 3, and stops the moment the customer approves.</p>
+          <p class="a-more">Appointment reminders and review requests run the same way, so fewer customers forget and more of them leave a review after the job.</p>
+          <span class="a-proof"><i></i>Day 1 reminder · automatic</span>
+        </div>
+      </li>
+      <li class="a-item">
+        <div class="a-time num">Thu 10:12<small>Booked</small></div><div class="a-dot"></div>
+        <div class="a-body">
+          <h3>Bookings backed by a deposit</h3>
+          <p class="a-was"><s>A verbal yes on the phone, then an empty bay on Saturday.</s></p>
+          <p class="a-now">Jordan approves the quote by paying a deposit, so the time is only held for customers who’ve committed.</p>
+          <p class="a-more">Deposits go straight to your bank by card. Paid status shows on the job, so you know who’s confirmed before you load the van.</p>
+          <span class="a-proof"><i></i>Deposit paid · Visa ·· 4242 <span class="num">$150.00</span></span>
+        </div>
+      </li>
+      <li class="a-item">
+        <div class="a-time num">Sat 15:30<small>Paid</small></div><div class="a-dot"></div>
+        <div class="a-body">
+          <h3>Invoiced and paid before you pack up</h3>
+          <p class="a-was"><s>Retyping invoices from texts, then sending e-transfer reminders for a week.</s></p>
+          <p class="a-now">The approved quote becomes the invoice, with your tax and branding, and the deposit already taken off.</p>
+          <p class="a-more">Jordan pays the balance by card or Apple Pay in one tap. You see it as paid on the job, with nothing to retype or chase.</p>
+          <span class="a-proof ok"><i></i>INV-0412 · balance paid · Apple Pay <span class="num">$879.00</span></span>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ======================= B ======================= -->
+<section class="v" id="b">
+  <div class="wrap">
+    <p class="tag"><b>B · Two shops, same week.</b> A side-by-side of the same week with and without the system.</p>
+    <div class="sep" style="margin:16px 0 56px"></div>
+    <div class="b-head">
+      <h2>Same shop. Same week.<br />Less admin.</h2>
+      <p class="lede">WheelPro is shop management software for wheel repair and refinishing businesses. Your repair work stays the same; the replies, quotes, follow-ups, bookings and invoices around it run themselves.</p>
+    </div>
+
+    <div class="b-grid">
+      <div class="b-col off">
+        <h3>Without a system <span>Inbox, texts and memory</span></h3>
+        <div class="b-row"><p class="b-when">Monday, enquiry arrives 8:14 am</p><p class="b-what">You see it at lunch</p><p class="b-why">By the time you reply, the customer has asked two other shops for a price.</p><span class="b-flag">Reply after 4 hours</span></div>
+        <div class="b-row"><p class="b-when">Monday afternoon</p><p class="b-what">“What size are the wheels?”</p><p class="b-why">Three messages to get the size, photos of the damage and the finish they want.</p><span class="b-flag">No quote yet</span></div>
+        <div class="b-row"><p class="b-when">Wednesday</p><p class="b-what">The quote goes quiet</p><p class="b-why">You meant to follow up. Another job came in. You forget.</p><span class="b-flag">Lead lost</span></div>
+        <div class="b-row"><p class="b-when">Saturday</p><p class="b-what">The no-show</p><p class="b-why">A verbal yes on the phone, and nobody turns up for the 9 am slot.</p><span class="b-flag">Empty bay</span></div>
+        <div class="b-row"><p class="b-when">The week after</p><p class="b-what">Chasing payment</p><p class="b-why">You retype the invoice from your texts and send e-transfer reminders.</p><span class="b-flag">Paid late, maybe</span></div>
+      </div>
+      <div class="b-col on">
+        <h3>With WheelPro <span>One system</span></h3>
+        <div class="b-row"><p class="b-when">Monday, enquiry arrives 8:14 am</p><p class="b-what">Reply sent in seconds</p><p class="b-why">The customer gets photos-received, a 2-hour quote promise and the next step. Gmail enquiries too.</p><span class="b-flag">Reply at 8:14</span></div>
+        <div class="b-row"><p class="b-when">Monday, 8:40 am</p><p class="b-what">Quote sent in one tap</p><p class="b-why">Photos, wheel size, damage and finish came with the enquiry, so you price it straight away.</p><span class="b-flag">Q-1044 · $1,029</span></div>
+        <div class="b-row"><p class="b-when">Tuesday and Thursday</p><p class="b-what">Reminders go out for you</p><p class="b-why">Day 1 and day 3 follow-ups send automatically and stop when the customer approves.</p><span class="b-flag">Approved Thursday</span></div>
+        <div class="b-row"><p class="b-when">Thursday</p><p class="b-what">Booked with a deposit</p><p class="b-why">The customer approves by paying a deposit, so the slot is held for a committed job.</p><span class="b-flag">$150 deposit paid</span></div>
+        <div class="b-row"><p class="b-when">Saturday, job done</p><p class="b-what">Paid before you pack up</p><p class="b-why">The quote becomes the invoice, deposit deducted; the balance is paid by card or Apple Pay.</p><span class="b-flag">$879 paid · same day</span></div>
+      </div>
+    </div>
+    <div class="b-tally" style="border-radius:0 0 12px 12px;overflow:hidden">
+      <div class="off"><b>1 job, maybe</b>lost lead, empty slot, late invoice</div>
+      <div class="on"><b>1 job, paid</b>booked, done and paid the same week</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= C ======================= -->
+<section class="v" id="c">
+  <div class="wrap">
+    <p class="tag"><b>C · Spec sheet.</b> A blueprint-style table that matches the speedometer drawing. Dense, precise and easy to scan.</p>
+    <div class="sep" style="margin:16px 0 56px"></div>
+    <h2>What changes in<br />your first week</h2>
+    <p class="lede">WheelPro is shop management software built only for wheel repair and refinishing shops and mobile techs. Five parts of the job change on day one. The repair work doesn’t.</p>
+
+    <div class="c-frame">
+      <div class="c-titlebar"><b>WHEELPRO · JOB FLOW</b><span>Shop and mobile</span><span>Set up in your first week</span></div>
+      <table class="c-table">
+        <thead><tr><th style="width:17%">Stage</th><th style="width:25%">Before</th><th>With WheelPro</th><th style="width:15%;text-align:right">Result</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><p class="c-stage">First reply<small>Website form and Gmail</small></p></td>
+            <td class="c-before">Whenever you’re off the tools, often hours later.</td>
+            <td class="c-after"><strong>An instant reply with the next step.</strong>Every enquiry is captured as a lead with contact details and photos, and the customer hears back straight away, day or night.</td>
+            <td class="c-out"><b>Seconds</b><span>to first reply</span></td>
+          </tr>
+          <tr>
+            <td><p class="c-stage">Quote details<small>Photos, size, damage, finish</small></p></td>
+            <td class="c-before">Back and forth over text to get what you need.</td>
+            <td class="c-after"><strong>Everything arrives in the first message.</strong>The quote form asks for photos, wheel size, damage and finish, and you price from your own finish chart.</td>
+            <td class="c-out"><b>1 message</b><span>to price the job</span></td>
+          </tr>
+          <tr>
+            <td><p class="c-stage">Follow-up<small>Quotes, bookings, reviews</small></p></td>
+            <td class="c-before">When you remember, if you remember.</td>
+            <td class="c-after"><strong>Reminders send themselves.</strong>Quote reminders go out on day 1 and day 3 and stop on approval; appointment reminders and review requests run the same way.</td>
+            <td class="c-out"><b>Day 1 + 3</b><span>automatic</span></td>
+          </tr>
+          <tr>
+            <td><p class="c-stage">Booking<small>Deposits</small></p></td>
+            <td class="c-before">A verbal yes and an empty bay on Saturday.</td>
+            <td class="c-after"><strong>A paid deposit holds the slot.</strong>Customers approve the quote by paying a deposit by card, straight to your bank, so you only hold time for committed jobs.</td>
+            <td class="c-out"><b>$150</b><span>deposit before booking</span></td>
+          </tr>
+          <tr>
+            <td><p class="c-stage">Getting paid<small>Invoices and balance</small></p></td>
+            <td class="c-before">Retyped invoices and e-transfer reminders.</td>
+            <td class="c-after"><strong>The quote becomes the invoice.</strong>Your tax and branding are included and the deposit is deducted; customers pay the balance by card or Apple Pay in one tap.</td>
+            <td class="c-out"><b>1 tap</b><span>to pay the balance</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="c-scale"><span>Enquiry</span><span>Quote</span><span>Follow-up</span><span>Booking</span><span>Paid</span></div>
+  </div>
+</section>
+
+<!-- ======================= D ======================= -->
+<section class="v" id="d">
+  <div class="wrap" style="padding:0"><p class="tag" style="padding-left:0"><b>D · The admin you stop doing.</b> A bold list of chores that strike through as you scroll, each followed by what replaces it.</p><div class="sep" style="margin:16px 0 40px"></div></div>
+  <div class="d-band">
+    <div class="wrap">
+      <h2>The admin you<br />stop doing</h2>
+      <p class="lede">WheelPro is shop management software for wheel repair and refinishing businesses. It takes the paperwork between the enquiry and the payment off your plate, so the only thing left on your list is the wheels.</p>
+      <ol class="d-list">
+        <li class="d-item"><span><span class="d-chore">Replying to every enquiry by hand</span></span>
+          <p class="d-now"><b>Now</b><em>Every website and Gmail enquiry gets an instant reply</em> with a 2-hour quote promise and the next step, and lands in one list with the customer’s photos and details.</p></li>
+        <li class="d-item"><span><span class="d-chore">Texting back and forth for wheel sizes</span></span>
+          <p class="d-now"><b>Now</b><em>The quote form collects photos, size, damage and finish up front,</em> so you can price the job from the first message and send the quote in one tap.</p></li>
+        <li class="d-item"><span><span class="d-chore">Chasing quotes that went quiet</span></span>
+          <p class="d-now"><b>Now</b><em>Reminders go out on day 1 and day 3 automatically</em> and stop when the customer approves. Appointment reminders and review requests run themselves too.</p></li>
+        <li class="d-item"><span><span class="d-chore">Holding slots for no-shows</span></span>
+          <p class="d-now"><b>Now</b><em>Customers approve by paying a deposit,</em> paid by card straight to your bank, so the bay is only booked for committed jobs.</p></li>
+        <li class="d-item"><span><span class="d-chore">Retyping invoices and chasing e-transfers</span></span>
+          <p class="d-now"><b>Now</b><em>The approved quote becomes the invoice</em> with your tax and branding and the deposit deducted, and the balance is paid by card or Apple Pay in one tap.</p></li>
+      </ol>
+      <div class="d-end">
+        <p>What’s left on the list? <span>The wheels.</span></p>
+        <a class="d-btn" href="#"><i>→</i>Book a meeting</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="height:80px"></div>
+<script>
+  // D: strike each chore as it scrolls into view (shown struck immediately with reduced motion).
+  const items = document.querySelectorAll(".d-item");
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) items.forEach(i => i.classList.add("in"));
+  else { const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -35% 0px" }); items.forEach(i => io.observe(i)); }
+</script>
+</body>
+</html>

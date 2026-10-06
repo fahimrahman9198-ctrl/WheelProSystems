@@ -31,7 +31,7 @@ export function CaseStudy() {
           </h2>
         </Reveal>
 
-        <div className="mt-16 grid items-center gap-10 md:mt-24 lg:grid-cols-12 lg:gap-12">
+        <div className="mt-12 grid items-center gap-10 md:mt-16 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-4">
             <Reveal className="flex flex-wrap items-center gap-2.5">
               <span className="text-[15px] font-semibold tracking-tight text-ink">WESTERN WHEELCRAFT</span>
