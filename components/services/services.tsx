@@ -111,7 +111,7 @@ export function Services() {
                 role="tablist"
                 aria-label="Services"
                 onKeyDown={onKey}
-                className="no-scrollbar flex snap-x gap-1 overflow-x-auto rounded-none border border-line bg-subtle/90 p-1.5 backdrop-blur-md"
+                className="no-scrollbar flex snap-x gap-1 overflow-x-auto rounded-md border border-line bg-subtle/90 p-1.5 backdrop-blur-md"
               >
                 {services.map((sv, i) => (
                   <button
@@ -125,18 +125,18 @@ export function Services() {
                     aria-controls="service-panel"
                     tabIndex={i === active ? 0 : -1}
                     onClick={() => choose(i)}
-                    className={`relative h-11 shrink-0 snap-center rounded-none px-5 text-[15px] font-medium whitespace-nowrap transition-colors duration-200 ${
+                    className={`relative h-11 shrink-0 snap-center rounded-sm px-5 text-[15px] font-medium whitespace-nowrap transition-colors duration-200 ${
                       i === active ? "text-white" : "text-ink-2 hover:bg-muted hover:text-ink"
                     }`}
                   >
                     {i === active && (
-                      <motion.span layoutId="pill-bg" className="absolute inset-0 rounded-none bg-ink" transition={{ type: "spring", stiffness: 380, damping: 34 }} />
+                      <motion.span layoutId="pill-bg" className="absolute inset-0 rounded-sm bg-ink" transition={{ type: "spring", stiffness: 380, damping: 34 }} />
                     )}
                     <span className="relative">{sv.pill}</span>
                   </button>
                 ))}
               </div>
-              <div className="mx-6 mt-2 h-0.5 overflow-hidden rounded-none" aria-hidden="true">
+              <div className="mx-6 mt-2 h-0.5 overflow-hidden rounded-full" aria-hidden="true">
                 {playing && (
                   <motion.div
                     key={`${active}-${cycle}`}
@@ -154,7 +154,7 @@ export function Services() {
             id="service-panel"
             role="tabpanel"
             aria-labelledby={`tab-${s.id}`}
-            className="mt-6 grid gap-8 bg-subtle p-5 md:p-8 lg:grid-cols-12 lg:gap-10 lg:p-12"
+            className="mt-6 grid gap-8 rounded-xl bg-subtle p-5 md:p-8 lg:grid-cols-12 lg:gap-10 lg:p-12"
           >
             <div className="order-2 flex flex-col justify-center lg:order-1 lg:col-span-4">
               <AnimatePresence mode="wait" initial={false}>
@@ -175,7 +175,7 @@ export function Services() {
                   <ul className="mt-6 grid gap-2.5">
                     {s.points.map((p) => (
                       <li key={p} className="flex items-center gap-2.5 text-[15px] text-ink">
-                        <span className="grid size-5 place-items-center bg-ink text-white">
+                        <span className="grid size-5 place-items-center rounded-xs bg-ink text-white">
                           <Check size={12} strokeWidth={2.5} />
                         </span>
                         {p}
@@ -188,7 +188,7 @@ export function Services() {
 
             {/* Dark showcase card: screens slide like a carousel (auto, tap, swipe), status card follows the tab. */}
             <div
-              className="relative order-1 bg-[#0e0f11] p-4 sm:p-6 lg:order-2 lg:col-span-8"
+              className="relative order-1 rounded-lg bg-[#0e0f11] p-4 sm:p-6 lg:order-2 lg:col-span-8"
               onMouseEnter={() => setPaused(true)}
               onMouseLeave={() => setPaused(false)}
             >
@@ -201,7 +201,7 @@ export function Services() {
               </div>
 
               <div className="grid gap-3 sm:grid-cols-[1fr_120px] lg:grid-cols-[1fr_132px]">
-                <div className="relative aspect-[4/5] overflow-hidden bg-white sm:aspect-[16/10]">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-white sm:aspect-[16/10]">
                   <motion.div
                     className="flex h-full cursor-grab touch-pan-y active:cursor-grabbing"
                     animate={{ x: `${-active * 100}%` }}
@@ -233,7 +233,7 @@ export function Services() {
                   </motion.div>
                 </div>
                 <div className="hidden flex-col gap-2 sm:flex">
-                  <div className="relative aspect-[4/3] overflow-hidden border border-[#2a2a2f]">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-md border border-[#2a2a2f]">
                     <Image src="/photos/rash-lip.jpg" alt="Customer photo of curb rash on a silver wheel" fill sizes="132px" className="object-cover" />
                   </div>
                   <span className="text-[13px] leading-tight font-semibold text-on-dark">
@@ -245,7 +245,7 @@ export function Services() {
               </div>
 
               {/* status card: overlaps the screen on desktop, sits below it on phones */}
-              <div className="relative mt-3 bg-[#e6e7ea] p-4 sm:p-5 lg:absolute lg:right-6 lg:bottom-16 lg:mt-0 lg:w-[300px] lg:shadow-lg">
+              <div className="relative mt-3 rounded-lg bg-[#e6e7ea] p-4 sm:p-5 lg:absolute lg:right-6 lg:bottom-16 lg:mt-0 lg:w-[300px] lg:shadow-lg">
                 <p className="text-[13px] font-medium text-ink-2">Job status · Jordan M.</p>
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.div

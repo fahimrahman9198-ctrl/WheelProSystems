@@ -42,7 +42,7 @@ const Line = ({
   <div className="flex items-center gap-3 border-t border-dark-line py-2.5 text-[14px] text-[#d4d4d8] first:border-t-0">
     {t && <time className="t-mono w-12 text-[12.5px] text-[#71717a]">{t}</time>}
     <span
-      className="size-2 shrink-0 rounded-none"
+      className="size-2 shrink-0 rounded-xs"
       style={{ background: dot }}
     />
     <span>{children}</span>
@@ -52,9 +52,9 @@ const Line = ({
   </div>
 );
 const Chip = ({ dot, children }: { dot?: string; children: ReactNode }) => (
-  <span className="inline-flex h-7 items-center gap-1.5 border border-[#2a2a2f] px-2.5 text-[12.5px] text-[#d4d4d8]">
+  <span className="inline-flex h-7 items-center gap-1.5 rounded-sm border border-[#2a2a2f] px-2.5 text-[12.5px] text-[#d4d4d8]">
     {dot && (
-      <span className="size-1.5 rounded-none" style={{ background: dot }} />
+      <span className="size-1.5 rounded-xs" style={{ background: dot }} />
     )}
     {children}
   </span>
@@ -90,7 +90,7 @@ const rows: { key: string; today: string; wp: string; proof: ReactNode }[] = [
           {["rash-lip", "rash-chips", "rash-dark", "model-y"].map((p) => (
             <span
               key={p}
-              className="relative block size-16 overflow-hidden border border-dark-line"
+              className="relative block size-16 overflow-hidden rounded-md border border-dark-line"
             >
               <Image
                 src={`/photos/${p}.jpg`}
@@ -270,7 +270,7 @@ function ScrollStep({
       >
         <motion.span
           style={{ background: tick }}
-          className="mt-2 grid size-7 shrink-0 place-items-center rounded-none"
+          className="mt-2 grid size-7 shrink-0 place-items-center rounded-sm"
         >
           <Tick />
         </motion.span>
@@ -281,7 +281,7 @@ function ScrollStep({
         className="mt-10"
       >
         <p className="t-label mb-2 text-[10.5px] text-[#71717a]">In WheelPro</p>
-        <div className="border border-dark-line bg-dark-2 px-5 py-4">
+        <div className="rounded-lg border border-dark-line bg-dark-2 px-5 py-4">
           {r.proof}
         </div>
       </motion.div>
@@ -312,12 +312,12 @@ function StaticRow({
         {r.today}
       </p>
       <p className="mt-2 flex items-start gap-3 text-[19px] leading-snug font-medium text-on-dark">
-        <span className="mt-1 grid size-5 shrink-0 place-items-center rounded-none bg-[#4f7bff]">
+        <span className="mt-1 grid size-5 shrink-0 place-items-center rounded-xs bg-[#4f7bff]">
           <Tick />
         </span>
         {r.wp}
       </p>
-      <div className="mt-4 border border-dark-line bg-dark-2 px-4 py-3">
+      <div className="mt-4 rounded-lg border border-dark-line bg-dark-2 px-4 py-3">
         {r.proof}
       </div>
     </motion.li>
@@ -379,7 +379,7 @@ function PinnedCompare({ heading }: { heading: ReactNode }) {
                           }`}
                         >
                           <span
-                            className={`grid size-4 place-items-center rounded-none transition-colors duration-500 ${
+                            className={`grid size-4 place-items-center rounded-xs transition-colors duration-500 ${
                               done
                                 ? "bg-[#4f7bff]"
                                 : i === active
@@ -432,7 +432,7 @@ export function Compare() {
 
   return (
     <section id="results" className="px-3 md:px-6">
-      <div className="bg-dark text-on-dark-2">
+      <div className="rounded-xl bg-dark text-on-dark-2">
         {pinned ? (
           <PinnedCompare heading={heading} />
         ) : (

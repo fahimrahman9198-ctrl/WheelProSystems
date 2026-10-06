@@ -14,7 +14,7 @@ const pains = [
 ];
 
 const field =
-  "h-[52px] w-full rounded-sm border border-line-strong bg-white px-4 text-[16px] text-ink transition-[border-color,box-shadow] placeholder:text-ink-3 hover:border-ink-3 focus:border-ink focus:shadow-[0_0_0_3px_rgba(47,91,255,.15)] focus:outline-none aria-[invalid=true]:border-danger";
+  "h-[52px] w-full rounded-md border border-line-strong bg-white px-4 text-[16px] text-ink transition-[border-color,box-shadow] placeholder:text-ink-3 hover:border-ink-3 focus:border-ink focus:shadow-[0_0_0_3px_rgba(47,91,255,.15)] focus:outline-none aria-[invalid=true]:border-danger";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
@@ -47,9 +47,9 @@ export function ContactForm() {
         initial={reduce ? false : { opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: easeOut }}
-        className="flex min-h-[460px] flex-col justify-center bg-subtle p-8"
+        className="flex min-h-[460px] flex-col justify-center rounded-lg bg-subtle p-8"
       >
-        <span className="mb-5 grid size-12 place-items-center rounded-none bg-success-soft text-success">
+        <span className="mb-5 grid size-12 place-items-center rounded-md bg-success-soft text-success">
           <Check size={24} strokeWidth={2.2} />
         </span>
         <h3 className="t-h3">Got it, we’ll be in touch</h3>
@@ -59,7 +59,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="grid gap-5 bg-subtle p-6 md:p-8">
+    <form onSubmit={onSubmit} noValidate className="grid gap-5 rounded-lg bg-subtle p-6 md:p-8">
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="grid gap-2">
           <label htmlFor="cf-name" className="t-label text-ink-3">Your name</label>
@@ -74,11 +74,11 @@ export function ContactForm() {
 
       <fieldset className="grid gap-2">
         <legend className="t-label mb-2 text-ink-3">How you work</legend>
-        <div className="grid grid-cols-3 border border-line-strong bg-white p-1">
+        <div className="grid grid-cols-3 rounded-md border border-line-strong bg-white p-1">
           {["Shop", "Mobile", "Both"].map((v, i) => (
             <label key={v} className="relative cursor-pointer">
               <input type="radio" name="type" value={v} defaultChecked={i === 0} className="peer sr-only" />
-              <span className="block rounded-none py-2.5 text-center text-[15px] font-medium text-ink-2 transition-colors peer-checked:bg-ink peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-accent">
+              <span className="block rounded-sm py-2.5 text-center text-[15px] font-medium text-ink-2 transition-colors peer-checked:bg-ink peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-accent">
                 {v}
               </span>
             </label>
@@ -110,7 +110,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="group mt-1 inline-flex h-[52px] items-center justify-center gap-2 bg-ink text-[16px] font-medium text-white transition-[background,transform] hover:bg-[#27272a] active:scale-[0.98] disabled:cursor-progress disabled:opacity-60"
+        className="group mt-1 inline-flex h-[52px] items-center justify-center gap-2 rounded-md bg-ink text-[16px] font-medium text-white transition-[background,transform] hover:bg-[#27272a] active:scale-[0.98] disabled:cursor-progress disabled:opacity-60"
       >
         {status === "sending" ? (
           <>

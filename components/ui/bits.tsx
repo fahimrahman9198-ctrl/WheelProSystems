@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 export function Tag({ children }: { children: ReactNode }) {
   return (
-    <span className="t-label inline-flex items-center rounded-none border border-line px-3 py-1.5 text-[11px] text-ink-2">
+    <span className="t-label inline-flex items-center rounded-sm border border-line px-3 py-1.5 text-[11px] text-ink-2">
       {children}
     </span>
   );
@@ -10,7 +10,7 @@ export function Tag({ children }: { children: ReactNode }) {
 
 export function SampleTag({ className = "" }: { className?: string }) {
   return (
-    <span className={`t-mono rounded-none border border-line bg-white px-1.5 py-0.5 text-[10px] tracking-wider text-ink-3 uppercase ${className}`}>
+    <span className={`t-mono rounded-xs border border-line bg-white px-1.5 py-0.5 text-[10px] tracking-wider text-ink-3 uppercase ${className}`}>
       Sample
     </span>
   );
@@ -27,8 +27,8 @@ const chip = {
 
 export function StatusChip({ tone, children }: { tone: keyof typeof chip; children: ReactNode }) {
   return (
-    <span className={`inline-flex shrink-0 items-center gap-1.5 rounded-none px-2 py-0.5 text-[11px] font-medium whitespace-nowrap ${chip[tone]}`}>
-      <span className="size-1.5 rounded-none bg-current" />
+    <span className={`inline-flex shrink-0 items-center gap-1.5 rounded-sm px-2 py-0.5 text-[11px] font-medium whitespace-nowrap ${chip[tone]}`}>
+      <span className="size-1.5 rounded-xs bg-current" />
       {children}
     </span>
   );

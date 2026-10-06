@@ -8,9 +8,9 @@ export function ArrowButton({ children, className = "", ...props }: LinkProps) {
   return (
     <a
       {...props}
-      className={`group inline-flex h-[52px] items-center gap-3.5 bg-ink py-1.5 pr-7 pl-1.5 text-[16px] font-semibold text-white transition-colors duration-[240ms] hover:bg-[#1c1c1f] active:scale-[0.98] ${className}`}
+      className={`group inline-flex h-[52px] items-center gap-3.5 rounded-md bg-ink py-1.5 pr-7 pl-1.5 text-[16px] font-semibold text-white transition-colors duration-[240ms] hover:bg-[#1c1c1f] active:scale-[0.98] ${className}`}
     >
-      <span className="grid size-10 place-items-center bg-accent text-white transition-transform duration-[240ms] ease-out-expo group-hover:scale-[1.04]">
+      <span className="grid size-10 place-items-center rounded-sm bg-accent text-white transition-transform duration-[240ms] ease-out-expo group-hover:scale-[1.04]">
         <ArrowRight size={18} strokeWidth={1.75} className="transition-transform duration-[240ms] ease-out-expo group-hover:translate-x-[3px]" />
       </span>
       {children}
@@ -22,7 +22,7 @@ export function SolidButton({ children, className = "", ...props }: LinkProps) {
   return (
     <a
       {...props}
-      className={`inline-flex h-11 items-center justify-center bg-ink px-6 text-[15px] font-medium text-white transition-[background,transform] duration-[240ms] hover:-translate-y-px hover:bg-[#27272a] active:scale-[0.98] ${className}`}
+      className={`inline-flex h-11 items-center justify-center rounded-md bg-ink px-6 text-[15px] font-medium text-white transition-[background,transform] duration-[240ms] hover:-translate-y-px hover:bg-[#27272a] active:scale-[0.98] ${className}`}
     >
       {children}
     </a>

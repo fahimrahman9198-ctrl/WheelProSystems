@@ -65,14 +65,14 @@ export function CaseStudy() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Open westernwheelcraft.ca in a new tab"
-              className="group block overflow-hidden bg-[#0e0f11] p-3"
+              className="group block overflow-hidden rounded-xl bg-[#0e0f11] p-3"
             >
               <div className="overflow-hidden rounded-md border border-line bg-white">
                 <div className="flex items-center gap-1.5 border-b border-line px-3 py-2.5">
-                  <i className="size-2 rounded-none bg-line-strong" />
-                  <i className="size-2 rounded-none bg-line-strong" />
-                  <i className="size-2 rounded-none bg-line-strong" />
-                  <span className="t-mono ml-3 rounded-none bg-subtle px-2.5 py-0.5 text-[11px] text-ink-3">westernwheelcraft.ca</span>
+                  <i className="size-2 rounded-xs bg-line-strong" />
+                  <i className="size-2 rounded-xs bg-line-strong" />
+                  <i className="size-2 rounded-xs bg-line-strong" />
+                  <span className="t-mono ml-3 rounded-sm bg-subtle px-2.5 py-0.5 text-[11px] text-ink-3">westernwheelcraft.ca</span>
                 </div>
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <motion.div style={{ y }} className="absolute inset-x-0 -top-[2%] h-[112%]">

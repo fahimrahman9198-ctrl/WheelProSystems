@@ -39,7 +39,7 @@ export function Book() {
         </div>
         <Reveal delay={0.15} className="lg:col-span-7">
           {calLink ? (
-            <div className="overflow-hidden bg-subtle">
+            <div className="overflow-hidden rounded-lg bg-subtle">
               <iframe
                 src={`https://cal.com/${calLink}?embed=true&theme=light`}
                 title="Book a 20-minute meeting with WheelPro"

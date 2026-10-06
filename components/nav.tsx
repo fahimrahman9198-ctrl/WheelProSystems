@@ -43,7 +43,7 @@ export function Nav() {
         </nav>
         <a
           href="#book"
-          className="ml-auto inline-flex h-10 items-center bg-ink px-5 text-[14px] font-medium text-white transition-[background,transform] duration-[240ms] hover:-translate-y-px hover:bg-[#27272a] active:scale-[0.98] md:ml-0 md:h-11 md:px-5 md:text-[15px]"
+          className="ml-auto inline-flex h-10 items-center rounded-md bg-ink px-5 text-[14px] font-medium text-white transition-[background,transform] duration-[240ms] hover:-translate-y-px hover:bg-[#27272a] active:scale-[0.98] md:ml-0 md:h-11 md:px-5 md:text-[15px]"
         >
           Book<span className="hidden sm:inline">&nbsp;a meeting</span>
         </a>
