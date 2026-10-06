@@ -208,182 +208,6 @@ html.lenis body {
   }
 }
 
-/* ---- Hero: job arc ---- */
-.arc-badge {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 2;
-  width: 48px;
-  height: 48px;
-  margin: -24px 0 0 -24px;
-  border-radius: 0;
-  background: #1e2433;
-  color: #fff;
-  display: grid;
-  place-items: center;
-  box-shadow: 0 10px 24px -6px rgba(10, 10, 11, 0.35);
-  will-change: transform, opacity;
-  pointer-events: none;
-}
-.arc-badge.src {
-  background: #fff;
-  color: #1e2433;
-  box-shadow: 0 0 0 1px var(--line), 0 10px 24px -6px rgba(10, 10, 11, 0.25);
-}
-.arc-badge svg {
-  width: 20px;
-  height: 20px;
-}
-.arc-badge .tag {
-  display: none;
-}
-@media (min-width: 1024px) {
-  .arc-badge {
-    width: 60px;
-    height: 60px;
-    margin: -30px 0 0 -30px;
-  }
-  .arc-badge svg {
-    width: 24px;
-    height: 24px;
-  }
-  .arc-badge .tag {
-    display: block;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-top: 8px;
-    transform: translateX(-50%);
-    padding: 2px 8px;
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--ink-2);
-    white-space: nowrap;
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 0;
-  }
-}
-.arc-fly {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 5;
-  width: 24px;
-  height: 24px;
-  margin: -12px 0 0 -12px;
-  border-radius: 0;
-  background: #1e2433;
-  color: #fff;
-  display: grid;
-  place-items: center;
-  pointer-events: none;
-}
-.arc-fly svg {
-  width: 12px;
-  height: 12px;
-}
-
-.job-card .src-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 2px 6px;
-  font-size: 10px;
-  white-space: nowrap;
-  color: var(--ink-2);
-  background: var(--bg-subtle);
-  border-radius: 0;
-}
-.job-card .src-chip svg {
-  width: 12px;
-  height: 12px;
-}
-.job-card .step {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 3px 0;
-  font-size: 12px;
-  color: var(--ink-3);
-  transition: color 0.4s;
-}
-.job-card .step .dot {
-  display: grid;
-  place-items: center;
-  flex: none;
-  width: 22px;
-  height: 22px;
-  border-radius: 0;
-  border: 1.5px solid var(--line);
-  color: #a1a1aa;
-  transition: background 0.4s, border-color 0.4s, box-shadow 0.4s, color 0.4s;
-}
-.job-card .step .dot svg {
-  width: 11px;
-  height: 11px;
-}
-.job-card .step time {
-  display: none;
-  margin-left: auto;
-  font-family: inherit;
-  font-variant-numeric: tabular-nums;
-  font-size: 11px;
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-.job-card .step.done {
-  color: var(--ink);
-}
-.job-card .step.done .dot {
-  background: var(--success);
-  border-color: var(--success);
-  color: #fff;
-}
-.job-card .step.done time {
-  opacity: 1;
-}
-.job-card .step.now .dot {
-  border-color: var(--accent);
-  color: var(--accent);
-  box-shadow: 0 0 0 4px var(--accent-soft);
-}
-.job-card .paid-chip {
-  padding: 3px 9px;
-  font-size: 11px;
-  color: var(--ink-2);
-  background: var(--bg-subtle);
-  border-radius: 0;
-  transition: background 0.4s, color 0.4s;
-}
-.job-card .paid-chip.on {
-  background: var(--success-soft);
-  color: var(--success);
-}
-@media (min-width: 1024px) {
-  .job-card .src-chip {
-    font-size: 11px;
-    padding: 3px 8px;
-  }
-  .job-card .step {
-    gap: 10px;
-    padding: 5px 0;
-    font-size: 13px;
-  }
-  .job-card .step .dot {
-    width: 26px;
-    height: 26px;
-  }
-  .job-card .step .dot svg {
-    width: 13px;
-    height: 13px;
-  }
-  .job-card .step time {
-    display: block;
-  }
-}
-
 /* ---- Reference style: outlined second line, cut corners ---- */
 /* Keyword accent switched off: keywords render as normal solid heading text.
    Re-enable by restoring the outline styles here. */
@@ -397,206 +221,108 @@ html.lenis body {
 
 /* All boxes and buttons are plain rectangles (cut-corner style removed). */
 
-/* ---- Hero: step rings ---- */
-.ring {
+/* ---- Hero: rev dial ---- */
+.dial-draw,
+.dial-thin,
+.dial-line {
   fill: none;
-  stroke: #dcdde1;
+  stroke: var(--ink);
   stroke-width: 1;
-  stroke-dasharray: 3 7;
-  transition: stroke 0.5s;
 }
-.ring.now {
-  stroke: var(--accent);
-  stroke-dasharray: none;
+.dial-draw {
+  stroke-opacity: 0.72;
+  stroke-dasharray: var(--len);
+  stroke-dashoffset: var(--len);
 }
-.ring.done {
-  stroke: #a7dcb9;
-  stroke-dasharray: none;
+.dial-in .dial-draw {
+  animation: dial-draw 1.9s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  animation-delay: var(--d, 0s);
 }
-.ring-node {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 2;
-  width: 32px;
-  height: 32px;
-  margin: -16px 0 0 -16px;
-  pointer-events: none;
-  will-change: transform;
-}
-.ring-node .ic {
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  background: #fff;
-  border: 1px solid var(--line-strong);
-  color: #a1a1aa;
-  transition: background 0.4s, border-color 0.4s, color 0.4s, box-shadow 0.4s;
-}
-.ring-node .ic svg {
-  width: 15px;
-  height: 15px;
-}
-.ring-node .lbl {
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  margin-left: 8px;
-  transform: translateY(-50%);
-  font-size: 12px;
-  font-weight: 500;
-  white-space: nowrap;
-  color: var(--ink-3);
-  background: rgba(255, 255, 255, 0.9);
-  padding: 2px 6px;
-  transition: color 0.4s;
-}
-.ring-node.now .ic {
-  border-color: var(--accent);
-  color: var(--accent);
-  box-shadow: 0 0 0 4px var(--accent-soft);
-}
-.ring-node.now .lbl {
-  color: var(--accent);
-}
-.ring-node.done .ic {
-  background: var(--success);
-  border-color: var(--success);
-  color: #fff;
-}
-.ring-node.done .lbl {
-  color: var(--ink);
-}
-@media (max-width: 1023px) {
-  .ring-node {
-    width: 26px;
-    height: 26px;
-    margin: -13px 0 0 -13px;
-  }
-  .ring-node .ic {
-    width: 26px;
-    height: 26px;
-  }
-  .ring-node .ic svg {
-    width: 12px;
-    height: 12px;
-  }
-  .ring-node:not(.now) .lbl {
-    display: none;
+@keyframes dial-draw {
+  to {
+    stroke-dashoffset: 0;
   }
 }
-
-
-/* ---- Hero: eclipse wheel ---- */
-.hero-wheel {
-  position: absolute;
-  z-index: 2;
-  border-radius: 50%;
-  pointer-events: none;
-  will-change: transform;
-  filter: drop-shadow(0 20px 40px rgba(10, 10, 11, 0.25));
+.dial-thin {
+  stroke-opacity: 0.3;
+  stroke-dasharray: 3 5;
 }
-.orbit-line {
+.dial-line {
+  stroke: var(--ink-3);
+}
+.dial-tread {
+  stroke: var(--ink);
+  stroke-opacity: 0;
+  transition: stroke-opacity 1s 1.3s;
+}
+.dial-in .dial-tread {
+  stroke-opacity: 0.2;
+}
+.dial-late {
+  opacity: 0;
+  transition: opacity 0.8s 1.4s;
+}
+.dial-in .dial-late {
+  opacity: 1;
+}
+.dial-tick {
+  stroke: var(--ink);
+  stroke-opacity: 0.35;
+}
+.dial-tick.major {
+  stroke-opacity: 0.8;
+}
+.dial-tick.red {
+  stroke: #e5484d;
+}
+.dial-red {
   fill: none;
-  stroke: #c4c4ca;
-  stroke-width: 1.5;
-  stroke-dasharray: 2 9;
+  stroke: #e5484d;
+  stroke-width: 3;
 }
-.orbit-planet {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 3;
-  width: 44px;
-  height: 44px;
-  margin: -22px 0 0 -22px;
-  pointer-events: none;
-  will-change: transform;
-}
-.orbit-planet .orb {
-  display: grid;
-  place-items: center;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: #fff;
-  border: 1.6px solid var(--pc);
-  color: var(--pc);
-  transition: background 0.4s, color 0.4s, box-shadow 0.4s;
-}
-.orbit-planet .orb svg {
-  width: 20px;
-  height: 20px;
-}
-.orbit-planet.done .orb {
-  background: var(--pc);
-  color: #fff;
-}
-.orbit-planet.now .orb {
-  box-shadow: 0 0 0 7px color-mix(in srgb, var(--pc) 16%, transparent);
-}
-.orbit-planet .lbl {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-top: 8px;
-  transform: translateX(-50%);
-  font-size: 12.5px;
+.dial-num {
+  font-family: var(--font-display);
+  font-size: 14px;
   font-weight: 500;
-  white-space: nowrap;
-  color: var(--ink-3);
+  fill: var(--ink-2);
 }
-.orbit-planet.done .lbl {
-  color: var(--ink);
+.dial-needle {
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
 }
-.orbit-planet.now .lbl {
-  color: var(--pc);
+.dial-curve.big {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 600;
+  fill: var(--ink);
 }
-.orbit-comet {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 6;
-  width: 24px;
-  height: 24px;
-  margin: -12px 0 0 -12px;
-  border-radius: 50%;
-  background: var(--pc);
-  color: #fff;
-  display: grid;
-  place-items: center;
-  box-shadow: 0 0 18px var(--pc);
-  pointer-events: none;
+.dial-curve.small {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  fill: var(--ink-3);
 }
-.orbit-comet svg {
-  width: 12px;
-  height: 12px;
-}
-.orbit-trail {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 5;
-  width: 12px;
-  height: 12px;
-  margin: -6px 0 0 -6px;
-  border-radius: 50%;
-  background: var(--pc);
-  filter: blur(3px);
-  pointer-events: none;
+.dial-curve.small .rp {
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  fill: var(--accent);
+  font-variant-numeric: tabular-nums;
 }
 @media (max-width: 1023px) {
-  .orbit-planet {
-    width: 34px;
-    height: 34px;
-    margin: -17px 0 0 -17px;
+  .dial-curve.big {
+    font-size: 24px;
   }
-  .orbit-planet .orb svg {
-    width: 15px;
-    height: 15px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dial-draw {
+    stroke-dashoffset: 0;
   }
-  .orbit-planet:not(.now) .lbl {
-    display: none;
+  .dial-late {
+    opacity: 1;
+  }
+  .dial-tread {
+    stroke-opacity: 0.2;
   }
 }
