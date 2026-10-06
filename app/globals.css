@@ -222,26 +222,15 @@ html.lenis body {
 /* All boxes and buttons are plain rectangles (cut-corner style removed). */
 
 /* ---- Hero: rev dial ---- */
-.dial-draw,
+.dial-stroke,
 .dial-thin,
 .dial-line {
   fill: none;
   stroke: var(--ink);
   stroke-width: 1;
 }
-.dial-draw {
+.dial-stroke {
   stroke-opacity: 0.72;
-  stroke-dasharray: var(--len);
-  stroke-dashoffset: var(--len);
-}
-.dial-in .dial-draw {
-  animation: dial-draw 1.9s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-  animation-delay: var(--d, 0s);
-}
-@keyframes dial-draw {
-  to {
-    stroke-dashoffset: 0;
-  }
 }
 .dial-thin {
   stroke-opacity: 0.3;
@@ -252,18 +241,7 @@ html.lenis body {
 }
 .dial-tread {
   stroke: var(--ink);
-  stroke-opacity: 0;
-  transition: stroke-opacity 1s 1.3s;
-}
-.dial-in .dial-tread {
   stroke-opacity: 0.2;
-}
-.dial-late {
-  opacity: 0;
-  transition: opacity 0.8s 1.4s;
-}
-.dial-in .dial-late {
-  opacity: 1;
 }
 .dial-tick {
   stroke: var(--ink);
@@ -313,16 +291,5 @@ html.lenis body {
 @media (max-width: 1023px) {
   .dial-curve.big {
     font-size: 24px;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .dial-draw {
-    stroke-dashoffset: 0;
-  }
-  .dial-late {
-    opacity: 1;
-  }
-  .dial-tread {
-    stroke-opacity: 0.2;
   }
 }

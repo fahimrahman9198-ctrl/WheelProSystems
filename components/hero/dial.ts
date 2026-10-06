@@ -36,16 +36,11 @@ function mk<K extends keyof SVGElementTagNameMap>(p: Element, tag: K, a: Record<
 const stepAt = (v: number) => STEPS.reduce((s, st, i) => (v >= st.v - 0.02 ? i : s), 0);
 const rpm = (v: number) => (Math.round((v * 1000) / 50) * 50).toLocaleString("en-US");
 
-// Line drawing of a split 5-spoke wheel around (0,0); `draw` elements animate in.
+// Line drawing of a split 5-spoke wheel around (0,0).
 function wheel(g: SVGGElement, R: number) {
-  const draw = (el: SVGElement, d: number) => {
-    el.classList.add("dial-draw");
-    el.style.setProperty("--d", `${d}s`);
-  };
+  const draw = (el: SVGElement) => el.classList.add("dial-stroke");
   const rb = R * 0.73, rh = R * 0.27;
-  ([[R, 0], [R * 0.9, 0.08], [R * 0.8, 0.16], [R * 0.765, 0.22], [rh, 0.3], [R * 0.19, 0.36], [R * 0.07, 0.42]] as const).forEach(([r, d]) =>
-    draw(mk(g, "circle", { r: f(r) }), d),
-  );
+  [R, R * 0.9, R * 0.8, R * 0.765, rh, R * 0.19, R * 0.07].forEach((r) => draw(mk(g, "circle", { r: f(r) })));
   mk(g, "circle", { r: f(rb) }, "dial-thin");
   for (let i = 0; i < 5; i++) {
     const a = i * 72 - 90;
@@ -53,10 +48,10 @@ function wheel(g: SVGGElement, R: number) {
       const c = a + s * 9;
       const p = [P(rh, c - 5), P(rb, c - 2.6), P(rb, c + 2.6), P(rh, c + 5)];
       const d = `M${f(p[0][0])} ${f(p[0][1])}L${f(p[1][0])} ${f(p[1][1])}A${f(rb)} ${f(rb)} 0 0 1 ${f(p[2][0])} ${f(p[2][1])}L${f(p[3][0])} ${f(p[3][1])}`;
-      draw(mk(g, "path", { d }), 0.5 + i * 0.08);
+      draw(mk(g, "path", { d }));
     }
     const [lx, ly] = P(R * 0.13, a + 36);
-    draw(mk(g, "circle", { cx: f(lx), cy: f(ly), r: f(R * 0.022) }), 0.95);
+    draw(mk(g, "circle", { cx: f(lx), cy: f(ly), r: f(R * 0.022) }));
   }
   for (let i = 0; i < 90; i++) {
     const [x1, y1] = P(R * 0.9, i * 4 + 2), [x2, y2] = P(R, i * 4 + 2);
@@ -79,7 +74,7 @@ export function startDial(stage: HTMLElement, pin: HTMLElement, svg: SVGSVGEleme
     wheel(g, R);
 
     // scale
-    const sc = mk(fx, "g", {}, "dial-late");
+    const sc = mk(fx, "g");
     mk(sc, "path", { d: arc(r1, 180, 270), transform: `translate(${cx} ${cy})` }, "dial-line");
     mk(sc, "path", { d: arc(r1 + 6, A(RED), 270), transform: `translate(${cx} ${cy})` }, "dial-red");
     for (let v = 0; v <= 8.001; v += 0.25) {
@@ -106,8 +101,6 @@ export function startDial(stage: HTMLElement, pin: HTMLElement, svg: SVGSVGEleme
     const lo = m ? 212 : 206, hi = m ? 248 : 252;
     const at = (v: number) => `${(((Math.min(hi, Math.max(lo, A(v))) - 140) / 170) * 100).toFixed(2)}%`;
 
-    svg.querySelectorAll<SVGGeometryElement>(".dial-draw").forEach((el) => el.style.setProperty("--len", String(Math.ceil(el.getTotalLength()) + 1)));
-
     let last = -1;
     update = (v, rot) => {
       g.setAttribute("transform", `translate(${f(cx)} ${f(cy)}) rotate(${f(rot)})`);
@@ -132,8 +125,6 @@ export function startDial(stage: HTMLElement, pin: HTMLElement, svg: SVGSVGEleme
   build();
   const ro = new ResizeObserver(build);
   ro.observe(stage);
-  const io = new IntersectionObserver(([e]) => e.isIntersecting && stage.classList.add("dial-in"), { threshold: 0.2 });
-  io.observe(stage);
 
   // Needle follows scroll progress through the pinned hero (or the first
   // 520px of scroll when the hero isn't pinned, e.g. on phones).
@@ -152,7 +143,6 @@ export function startDial(stage: HTMLElement, pin: HTMLElement, svg: SVGSVGEleme
   return () => {
     cancelAnimationFrame(raf);
     ro.disconnect();
-    io.disconnect();
     window.removeEventListener("scroll", onScroll);
     svg.innerHTML = "";
   };
