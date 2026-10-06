@@ -1,0 +1,28 @@
+{
+  "brand": "WheelPro Systems",
+  "tagline": "Booking, quotes and payments for wheel shops",
+  "brief": "WheelPro Systems builds the booking, quoting and payment system for custom wheel and rim shops. The old mark (a generic spoked wheel next to plain type) was static and blended in. The new identity should feel precise, mechanical, bold and dependable, with the confidence of a tool you trust.",
+  "adjectives": ["precise", "mechanical", "bold", "dependable"],
+  "criteria": "Success: avoids wheel-shop clichés (flames, chequered flags, treads, spoked wheels), reads at 16 px, works in one colour, and pairs with a tight two-line grotesk wordmark.",
+  "mockups": ["signage", "website", "app-icon", "business-card", "tshirt", "sticker"],
+  "nav": ["How it works", "Pricing", "Book a demo"],
+  "brand_color": "#0A0A0B",
+  "greyscale": false,
+  "designer": "WheelPro Systems",
+  "round": 2,
+  "concepts": [
+    {
+      "name": "Lug Nut W",
+      "symbol": "../kit/svg/wheelpro-symbol.svg",
+      "lockup": "../kit/svg/wheelpro-horizontal.svg",
+      "idea": "A flat-top hex lug nut, seen the way a socket meets it, with a W milled through it at an even wall thickness.",
+      "rationale": [
+        "The lug nut is the part every wheel shop torques daily: relevant without drawing a wheel",
+        "The W's outer tips are cut at the nut's own 60° angle, so the letter looks machined, not placed",
+        "One colour, one radius, 15° and 60° angles only; holds at 16 px with the small cut"
+      ]
+    }
+  ],
+  "recommendation": "Lug Nut W: ink as the primary colour, Torque Blue (#2F5BFF) as the accent for the app tile and highlights.",
+  "next_steps": ["Swap the site header and favicon to the new mark", "Outline the wordmark in Switzer if you want it to match the site type exactly", "Run a trademark search before launch"]
+}

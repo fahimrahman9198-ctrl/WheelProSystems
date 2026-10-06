@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hero Backgrounds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+  @font-face { font-family: "Switzer"; src: url("../app/fonts/switzer-variable.woff2") format("woff2"); font-weight: 100 900; }
+  :root {
+    --ink: #0a0a0b; --ink-2: #3f3f46; --ink-3: #71717a; --line: #e4e4e7; --paper: #f5f5f6; --white: #fff;
+    --blue: #2f5bff; --violet: #7c3aed; --amber: #d97706; --teal: #0d9488; --green: #16a34a;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: "Switzer", system-ui, sans-serif; color: var(--ink); background: var(--white); -webkit-font-smoothing: antialiased; }
+
+  .intro { padding: 56px 24px 32px; max-width: 1200px; margin: 0 auto; }
+  .intro h1 { font: 600 32px/1.1 "Saira Semi Condensed", sans-serif; }
+  .intro p { color: var(--ink-3); margin-top: 8px; max-width: 640px; line-height: 1.5; }
+
+  .hero { position: relative; height: 760px; overflow: hidden; border-top: 1px solid var(--line); isolation: isolate; }
+  .tag { position: absolute; top: 20px; right: 24px; z-index: 5; font: 500 12px/1 "Switzer"; letter-spacing: .08em; text-transform: uppercase;
+         background: var(--ink); color: #fff; padding: 8px 12px; }
+  .tag b { color: #8fa6ff; font-weight: 600; margin-right: 6px; }
+  .copy { position: relative; z-index: 3; max-width: 1200px; margin: 0 auto; padding: 150px 24px 0; }
+  .eyebrow { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+  .copy h2 { font: 600 clamp(2.5rem, 5.2vw, 4.75rem)/1.02 "Saira Semi Condensed", sans-serif; max-width: 720px; margin-top: 20px; }
+  .copy p { margin-top: 24px; max-width: 460px; font-size: 18px; line-height: 1.5; color: var(--ink-2); }
+  .ctas { display: flex; gap: 24px; align-items: center; margin-top: 36px; }
+  .btn { display: inline-flex; align-items: center; gap: 14px; background: var(--ink); color: #fff; padding: 8px 20px 8px 8px; font-weight: 500; text-decoration: none; }
+  .btn i { width: 36px; height: 36px; background: var(--blue); display: grid; place-items: center; font-style: normal; }
+  .link { color: var(--ink); font-weight: 500; text-decoration: underline; text-underline-offset: 5px; text-decoration-color: var(--line); }
+  .wheel { position: absolute; z-index: 2; width: 440px; height: 440px; right: -220px; bottom: -220px; background: url("../public/photos/wheel.png") center/contain no-repeat; will-change: transform; }
+  .note { position: absolute; left: 24px; bottom: 20px; z-index: 5; font-size: 13px; color: var(--ink-3); max-width: 560px; line-height: 1.45; background: rgba(255,255,255,.85); padding: 10px 12px; border: 1px solid var(--line); }
+  .note strong { color: var(--ink); }
+  .bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+
+  /* ---------- A · Calibrated grid ---------- */
+  #a .bg { background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+           background-size: 56px 56px; mask-image: radial-gradient(120% 90% at 70% 60%, #000 30%, transparent 85%); }
+  #a .spot { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+             background-image: linear-gradient(rgba(47,91,255,.45) 1px, transparent 1px), linear-gradient(90deg, rgba(47,91,255,.45) 1px, transparent 1px);
+             background-size: 56px 56px;
+             mask-image: radial-gradient(220px 220px at var(--mx, 75%) var(--my, 55%), #000, transparent 70%); transition: opacity .3s; }
+  #a .marks { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  #a .mark { position: absolute; width: 14px; height: 14px; transform: translate(-50%, -50%); }
+  #a .mark::before, #a .mark::after { content: ""; position: absolute; background: var(--blue); }
+  #a .mark::before { left: 6px; top: 0; width: 2px; height: 14px; }
+  #a .mark::after { top: 6px; left: 0; height: 2px; width: 14px; }
+  #a .cell { position: absolute; width: 56px; height: 56px; background: var(--blue); opacity: 0; animation: cell 4.2s infinite; }
+  @keyframes cell { 0%, 100% { opacity: 0 } 12% { opacity: .1 } 40% { opacity: 0 } }
+
+  /* ---------- B · Aurora (light) ---------- */
+  #b { background: #fbfbfd; }
+  #b .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .32; will-change: transform; }
+  #b .b1 { width: 620px; height: 620px; background: var(--blue); right: -80px; top: 60px; animation: drift1 14s ease-in-out infinite alternate; }
+  #b .b2 { width: 460px; height: 460px; background: var(--violet); right: 320px; bottom: -160px; opacity: .22; animation: drift2 12s ease-in-out infinite alternate; }
+  #b .b3 { width: 380px; height: 380px; background: var(--amber); right: 120px; top: -140px; opacity: .2; animation: drift3 16s ease-in-out infinite alternate; }
+  #b .b4 { width: 300px; height: 300px; background: var(--teal); right: 520px; top: 120px; opacity: .14; animation: drift1 18s ease-in-out infinite alternate-reverse; }
+  @keyframes drift1 { to { transform: translate(-120px, 80px) scale(1.12) } }
+  @keyframes drift2 { to { transform: translate(140px, -90px) scale(.9) } }
+  @keyframes drift3 { to { transform: translate(-80px, 120px) scale(1.15) } }
+  #b .wash { position: absolute; inset: 0; background: linear-gradient(90deg, #fbfbfd 28%, rgba(251,251,253,.55) 55%, transparent 80%); }
+  #b .grain { position: absolute; inset: 0; opacity: .5; mix-blend-mode: multiply;
+              background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+  #b .glass { position: absolute; z-index: 2; right: 260px; top: 210px; width: 230px; padding: 14px 16px; background: rgba(255,255,255,.55);
+              backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,.8); box-shadow: 0 10px 30px rgba(10,10,11,.06); font-size: 13px; }
+  #b .glass small { display: block; color: var(--ink-3); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
+  #b .glass .row { display: flex; justify-content: space-between; margin-top: 4px; }
+  #b .glass .dot { display: inline-block; width: 7px; height: 7px; background: var(--green); margin-right: 6px; border-radius: 50%; }
+
+  /* ---------- C · Blueprint ---------- */
+  #c .bg { background-image: linear-gradient(rgba(47,91,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(47,91,255,.07) 1px, transparent 1px),
+                             linear-gradient(rgba(47,91,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(47,91,255,.035) 1px, transparent 1px);
+           background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px; }
+  #c svg.bp { position: absolute; z-index: 1; right: -120px; top: 50%; width: 900px; height: 900px; transform: translateY(-50%); overflow: visible; }
+  #c .bp .draw { fill: none; stroke: var(--blue); stroke-width: 1.2; stroke-dasharray: var(--len); stroke-dashoffset: var(--len); }
+  #c.in .bp .draw { animation: draw 2.4s cubic-bezier(.65,0,.35,1) forwards; animation-delay: var(--d, 0s); }
+  @keyframes draw { to { stroke-dashoffset: 0 } }
+  #c .bp .dim { stroke: var(--ink-3); stroke-width: 1; fill: none; opacity: 0; transition: opacity .6s 1.8s; }
+  #c .bp text { font: 500 13px "Switzer"; fill: var(--ink-3); opacity: 0; transition: opacity .6s 2s; letter-spacing: .04em; }
+  #c.in .bp .dim, #c.in .bp text { opacity: 1; }
+  #c .bp .accent { fill: var(--blue); }
+  #c .fade { position: absolute; inset: 0; z-index: 2; background: linear-gradient(90deg, #fff 30%, rgba(255,255,255,.7) 48%, transparent 66%); pointer-events: none; }
+
+  /* ---------- D · Kinetic workflow type ---------- */
+  #d .rows { position: absolute; inset: -40px 0; display: flex; flex-direction: column; justify-content: center; gap: 6px; transform: rotate(-6deg) scale(1.1); }
+  #d .row { white-space: nowrap; font: 600 128px/1 "Saira Semi Condensed", sans-serif; color: #f0f0f2; will-change: transform; text-transform: uppercase; letter-spacing: .01em; }
+  #d .row span { margin-right: 56px; }
+  #d .row span.hot { color: rgba(47,91,255,.16); }
+  #d .fade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, #fff 22%, rgba(255,255,255,.75) 46%, rgba(255,255,255,.15) 75%); }
+
+  @media (max-width: 900px) {
+    .hero { height: 680px; }
+    .copy { padding-top: 110px; }
+    .wheel { width: 270px; height: 270px; right: -135px; bottom: -135px; }
+    #b .glass { display: none; }
+    #c svg.bp { width: 560px; height: 560px; right: -260px; top: 72%; }
+    #d .row { font-size: 72px; }
+    .note { right: 16px; left: 16px; max-width: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    #c .bp .draw { stroke-dashoffset: 0; } #c .bp .dim, #c .bp text { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+  <div class="intro">
+    <h1>Hero background: 4 variations</h1>
+    <p>Same headline, buttons and corner wheel in each, only the background changes. Scroll to see the scroll-linked motion; move the mouse over A. Built with ui-ux-pro-max guidance: light mode, subtle background motion, reduced-motion safe.</p>
+  </div>
+
+  <!-- A -->
+  <section class="hero" id="a" data-hero>
+    <div class="tag"><b>A</b>Calibrated grid</div>
+    <div class="bg"></div>
+    <div class="spot"></div>
+    <div class="marks"></div>
+    <div class="wheel"></div>
+    <div class="copy">
+      <div class="eyebrow">Built only for wheel refinishers</div>
+      <h2>One-stop solution for wheel refinishing businesses</h2>
+      <p>Leads from your website and Gmail get captured, quoted, followed up, invoiced and paid, all in one system.</p>
+      <div class="ctas"><a class="btn" href="#"><i>→</i>Book a meeting</a><a class="link" href="#">See how it works</a></div>
+    </div>
+    <div class="note"><strong>Swiss / precision.</strong> A 56px measuring grid fades out to the left. The cursor reveals a blue grid under it, blue crosshairs mark key points, and cells blink like jobs coming in. The grid drifts as you scroll. Calmest option, closest to the current site.</div>
+  </section>
+
+  <!-- B -->
+  <section class="hero" id="b" data-hero>
+    <div class="tag"><b>B</b>Light aurora + glass</div>
+    <div class="bg"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div><div class="wash"></div><div class="grain"></div></div>
+    <div class="glass"><small>Today</small><div class="row"><span><span class="dot"></span>Paid</span><b>$1,840</b></div><div class="row"><span>Quotes sent</span><b>12</b></div><div class="row"><span>New leads</span><b>7</b></div></div>
+    <div class="wheel"></div>
+    <div class="copy">
+      <div class="eyebrow">Built only for wheel refinishers</div>
+      <h2>One-stop solution for wheel refinishing businesses</h2>
+      <p>Leads from your website and Gmail get captured, quoted, followed up, invoiced and paid, all in one system.</p>
+      <div class="ctas"><a class="btn" href="#"><i>→</i>Book a meeting</a><a class="link" href="#">See how it works</a></div>
+    </div>
+    <div class="note"><strong>Soft colour.</strong> Slow 12–18s blobs in the five step colours (blue, violet, amber, teal), washed to white behind the text, with fine grain. One frosted-glass stat card floats over it. Warmest and most "premium SaaS".</div>
+  </section>
+
+  <!-- C -->
+  <section class="hero" id="c" data-hero>
+    <div class="tag"><b>C</b>Wheel blueprint</div>
+    <div class="bg"></div>
+    <svg class="bp" viewBox="-450 -450 900 900" aria-hidden="true"><g class="spin"></g><g class="fixed"></g></svg>
+    <div class="fade"></div>
+    <div class="copy">
+      <div class="eyebrow">Built only for wheel refinishers</div>
+      <h2>One-stop solution for wheel refinishing businesses</h2>
+      <p>Leads from your website and Gmail get captured, quoted, followed up, invoiced and paid, all in one system.</p>
+      <div class="ctas"><a class="btn" href="#"><i>→</i>Book a meeting</a><a class="link" href="#">See how it works</a></div>
+    </div>
+    <div class="note"><strong>Technical drawing.</strong> A thin blue blueprint of a 5-spoke wheel draws itself on load, then dimension lines and specs appear (Ø 20", 5×112, ET 35). It turns as you scroll. Speaks the refinisher's language; replaces the photo wheel.</div>
+  </section>
+
+  <!-- D -->
+  <section class="hero" id="d" data-hero>
+    <div class="tag"><b>D</b>Kinetic workflow type</div>
+    <div class="bg"><div class="rows"></div><div class="fade"></div></div>
+    <div class="wheel"></div>
+    <div class="copy">
+      <div class="eyebrow">Built only for wheel refinishers</div>
+      <h2>One-stop solution for wheel refinishing businesses</h2>
+      <p>Leads from your website and Gmail get captured, quoted, followed up, invoiced and paid, all in one system.</p>
+      <div class="ctas"><a class="btn" href="#"><i>→</i>Book a meeting</a><a class="link" href="#">See how it works</a></div>
+    </div>
+    <div class="note"><strong>Moving words.</strong> Huge, very light rows of the workflow (Lead, Quote, Follow-up, Invoice, Paid) slide in opposite directions on a slight tilt. Scrolling speeds them up. Boldest, most "agency" option.</div>
+  </section>
+
+<script>
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ---- A: crosshairs, blinking cells, cursor spotlight, scroll drift ----
+  (() => {
+    const s = document.getElementById("a"), marks = s.querySelector(".marks"), G = 56;
+    [[14, 4], [18, 7], [11, 9], [20, 11], [16, 12]].forEach(([c, r]) => {
+      const m = document.createElement("span"); m.className = "mark"; m.style.left = c * G + "px"; m.style.top = r * G + "px"; marks.appendChild(m);
+    });
+    [[15, 5, 0], [19, 8, 1.4], [13, 10, 2.8], [17, 3, 2.1]].forEach(([c, r, d]) => {
+      const e = document.createElement("span"); e.className = "cell"; e.style.left = c * G + "px"; e.style.top = r * G + "px"; e.style.animationDelay = d + "s"; marks.appendChild(e);
+    });
+    s.addEventListener("pointermove", (e) => { const b = s.getBoundingClientRect(); s.style.setProperty("--mx", e.clientX - b.left + "px"); s.style.setProperty("--my", e.clientY - b.top + "px"); });
+  })();
+
+  // ---- C: blueprint wheel ----
+  (() => {
+    const g = document.querySelector("#c .spin"), ns = "http://www.w3.org/2000/svg";
+    const fixed = document.querySelector("#c .fixed");
+    const add = (tag, attrs, cls = "draw", d = 0, parent = g) => { const el = document.createElementNS(ns, tag); for (const k in attrs) el.setAttribute(k, attrs[k]); el.setAttribute("class", cls); el.style.setProperty("--d", d + "s"); parent.appendChild(el); return el; };
+    [[330, 0], [300, .1], [250, .2], [96, .4], [70, .5], [26, .6]].forEach(([r, d]) => add("circle", { r }, "draw", d));
+    for (let i = 0; i < 5; i++) {
+      const a = (i * 72 - 90) * Math.PI / 180, b = a + 0.21, c = a - 0.21, r1 = 92, r2 = 248;
+      const p = (r, t) => `${(r * Math.cos(t)).toFixed(1)} ${(r * Math.sin(t)).toFixed(1)}`;
+      add("path", { d: `M ${p(r1, a - .32)} L ${p(r2, c)} A ${r2} ${r2} 0 0 1 ${p(r2, b)} L ${p(r1, a + .32)}` }, "draw", .7 + i * .12);
+      const la = a + Math.PI / 5; add("circle", { r: 9, cx: (48 * Math.cos(la)).toFixed(1), cy: (48 * Math.sin(la)).toFixed(1) }, "draw", 1.2);
+    }
+    // dimension lines + labels (static layer)
+    const dim = (d) => add("path", { d }, "dim", 0, fixed);
+    dim("M -330 380 L 330 380 M -330 370 L -330 390 M 330 370 L 330 390 M -330 380 L -330 300 M 330 380 L 330 300");
+    dim("M 225 -245 L 180 -290 L 60 -290");
+    const t = (x, y, s, cls = "") => { const e = add("text", { x, y }, cls, 0, fixed); e.textContent = s; };
+    t(-30, 405, 'Ø 20"'); t(60, -300, "5×112 · ET 35"); t(-200, -350, "SPOKE 05 / 05");
+    add("circle", { r: 5, cx: 330, cy: 0 }, "accent");
+    g.querySelectorAll(".draw").forEach((el) => el.style.setProperty("--len", Math.ceil(el.getTotalLength())));
+    new IntersectionObserver(([e]) => e.isIntersecting && document.getElementById("c").classList.add("in"), { threshold: .3 }).observe(document.getElementById("c"));
+  })();
+
+  // ---- D: kinetic rows ----
+  const words = ["Lead captured", "Quote sent", "Follow-up", "Invoice", "Paid"];
+  const rows = [...Array(5)].map((_, i) => {
+    const row = document.createElement("div"); row.className = "row";
+    let html = ""; for (let k = 0; k < 4; k++) words.forEach((w, j) => (html += `<span class="${(j + i) % 5 === 4 ? "hot" : ""}">${w}</span>`));
+    row.innerHTML = html; document.querySelector("#d .rows").appendChild(row); return { row, x: -i * 300, dir: i % 2 ? 1 : -1 };
+  });
+
+  // ---- shared rAF: scroll-linked motion ----
+  const wheels = [...document.querySelectorAll(".wheel")], spin = document.querySelector("#c .spin"), aBg = document.querySelector("#a .bg");
+  let target = scrollY, eased = scrollY, lastY = scrollY, boost = 0;
+  addEventListener("scroll", () => (target = scrollY), { passive: true });
+  function frame() {
+    eased += (target - eased) * (reduce ? 1 : .12);
+    const v = eased - lastY; lastY = eased; boost += (Math.abs(v) - boost) * .1;
+    wheels.forEach((w) => (w.style.transform = `rotate(${(eased * .3).toFixed(2)}deg)`));
+    if (!reduce) {
+      aBg.style.backgroundPosition = `0 ${(-eased * .15).toFixed(1)}px`;
+      spin.setAttribute("transform", `rotate(${(eased * .08).toFixed(2)})`);
+      rows.forEach((r) => { r.x += r.dir * (0.35 + boost * 0.6); const w = r.row.scrollWidth / 4; if (r.x < -w) r.x += w; if (r.x > 0) r.x -= w; r.row.style.transform = `translateX(${r.x.toFixed(1)}px)`; });
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+</script>
+</body>
+</html>

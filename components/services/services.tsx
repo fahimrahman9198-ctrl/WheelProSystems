@@ -192,14 +192,6 @@ export function Services() {
               onMouseEnter={() => setPaused(true)}
               onMouseLeave={() => setPaused(false)}
             >
-              <div className="mb-4 flex items-center justify-between text-[13px] font-medium sm:mb-5 sm:text-[14px]">
-                <span className="text-[#a1a1aa]">Sample job · Q-1044</span>
-                <span className="flex items-center gap-2 pr-6 text-on-dark">
-                  <span className="size-2 bg-[#22c55e]" />
-                  System active
-                </span>
-              </div>
-
               <div className="grid gap-3 sm:grid-cols-[1fr_120px] lg:grid-cols-[1fr_132px]">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-white sm:aspect-[16/10]">
                   <motion.div

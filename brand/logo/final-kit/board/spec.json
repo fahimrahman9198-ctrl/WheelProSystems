@@ -1,0 +1,48 @@
+{
+  "brand": "WheelPro Systems",
+  "tagline": "Booking, quotes and payments for wheel shops",
+  "brief": "WheelPro Systems builds the booking, quoting and payment system for custom wheel and rim shops. The old mark (a generic spoked wheel next to plain type) was static and blended in. The new identity should feel precise, mechanical, bold and dependable, with the confidence of a tool you trust.",
+  "adjectives": [
+    "precise",
+    "mechanical",
+    "bold",
+    "dependable"
+  ],
+  "criteria": "Success: avoids wheel-shop clich\u00e9s (flames, chequered flags, treads, spoked wheels), reads at 16 px, works in one colour, and pairs with a tight two-line grotesk wordmark.",
+  "mockups": [
+    "signage",
+    "website",
+    "app-icon",
+    "business-card",
+    "tshirt",
+    "sticker"
+  ],
+  "nav": [
+    "How it works",
+    "Pricing",
+    "Book a demo"
+  ],
+  "brand_color": "#0A0A0B",
+  "greyscale": false,
+  "designer": "WheelPro Systems",
+  "round": 3,
+  "concepts": [
+    {
+      "name": "Fitment",
+      "symbol": "../svg/wheelpro-symbol.svg",
+      "lockup": "../svg/wheelpro-horizontal.svg",
+      "idea": "The corner of a car: a fender arching over a wheel, with the tight, even gap that wheel people obsess over.",
+      "rationale": [
+        "Fitment is the language of the customer: the gap between tire and fender is what they judge a build by",
+        "Instantly says wheels and cars without a spoke, tread or flame",
+        "Wordmark in Mona Sans: WheelPro Bold, Systems Light \u2014 one clean line that stays legible in a nav bar"
+      ]
+    }
+  ],
+  "recommendation": "Final: Fitment mark with a one-line Mona Sans wordmark (Bold / Light). Ink primary, Torque Blue (#2F5BFF) accent.",
+  "next_steps": [
+    "Swap the site header and favicon to the new mark",
+    "Order a sign/vinyl test print to confirm the gap holds at shop-sign size",
+    "Run a trademark search before launch"
+  ]
+}

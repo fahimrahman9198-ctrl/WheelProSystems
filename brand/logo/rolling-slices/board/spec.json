@@ -1,0 +1,48 @@
+{
+  "brand": "WheelPro Systems",
+  "tagline": "Booking, quotes and payments for wheel shops",
+  "brief": "WheelPro Systems builds the booking, quoting and payment system for custom wheel and rim shops. The old mark (a generic spoked wheel next to plain type) was static and blended in. The new identity should feel precise, mechanical, bold and dependable, with the confidence of a tool you trust.",
+  "adjectives": [
+    "precise",
+    "mechanical",
+    "bold",
+    "dependable"
+  ],
+  "criteria": "Success: avoids wheel-shop clich\u00e9s (flames, chequered flags, treads, spoked wheels), reads at 16 px, works in one colour, and pairs with a tight two-line grotesk wordmark.",
+  "mockups": [
+    "signage",
+    "website",
+    "app-icon",
+    "business-card",
+    "tshirt",
+    "sticker"
+  ],
+  "nav": [
+    "How it works",
+    "Pricing",
+    "Book a demo"
+  ],
+  "brand_color": "#0A0A0B",
+  "greyscale": false,
+  "designer": "WheelPro Systems",
+  "round": 2,
+  "concepts": [
+    {
+      "name": "Rolling Slices",
+      "symbol": "../kit/svg/wheelpro-symbol.svg",
+      "lockup": "../kit/svg/wheelpro-horizontal.svg",
+      "idea": "A wheel sliced into four rows that slide sideways, with a hub bore through the middle: a wheel in motion, and a schedule of booked jobs.",
+      "rationale": [
+        "Reads as a moving wheel without spokes, treads or speed lines",
+        "The rows echo a booking list \u2014 what WheelPro actually runs for the shop",
+        "The hub bore stops it reading as a striped sunset; a heavier 4-row cut covers 16\u201332 px"
+      ]
+    }
+  ],
+  "recommendation": "Rolling Slices: ink as the primary colour, Torque Blue (#2F5BFF) for the app tile and highlights.",
+  "next_steps": [
+    "Swap the site header and favicon to the new mark",
+    "Outline the wordmark in Switzer if you want it to match the site type exactly",
+    "Run a trademark search before launch"
+  ]
+}

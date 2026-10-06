@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256"><title>WheelPro Systems - Pro Block</title>
+<path fill="#0A0A0B" d="M32 64 L64 32 L224 32 L192 64 Z"/>
+<path fill="#0A0A0B" d="M192 72 L224 40 L224 192 L192 224 Z"/>
+<path fill="#0A0A0B" fill-rule="evenodd" d="M32 72 H184 V224 H32 Z M60 92 H112 A40 40 0 0 1 112 172 H86 V204 H60 Z M112 119 A13 13 0 1 1 112 145 A13 13 0 1 1 112 119 Z"/>
+</svg>

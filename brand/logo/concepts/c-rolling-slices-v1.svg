@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256"><title>WheelPro Systems - Rolling Slices</title>
+<g fill="#0A0A0B">
+<path transform="translate(16 0)" d="M128 32 A96 96 0 0 1 199.55 64 H56.45 A96 96 0 0 1 128 32 Z"/>
+<path transform="translate(8 0)" d="M50.03 72 H205.97 A96 96 0 0 1 220.95 104 H35.05 A96 96 0 0 1 50.03 72 Z"/>
+<path d="M33.34 112 H222.66 A96 96 0 0 1 222.66 144 H33.34 A96 96 0 0 1 33.34 112 Z"/>
+<path transform="translate(-8 0)" d="M35.05 152 H220.95 A96 96 0 0 1 205.97 184 H50.03 A96 96 0 0 1 35.05 152 Z"/>
+<path transform="translate(-16 0)" d="M56.45 192 H199.55 A96 96 0 0 1 128 224 A96 96 0 0 1 56.45 192 Z"/>
+</g></svg>

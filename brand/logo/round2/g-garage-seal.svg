@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img"><title>WheelPro Systems — Garage Seal</title>
+<path fill="#0A0A0B" fill-rule="evenodd" d="M8 128 A120 120 0 1 1 248 128 A120 120 0 1 1 8 128 Z M20 128 A108 108 0 1 1 236 128 A108 108 0 1 1 20 128 Z"/>
+<path fill="#0A0A0B" fill-rule="evenodd" d="M60 128 A68 68 0 1 1 196 128 A68 68 0 1 1 60 128 Z M122 95 A6 6 0 1 1 134 95 A6 6 0 1 1 122 95 Z M153.38 117.8 A6 6 0 1 1 165.38 117.8 A6 6 0 1 1 153.38 117.8 Z M141.4 154.7 A6 6 0 1 1 153.4 154.7 A6 6 0 1 1 141.4 154.7 Z M102.6 154.7 A6 6 0 1 1 114.6 154.7 A6 6 0 1 1 102.6 154.7 Z M90.62 117.8 A6 6 0 1 1 102.62 117.8 A6 6 0 1 1 90.62 117.8 Z M110 128 A18 18 0 1 1 146 128 A18 18 0 1 1 110 128 Z"/>
+<defs><path id="ring" d="M128 128 m-88 0 a88 88 0 1 1 176 0 a88 88 0 1 1 -176 0"/></defs>
+<text font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="900" font-size="25" letter-spacing="3.2" fill="#0A0A0B"><textPath href="#ring" startOffset="0">WHEELPRO ★ SYSTEMS ★ WHEELPRO ★ SYSTEMS ★</textPath></text>
+</svg>

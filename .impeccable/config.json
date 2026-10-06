@@ -19,7 +19,14 @@
         "rule": "all-caps-body",
         "value": "*",
         "files": [
-          "samples/hero-hub.html"
+          "samples/hero-hub.html",
+          "samples/hero-backgrounds.html",
+          "samples/hero-blueprint.html",
+          "samples/hero-tach-icons.html",
+          "samples/hero-needle.html",
+          "samples/hero-dial-type.html",
+          "samples/hero-rims.html",
+          "samples/hero-rims-2.html"
         ],
         "createdAt": "2026-10-04T05:27:06.590Z",
         "reason": "Claude: uppercase only on short labels (eyebrow, SAMPLE tag), per DESIGN-SYSTEM label style"
@@ -100,7 +107,14 @@
         "rule": "all-caps-body",
         "value": "*",
         "files": [
-          "samples/hero-eclipse.html"
+          "samples/hero-eclipse.html",
+          "samples/hero-backgrounds.html",
+          "samples/hero-blueprint.html",
+          "samples/hero-tach-icons.html",
+          "samples/hero-needle.html",
+          "samples/hero-dial-type.html",
+          "samples/hero-rims.html",
+          "samples/hero-rims-2.html"
         ],
         "createdAt": "2026-10-05T03:07:28.415Z",
         "reason": "Claude: uppercase only on short labels (eyebrow, SAMPLE tag) in a throwaway sample page"
