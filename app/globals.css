@@ -252,11 +252,17 @@ html.lenis body {
 }
 .dial-tick.red {
   stroke: #e5484d;
+  transition: stroke 0.4s;
 }
 .dial-red {
   fill: none;
   stroke: #e5484d;
   stroke-width: 3;
+  transition: stroke 0.4s;
+}
+.dial-ok .dial-tick.red,
+.dial-ok .dial-red {
+  stroke: var(--success);
 }
 .dial-num {
   font-family: var(--font-display);
@@ -273,18 +279,19 @@ html.lenis body {
   font-family: var(--font-display);
   font-size: 30px;
   font-weight: 600;
+  letter-spacing: -0.02em;
   fill: var(--ink);
 }
 .dial-curve.small {
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.03em;
   fill: var(--ink-3);
 }
 .dial-curve.small .rp {
   font-weight: 600;
   font-size: 13px;
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
   fill: var(--accent);
   font-variant-numeric: tabular-nums;
 }

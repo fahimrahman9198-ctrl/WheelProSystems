@@ -15,6 +15,7 @@ const STEPS = [
   { v: 7.1, label: "Paid", info: "$180 received · Stripe" },
 ];
 const RED = 7.5; // red line starts here (scale runs 0–8)
+const PAID_ZONE = 4; // from "Invoice sent" on, the red line turns green
 const WHEEL_SPIN = 0.25; // wheel degrees per scrolled pixel
 
 const f = (n: number) => n.toFixed(1);
@@ -36,21 +37,23 @@ function mk<K extends keyof SVGElementTagNameMap>(p: Element, tag: K, a: Record<
 const stepAt = (v: number) => STEPS.reduce((s, st, i) => (v >= st.v - 0.02 ? i : s), 0);
 const rpm = (v: number) => (Math.round((v * 1000) / 50) * 50).toLocaleString("en-US");
 
-// Line drawing of a split 5-spoke wheel around (0,0).
+// Line drawing of a rally-style wheel around (0,0): eight rounded windows and
+// a ring of rivets around the centre.
 function wheel(g: SVGGElement, R: number) {
   const draw = (el: SVGElement) => el.classList.add("dial-stroke");
-  const rb = R * 0.73, rh = R * 0.27;
+  const L = (r: number, a: number) => P(r, a).map(f).join(" ");
+  const rb = R * 0.73, rh = R * 0.27, r1 = R * 0.37, r2 = rb - R * 0.05;
   [R, R * 0.9, R * 0.8, R * 0.765, rh, R * 0.19, R * 0.07].forEach((r) => draw(mk(g, "circle", { r: f(r) })));
   mk(g, "circle", { r: f(rb) }, "dial-thin");
+  for (let i = 0; i < 8; i++) {
+    const c = i * 45 + 22.5;
+    const d = `M${L(r1, c - 11)}L${L(r2, c - 16)}A${f(r2)} ${f(r2)} 0 0 1 ${L(r2, c + 16)}L${L(r1, c + 11)}A${f(r1)} ${f(r1)} 0 0 0 ${L(r1, c - 11)}Z`;
+    draw(mk(g, "path", { d }));
+    const [x, y] = P(R * 0.315, i * 45);
+    draw(mk(g, "circle", { cx: f(x), cy: f(y), r: f(R * 0.011) }));
+  }
   for (let i = 0; i < 5; i++) {
-    const a = i * 72 - 90;
-    for (const s of [-1, 1]) {
-      const c = a + s * 9;
-      const p = [P(rh, c - 5), P(rb, c - 2.6), P(rb, c + 2.6), P(rh, c + 5)];
-      const d = `M${f(p[0][0])} ${f(p[0][1])}L${f(p[1][0])} ${f(p[1][1])}A${f(rb)} ${f(rb)} 0 0 1 ${f(p[2][0])} ${f(p[2][1])}L${f(p[3][0])} ${f(p[3][1])}`;
-      draw(mk(g, "path", { d }));
-    }
-    const [lx, ly] = P(R * 0.13, a + 36);
+    const [lx, ly] = P(R * 0.13, i * 72 - 54);
     draw(mk(g, "circle", { cx: f(lx), cy: f(ly), r: f(R * 0.022) }));
   }
   for (let i = 0; i < 90; i++) {
@@ -114,6 +117,7 @@ export function startDial(stage: HTMLElement, pin: HTMLElement, svg: SVGSVGEleme
       const s = stepAt(v);
       if (s !== last) {
         last = s;
+        svg.classList.toggle("dial-ok", s >= PAID_ZONE);
         big.textContent = STEPS[s].label;
         small.innerHTML = `${STEPS[s].info.toUpperCase()}<tspan dx="10" class="rp"></tspan><tspan dx="4">R/MIN</tspan>`;
         if (s > 0) live.textContent = `${STEPS[s].label}: ${STEPS[s].info}`;
