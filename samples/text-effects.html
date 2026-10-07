@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Headline Text Effects</title>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  :root { --hero: #f3f0e9; --ink: #14130f; --ink-2: #45423b; --ink-3: #6e6a61; --accent: #9a5b1e; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: #e9e7e2; color: var(--ink); font-family: "General Sans", system-ui, sans-serif; padding: 28px 16px 60px; }
+  .page { max-width: 1180px; margin: 0 auto; display: grid; gap: 20px; }
+  .intro { font-size: 15px; color: var(--ink-2); line-height: 1.55; max-width: 72ch; }
+  .intro b { color: var(--ink); }
+  .card { background: var(--hero); border-radius: 14px; padding: clamp(28px, 5vw, 56px); border: 1px solid #e0dccf; }
+  .tag { font-family: "Fragment Mono", monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+  .tag b { color: var(--accent); font-weight: 400; }
+  h1 { font-weight: 400; font-size: clamp(2.6rem, 5.6vw, 5.25rem); line-height: 1.02; letter-spacing: -0.035em; margin-top: 18px; max-width: 14ch; }
+  .fx { font-family: "Instrument Serif", serif; font-style: italic; letter-spacing: -0.01em; padding-right: .06em;
+        -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+  .why { margin-top: 18px; font-size: 14.5px; color: var(--ink-2); max-width: 70ch; line-height: 1.55; }
+
+  /* 1 · Polish sweep: a bright sheen passes through dark ink, like a buffer pass */
+  .fx-1 { background-image: linear-gradient(105deg, var(--ink) 0 40%, #b98a52 46%, #fff6e6 50%, #b98a52 54%, var(--ink) 60% 100%);
+          background-size: 260% 100%; animation: sweep 3.4s cubic-bezier(.45,.05,.25,1) infinite; }
+  @keyframes sweep { 0% { background-position: 100% 0; } 55%, 100% { background-position: 0% 0; } }
+
+  /* 2 · Chrome: a polished-metal gradient with horizon line, slowly drifting */
+  .fx-2 { background-image: linear-gradient(100deg, transparent 38%, rgb(255 250 240 / .85) 50%, transparent 62%),
+                            linear-gradient(180deg, #1f1c17 0%, #57524a 28%, #c9c2b5 47%, #1a1712 51%, #3d3830 66%, #8f887b 84%, #2a2620 100%);
+          background-size: 300% 100%, 100% 100%; background-repeat: no-repeat; animation: chrome 4.5s ease-in-out infinite; }
+  @keyframes chrome { 0% { background-position: 120% 0, 0 0; } 60%, 100% { background-position: -20% 0, 0 0; } }
+
+  /* 3 · Bronze refinish: letters fill with satin bronze left to right, like a spray pass, then reset */
+  .fx-3 { background-image: linear-gradient(90deg, #7a4614, #c98a4b 45%, #e8c08f 55%, #9a5b1e), linear-gradient(var(--ink), var(--ink));
+          background-size: 0% 100%, 100% 100%; background-repeat: no-repeat; animation: coat 4.2s cubic-bezier(.65,0,.35,1) infinite; }
+  @keyframes coat { 0% { background-size: 0% 100%, 100% 100%; } 45%, 80% { background-size: 100% 100%, 100% 100%; } 100% { background-size: 100% 100%, 100% 100%; opacity: 1; } }
+
+  /* 4 · Metal flake: dark letters with twinkling bronze and white flakes, like a metallic clear coat */
+  .fx-4 { background-color: var(--ink);
+          background-image: radial-gradient(circle, #fff3dc 0 1px, transparent 1.6px), radial-gradient(circle, #c98a4b 0 1.2px, transparent 1.8px), radial-gradient(circle, #e8c08f 0 .9px, transparent 1.5px);
+          background-size: 23px 19px, 31px 27px, 17px 23px; animation: flake 2.6s steps(6) infinite; }
+  @keyframes flake { 0% { background-position: 0 0, 7px 11px, 3px 5px; } 100% { background-position: 23px 19px, -24px 38px, 20px -18px; } }
+
+  /* 5 · Diamond cut: fine machined rings, like a turned wheel face, rotating inside the letters */
+  .fx-5 { background-image: repeating-radial-gradient(circle at 30% 120%, #1a1712 0 1.1px, #5e584e 1.5px, #b8b0a2 1.9px, #2e2a23 2.4px, #1a1712 2.8px);
+          background-size: 220% 220%; animation: lathe 7s linear infinite; }
+  @keyframes lathe { 0% { background-position: 0% 0%; } 50% { background-position: 100% 60%; } 100% { background-position: 0% 0%; } }
+
+  @media (prefers-reduced-motion: reduce) { .fx { animation: none !important; } .fx-3 { background-size: 100% 100%, 100% 100%; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <p class="intro"><b>Five animated effects inside “wheel refinishing”.</b> Each effect lives only inside the letters; the rest of the headline stays plain. They respect reduced-motion settings (shown still).</p>
+
+  <section class="card"><p class="tag"><b>1 · Polish sweep</b> · a bright sheen passes through the letters, like a buffing pass</p>
+    <h1>One-stop solution for <span class="fx fx-1">wheel refinishing</span> businesses</h1>
+    <p class="why">The cleanest and most premium. Dark letters most of the time, with a short warm highlight every 3.4 seconds.</p></section>
+
+  <section class="card"><p class="tag"><b>2 · Chrome</b> · polished-metal gradient with a drifting reflection</p>
+    <h1>One-stop solution for <span class="fx fx-2">wheel refinishing</span> businesses</h1>
+    <p class="why">Looks like a chrome wheel lip: a horizon line through the middle of the letters and a slow moving reflection. The most automotive.</p></section>
+
+  <section class="card"><p class="tag"><b>3 · Bronze refinish</b> · letters fill with satin bronze, left to right</p>
+    <h1>One-stop solution for <span class="fx fx-3">wheel refinishing</span> businesses</h1>
+    <p class="why">Tells the story: the words get “refinished” in your bronze accent, like a spray pass, then reset. The most on-brand.</p></section>
+
+  <section class="card"><p class="tag"><b>4 · Metal flake</b> · twinkling flakes in a dark clear coat</p>
+    <h1>One-stop solution for <span class="fx fx-4">wheel refinishing</span> businesses</h1>
+    <p class="why">Like metallic paint up close: tiny bronze and white flakes sparkle inside the letters. Subtle from afar, rich up close.</p></section>
+
+  <section class="card"><p class="tag"><b>5 · Diamond cut</b> · machined rings turning inside the letters</p>
+    <h1>One-stop solution for <span class="fx fx-5">wheel refinishing</span> businesses</h1>
+    <p class="why">Fine concentric rings like a diamond-cut wheel face, slowly moving as if on the lathe. The most technical.</p></section>
+</div>
+</body>
+</html>

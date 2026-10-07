@@ -4,7 +4,9 @@
       "cream-palette"
     ],
     "ignoreFiles": [
-      "samples/font-sayeed.html"
+      "samples/font-sayeed.html",
+      "samples/text-effects.html",
+      "samples/text-wheel.html"
     ],
     "ignoreValues": [
       {

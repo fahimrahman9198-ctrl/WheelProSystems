@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rolling Wheel Text</title>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  :root { --hero: #f3f0e9; --ink: #14130f; --ink-2: #45423b; --ink-3: #6e6a61; --accent: #9a5b1e; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: #e9e7e2; color: var(--ink); font-family: "General Sans", system-ui, sans-serif; padding: 28px 16px 60px; }
+  .page { max-width: 1180px; margin: 0 auto; display: grid; gap: 20px; }
+  .intro { font-size: 15px; color: var(--ink-2); line-height: 1.55; max-width: 72ch; }
+  .intro b { color: var(--ink); }
+  .card { background: var(--hero); border-radius: 14px; padding: clamp(28px, 5vw, 56px); border: 1px solid #e0dccf; }
+  .tag { font-family: "Fragment Mono", monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+  .tag b { color: var(--accent); font-weight: 400; }
+  h1 { font-weight: 400; font-size: clamp(2.6rem, 5.6vw, 5.25rem); line-height: 1.02; letter-spacing: -0.035em; margin-top: 18px; max-width: 14ch; }
+  .fx { font-family: "Instrument Serif", serif; font-style: italic; letter-spacing: -0.01em; padding-right: .06em;
+        -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+  .why { margin-top: 18px; font-size: 14.5px; color: var(--ink-2); max-width: 70ch; line-height: 1.55; }
+
+  /* 1 · Polish sweep: a bright sheen passes through dark ink, like a buffer pass */
+  .fx-1 { background-image: linear-gradient(105deg, var(--ink) 0 40%, #b98a52 46%, #fff6e6 50%, #b98a52 54%, var(--ink) 60% 100%);
+          background-size: 260% 100%; animation: sweep 3.4s cubic-bezier(.45,.05,.25,1) infinite; }
+  @keyframes sweep { 0% { background-position: 100% 0; } 55%, 100% { background-position: 0% 0; } }
+
+  /* 2 · Chrome: a polished-metal gradient with horizon line, slowly drifting */
+  .fx-2 { background-image: linear-gradient(100deg, transparent 38%, rgb(255 250 240 / .85) 50%, transparent 62%),
+                            linear-gradient(180deg, #1f1c17 0%, #57524a 28%, #c9c2b5 47%, #1a1712 51%, #3d3830 66%, #8f887b 84%, #2a2620 100%);
+          background-size: 300% 100%, 100% 100%; background-repeat: no-repeat; animation: chrome 4.5s ease-in-out infinite; }
+  @keyframes chrome { 0% { background-position: 120% 0, 0 0; } 60%, 100% { background-position: -20% 0, 0 0; } }
+
+  /* 3 · Bronze refinish: letters fill with satin bronze left to right, like a spray pass, then reset */
+  .fx-3 { background-image: linear-gradient(90deg, #7a4614, #c98a4b 45%, #e8c08f 55%, #9a5b1e), linear-gradient(var(--ink), var(--ink));
+          background-size: 0% 100%, 100% 100%; background-repeat: no-repeat; animation: coat 4.2s cubic-bezier(.65,0,.35,1) infinite; }
+  @keyframes coat { 0% { background-size: 0% 100%, 100% 100%; } 45%, 80% { background-size: 100% 100%, 100% 100%; } 100% { background-size: 100% 100%, 100% 100%; opacity: 1; } }
+
+  /* 4 · Metal flake: dark letters with twinkling bronze and white flakes, like a metallic clear coat */
+  .fx-4 { background-color: var(--ink);
+          background-image: radial-gradient(circle, #fff3dc 0 1px, transparent 1.6px), radial-gradient(circle, #c98a4b 0 1.2px, transparent 1.8px), radial-gradient(circle, #e8c08f 0 .9px, transparent 1.5px);
+          background-size: 23px 19px, 31px 27px, 17px 23px; animation: flake 2.6s steps(6) infinite; }
+  @keyframes flake { 0% { background-position: 0 0, 7px 11px, 3px 5px; } 100% { background-position: 23px 19px, -24px 38px, 20px -18px; } }
+
+  /* 5 · Diamond cut: fine machined rings, like a turned wheel face, rotating inside the letters */
+  .fx-5 { background-image: repeating-radial-gradient(circle at 30% 120%, #1a1712 0 1.1px, #5e584e 1.5px, #b8b0a2 1.9px, #2e2a23 2.4px, #1a1712 2.8px);
+          background-size: 220% 220%; animation: lathe 7s linear infinite; }
+  @keyframes lathe { 0% { background-position: 0% 0%; } 50% { background-position: 100% 60%; } 100% { background-position: 0% 0%; } }
+
+  @media (prefers-reduced-motion: reduce) { .fx { animation: none !important; } .fx-3 { background-size: 100% 100%, 100% 100%; } }
+
+  .roll { background-repeat: no-repeat; }
+  /* 1 · Bronze wheel rolls through dark letters */
+  .r1 { background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20200%20200%22%3E%3Cg%3E%3CanimateTransform%20attributeName%3D%22transform%22%20type%3D%22rotate%22%20from%3D%220%20100%20100%22%20to%3D%22360%20100%20100%22%20dur%3D%221.1s%22%20repeatCount%3D%22indefinite%22/%3E%0A%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%2296%22%20fill%3D%22%239a5b1e%22/%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%2296%22%20fill%3D%22none%22%20stroke%3D%22%23f6e3c6%22%20stroke-width%3D%226%22/%3E%0A%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%2278%22%20fill%3D%22none%22%20stroke%3D%22%23f6e3c6%22%20stroke-width%3D%223.5999999999999996%22/%3E%3Cpath%20transform%3D%22rotate%280%20100%20100%29%22%20d%3D%22M92%2034%20L108%2034%20L104%2086%20L96%2086%20Z%22%20fill%3D%22%23f6e3c6%22/%3E%3Cpath%20transform%3D%22rotate%2845%20100%20100%29%22%20d%3D%22M92%2034%20L108%2034%20L104%2086%20L96%2086%20Z%22%20fill%3D%22%23f6e3c6%22/%3E%3Cpath%20transform%3D%22rotate%2890%20100%20100%29%22%20d%3D%22M92%2034%20L108%2034%20L104%2086%20L96%2086%20Z%22%20fill%3D%22%23f6e3c6%22/%3E%3Cpath%20transform%3D%22rotate%28135%20100%20100%29%22%20d%3D%22M92%2034%20L108%2034%20L104%2086%20L96%2086%20Z%22%20fill%3D%22%23f6e3c6%22/%3E%3Cpath%20transform%3D%22rotate%28180%20100%20100%29%22%20d%3D%22M92%2034%20L108%2034%20L104%2086%20L96%2086%20Z%22%20fill%3D%22%23f6e3c6%22/%3E%3Cpath%20transform%3D%22rotate%28225%20100%20100%29%22%20d%3D%22M92%2034%20L108%2034%20L104%2086%20L96%2086%20Z%22%20fill%3D%22%23f6e3c6%22/%3E%3Cpath%20transform%3D%22rotate%28270%20100%20100%29%22%20d%3D%22M92%2034%20L108%2034%20L104%2086%20L96%2086%20Z%22%20fill%3D%22%23f6e3c6%22/%3E%3Cpath%20transform%3D%22rotate%28315%20100%20100%29%22%20d%3D%22M92%2034%20L108%2034%20L104%2086%20L96%2086%20Z%22%20fill%3D%22%23f6e3c6%22/%3E%0A%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%2220%22%20fill%3D%22none%22%20stroke%3D%22%23f6e3c6%22%20stroke-width%3D%224.800000000000001%22/%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%226%22%20fill%3D%22%23f6e3c6%22/%3E%3C/g%3E%3C/svg%3E"), linear-gradient(var(--ink), var(--ink));
+         background-size: auto 80%, 100% 100%; animation: roll 3.6s cubic-bezier(.45,0,.55,1) infinite; }
+  /* 2 · The wheel leaves the letters refinished in bronze behind it */
+  .r2 { background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20200%20200%22%3E%3Cg%3E%3CanimateTransform%20attributeName%3D%22transform%22%20type%3D%22rotate%22%20from%3D%220%20100%20100%22%20to%3D%22360%20100%20100%22%20dur%3D%221.1s%22%20repeatCount%3D%22indefinite%22/%3E%0A%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%2296%22%20fill%3D%22%23c98a4b%22/%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%2296%22%20fill%3D%22none%22%20stroke%3D%22%2314130f%22%20stroke-width%3D%226%22/%3E%0A%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%2278%22%20fill%3D%22none%22%20stroke%3D%22%2314130f%22%20stroke-width%3D%223.5999999999999996%22/%3E%3Cpath%20transform%3D%22rotate%280%20100%20100%29%22%20d%3D%22M92%2034%20L108%2034%20L104%2086%20L96%2086%20Z%22%20fill%3D%22%2314130f%22/%3E%3Cpath%20transform%3D%22rotate%2845%20100%20100%29%22%20d%3D%22M92%2034%20L108%2034%20L104%2086%20L96%2086%20Z%22%20fill%3D%22%2314130f%22/%3E%3Cpath%20transform%3D%22rotate%2890%20100%20100%29%22%20d%3D%22M92%2034%20L108%2034%20L104%2086%20L96%2086%20Z%22%20fill%3D%22%2314130f%22/%3E%3Cpath%20transform%3D%22rotate%28135%20100%20100%29%22%20d%3D%22M92%2034%20L108%2034%20L104%2086%20L96%2086%20Z%22%20fill%3D%22%2314130f%22/%3E%3Cpath%20transform%3D%22rotate%28180%20100%20100%29%22%20d%3D%22M92%2034%20L108%2034%20L104%2086%20L96%2086%20Z%22%20fill%3D%22%2314130f%22/%3E%3Cpath%20transform%3D%22rotate%28225%20100%20100%29%22%20d%3D%22M92%2034%20L108%2034%20L104%2086%20L96%2086%20Z%22%20fill%3D%22%2314130f%22/%3E%3Cpath%20transform%3D%22rotate%28270%20100%20100%29%22%20d%3D%22M92%2034%20L108%2034%20L104%2086%20L96%2086%20Z%22%20fill%3D%22%2314130f%22/%3E%3Cpath%20transform%3D%22rotate%28315%20100%20100%29%22%20d%3D%22M92%2034%20L108%2034%20L104%2086%20L96%2086%20Z%22%20fill%3D%22%2314130f%22/%3E%0A%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%2220%22%20fill%3D%22none%22%20stroke%3D%22%2314130f%22%20stroke-width%3D%224.800000000000001%22/%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%226%22%20fill%3D%22%2314130f%22/%3E%3C/g%3E%3C/svg%3E"), linear-gradient(90deg, #7a4614, #c98a4b 60%, #e8c08f), linear-gradient(var(--ink), var(--ink));
+         background-size: auto 80%, 0% 100%, 100% 100%; animation: roll2 4.2s cubic-bezier(.45,0,.55,1) infinite; }
+  /* 3 · Blueprint line wheel crosses big through ink letters */
+  .r3 { background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20200%20200%22%3E%3Cg%3E%3CanimateTransform%20attributeName%3D%22transform%22%20type%3D%22rotate%22%20from%3D%220%20100%20100%22%20to%3D%22360%20100%20100%22%20dur%3D%221.1s%22%20repeatCount%3D%22indefinite%22/%3E%0A%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%2296%22%20fill%3D%22none%22/%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%2296%22%20fill%3D%22none%22%20stroke%3D%22%23efe9dc%22%20stroke-width%3D%229%22/%3E%0A%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%2278%22%20fill%3D%22none%22%20stroke%3D%22%23efe9dc%22%20stroke-width%3D%225.4%22/%3E%3Cpath%20d%3D%22M100%20100%20L170.0%20100.0%22%20stroke%3D%22%23efe9dc%22%20stroke-width%3D%229%22%20stroke-linecap%3D%22round%22/%3E%3Cpath%20d%3D%22M100%20100%20L149.49750751954585%20149.49744184654904%22%20stroke%3D%22%23efe9dc%22%20stroke-width%3D%229%22%20stroke-linecap%3D%22round%22/%3E%3Cpath%20d%3D%22M100%20100%20L100.00009287564276%20169.99999999993838%22%20stroke%3D%22%23efe9dc%22%20stroke-width%3D%229%22%20stroke-linecap%3D%22round%22/%3E%3Cpath%20d%3D%22M100%20100%20L50.50262382653492%20149.49757319245552%22%20stroke%3D%22%23efe9dc%22%20stroke-width%3D%229%22%20stroke-linecap%3D%22round%22/%3E%3Cpath%20d%3D%22M100%20100%20L30.000000000246445%20100.00018575128553%22%20stroke%3D%22%23efe9dc%22%20stroke-width%3D%229%22%20stroke-linecap%3D%22round%22/%3E%3Cpath%20d%3D%22M100%20100%20L50.50236113472196%2050.50268949970598%22%20stroke%3D%22%23efe9dc%22%20stroke-width%3D%229%22%20stroke-linecap%3D%22round%22/%3E%3Cpath%20d%3D%22M100%20100%20L99.99972137307167%2030.00000000055452%22%20stroke%3D%22%23efe9dc%22%20stroke-width%3D%229%22%20stroke-linecap%3D%22round%22/%3E%3Cpath%20d%3D%22M100%20100%20L149.4972448270358%2050.502295461986535%22%20stroke%3D%22%23efe9dc%22%20stroke-width%3D%229%22%20stroke-linecap%3D%22round%22/%3E%0A%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%2220%22%20fill%3D%22none%22%20stroke%3D%22%23efe9dc%22%20stroke-width%3D%227.2%22/%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%226%22%20fill%3D%22%23efe9dc%22/%3E%3C/g%3E%3C/svg%3E"), linear-gradient(var(--ink), var(--ink));
+         background-size: auto 90%, 100% 100%; animation: roll3 4s linear infinite; }
+  @keyframes roll { 0% { background-position: -12% 50%, 0 0; } 100% { background-position: 112% 50%, 0 0; } }
+  @keyframes roll2 { 0% { background-position: -12% 50%, 0 0, 0 0; background-size: auto 80%, 0% 100%, 100% 100%; }
+                      80% { background-position: 112% 50%, 0 0, 0 0; background-size: auto 80%, 100% 100%, 100% 100%; }
+                      100% { background-position: 112% 50%, 0 0, 0 0; background-size: auto 80%, 100% 100%, 100% 100%; } }
+  @keyframes roll3 { 0% { background-position: -20% 55%, 0 0; } 100% { background-position: 120% 55%, 0 0; } }
+  @media (prefers-reduced-motion: reduce) { .roll { animation: none !important; background-position: 45% 50%, 0 0, 0 0 !important; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <p class="intro"><b>A wheel rolling inside “wheel refinishing”.</b> The wheel only shows through the letters; the rest of the headline stays plain. With reduced motion it shows still.</p>
+  <section class="card"><p class="tag"><b>1 · Bronze wheel</b> · a bronze rim rolls through the dark letters, from “wheel” to “refinishing”</p>
+    <h1>One-stop solution for <span class="fx roll r1">wheel refinishing</span> businesses</h1>
+    <p class="why">Clean and readable: the letters stay ink, and a bronze wheel rolls across inside them, then starts again. The clearest story.</p></section>
+  <section class="card"><p class="tag"><b>2 · Refinish trail</b> · the wheel rolls across and leaves the letters refinished in bronze</p>
+    <h1>One-stop solution for <span class="fx roll r2">wheel refinishing</span> businesses</h1>
+    <p class="why">The wheel rolls through, and everything behind it turns satin bronze, as if the wheel itself refinished the words. Most on-brand.</p></section>
+  <section class="card"><p class="tag"><b>3 · Blueprint wheel</b> · a large line-drawn wheel, like the hero dial, crosses inside the letters</p>
+    <h1>One-stop solution for <span class="fx roll r3">wheel refinishing</span> businesses</h1>
+    <p class="why">A big outline wheel in the same blueprint style as the speedometer crosses through, spokes turning. Ties the headline to the dial.</p></section>
+</div>
+</body>
+</html>

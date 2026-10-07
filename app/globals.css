@@ -274,6 +274,7 @@ html.lenis body {
 .deck-stage {
   position: sticky;
   top: 0;
+  height: 100vh;
   height: 100svh;
   overflow: hidden;
   display: flex;
@@ -425,5 +426,41 @@ html.lenis body {
 @media (max-width: 1023px) {
   .dial-curve.big {
     font-size: 24px;
+  }
+}
+
+/* ---- Large screens: widen the layout and scale type a step so the page
+   doesn't sit small in the middle of 1920px+ monitors. ---- */
+@media (min-width: 1800px) {
+  html {
+    font-size: 112.5%;
+  }
+  .wrap {
+    max-width: 1440px;
+  }
+}
+@media (min-width: 2400px) {
+  html {
+    font-size: 125%;
+  }
+  .wrap {
+    max-width: 1680px;
+  }
+}
+
+/* ---- Older browsers ---- */
+/* svh (small viewport height) is Safari 15.4+/Chrome 108+; give everything a vh height first. */
+@supports not (height: 100svh) {
+  .h-\[100svh\] {
+    height: 100vh;
+  }
+  .h-\[220svh\] {
+    height: 220vh;
+  }
+}
+/* Without backdrop blur the glass nav would be see-through; make it solid instead. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .nav-glass {
+    background: var(--bg);
   }
 }

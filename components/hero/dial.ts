@@ -76,7 +76,7 @@ export function startDial(stage: HTMLElement, pin: HTMLElement, svg: SVGSVGEleme
     // so the curved labels land in the clear space under them.
     const copy = stage.querySelector("h1")?.parentElement;
     const copyEnd = copy ? copy.getBoundingClientRect().bottom - stage.getBoundingClientRect().top : H * 0.6;
-    const R = m ? Math.min(W * 0.68, 300) : Math.min(H * 0.38, 300), cx = m ? W + W * 0.12 : W - 10;
+    const R = m ? Math.min(W * 0.68, 300) : Math.min(H * 0.38, W * 0.24, 480), cx = m ? W + W * 0.12 : W - 10;
     const cy = m ? Math.max(H * 0.8, copyEnd + 200) : H - 34;
     const r0 = R + (m ? 44 : 58), r1 = R + (m ? 62 : 80), A = (v: number) => 180 + (v / 8) * 90;
     const pt = (r: number, v: number) => { const [x, y] = P(r, A(v)); return [cx + x, cy + y]; };
