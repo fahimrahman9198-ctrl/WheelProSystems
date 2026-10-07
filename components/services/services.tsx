@@ -203,7 +203,7 @@ export function Services() {
             <div
               className="relative order-1 rounded-lg bg-[#0e0f11] p-4 sm:p-6 lg:order-2 lg:col-span-8"
             >
-              <div className="grid gap-3 sm:grid-cols-[1fr_120px] lg:grid-cols-[1fr_132px]">
+              <div className="relative grid items-start gap-3 sm:grid-cols-[1fr_128px] lg:grid-cols-[1fr_148px]">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-white sm:aspect-[16/10]">
                   <motion.div
                     className="flex h-full cursor-grab touch-pan-y active:cursor-grabbing"
@@ -236,53 +236,35 @@ export function Services() {
                     ))}
                   </motion.div>
                 </div>
-                <div className="hidden flex-col gap-2 sm:flex">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-md border border-[#2a2a2f]">
-                    <Image src="/photos/rash-lip.jpg" alt="Customer photo of curb rash on a silver wheel" fill sizes="132px" className="object-cover" />
+                <div className="hidden flex-col gap-2 sm:flex damage-col lg:self-stretch lg:pb-[172px]">
+                  <div className="relative aspect-square overflow-hidden rounded-md border border-[#2a2a2f] lg:aspect-auto lg:min-h-0 lg:flex-1">
+                    <Image src="/photos/rash-lip.jpg" alt="Customer photo of curb rash on a silver wheel" fill sizes="148px" className="object-cover" />
                   </div>
-                  <span className="text-[13px] leading-tight font-medium text-on-dark">
-                    Damage
-                    <br />
-                    received
-                  </span>
+                  <span className="text-[13px] leading-tight font-medium whitespace-nowrap text-on-dark">Damage received</span>
+                </div>
+                {/* status card: overlaps the screen on desktop, sits below it on phones */}
+                <div className="status-corner relative mt-0 rounded-lg p-4 sm:p-5 sm:col-span-2 lg:absolute lg:right-0 lg:bottom-0 lg:mt-0 lg:w-[300px] lg:shadow-lg">
+                  <p className="text-[13px] font-medium text-ink-2">Job status · Jordan M.</p>
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.div
+                      key={s.id}
+                      initial={reduce ? false : { opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={reduce ? undefined : { opacity: 0, y: -6, transition: { duration: 0.2 } }}
+                      transition={{ duration: 0.45, ease: easeOut }}
+                    >
+                      <p className="mt-1 text-[length:clamp(1.8rem,2.7vw,2.4rem)] leading-none font-normal tracking-[-0.03em] text-ink [font-family:var(--font-display)]">
+                        {s.status.title}
+                      </p>
+                      <div className="mt-4 flex items-center justify-between border-t border-line-strong pt-3 text-[13px]">
+                        <span className="text-ink-2">{s.status.left}</span>
+                        <span className="t-mono text-success">{s.status.right}</span>
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
                 </div>
               </div>
 
-              {/* status card: overlaps the screen on desktop, sits below it on phones */}
-              <div className="relative mt-3 rounded-lg border border-[#b9bcc4] bg-[#e6e7ea] p-4 outline outline-1 outline-offset-4 outline-white/25 sm:p-5 lg:absolute lg:right-6 lg:bottom-16 lg:mt-0 lg:w-[300px] lg:shadow-lg">
-                <p className="text-[13px] font-medium text-ink-2">Job status · Jordan M.</p>
-                <AnimatePresence mode="wait" initial={false}>
-                  <motion.div
-                    key={s.id}
-                    initial={reduce ? false : { opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={reduce ? undefined : { opacity: 0, y: -6, transition: { duration: 0.2 } }}
-                    transition={{ duration: 0.45, ease: easeOut }}
-                  >
-                    <p className="mt-1 text-[length:clamp(1.8rem,2.7vw,2.4rem)] leading-none font-normal tracking-[-0.03em] text-ink [font-family:var(--font-display)]">
-                      {s.status.title}
-                    </p>
-                    <div className="mt-4 flex items-center justify-between border-t border-line-strong pt-3 text-[13px]">
-                      <span className="text-ink-2">{s.status.left}</span>
-                      <span className="t-mono text-success">{s.status.right}</span>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              <div className="mt-4 flex items-center justify-between gap-4 sm:mt-5">
-                <span className="text-[12.5px] text-[#71717a]">Tap the screen or swipe for the next step</span>
-                <div className="flex gap-2" aria-hidden="true">
-                  {services.map((sv, i) => (
-                    <button
-                      key={sv.id}
-                      tabIndex={-1}
-                      onClick={() => choose(i)}
-                      className={`h-1.5 transition-all duration-500 ${i === active ? "w-6 bg-on-dark" : "w-1.5 bg-[#3f3f46] hover:bg-[#71717a]"}`}
-                    />
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
         </div>
