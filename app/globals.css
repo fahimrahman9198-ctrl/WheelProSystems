@@ -315,21 +315,7 @@ html.lenis body {
   transform: translateY(120vh);
   will-change: transform;
 }
-.deck-side {
-  position: relative;
-  z-index: 30;
-  order: -1;
-  max-width: 560px;
-  padding: 96px 20px 0;
-}
 @media (min-width: 1280px) {
-  .deck-side {
-    position: absolute;
-    left: 56px;
-    bottom: 56px;
-    max-width: 340px;
-    padding: 0;
-  }
   .deck-card {
     height: min(560px, 74svh);
   }
@@ -360,11 +346,6 @@ html.lenis body {
   inset: auto;
   height: 540px;
   transform: none;
-}
-.deck-track[data-static] .deck-side {
-  position: relative;
-  left: auto;
-  bottom: auto;
 }
 
 /* ---- Hero: rev dial ---- */

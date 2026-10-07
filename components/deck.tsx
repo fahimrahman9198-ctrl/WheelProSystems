@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import { ArrowButton } from "./ui/button";
 
 // "One system" deck: the section pins while five product cards are dealt onto
 // a stack, one per stage of a job. A giant headline sits behind and blurs as
@@ -57,12 +56,11 @@ const ease = (x: number) => 1 - Math.pow(1 - x, 3);
 export function Deck() {
   const trackRef = useRef<HTMLDivElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
-  const countRef = useRef<HTMLSpanElement>(null);
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
-    const track = trackRef.current, bg = bgRef.current, count = countRef.current;
-    if (!track || !bg || !count) return;
+    const track = trackRef.current, bg = bgRef.current;
+    if (!track || !bg) return;
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
       track.dataset.static = "";
       return;
@@ -74,11 +72,9 @@ export function Deck() {
       if (r.bottom > 0 && r.top < vh) {
         const p = clamp(-r.top / (track.offsetHeight - vh));
         const seg = 1 / (N + 0.4);
-        let shown = 1;
         cardRefs.current.forEach((c, i) => {
           if (!c) return;
           const e = ease(clamp((p - i * seg) / (seg * 0.85)));
-          if (e > 0.5) shown = i + 1;
           const [rr, rx, ry] = REST[i], [er, ex] = ENTER[i];
           const rot = er + (rr - er) * e, x = (ex + (rx - ex) * e) * sx, y = (1 - e) * vh * 1.15 + ry * e;
           c.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) rotate(${rot.toFixed(2)}deg)`;
@@ -86,7 +82,6 @@ export function Deck() {
         const b = clamp(p * 4);
         bg.style.filter = `blur(${(b * 12).toFixed(1)}px)`;
         bg.style.opacity = String(1 - b * 0.55);
-        count.textContent = `0${shown}`;
       }
       raf = requestAnimationFrame(frame);
     };
@@ -144,22 +139,9 @@ export function Deck() {
             ))}
           </div>
 
-          <div className="deck-side">
-            <p className="t-mono mb-3 text-[13px] tracking-[0.08em] text-ink-2">
-              <span ref={countRef}>01</span> / 0{N}
-            </p>
-            <h2 id="deck-title" className="text-[length:clamp(1.6rem,2.3vw,2.1rem)] leading-[1.05] font-normal tracking-[-0.03em] text-ink [font-family:var(--font-display)]">
-              One job. Five steps. Zero chasing.
-            </h2>
-            <p className="mt-3 text-[15px] leading-relaxed text-ink-2">
-              WheelPro is shop management software for wheel repair and refinishing businesses. Lead capture,
-              quoting, follow-ups, deposits and invoicing run as one system, from the first enquiry to money in
-              the bank.
-            </p>
-            <ArrowButton href="#book" className="mt-6">
-              Book a meeting
-            </ArrowButton>
-          </div>
+          <h2 id="deck-title" className="sr-only">
+            WheelPro: lead capture, quoting, follow-ups, deposits and invoicing in one system
+          </h2>
 
         </div>
       </div>
