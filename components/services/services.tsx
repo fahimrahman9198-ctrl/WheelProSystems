@@ -72,6 +72,19 @@ export function Services() {
   const inView = useInView(ref, { amount: 0.35 });
   const playing = !paused && inView && !reduce;
 
+  // A tap can start a drag that never reports its end (common on touch), which
+  // would leave autoplay paused for good; any pointer release clears the pause.
+  useEffect(() => {
+    if (!paused) return;
+    const resume = () => setPaused(false);
+    window.addEventListener("pointerup", resume);
+    window.addEventListener("pointercancel", resume);
+    return () => {
+      window.removeEventListener("pointerup", resume);
+      window.removeEventListener("pointercancel", resume);
+    };
+  }, [paused]);
+
   useEffect(() => {
     if (!playing) return;
     const t = setTimeout(() => {
@@ -186,11 +199,9 @@ export function Services() {
               </AnimatePresence>
             </div>
 
-            {/* Dark showcase card: screens slide like a carousel (auto, tap, swipe), status card follows the tab. */}
+            {/* Dark showcase card: screens advance every 3s on their own (paused only mid-swipe), tap or swipe to skip; status card follows the tab. */}
             <div
               className="relative order-1 rounded-lg bg-[#0e0f11] p-4 sm:p-6 lg:order-2 lg:col-span-8"
-              onMouseEnter={() => setPaused(true)}
-              onMouseLeave={() => setPaused(false)}
             >
               <div className="grid gap-3 sm:grid-cols-[1fr_120px] lg:grid-cols-[1fr_132px]">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-white sm:aspect-[16/10]">
@@ -215,6 +226,7 @@ export function Services() {
                         <Image
                           src={sv.image}
                           alt={i === active ? sv.alt : ""}
+                          loading={i === 0 ? "eager" : "lazy"}
                           fill
                           draggable={false}
                           sizes="(min-width: 1200px) 600px, 100vw"
@@ -228,7 +240,7 @@ export function Services() {
                   <div className="relative aspect-[4/3] overflow-hidden rounded-md border border-[#2a2a2f]">
                     <Image src="/photos/rash-lip.jpg" alt="Customer photo of curb rash on a silver wheel" fill sizes="132px" className="object-cover" />
                   </div>
-                  <span className="text-[13px] leading-tight font-semibold text-on-dark">
+                  <span className="text-[13px] leading-tight font-medium text-on-dark">
                     Damage
                     <br />
                     received
@@ -237,7 +249,7 @@ export function Services() {
               </div>
 
               {/* status card: overlaps the screen on desktop, sits below it on phones */}
-              <div className="relative mt-3 rounded-lg bg-[#e6e7ea] p-4 sm:p-5 lg:absolute lg:right-6 lg:bottom-16 lg:mt-0 lg:w-[300px] lg:shadow-lg">
+              <div className="relative mt-3 rounded-lg border border-[#b9bcc4] bg-[#e6e7ea] p-4 outline outline-1 outline-offset-4 outline-white/25 sm:p-5 lg:absolute lg:right-6 lg:bottom-16 lg:mt-0 lg:w-[300px] lg:shadow-lg">
                 <p className="text-[13px] font-medium text-ink-2">Job status · Jordan M.</p>
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.div
@@ -247,12 +259,12 @@ export function Services() {
                     exit={reduce ? undefined : { opacity: 0, y: -6, transition: { duration: 0.2 } }}
                     transition={{ duration: 0.45, ease: easeOut }}
                   >
-                    <p className="mt-1 text-[clamp(1.75rem,2.6vw,2.25rem)] leading-none font-semibold text-ink [font-family:var(--font-display)]">
+                    <p className="mt-1 text-[length:clamp(1.8rem,2.7vw,2.4rem)] leading-none font-normal tracking-[-0.03em] text-ink [font-family:var(--font-display)]">
                       {s.status.title}
                     </p>
                     <div className="mt-4 flex items-center justify-between border-t border-line-strong pt-3 text-[13px]">
                       <span className="text-ink-2">{s.status.left}</span>
-                      <span className="t-mono font-semibold text-success">{s.status.right}</span>
+                      <span className="t-mono text-success">{s.status.right}</span>
                     </div>
                   </motion.div>
                 </AnimatePresence>

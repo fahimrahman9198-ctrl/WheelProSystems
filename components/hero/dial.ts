@@ -17,7 +17,7 @@ const STEPS = [
 ];
 const RED = 7.5; // red line starts here (scale runs 0–8)
 const PAID_ZONE = 4; // from "Invoice sent" on, the red line turns green
-const WHEEL_SPIN = 0.25; // wheel degrees per scrolled pixel
+const DONE = 0.85; // share of the pinned scroll used by the sweep; the rest is a short hold
 
 const f = (n: number) => n.toFixed(1);
 const P = (r: number, deg: number): [number, number] => {
@@ -149,8 +149,8 @@ export function startDial(stage: HTMLElement, pin: HTMLElement, svg: SVGSVGEleme
   const ro = new ResizeObserver(build);
   ro.observe(stage);
 
-  // Needle follows scroll progress through the pinned hero (or the first
-  // 520px of scroll when the hero isn't pinned, e.g. on phones).
+  // Needle and wheel follow scroll progress through the pinned hero: one full
+  // turn and the whole Lead → Paid sweep finish before the pin releases.
   let target = window.scrollY, eased = target, raf = 0;
   const onScroll = () => (target = window.scrollY);
   window.addEventListener("scroll", onScroll, { passive: true });
@@ -199,10 +199,11 @@ export function startDial(stage: HTMLElement, pin: HTMLElement, svg: SVGSVGEleme
   }
 
   function frame(t: number) {
-    eased += (target - eased) * (reduce ? 1 : 0.14);
+    eased += (target - eased) * (reduce ? 1 : 0.22);
     const top = pin.offsetTop, span = pin.offsetHeight - window.innerHeight;
-    const p = Math.min(1, Math.max(0, (eased - top) / (span > 300 ? span : 520)));
-    update(0.15 + p * 7.6, reduce ? 0 : (eased - top) * WHEEL_SPIN);
+    const p = Math.min(1, Math.max(0, (eased - top) / Math.max(span, 1)));
+    const k = Math.min(1, p / DONE);
+    update(0.15 + k * 7.6, reduce ? 0 : k * 360);
     if (!document.hidden && stage.getBoundingClientRect().bottom > 0) drawRings(t);
     raf = requestAnimationFrame(frame);
   }

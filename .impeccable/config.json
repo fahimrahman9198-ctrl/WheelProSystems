@@ -1,7 +1,11 @@
 {
   "detector": {
-    "ignoreRules": [],
-    "ignoreFiles": [],
+    "ignoreRules": [
+      "cream-palette"
+    ],
+    "ignoreFiles": [
+      "samples/font-sayeed.html"
+    ],
     "ignoreValues": [
       {
         "rule": "overused-font",

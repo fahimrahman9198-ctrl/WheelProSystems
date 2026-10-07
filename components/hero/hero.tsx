@@ -7,7 +7,7 @@ import { easeOut } from "../ui/motion";
 import { startDial } from "./dial";
 
 const headline = ["One-stop", "solution", "for", "wheel", "refinishing", "businesses"];
-const outlined = new Set([3, 4, 5]);
+const outlined = new Set([3, 4]);
 
 // The description, split so the words for each dial step can react when the
 // needle reaches that step (s = step number in dial.ts, 0 = plain text).
@@ -47,13 +47,14 @@ export function Hero() {
     transition: reduce ? { duration: 0 } : { duration: 0.9, ease: easeOut, delay },
   });
 
-  // On desktop the hero pins while the needle climbs through the job steps.
+  // The hero pins while the wheel makes one full turn and the needle climbs
+  // through the job steps; only then does the page scroll on.
   return (
-    <div ref={pinRef} className="relative lg:h-[150svh]">
+    <div ref={pinRef} className="relative h-[220svh]">
       <section
         id="top"
         ref={heroRef}
-        className="relative h-[100svh] min-h-[760px] overflow-hidden bg-hero lg:sticky lg:top-0 lg:h-[100svh] lg:min-h-[720px]"
+        className="sticky top-0 h-[100svh] min-h-[640px] overflow-hidden bg-hero lg:min-h-[720px]"
       >
         <canvas ref={ringsRef} className="pointer-events-none absolute inset-0 z-0 h-full w-full" aria-hidden="true" />
         <svg ref={dialRef} className="pointer-events-none absolute inset-0 z-[1] h-full w-full" aria-hidden="true" />

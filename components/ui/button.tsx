@@ -8,7 +8,7 @@ export function ArrowButton({ children, className = "", ...props }: LinkProps) {
   return (
     <a
       {...props}
-      className={`group inline-flex h-[52px] items-center gap-3.5 rounded-md bg-ink py-1.5 pr-7 pl-1.5 text-[16px] font-semibold text-white transition-colors duration-[240ms] hover:bg-[#1c1c1f] active:scale-[0.98] ${className}`}
+      className={`group inline-flex h-[52px] items-center gap-3.5 rounded-md bg-ink py-1.5 pr-7 pl-1.5 text-[16px] font-medium text-white transition-colors duration-[240ms] hover:bg-[#1c1c1f] active:scale-[0.98] ${className}`}
     >
       {/* On hover the arrow slides out to the right and a second one slides in from the left. */}
       <span className="relative grid size-10 place-items-center overflow-hidden rounded-sm bg-accent text-white">

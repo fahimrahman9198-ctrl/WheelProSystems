@@ -5,13 +5,36 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
 import { easeOut, Reveal } from "./ui/motion";
 
-// Answers marked TODO need confirming before launch.
+// Each answer states only what the service already does; confirm any new claim before adding it.
 const faqs = [
-  { q: "How long until I'm live?", a: "Most shops are live in two to three weeks. We set up your services, area, finishes and emails for you." },
-  { q: "Do I own my website and customer data?", a: "Yes. Your domain, your website and your customer list belong to you." },
-  { q: "Can I keep my domain and phone number?", a: "Yes. We connect your existing domain and keep your phone number on the site." },
-  { q: "Which payment providers do you use?", a: "Card payments go through Stripe and land straight in your bank account." },
-  { q: "What does it cost?", a: "It depends on what you need. Some shops start with quotes and booking, others want everything. We'll give you a clear price in the meeting." },
+  {
+    q: "What is the typical implementation timeline?",
+    a: "Most businesses are fully operational within two to three weeks. Our team configures your services, service area, finish options and email templates, and walks your staff through the platform before launch.",
+  },
+  {
+    q: "Will WheelPro require changes to our existing operations?",
+    a: "No. WheelPro is designed to integrate with your current workflow. Your repair process remains unchanged, while the platform manages enquiries, quotations, follow-ups, deposits and invoicing.",
+  },
+  {
+    q: "Is the platform suitable for mobile technicians as well as fixed-location shops?",
+    a: "Yes. Jobs can be scheduled as in-shop appointments or mobile visits, with quotations, deposits and invoicing handled consistently across both.",
+  },
+  {
+    q: "Can the platform be customised to our business?",
+    a: "Yes. Every installation is configured around your business: your services, finishes, pricing, service area, branding and customer emails. If your workflow requires something beyond the standard setup, we scope it with you during the consultation and confirm it in your quotation.",
+  },
+  {
+    q: "Can we retain our existing domain, email and phone number?",
+    a: "Yes. We integrate your existing domain, display your current business phone number and connect your Gmail account, so enquiries continue to arrive through your established channels.",
+  },
+  {
+    q: "How are customer payments processed?",
+    a: "All payments are processed securely through Stripe. Customers pay deposits and balances by card or Apple Pay, and funds are paid out directly to your business bank account.",
+  },
+  {
+    q: "How is pricing structured?",
+    a: "Pricing is tailored to the modules your business requires, from lead capture and quoting through to the complete platform. You receive a clear, itemised quotation during your consultation.",
+  },
 ];
 
 export function Faq() {
@@ -23,9 +46,9 @@ export function Faq() {
         <Reveal className="lg:col-span-4">
           <p className="t-label mb-4 text-ink-3">FAQ</p>
           <h2 className="t-h1 [--outline-fill:var(--bg-subtle)]">
-            <span className="t-outline">Questions</span>
+            Frequently asked
             <br />
-            owners ask
+            <span className="t-outline">questions</span>
           </h2>
         </Reveal>
         <div className="lg:col-span-8">
@@ -41,7 +64,7 @@ export function Faq() {
                     className="flex w-full items-center gap-6 py-7 text-left"
                   >
                     <span className="t-mono w-6 text-[13px] text-ink-3">0{i + 1}</span>
-                    <span className="flex-1 text-[clamp(1.125rem,1.8vw,1.5rem)] font-semibold tracking-[-0.02em] text-ink">{f.q}</span>
+                    <span className="flex-1 text-[length:clamp(1.15rem,1.8vw,1.55rem)] font-normal tracking-[-0.025em] text-ink">{f.q}</span>
                     <Plus size={22} strokeWidth={1.5} className={`shrink-0 text-ink transition-transform duration-[400ms] ease-out-expo ${isOpen ? "rotate-45" : ""}`} />
                   </button>
                 </h3>

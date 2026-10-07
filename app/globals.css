@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 :root {
+  --font-body: "General Sans";
+  --font-display: "General Sans";
   --bg: #fcfbf8;
   --bg-subtle: #f5f3ee;
   --bg-muted: #ece9e2;
@@ -51,8 +53,8 @@
   --color-warn-soft: var(--warn-soft);
   --color-danger: var(--danger);
 
-  --font-sans: var(--font-switzer), Arial, sans-serif;
-  --font-mono: var(--font-switzer), Arial, sans-serif;
+  --font-sans: var(--font-body), Arial, sans-serif;
+  --font-mono: var(--font-code), ui-monospace, monospace;
 
   --radius-xs: 2px;
   --radius-sm: 4px;
@@ -75,7 +77,9 @@ html {
 body {
   background: var(--bg);
   color: var(--ink-2);
-  font-family: var(--font-switzer), Arial, sans-serif;
+  font-family: var(--font-body), Arial, sans-serif;
+  /* Medium keeps General Sans easy to read on the warm background. */
+  font-weight: 500;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -120,29 +124,29 @@ p {
 }
 
 .t-display {
-  font-family: var(--font-display), var(--font-switzer), sans-serif;
-  font-size: clamp(2.5rem, 5.2vw, 4.75rem);
-  font-weight: 600;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(2.6rem, 5.6vw, 5.25rem);
+  font-weight: 400;
   line-height: 1.02;
-  letter-spacing: 0;
+  letter-spacing: -0.035em;
 }
 .t-h1 {
-  font-family: var(--font-display), var(--font-switzer), sans-serif;
-  font-size: clamp(2rem, 3.8vw, 3.5rem);
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(2.1rem, 4vw, 3.75rem);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
 }
 .t-h2 {
-  font-family: var(--font-display), var(--font-switzer), sans-serif;
-  font-size: clamp(1.625rem, 2.6vw, 2.375rem);
-  font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.7rem, 2.7vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
 }
 .t-h3 {
   font-size: clamp(1.25rem, 1.6vw, 1.5rem);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.25;
   letter-spacing: -0.02em;
 }
@@ -159,14 +163,15 @@ p {
   letter-spacing: -0.01em;
 }
 .t-label {
+  font-family: var(--font-code), ui-monospace, monospace;
   font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-weight: 400;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   line-height: 1.3;
 }
 .t-mono {
-  font-family: inherit;
+  font-family: var(--font-code), ui-monospace, monospace;
   font-variant-numeric: tabular-nums;
   font-variant-numeric: tabular-nums;
 }
@@ -213,8 +218,13 @@ html.lenis body {
 /* ---- Reference style: outlined second line, cut corners ---- */
 /* Keyword accent switched off: keywords render as normal solid heading text.
    Re-enable by restoring the outline styles here. */
+/* One emphasised word per heading: Instrument Serif italic. */
 .t-outline {
   color: inherit;
+  font-family: var(--font-serif), serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 .on-dark-text {
   --outline: var(--on-dark);
@@ -277,10 +287,10 @@ html.lenis body {
   text-align: center;
   pointer-events: none;
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(5rem, 17vw, 17rem);
+  font-weight: 500;
+  font-size: clamp(4.25rem, 17vw, 17rem);
   line-height: 0.84;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.05em;
   text-transform: uppercase;
   color: var(--ink);
   will-change: filter, opacity;

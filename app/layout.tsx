@@ -1,23 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { Saira_Semi_Condensed } from "next/font/google";
-import localFont from "next/font/local";
+import { Fragment_Mono, Instrument_Serif } from "next/font/google";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import "./globals.css";
 
-const switzer = localFont({
-  src: "./fonts/switzer-variable.woff2",
-  variable: "--font-switzer",
-  weight: "100 900",
-  style: "normal",
-  display: "swap",
-  fallback: ["Arial", "sans-serif"],
-});
-
-// Trial display face for headings (free stand-in for Caudion).
-const display = Saira_Semi_Condensed({
-  variable: "--font-display",
+// Headlines and body use General Sans (Fontshare, free for commercial use),
+// loaded from its CDN in <head> below. These two are the accents:
+// Instrument Serif italic for one emphasised word per heading,
+// Fragment Mono for small uppercase labels and figures.
+const serif = Instrument_Serif({
+  variable: "--font-serif",
   subsets: ["latin"],
-  weight: ["500", "600"],
+  weight: "400",
+  style: ["normal", "italic"],
+  display: "swap",
+});
+const mono = Fragment_Mono({
+  variable: "--font-code",
+  subsets: ["latin"],
+  weight: "400",
   display: "swap",
 });
 
@@ -46,7 +46,12 @@ const jsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${switzer.variable} ${display.variable} antialiased`}>
+    <html lang="en" className={`${serif.variable} ${mono.variable} antialiased`}>
+      <head>
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="" />
+        <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@300,400,500,600,700&display=swap" />
+      </head>
       <body>
         <SmoothScroll />
         {children}

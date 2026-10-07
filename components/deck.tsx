@@ -98,13 +98,14 @@ export function Deck() {
     <section id="results" aria-labelledby="deck-title" className="deck bg-subtle">
       <div ref={trackRef} className="deck-track">
         <div className="deck-stage">
-          <div ref={bgRef} className="deck-bg" aria-hidden="true">
-            One
-            <br />
-            system
-          </div>
-
+          {/* The headline lives in the cards area, so on smaller screens it sits below
+              the intro and button instead of behind them. */}
           <div className="deck-cards">
+            <div ref={bgRef} className="deck-bg" aria-hidden="true">
+              One
+              <br />
+              system
+            </div>
             {cards.map((c, i) => (
               <article
                 key={c.img}
@@ -114,17 +115,17 @@ export function Deck() {
                 className="deck-card"
                 style={{ zIndex: i + 1 }}
               >
-                <div className="relative h-[52%] min-h-[220px] bg-[#f1efe9]">
+                <div className="relative h-[52%] min-h-[200px] bg-[#eeebe4]">
                   <Image
-                    src={`/screens/admin/${c.img}.svg`}
+                    src={`/screens/deck/${c.img}.svg`}
                     alt={c.alt}
                     fill
                     sizes="420px"
-                    className="object-cover object-[0%_0%]"
+                    className="object-cover object-top"
                   />
                 </div>
                 <div className="flex flex-1 flex-col px-[22px] pt-5 pb-[18px]">
-                  <h3 className="text-[length:clamp(1.7rem,2.6vw,2.15rem)] leading-[0.92] font-extrabold !text-on-dark uppercase [font-family:var(--font-display)]">
+                  <h3 className="text-[length:clamp(1.8rem,2.7vw,2.3rem)] leading-[1] font-normal tracking-[-0.03em] !text-on-dark [font-family:var(--font-display)]">
                     {c.title}
                   </h3>
                   <p className="mt-3 max-w-[32ch] text-[13.5px] leading-normal text-on-dark-2">{c.text}</p>
@@ -134,7 +135,7 @@ export function Deck() {
                         <li key={t}>{t}</li>
                       ))}
                     </ul>
-                    <span className="text-[44px] leading-[0.8] font-bold text-[#c98a4b] [font-family:var(--font-display)]">
+                    <span className="t-mono text-[34px] leading-[0.8] text-[#c98a4b]">
                       0{i + 1}
                     </span>
                   </div>
@@ -144,11 +145,11 @@ export function Deck() {
           </div>
 
           <div className="deck-side">
-            <p className="t-mono mb-3 text-[14px] font-semibold text-ink">
+            <p className="t-mono mb-3 text-[13px] tracking-[0.08em] text-ink-2">
               <span ref={countRef}>01</span> / 0{N}
             </p>
-            <h2 id="deck-title" className="text-[length:clamp(1.4rem,2vw,1.75rem)] leading-tight font-semibold text-ink [font-family:var(--font-display)]">
-              Five tools, one job, start to finish
+            <h2 id="deck-title" className="text-[length:clamp(1.6rem,2.3vw,2.1rem)] leading-[1.05] font-normal tracking-[-0.03em] text-ink [font-family:var(--font-display)]">
+              One job. Five steps. Zero chasing.
             </h2>
             <p className="mt-3 text-[15px] leading-relaxed text-ink-2">
               WheelPro is shop management software for wheel repair and refinishing businesses. Lead capture,
