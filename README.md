@@ -9,7 +9,14 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000. Add `?shop=Ace%20Wheels` to the URL to see the personalised outreach version.
+Open http://localhost:3000.
+
+## Shop quote pages (outreach)
+
+Each prospect gets a photo-quote page at `/q/<slug>`, e.g. http://localhost:3000/q/london-wheel-repair. Add or edit shops in `lib/shops.ts`; anything not listed there is a 404. Pages are always `noindex`.
+
+- `status: "preview"`: shows a "Preview built for…" bar, and quote requests go to `CONTACT_TO` (you). The first time someone opens the page in a browser session, you get a "<shop> opened their quote page" email so you can call the same day. Open any page once with `?me=1` so your own visits don't count.
+- `status: "live"`: the shop said yes. Requests go to the shop's `email`, with you on BCC. Photos (up to 4, shrunk in the browser) arrive as attachments.
 
 ## Configure
 
