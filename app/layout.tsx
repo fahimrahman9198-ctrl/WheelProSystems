@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Fragment_Mono, Instrument_Serif } from "next/font/google";
+import Script from "next/script";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import "./globals.css";
 
@@ -46,7 +47,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${serif.variable} ${mono.variable} antialiased`}>
+    <html lang="en" className={`${serif.variable} ${mono.variable} antialiased`} suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://api.fontshare.com" />
         <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="" />
@@ -55,6 +56,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <SmoothScroll />
         {children}
+        {/* /demo pages opened with ?shot=1 (outreach video screenshots) hide their demo bars. */}
+        <Script id="demo-shot" strategy="beforeInteractive">
+          {`if(/[?&]shot=1/.test(location.search))document.documentElement.dataset.shot="1"`}
+        </Script>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>
     </html>

@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 import { getShop } from "@/lib/shops";
 
-// A preview page was opened for the first time in a browser session. Tells you, so you can call the same day.
+// A shop's demo was opened for the first time in a browser session. Tells you, so you can call the same day.
 export async function POST(req: Request) {
   let slug = "";
   try {
@@ -10,22 +10,22 @@ export async function POST(req: Request) {
     return new Response(null, { status: 400 });
   }
   const shop = getShop(slug);
-  if (!shop || shop.status !== "preview") return new Response(null, { status: 204 });
+  if (!shop) return new Response(null, { status: 204 });
 
   const key = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO;
   const ua = req.headers.get("user-agent") ?? "unknown device";
   if (!key || !to) {
-    console.log(`[quote-view] ${shop.name} preview opened (${ua})`);
+    console.log(`[demo-view] ${shop.name} demo opened (${ua})`);
     return new Response(null, { status: 204 });
   }
 
   await new Resend(key).emails.send({
     from: process.env.CONTACT_FROM ?? "WheelPro <onboarding@resend.dev>",
     to,
-    subject: `${shop.name} opened their quote page`,
+    subject: `${shop.name} opened their demo`,
     text: [
-      `Someone just opened /q/${shop.slug}.`,
+      `Someone just opened /demo/${shop.slug}.`,
       shop.phone ? `Call: ${shop.phone}` : "",
       `Device: ${ua}`,
       "",

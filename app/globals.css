@@ -491,3 +491,8 @@ html.lenis body {
     padding-bottom: 206px;
   }
 }
+
+/* Demo screenshots for the outreach video (?shot=1): no demo bar, no tour bar. */
+[data-shot] .demo-chrome {
+  display: none;
+}

@@ -2,7 +2,9 @@
 
 import { ArrowRight, Camera, Check, X } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
+import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { saveToDemoAdmin } from "@/lib/demo-store";
 import { easeOut } from "../ui/motion";
 
 const damages = ["Curb rash", "Scratches", "Bent", "Cracked", "Corrosion or peeling", "Just want a new colour"];
@@ -36,27 +38,13 @@ async function shrink(file: File): Promise<File> {
   }
 }
 
-export function QuoteForm({ slug, shopName, mobile, preview }: { slug: string; shopName: string; mobile: boolean; preview: boolean }) {
+export function QuoteForm({ slug, shopName, mobile }: { slug: string; shopName: string; mobile: boolean }) {
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [errors, setErrors] = useState<{ name?: boolean; contact?: boolean; photos?: string }>({});
   const [sent, setSent] = useState<{ first: string; reply: string } | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const reduce = useReducedMotion();
-
-  // Tell WheelPro the first time a preview page is opened in this browser, so the call can follow the same day.
-  // Visit once with ?me=1 to stop your own visits counting.
-  useEffect(() => {
-    if (!preview) return;
-    try {
-      if (new URLSearchParams(location.search).has("me")) localStorage.setItem("wp-me", "1");
-      if (localStorage.getItem("wp-me") || sessionStorage.getItem(`wp-view-${slug}`)) return;
-      sessionStorage.setItem(`wp-view-${slug}`, "1");
-    } catch {
-      // Storage blocked: still report the view.
-    }
-    navigator.sendBeacon?.("/api/quote/view", JSON.stringify({ slug }));
-  }, [preview, slug]);
 
   // Free the preview images when the page goes away.
   const photosRef = useRef(photos);
@@ -110,6 +98,7 @@ export function QuoteForm({ slug, shopName, mobile, preview }: { slug: string; s
     try {
       const res = await fetch("/api/quote", { method: "POST", body: data });
       if (!res.ok) throw new Error();
+      await saveToDemoAdmin(slug, data, photos);
       setSent({ first: name.split(/\s+/)[0], reply: String(data.get("reply") ?? "Text") });
       setStatus("done");
     } catch {
@@ -141,9 +130,17 @@ export function QuoteForm({ slug, shopName, mobile, preview }: { slug: string; s
         <p className="mt-3 max-w-[42ch] text-[16px] text-ink-2">
           {shopName} has your {photos.length ? "photos and details" : "details"} and will {how} with a price.
         </p>
-        <button type="button" onClick={reset} className="mt-8 self-start text-[15px] font-medium text-ink underline decoration-line-strong underline-offset-[0.3em] hover:decoration-ink">
-          Send another wheel
-        </button>
+        <div className="mt-8 flex flex-wrap items-center gap-5">
+          <Link
+            href={`/demo/${slug}/admin?view=leads&lead=latest`}
+            className="inline-flex h-11 items-center gap-2 rounded-md bg-ink px-5 text-[15px] font-medium text-white hover:bg-[#27272a]"
+          >
+            See it in your admin <ArrowRight size={17} strokeWidth={1.75} />
+          </Link>
+          <button type="button" onClick={reset} className="text-[15px] font-medium text-ink underline decoration-line-strong underline-offset-[0.3em] hover:decoration-ink">
+            Send another wheel
+          </button>
+        </div>
       </motion.div>
     );
   }
@@ -304,9 +301,7 @@ export function QuoteForm({ slug, shopName, mobile, preview }: { slug: string; s
           <p role="alert" className="text-center text-[14px] text-danger">That didn’t send. Check your connection and try again.</p>
         )}
         <p className="text-center text-[13px] text-ink-3">
-          {preview
-            ? `Preview: requests go to WheelPro Systems until ${shopName} switches this page on.`
-            : `No obligation to book. Your details only go to ${shopName}.`}
+          Demo: requests go to WheelPro Systems and appear in this demo’s admin.
         </p>
       </div>
     </form>

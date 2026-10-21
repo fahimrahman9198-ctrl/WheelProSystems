@@ -11,12 +11,19 @@ npm run dev
 
 Open http://localhost:3000.
 
-## Shop quote pages (outreach)
+## Shop demos (outreach)
 
-Each prospect gets a photo-quote page at `/q/<slug>`, e.g. http://localhost:3000/q/london-wheel-repair. Add or edit shops in `lib/shops.ts`; anything not listed there is a 404. Pages are always `noindex`.
+Each prospect gets a private demo of the whole system at `/demo/<slug>`, e.g. http://localhost:3000/demo/london-wheel-repair. A tour bar moves between three parts:
 
-- `status: "preview"`: shows a "Preview built for…" bar, and quote requests go to `CONTACT_TO` (you). The first time someone opens the page in a browser session, you get a "<shop> opened their quote page" email so you can call the same day. Open any page once with `?me=1` so your own visits don't count.
-- `status: "live"`: the shop said yes. Requests go to the shop's `email`, with you on BCC. Photos (up to 4, shrunk in the browser) arrive as attachments.
+- **Website** (`/demo/<slug>`): their new site, with their name, services, highlights and contact details.
+- **Customer quote** (`/demo/<slug>/quote`): the photo quote form. A request sent here shows up in their demo admin in the same browser, and is emailed to `CONTACT_TO` (you), never to the shop.
+- **Your admin** (`/demo/<slug>/admin`): dashboard, leads, quote builder with their province's tax, invoices, a deposit paid through Stripe, and automations. Sample data, labelled as such.
+
+Add or edit shops in `lib/shops.ts` (anything not listed is a 404); sample leads and prices are in `lib/demo-data.ts`. Demos are always `noindex`.
+
+- The first time someone opens a demo in a browser session, you get a "<shop> opened their demo" email so you can call the same day. Open any demo once with `?me=1` so your own visits don't count.
+- The deposit button opens a real Stripe Checkout in **test mode** when `STRIPE_SECRET_KEY` is a `sk_test_` key (live keys are refused). Pay with 4242 4242 4242 4242.
+- Admin screens are URLs (`?view=quote&lead=jordan&sent=1`, `?view=payments&lead=jordan&paid=1`), and `?shot=1` hides the demo bars. The outreach video (`promo-remotion`, `ShopPitch`) screenshots them.
 
 ## Configure
 
@@ -24,6 +31,7 @@ Copy `.env.example` to `.env.local` and fill in:
 
 - `NEXT_PUBLIC_CAL_LINK`: shows the Cal.com calendar in the booking section instead of the form.
 - `RESEND_API_KEY`, `CONTACT_TO`, `CONTACT_FROM`: emails form submissions to you. Without them, submissions are only logged on the server.
+- `STRIPE_SECRET_KEY`: a Stripe **test** key (`sk_test_…`) for the demo deposit checkout. Best added with `vercel integration add stripe` once the project is linked to Vercel.
 
 ## Still to replace before launch
 

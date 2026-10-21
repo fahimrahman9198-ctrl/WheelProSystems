@@ -50,7 +50,7 @@ export async function POST(req: Request) {
   const wheels = `${lead.wheels || "1"} wheel${lead.wheels === "1" ? "" : "s"}`;
   const subject = [`Quote request: ${wheels}`, lead.damage[0]?.toLowerCase(), lead.vehicle].filter(Boolean).join(", ") + ` · ${lead.name}`;
   const text = [
-    shop.status === "preview" ? `PREVIEW PAGE for ${shop.name} (/q/${shop.slug})\n` : "",
+    `DEMO for ${shop.name} (/demo/${shop.slug}). Probably the owner trying it, so a good moment to call.\n`,
     `Name: ${lead.name}`,
     `Phone: ${lead.phone || "-"}`,
     `Email: ${lead.email || "-"}`,
@@ -69,9 +69,8 @@ export async function POST(req: Request) {
     .join("\n");
 
   const key = process.env.RESEND_API_KEY;
-  const you = process.env.CONTACT_TO;
-  // Preview pages only ever reach you. Live pages go to the shop, with you copied.
-  const to = shop.status === "live" && shop.email ? shop.email : you;
+  // Demo requests only ever reach you, never the shop.
+  const to = process.env.CONTACT_TO;
   if (!key || !to) {
     // Not configured yet: log so requests aren't silently lost in development.
     console.log(`[quote] RESEND_API_KEY/CONTACT_TO not set. ${shop.slug}:`, { ...lead, photos: attachments.length });
@@ -81,9 +80,8 @@ export async function POST(req: Request) {
   const { error } = await new Resend(key).emails.send({
     from: process.env.CONTACT_FROM ?? "WheelPro <onboarding@resend.dev>",
     to,
-    bcc: to !== you && you ? you : undefined,
     replyTo: validEmail ? lead.email : undefined,
-    subject,
+    subject: `[Demo · ${shop.name}] ${subject}`,
     text,
     attachments,
   });
