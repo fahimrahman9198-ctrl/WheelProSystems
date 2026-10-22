@@ -1,6 +1,4 @@
 import { loadFont } from "@remotion/fonts";
-import { loadFont as loadFragmentMono } from "@remotion/google-fonts/FragmentMono";
-import { loadFont as loadInstrumentSerif } from "@remotion/google-fonts/InstrumentSerif";
 import { Easing, interpolate, spring, staticFile } from "remotion";
 
 // Shared bits for the per-shop pitch video (ShopPitch). Same world as the shop demos:
@@ -9,8 +7,9 @@ import { Easing, interpolate, spring, staticFile } from "remotion";
 for (const w of ["300", "400", "500", "600"]) {
   loadFont({ family: "General Sans", url: staticFile(`fonts/general-sans/GeneralSans-${w}.woff2`), weight: w });
 }
-loadInstrumentSerif("italic", { weights: ["400"], subsets: ["latin"] });
-loadFragmentMono("normal", { weights: ["400"], subsets: ["latin"] });
+// Latin subsets from Google Fonts, self-hosted so a render never needs the network.
+loadFont({ family: "Instrument Serif", url: staticFile("fonts/instrument-serif-italic.woff2"), style: "italic", weight: "400" });
+loadFont({ family: "Fragment Mono", url: staticFile("fonts/fragment-mono.woff2"), weight: "400" });
 
 export const SANS = "General Sans, sans-serif";
 export const SERIF = "Instrument Serif, serif";

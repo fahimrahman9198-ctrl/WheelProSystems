@@ -1,5 +1,4 @@
 import { loadFont } from "@remotion/fonts";
-import { loadFont as loadGeistMono } from "@remotion/google-fonts/GeistMono";
 import { staticFile } from "remotion";
 
 // Switzer is the WheelPro site's UI face (local variable font), Geist Mono is for times and amounts.
@@ -9,4 +8,8 @@ loadFont({
   weight: "100 900",
 });
 
-loadGeistMono("normal", { weights: ["400", "500"], subsets: ["latin"] });
+loadFont({
+  family: "Geist Mono",
+  url: staticFile("fonts/geist-mono-variable.woff2"),
+  weight: "100 900",
+});
