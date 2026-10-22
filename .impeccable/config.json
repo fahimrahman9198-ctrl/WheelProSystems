@@ -124,6 +124,18 @@
         ],
         "createdAt": "2026-10-05T03:07:28.415Z",
         "reason": "Claude: uppercase only on short labels (eyebrow, SAMPLE tag) in a throwaway sample page"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "switzer",
+        "createdAt": "2026-10-22T06:05:47.083Z",
+        "reason": "Claude's decision: promo-remotion is the video project with its own established type (src/fonts.ts loads Switzer and Geist Mono for the existing spots); DESIGN.md documents only the /demo web theme"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "geist mono",
+        "createdAt": "2026-10-22T06:05:47.104Z",
+        "reason": "Claude's decision: promo-remotion is the video project with its own established type (src/fonts.ts loads Switzer and Geist Mono for the existing spots); DESIGN.md documents only the /demo web theme"
       }
     ]
   }

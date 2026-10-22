@@ -18,7 +18,7 @@ export type Shop = {
   highlights: string[];
   /** What they offer, shown as a list beside the form. */
   services: string[];
-  /** Optional brand colour (hex) to replace the default bronze accent. */
+  /** Optional brand colour (hex) to replace the demo's default orange accent. */
   accent?: string;
 };
 
@@ -172,9 +172,76 @@ export const shops: Shop[] = [
     highlights: [],
     services: ["Wheel repair", "Wheel refinishing", "Wheels"],
   },
+  // British Columbia (Western Wheelcraft has OK'd approaching these).
+  {
+    slug: "dt-wheel-repair",
+    name: "DT Wheel Repair",
+    city: "Burnaby",
+    province: "BC",
+    kind: "shop",
+    website: "https://dtwheelrepair.com/",
+    phone: "778-552-8118",
+    email: "david.wheelrepair@gmail.com",
+    highlights: [],
+    services: ["Curb rash and scratch repair", "Wheel refinishing"],
+  },
+  {
+    slug: "wheel-tech-rim-repair",
+    name: "Wheel Tech Rim Repair",
+    city: "Surrey",
+    province: "BC",
+    kind: "shop",
+    website: "https://www.wheeltechrimrepair.com/",
+    phone: "(604) 593-5505",
+    email: "charlie@wheeltechrimrepair.com",
+    highlights: ["18+ years repairing wheels", "Dealer and trade work welcome"],
+    services: ["Rim repair", "Wheel refinishing"],
+  },
+  {
+    slug: "alloy-wheel-repair-bc",
+    name: "Alloy Wheel Repair Ltd",
+    city: "Richmond",
+    province: "BC",
+    kind: "shop",
+    website: "https://alloywheelrepairbc.com/",
+    phone: "(604) 231-7698",
+    address: "#115 - 2691 Simpson Rd, Richmond, BC V6X 2R2",
+    highlights: ["ICBC accredited", "1-year warranty", "Mobile service available"],
+    services: ["Curb rash and scratch repair", "Wheel refinishing", "Mobile wheel repair"],
+  },
+  {
+    slug: "interior-wheel-repair",
+    name: "Interior Wheel Repair",
+    city: "Kelowna",
+    province: "BC",
+    kind: "shop",
+    website: "https://interiorwheelrepair.com/",
+    phone: "1-888-208-1012",
+    address: "1060 Leathead Rd Unit 3, Kelowna, BC V1X 2K1",
+    highlights: ["Lifetime warranty on welds"],
+    services: ["Curb rash and scratch repair", "Bent and cracked wheel repair", "Wheel refinishing"],
+  },
+  {
+    slug: "razor-rim-repair",
+    name: "Razor Rim Repair",
+    city: "Vancouver",
+    province: "BC",
+    kind: "mobile",
+    highlights: ["We come to you"],
+    services: ["Mobile wheel repair", "Wheel refinishing"],
+  },
 ];
 
 export const getShop = (slug: string) => shops.find((s) => s.slug === slug);
+
+/** "The Complete Wheel Shop" → "CW", for the shop's monogram. */
+export const shopInitials = (name: string) =>
+  name
+    .replace(/^The /, "")
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join("");
 
 /** Digits only, for tel: and sms: links. */
 export const telHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, "")}`;

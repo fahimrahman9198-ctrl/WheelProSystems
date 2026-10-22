@@ -13,7 +13,7 @@ const finishes = ["Match the original", "Black", "Custom colour", "Not sure yet"
 const MAX_PHOTOS = 4;
 
 const field =
-  "h-[52px] w-full rounded-md border border-line-strong bg-white px-4 text-[16px] text-ink transition-[border-color,box-shadow] placeholder:text-ink-3 hover:border-ink-3 focus:border-ink focus:shadow-[0_0_0_3px_rgba(154,91,30,.18)] focus:outline-none aria-[invalid=true]:border-danger";
+  "h-[52px] w-full rounded-md border border-line-strong bg-[var(--card)] px-4 text-[16px] text-ink transition-[border-color,box-shadow] placeholder:text-ink-3 hover:border-ink-3 focus:border-ink focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--accent)_20%,transparent)] focus:outline-none aria-[invalid=true]:border-danger";
 const select = `${field} appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%2216%22 fill=%22none%22 stroke=%22%2371717a%22 stroke-width=%221.5%22><path d=%22M4 6l4 4 4-4%22/></svg>')] bg-[right_16px_center] bg-no-repeat`;
 const segment =
   "block rounded-sm py-2.5 text-center text-[15px] font-medium text-ink-2 transition-colors peer-checked:bg-ink peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-accent";
@@ -38,7 +38,27 @@ async function shrink(file: File): Promise<File> {
   }
 }
 
-export function QuoteForm({ slug, shopName, mobile }: { slug: string; shopName: string; mobile: boolean }) {
+export type QuoteStart = { wheels?: string; size?: string; finish?: string; damage?: string[] };
+
+/** Picks carried over from the website's hero panel, mapped onto this form's options. */
+function startFrom(initial: QuoteStart = {}) {
+  const finish = initial.finish === "Match original" ? "Match the original" : initial.finish;
+  const size = initial.size === '21"+' ? '21"' : initial.size;
+  return {
+    wheels: ["1", "2", "3", "4"].includes(initial.wheels ?? "") ? initial.wheels! : "1",
+    size: sizes.includes(size ?? "") ? size! : "Not sure",
+    finish: finishes.includes(finish ?? "") ? finish! : "Match the original",
+    damage: (initial.damage ?? []).filter((d) => damages.includes(d)),
+  };
+}
+
+export function QuoteForm({ slug, shopName, mobile, initial }: { slug: string; shopName: string; mobile: boolean; initial?: QuoteStart }) {
+  const start = startFrom(initial);
+  const [wheels, setWheels] = useState(start.wheels);
+  const [size, setSize] = useState(start.size);
+  const [finish, setFinish] = useState(start.finish);
+  const [damage, setDamage] = useState<string[]>(start.damage);
+  const [vehicle, setVehicle] = useState("");
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [errors, setErrors] = useState<{ name?: boolean; contact?: boolean; photos?: string }>({});
@@ -133,7 +153,7 @@ export function QuoteForm({ slug, shopName, mobile }: { slug: string; shopName: 
         <div className="mt-8 flex flex-wrap items-center gap-5">
           <Link
             href={`/demo/${slug}/admin?view=leads&lead=latest`}
-            className="inline-flex h-11 items-center gap-2 rounded-md bg-ink px-5 text-[15px] font-medium text-white hover:bg-[#27272a]"
+            className="shop-btn"
           >
             See it in your admin <ArrowRight size={17} strokeWidth={1.75} />
           </Link>
@@ -146,13 +166,50 @@ export function QuoteForm({ slug, shopName, mobile }: { slug: string; shopName: 
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="grid gap-7 rounded-lg bg-subtle p-5 sm:p-6 md:p-8">
+    <form onSubmit={onSubmit} noValidate className="shop-card grid gap-7 p-5 sm:p-6 md:p-8">
+      {/* The request, written back as it's filled in: same readout as the website's hero panel. */}
+      <div className="rounded-[16px] bg-[#141413] p-4 sm:p-5" aria-live="polite">
+        <p className="shop-mono mb-3 flex items-center gap-2 text-[11px] tracking-[0.14em] text-[#5fd39a] uppercase">
+          <span className="size-1.5 animate-pulse rounded-full bg-[#5fd39a]" /> Your request
+        </p>
+        <ul className="shop-mono grid gap-2 text-[13px] leading-snug text-[#d8d4c8]">
+          <li className="flex gap-2">
+            <span className="text-accent">→</span>
+            <span>
+              <span className="text-white">
+                {wheels} wheel{wheels === "1" ? "" : "s"}
+              </span>
+              , {size === "Not sure" ? "size not sure" : size}
+              {vehicle.trim() ? ` on a ${vehicle.trim()}` : ""}
+            </span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-accent">→</span>
+            <span>
+              <span className="text-white">Damage</span> {damage.length ? damage.join(", ").toLowerCase() : "not picked yet"}
+            </span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-accent">→</span>
+            <span>
+              <span className="text-white">Finish</span> {finish.toLowerCase()}
+            </span>
+          </li>
+          <li className="flex gap-2">
+            <span className={photos.length ? "text-[#5fd39a]" : "text-accent"}>→</span>
+            <span>
+              <span className="text-white">Photos</span> {photos.length ? `${photos.length} added` : "add 2 below"}
+            </span>
+          </li>
+        </ul>
+      </div>
+
       {/* Photos */}
       <fieldset className="grid gap-3">
         <legend className="t-label mb-1 text-ink-3">Photos of the wheel</legend>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {photos.map((p) => (
-            <div key={p.id} className="relative aspect-square overflow-hidden rounded-md border border-line bg-white">
+            <div key={p.id} className="relative aspect-square overflow-hidden rounded-md border border-line bg-[var(--card)]">
               {/* eslint-disable-next-line @next/next/no-img-element -- local blob preview */}
               <img src={p.url} alt="" className="size-full object-cover" />
               <button
@@ -167,7 +224,7 @@ export function QuoteForm({ slug, shopName, mobile }: { slug: string; shopName: 
           ))}
           {photos.length < MAX_PHOTOS && (
             <label
-              className={`flex cursor-pointer flex-col items-center justify-center gap-2 rounded-md border border-dashed border-line-strong bg-white text-center text-ink-2 transition-colors hover:border-ink focus-within:border-ink ${photos.length ? "aspect-square" : "col-span-2 py-9 sm:col-span-4"}`}
+              className={`flex cursor-pointer flex-col items-center justify-center gap-2 rounded-md border border-dashed border-line-strong bg-[var(--card)] text-center text-ink-2 transition-colors hover:border-ink focus-within:border-ink ${photos.length ? "aspect-square" : "col-span-2 py-9 sm:col-span-4"}`}
             >
               <span className="grid size-10 place-items-center rounded-sm bg-accent-soft text-accent">
                 <Camera size={20} strokeWidth={1.75} />
@@ -187,8 +244,15 @@ export function QuoteForm({ slug, shopName, mobile }: { slug: string; shopName: 
         <div className="flex flex-wrap gap-2">
           {damages.map((d) => (
             <label key={d} className="relative cursor-pointer">
-              <input type="checkbox" name="damage" value={d} className="peer sr-only" />
-              <span className="inline-flex h-10 items-center rounded-md border border-line-strong bg-white px-3.5 text-[15px] font-medium text-ink-2 transition-colors peer-checked:border-ink peer-checked:bg-ink peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-accent hover:border-ink-3">
+              <input
+                type="checkbox"
+                name="damage"
+                value={d}
+                checked={damage.includes(d)}
+                onChange={(e) => setDamage((cur) => (e.target.checked ? [...cur, d] : cur.filter((x) => x !== d)))}
+                className="peer sr-only"
+              />
+              <span className="inline-flex h-10 items-center rounded-md border border-line-strong bg-[var(--card)] px-3.5 text-[15px] font-medium text-ink-2 transition-colors peer-checked:border-ink peer-checked:bg-ink peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-accent hover:border-ink-3">
                 {d}
               </span>
             </label>
@@ -200,10 +264,10 @@ export function QuoteForm({ slug, shopName, mobile }: { slug: string; shopName: 
       <div className="grid gap-5 sm:grid-cols-2">
         <fieldset className="grid gap-2">
           <legend className="t-label mb-2 text-ink-3">How many wheels?</legend>
-          <div className="grid grid-cols-4 rounded-md border border-line-strong bg-white p-1">
-            {["1", "2", "3", "4"].map((v, i) => (
+          <div className="grid grid-cols-4 rounded-md border border-line-strong bg-[var(--card)] p-1">
+            {["1", "2", "3", "4"].map((v) => (
               <label key={v} className="relative cursor-pointer">
-                <input type="radio" name="wheels" value={v} defaultChecked={i === 0} className="peer sr-only" />
+                <input type="radio" name="wheels" value={v} checked={wheels === v} onChange={() => setWheels(v)} className="peer sr-only" />
                 <span className={segment}>{v}</span>
               </label>
             ))}
@@ -211,7 +275,7 @@ export function QuoteForm({ slug, shopName, mobile }: { slug: string; shopName: 
         </fieldset>
         <div className="grid gap-2">
           <label htmlFor="q-size" className="t-label text-ink-3">Wheel size</label>
-          <select id="q-size" name="size" className={select}>
+          <select id="q-size" name="size" value={size} onChange={(e) => setSize(e.target.value)} className={select}>
             {sizes.map((s) => (
               <option key={s}>{s}</option>
             ))}
@@ -222,7 +286,7 @@ export function QuoteForm({ slug, shopName, mobile }: { slug: string; shopName: 
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="grid gap-2">
           <label htmlFor="q-finish" className="t-label text-ink-3">Finish you want</label>
-          <select id="q-finish" name="finish" className={select}>
+          <select id="q-finish" name="finish" value={finish} onChange={(e) => setFinish(e.target.value)} className={select}>
             {finishes.map((f) => (
               <option key={f}>{f}</option>
             ))}
@@ -230,7 +294,7 @@ export function QuoteForm({ slug, shopName, mobile }: { slug: string; shopName: 
         </div>
         <div className="grid gap-2">
           <label htmlFor="q-vehicle" className="t-label text-ink-3">Vehicle</label>
-          <input id="q-vehicle" name="vehicle" placeholder="e.g. 2019 Audi A4" className={field} />
+          <input id="q-vehicle" name="vehicle" value={vehicle} onChange={(e) => setVehicle(e.target.value)} placeholder="e.g. 2019 Audi A4" className={field} />
         </div>
       </div>
 
@@ -262,7 +326,7 @@ export function QuoteForm({ slug, shopName, mobile }: { slug: string; shopName: 
 
         <fieldset className="grid gap-2">
           <legend className="t-label mb-2 text-ink-3">Best way to reach you</legend>
-          <div className="grid grid-cols-3 rounded-md border border-line-strong bg-white p-1">
+          <div className="grid grid-cols-3 rounded-md border border-line-strong bg-[var(--card)] p-1">
             {["Text", "Call", "Email"].map((v, i) => (
               <label key={v} className="relative cursor-pointer">
                 <input type="radio" name="reply" value={v} defaultChecked={i === 0} className="peer sr-only" />
@@ -285,7 +349,7 @@ export function QuoteForm({ slug, shopName, mobile }: { slug: string; shopName: 
         <button
           type="submit"
           disabled={status === "sending"}
-          className="group inline-flex h-[56px] items-center justify-center gap-2 rounded-md bg-ink text-[16px] font-medium text-white transition-[background,transform] hover:bg-[#27272a] active:scale-[0.98] disabled:cursor-progress disabled:opacity-60"
+          className="shop-btn group h-[56px] w-full disabled:cursor-progress"
         >
           {status === "sending" ? (
             <>
@@ -301,7 +365,7 @@ export function QuoteForm({ slug, shopName, mobile }: { slug: string; shopName: 
           <p role="alert" className="text-center text-[14px] text-danger">That didn’t send. Check your connection and try again.</p>
         )}
         <p className="text-center text-[13px] text-ink-3">
-          Demo: requests go to WheelPro Systems and appear in this demo’s admin.
+          Demo: your request shows up in this demo’s admin.
         </p>
       </div>
     </form>

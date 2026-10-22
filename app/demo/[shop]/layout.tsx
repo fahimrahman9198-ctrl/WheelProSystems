@@ -31,7 +31,7 @@ export default async function DemoLayout({ children, params }: LayoutProps<"/dem
   const style = shop.accent ? ({ "--accent": shop.accent } as CSSProperties) : undefined;
 
   return (
-    <div style={style} className="min-h-dvh pb-24">
+    <div style={style} className="demo-theme min-h-dvh pb-24">
       <DemoChrome slug={shop.slug} shopName={shop.name} />
       {children}
     </div>

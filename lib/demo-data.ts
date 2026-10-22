@@ -134,3 +134,57 @@ export const automations = [
   { group: "After the job", title: "Referral ask", when: "14 days after the job", on: false },
   { group: "After the job", title: "Seasonal check-in", when: "Before winter tire season", on: false },
 ];
+
+// Lead funnel for the admin's Funnel view (and the outreach video). Sample numbers, labelled as such in the UI.
+export type FunnelPeriod = "30" | "90";
+export const funnelStages = [
+  { key: "requests", label: "Requests in", note: "Every enquiry: website, Google, Instagram, Facebook" },
+  { key: "quoted", label: "Quote sent", note: "Got a written price" },
+  { key: "deposit", label: "Deposit paid", note: "Committed with a card deposit" },
+  { key: "booked", label: "Booked", note: "On the calendar" },
+  { key: "paid", label: "Job paid", note: "Wheels done, balance paid" },
+] as const;
+
+export const funnel: Record<
+  FunnelPeriod,
+  {
+    label: string;
+    counts: Record<(typeof funnelStages)[number]["key"], number>;
+    sources: { name: string; leads: number; booked: number }[];
+    leak: { reason: string; count: number }[];
+    wonBack: number;
+  }
+> = {
+  "30": {
+    label: "Last 30 days",
+    counts: { requests: 48, quoted: 41, deposit: 23, booked: 21, paid: 19 },
+    sources: [
+      { name: "Website", leads: 20, booked: 10 },
+      { name: "Google", leads: 13, booked: 6 },
+      { name: "Instagram", leads: 9, booked: 3 },
+      { name: "Facebook", leads: 6, booked: 2 },
+    ],
+    leak: [
+      { reason: "No reply after the quote", count: 11 },
+      { reason: "Price", count: 5 },
+      { reason: "Went elsewhere", count: 2 },
+    ],
+    wonBack: 6,
+  },
+  "90": {
+    label: "Last 90 days",
+    counts: { requests: 131, quoted: 112, deposit: 64, booked: 59, paid: 55 },
+    sources: [
+      { name: "Website", leads: 52, booked: 27 },
+      { name: "Google", leads: 39, booked: 17 },
+      { name: "Instagram", leads: 24, booked: 9 },
+      { name: "Facebook", leads: 16, booked: 6 },
+    ],
+    leak: [
+      { reason: "No reply after the quote", count: 29 },
+      { reason: "Price", count: 14 },
+      { reason: "Went elsewhere", count: 5 },
+    ],
+    wonBack: 17,
+  },
+};

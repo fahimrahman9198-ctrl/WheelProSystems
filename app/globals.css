@@ -30,6 +30,15 @@
   --shadow-lg: 0 4px 8px rgba(20, 19, 15, 0.04), 0 32px 64px -16px rgba(20, 19, 15, 0.18);
 }
 
+/* Radii are real variables (not inlined) so the demo theme can retune them. */
+@theme {
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+}
+
 @theme inline {
   --color-bg: var(--bg);
   --color-subtle: var(--bg-subtle);
@@ -55,12 +64,6 @@
 
   --font-sans: var(--font-body), Arial, sans-serif;
   --font-mono: var(--font-code), ui-monospace, monospace;
-
-  --radius-xs: 2px;
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 8px;
-  --radius-xl: 12px;
 
   --shadow-sm: var(--shadow-sm);
   --shadow-md: var(--shadow-md);
@@ -495,4 +498,179 @@ html.lenis body {
 /* Demo screenshots for the outreach video (?shot=1): no demo bar, no tour bar. */
 [data-shot] .demo-chrome {
   display: none;
+}
+
+/* ---- Shop demos (/demo/[shop]) ----
+   The shop's website, quote page and admin. Warm cream ground, near-black ink, one signal orange,
+   teal for second lines. Same faces as wheelprosystems.com: General Sans, Instrument Serif italic
+   for one word per heading, Fragment Mono for labels and readouts.
+   Overrides the site tokens inside .demo-theme only, so the quote form and admin pick it up too. */
+.demo-theme {
+  --font-body: "General Sans";
+  --font-display: "General Sans";
+  --bg: #f3efe3;
+  --bg-subtle: #ece6d6;
+  --bg-muted: #e4ddca;
+  --bg-hero: #f3efe3;
+  --line: #ddd5c2;
+  --line-strong: #cbc1aa;
+  --ink: #141413;
+  --ink-2: #3b3a36;
+  --ink-3: #6b675d;
+  --dark: #141413;
+  --dark-2: #1f1d1a;
+  --dark-line: #34312b;
+  --on-dark: #f3efe3;
+  --on-dark-2: #bdb7a8;
+  --accent: #ee5131;
+  --accent-soft: #fbe3da;
+  --teal: #12807a;
+  --card: #f9f6ee;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --shadow-sm: 0 1px 2px rgb(60 45 20 / 0.05), 0 4px 12px -4px rgb(60 45 20 / 0.08);
+  --shadow-md: 0 2px 4px rgb(60 45 20 / 0.04), 0 18px 40px -16px rgb(60 45 20 / 0.2);
+  --shadow-lg: 0 4px 10px rgb(60 45 20 / 0.05), 0 40px 80px -28px rgb(60 45 20 / 0.3);
+  background: var(--bg);
+  color: var(--ink-2);
+  font-family: "General Sans", Arial, sans-serif;
+  font-weight: 400;
+}
+.demo-theme ::selection {
+  background: var(--accent);
+  color: #fff;
+}
+.demo-theme :focus-visible {
+  outline-color: var(--accent);
+}
+/* Labels in the quote form and admin use the same tracked mono as the site's labels. */
+.demo-theme .t-label,
+.shop-label {
+  font-family: var(--font-code), ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.demo-theme .t-mono,
+.shop-mono {
+  font-family: var(--font-code), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+.demo-theme .t-display,
+.demo-theme .t-h1,
+.demo-theme .t-h2 {
+  font-weight: 300;
+  letter-spacing: -0.035em;
+}
+.shop-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 11px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--card);
+  font-family: var(--font-code), ui-monospace, monospace;
+  font-size: 10.5px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+/* One emphasised word per heading, as on wheelprosystems.com. */
+.shop-serif,
+.demo-theme .t-outline {
+  font-family: var(--font-serif), serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.shop-card {
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: var(--card);
+  box-shadow:
+    0 1px 2px rgb(60 45 20 / 0.05),
+    0 24px 60px -30px rgb(60 45 20 / 0.28);
+}
+/* The one action button of the demo world: uppercase, tracked, 11px corners. */
+.shop-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  height: 48px;
+  padding: 0 1.4rem;
+  border-radius: 11px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition:
+    background-color 0.2s,
+    transform 0.15s;
+}
+.shop-btn:hover {
+  background: #d8431f;
+}
+.shop-btn:active {
+  transform: scale(0.98);
+}
+.shop-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.shop-btn-dark {
+  background: var(--ink);
+  color: #f9f6ee;
+}
+.shop-btn-dark:hover {
+  background: #2a2925;
+}
+/* The soft orange smear behind one word of the hero headline. */
+.shop-smear {
+  position: relative;
+  isolation: isolate;
+}
+.shop-smear::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0.2em;
+  right: -0.9em;
+  top: 0.5em;
+  height: 0.18em;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgb(238 81 49 / 0.45) 30%, rgb(238 81 49 / 0.25) 70%, transparent);
+  filter: blur(4px);
+}
+@keyframes shop-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.shop-marquee {
+  animation: shop-marquee 40s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .shop-marquee {
+    animation: none;
+  }
+}
+.demo-theme ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.demo-theme ::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 999px;
+  border: 2px solid var(--bg);
 }
