@@ -1,114 +1,146 @@
 ---
 name: WheelPro Systems — Shop Demo
-description: The per-shop sales demo at /demo/[shop]; cool daylight, slate ink, one cobalt accent, Satoshi throughout.
+description: The per-shop sales demo at /demo/[shop]; warm cream paper, near-black ink, one signal orange with teal for second lines, General Sans with one Instrument Serif word per heading and Fragment Mono labels.
 colors:
-  cobalt: "#2752e7"
-  cobalt-deep: "#1f45cf"
-  cobalt-wash: "#e7edff"
-  daylight: "#f7f9fc"
-  paper: "#ffffff"
-  mist: "#eef2f8"
-  mist-deep: "#e3e9f3"
-  hairline: "#e1e7f0"
-  hairline-strong: "#c9d3e1"
-  slate-ink: "#0b1324"
-  slate-body: "#34405a"
-  slate-quiet: "#5d6a82"
-  night-line: "#26324a"
-  on-night: "#f5f8fd"
-  on-night-quiet: "#a6b1c6"
+  signal: "#ee5131"
+  signal-deep: "#d8431f"
+  signal-wash: "#fbe3da"
+  teal: "#12807a"
+  cream: "#f3efe3"
+  card: "#f9f6ee"
+  field: "#fdfbf6"
+  oat: "#ece6d6"
+  oat-deep: "#e4ddca"
+  hairline: "#ddd5c2"
+  hairline-strong: "#cbc1aa"
+  ink: "#141413"
+  ink-body: "#3b3a36"
+  ink-quiet: "#6b675d"
+  night-2: "#1f1d1a"
+  night-line: "#34312b"
+  on-night: "#f3efe3"
+  on-night-quiet: "#bdb7a8"
+  readout-green: "#5fd39a"
   success: "#15803d"
   success-wash: "#e8f7ee"
   danger: "#dc2626"
 typography:
   display:
-    fontFamily: "Satoshi, Arial, sans-serif"
-    fontSize: "clamp(2.3rem, 5.6vw, 4.4rem)"
-    fontWeight: 700
-    lineHeight: 1.08
-    letterSpacing: "-0.04em"
+    fontFamily: "General Sans, Arial, sans-serif"
+    fontSize: "clamp(3rem, 7.4vw, 6rem)"
+    fontWeight: 300
+    lineHeight: 0.96
+    letterSpacing: "-0.045em"
   headline:
-    fontFamily: "Satoshi, Arial, sans-serif"
-    fontSize: "clamp(1.9rem, 3.6vw, 3rem)"
-    fontWeight: 700
-    lineHeight: 1.08
+    fontFamily: "General Sans, Arial, sans-serif"
+    fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)"
+    fontWeight: 300
+    lineHeight: 1.02
     letterSpacing: "-0.035em"
+  emphasis:
+    fontFamily: "Instrument Serif, serif"
+    fontStyle: italic
+    fontWeight: 400
+    letterSpacing: "-0.01em"
   title:
-    fontFamily: "Satoshi, Arial, sans-serif"
-    fontSize: "16px"
-    fontWeight: 600
-    lineHeight: 1.375
+    fontFamily: "General Sans, Arial, sans-serif"
+    fontSize: "22px–24px"
+    fontWeight: 400
+    lineHeight: 1.2
+    letterSpacing: "-0.02em"
   lead:
-    fontFamily: "Satoshi, Arial, sans-serif"
-    fontSize: "clamp(1.05rem, 1.4vw, 1.2rem)"
-    fontWeight: 450
+    fontFamily: "General Sans, Arial, sans-serif"
+    fontSize: "clamp(1.05rem, 1.35vw, 1.2rem)"
+    fontWeight: 400
     lineHeight: 1.625
   body:
-    fontFamily: "Satoshi, Arial, sans-serif"
-    fontSize: "16px"
-    fontWeight: 450
+    fontFamily: "General Sans, Arial, sans-serif"
+    fontSize: "15px–17px"
+    fontWeight: 400
     lineHeight: 1.625
   label:
-    fontFamily: "Satoshi, Arial, sans-serif"
-    fontSize: "13px"
+    fontFamily: "Fragment Mono, ui-monospace, monospace"
+    fontSize: "11px (9.5px inside small cells)"
+    fontWeight: 400
+    letterSpacing: "0.14em"
+    textTransform: uppercase
+  button:
+    fontFamily: "General Sans, Arial, sans-serif"
+    fontSize: "12px–12.5px"
     fontWeight: 600
-    letterSpacing: "0"
+    letterSpacing: "0.14em–0.16em"
+    textTransform: uppercase
 rounded:
+  tick: "2px"
+  key: "7px"
   sm: "8px"
-  md: "12px"
-  lg: "20px"
-  xl: "28px"
+  toggle: "10px"
+  button: "11px"
+  button-lg: "13px"
+  well: "14px–16px"
+  nav: "18px"
+  card: "22px"
+  panel: "28px"
   pill: "9999px"
 spacing:
   gutter: "20px"
   gutter-md: "32px"
-  gutter-lg: "48px"
-  card-gap: "16px"
-  section: "64px"
-  section-lg: "96px"
+  wrap: "1280px"
+  section: "80px"
+  section-lg: "112px"
 components:
   button-primary:
-    backgroundColor: "{colors.cobalt}"
-    textColor: "{colors.paper}"
-    rounded: "{rounded.pill}"
-    padding: "0 20px 0 24px"
+    backgroundColor: "{colors.signal}"
+    textColor: "#ffffff"
+    rounded: "{rounded.button}"
+    padding: "0 22px"
     height: "48px"
   button-primary-hover:
-    backgroundColor: "{colors.cobalt-deep}"
-  button-secondary:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.slate-ink}"
-    rounded: "{rounded.pill}"
-    padding: "0 20px"
-    height: "48px"
-  button-on-cobalt:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.slate-ink}"
-    rounded: "{rounded.pill}"
-    padding: "0 20px 0 24px"
-    height: "48px"
-  chip-shop:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.slate-body}"
-    rounded: "{rounded.pill}"
-    padding: "6px 16px 6px 6px"
-  input-field:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.slate-ink}"
-    rounded: "{rounded.md}"
-    padding: "0 16px"
+    backgroundColor: "{colors.signal-deep}"
+  button-ink:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.card}"
+    rounded: "{rounded.button-lg}"
+    padding: "0 24px"
     height: "52px"
-  card-step:
-    backgroundColor: "{colors.paper}"
-    rounded: "{rounded.lg}"
-    padding: "10px"
+  button-outline:
+    backgroundColor: "{colors.card}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.button-lg}"
+    padding: "0 24px"
+    height: "52px"
+  chip:
+    backgroundColor: "{colors.card}"
+    textColor: "{colors.ink-body}"
+    rounded: "{rounded.pill}"
+    padding: "0 11px"
+    height: "26px"
+  field-cell:
+    backgroundColor: "{colors.field}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.button-lg}"
+    padding: "12px 14px"
+  card:
+    backgroundColor: "{colors.card}"
+    rounded: "{rounded.card}"
+    padding: "20px–24px"
+  readout:
+    backgroundColor: "{colors.ink}"
+    textColor: "#d8d4c8"
+    rounded: "{rounded.well}"
+    padding: "16px–20px"
+  site-nav:
+    backgroundColor: "{colors.card}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.nav}"
+    height: "64px"
   panel-close:
-    backgroundColor: "{colors.cobalt}"
-    textColor: "{colors.paper}"
-    rounded: "{rounded.xl}"
-    padding: "96px 24px"
+    backgroundColor: "linear-gradient(135deg, #1c1714, #141413 55%, #0f2a28)"
+    textColor: "{colors.on-night}"
+    rounded: "{rounded.panel}"
+    padding: "56px–64px 24px–48px"
   tour-bar:
-    backgroundColor: "{colors.slate-ink}"
+    backgroundColor: "{colors.ink}"
     textColor: "{colors.on-night-quiet}"
     rounded: "{rounded.pill}"
     padding: "6px"
@@ -116,147 +148,152 @@ components:
 
 # Design System: WheelPro Systems — Shop Demo
 
-Scope: this file records the demo world only, applied by the `.demo-theme` wrapper in `app/demo/[shop]/layout.tsx` to every `/demo/[shop]` route (overview, shop website, customer quote, admin). The marketing site keeps its own incumbent tokens in `app/globals.css` `:root` (warm off-white, bronze accent, General Sans with Instrument Serif and Fragment Mono), which are not documented here and are not replaced by this world.
+Scope: this file records the demo world only, applied by the `.demo-theme` wrapper in `app/demo/[shop]/layout.tsx` to every `/demo/[shop]` route (the shop's website, the customer quote and the admin). The tokens live in the `.demo-theme` block at the end of `app/globals.css`, which overrides the site's `:root` tokens inside the wrapper only. It shares its three faces with wheelprosystems.com (General Sans, Instrument Serif, Fragment Mono) but has its own palette, radii and shadows. The `.shop-*` utilities in the same block (`shop-btn`, `shop-chip`, `shop-card`, `shop-label`, `shop-mono`, `shop-serif`, `shop-smear`, `shop-marquee`) are this world's building blocks.
 
 ## Overview
 
-**Creative North Star: "The Cobalt Blueprint"**
+**Creative North Star: "The Shop Counter"**
 
-The demo reads as a clean working drawing of a shop's own system: cool daylight paper, slate ink, a faint blueprint grid that fades out behind hero areas, and a single cobalt accent spent with full commitment. The proof is the working product itself, so the world stays quiet and lets live miniatures, real forms and a real admin carry the page.
+The demo is the shop's own website and back office, so it should feel like a good independent workshop's counter: warm cream paper, near-black ink, a printed ticket readout, and one signal-orange mark where the customer should press. The shop is the brand; WheelPro only signs the footer.
 
-Density is calm on persuasion surfaces (overview, shop website) and denser in the admin, but both share one family, one accent and one shape language. Emphasis comes from weight and from the outlined cobalt highlight box, never from a second typeface, italics or tracked mono labels.
+Persuasion surfaces (website, quote) are big and airy: light 300-weight headlines at display sizes, one serif italic word, generous cream bands. The admin is denser but uses the same cards, labels and buttons. Small text that names or measures something (labels, chips, readouts, figures) is set in tracked uppercase Fragment Mono, which gives the world its "spec sheet" voice.
 
-Pills carry action and identity; rounded rectangles carry content. Depth is soft, cool and slate-tinted, lifting cards gently off the daylight ground.
+Rounded rectangles carry everything: 11–13px for controls, 13–16px for wells, 22px for cards, 28px for the closing panel. Pills are reserved for chips, dots and the floating tour bar. Depth is soft and warm, brown-tinted rather than grey.
 
 **Key Characteristics:**
-- Cool daylight ground with white cards and hairline borders
-- One cobalt accent: highlight box, step numbers, primary pill, close panel
-- Satoshi only, bold display with tight negative tracking
-- Pills for actions, chips and the tour bar; 12px controls; 20px cards
-- Soft slate-tinted shadows; a fading blueprint grid behind heroes
+- Warm cream ground, lighter cream cards, oat wells and hairlines
+- One signal orange for action and markers; teal only for second lines of headings and secondary data
+- Light 300 display weight with tight tracking; one Instrument Serif italic word per heading
+- Fragment Mono uppercase labels, chips and readouts
+- Uppercase tracked buttons on 11–13px corners; ink buttons for the hero, orange elsewhere
+- Near-black "ticket" readouts that echo the request or message back in mono
 
 ## Colors
 
-A cool, low-chroma slate-and-daylight neutral set with one saturated cobalt.
+A warm, low-chroma paper-and-ink set with one saturated orange and one muted teal.
 
 ### Primary
-- **Cobalt** (`{colors.cobalt}`): the only accent. Primary pill, step-number discs, highlight-box stroke and text, timeline times and icons, check badges, the full-bleed close panel, selection and focus color.
-- **Deep Cobalt** (`{colors.cobalt-deep}`): hover state of every cobalt pill.
-- **Cobalt Wash** (`{colors.cobalt-wash}`): fill inside the highlight box and behind small accent badges.
+- **Signal** (`{colors.signal}`, `--accent`): action and markers. The "Get a price" and "Add photos" buttons, `.shop-btn`, list ticks, ticker bullets, the active chapter rule, footer icons, arrows in readouts, admin counters, selection and focus colour, and the soft smear behind the hero's serif word.
+- **Deep Signal** (`{colors.signal-deep}`): hover on every orange button.
+- **Signal Wash** (`{colors.signal-wash}`, `--accent-soft`): tinted backgrounds behind small accent badges.
+
+### Secondary
+- **Teal** (`{colors.teal}`, `--teal`): the second line of section headings ("Look what we *fix*."), the far end of the orange-to-teal gradient on the nav progress line and funnel bars, and booked bars in the admin's source chart. Never on a button.
 
 ### Neutral
-- **Daylight** (`{colors.daylight}`): page ground.
-- **Paper** (`{colors.paper}`): cards, secondary pills, inputs, the admin sidebar and alternating white sections.
-- **Mist / Deep Mist** (`{colors.mist}`, `{colors.mist-deep}`): quote-form panel, preview wells, active admin nav row, loading placeholders.
-- **Hairline / Strong Hairline** (`{colors.hairline}`, `{colors.hairline-strong}`): card and section borders; input and secondary-pill strokes, timeline rails.
-- **Slate Ink** (`{colors.slate-ink}`): headings, primary text on light, and the night surface of the demo bar and tour bar.
-- **Slate Body / Slate Quiet** (`{colors.slate-body}`, `{colors.slate-quiet}`): body copy; supporting lines, captions, metadata.
-- **Night Line / On Night / On Night Quiet**: borders and text on the slate-ink bars.
-- **Success / Danger**: paid and sent states in the admin and quote confirmation; invalid fields.
+- **Cream** (`{colors.cream}`, `--bg`): page ground, and text on night surfaces.
+- **Card** (`{colors.card}`, `--card`): cards, the site nav, outline buttons, chips.
+- **Field** (`{colors.field}`): the lightest cells inside cards (quick-quote fields, quote facts).
+- **Oat / Deep Oat** (`{colors.oat}`, `{colors.oat-deep}`, `--bg-subtle`, `--bg-muted`): wells, the facts strip, the ticker band, the chapter list, empty progress tracks, hover on keys.
+- **Hairline / Strong Hairline** (`--line`, `--line-strong`): card and section borders; outline buttons, chips and unselected toggles.
+- **Ink** (`{colors.ink}`, `--ink`, `--dark`): headings, the hero button, selected toggles, readouts, the demo bar and tour bar.
+- **Ink Body / Ink Quiet** (`--ink-2`, `--ink-3`): body copy; labels, captions, metadata.
+- **Night Line / On Night / On Night Quiet**: borders and text on ink surfaces.
+- **Readout Green** (`{colors.readout-green}`): the live dot and heading inside dark readouts only ("Your request", "Follow-ups").
+- **Success / Danger**: paid states and invalid fields; state only.
 
 ### Named Rules
-**The One Cobalt Rule.** Cobalt is the only hue with saturation. Status green and red appear only as state, never as decoration.
+**The One Signal Rule.** Orange is the only loud colour. Teal is a quieter second voice for words and data, never for actions; status green and red are state only.
 
-**The Accent Is a Variable Rule.** Every accent use reads `var(--accent)`, because a shop may supply its own brand colour; new surfaces must not hard-code cobalt.
+**The Accent Is a Variable Rule.** Every accent use reads `var(--accent)` (or the `accent` Tailwind colour), because `lib/shops.ts` can give a shop its own brand colour and the layout writes it into `--accent`. The literal `#d8431f` hover is the one known exception and should become a token if a shop overrides the accent.
 
 ## Typography
 
-**Display Font:** Satoshi (self-hosted, `next/font/local`, cuts 400 / 500 / 700 / 900), with Arial, sans-serif
-**Body Font:** Satoshi
-**Label/Mono Font:** none; labels and figures stay in Satoshi with tabular numerals
+**Display / Body:** General Sans (Fontshare, loaded by the root layout), with Arial, sans-serif
+**Emphasis:** Instrument Serif italic 400 (`--font-serif`), one word per heading via `.shop-serif`
+**Label / Mono:** Fragment Mono 400 (`--font-code`), via `.shop-label` and `.shop-mono`
 
-**Character:** One geometric grotesk doing everything. Bold, tightly tracked headlines against a soft 450 body weight give hierarchy without a second voice. Only the 400, 500, 700 and 900 cuts ship, so the authored 450 body renders from the 500 cut and the 600 titles and labels render from the 700 cut.
+**Character:** A light, editorial grotesk at display sizes, broken by one serif italic word that does the emotional work ("yet.", "fix", "quote", "couch"). Body stays at regular weight. Everything small and factual moves to mono uppercase, so the page reads as headline, story and spec sheet.
 
 ### Hierarchy
-- **Display** (700, clamp(2.3rem, 5.6vw, 4.4rem), 1.08, -0.04em): overview and shop-site hero headlines, max ~15–19ch.
-- **Headline** (700, clamp(1.9rem, 3.6vw, 3rem), 1.08, -0.035em): section heads; the close panel runs larger (to 3.6rem).
-- **Title** (600, 16–19px, snug): card titles, timeline steps, service names, admin list names.
-- **Lead** (450, clamp(1.05rem, 1.4vw, 1.2rem), relaxed): the one sentence under a hero, 44–46ch.
-- **Body** (450, 16–17px, relaxed): paragraphs, ~52ch max.
-- **Label** (600, 13px, no tracking, sentence case): form legends and admin field labels.
+- **Display** (300, clamp(3rem, 7.4vw, 6rem), 0.96, -0.045em): the shop-site hero, set on three short lines.
+- **Headline** (300, clamp(2.2rem, 4.4vw, 3.6rem), 1.02, -0.035em): section heads; the second line turns teal. The close panel runs to 3.8rem.
+- **Title** (400, 22–24px, -0.02em): card heads and chapter names.
+- **Lead** (400, clamp(1.05rem, 1.35vw, 1.2rem), relaxed): the paragraph under the hero, 44ch.
+- **Body** (400, 15–17px, relaxed): paragraphs, 46–52ch.
+- **Label** (Fragment Mono 400, 11px, 0.14em, uppercase, ink-quiet): form legends, field cells, captions; 9.5px inside small cells.
+- **Button** (600, 12–12.5px, 0.14–0.16em, uppercase).
 
 ### Named Rules
-**The One Family Rule.** Satoshi everywhere. Emphasis is weight or the highlight box; never italics, a serif, or a mono face.
+**The One Serif Word Rule.** At most one Instrument Serif italic word per heading, and nowhere else. It may carry the orange smear only in the hero.
 
-**The Sentence-Case Label Rule.** Labels are plain sentence case at 13px; no uppercase, no letter-spacing.
+**The Mono Is for Facts Rule.** Mono uppercase is for labels, chips, figures and readouts, never for sentences a customer has to read.
 
 ## Layout
 
-Content sits in a centred wrap (max 1200px) with 20px gutters on phones, 32px from 768px and 48px from 1024px. Sections breathe at 64px vertical on phones and 96px from 768px, alternating daylight and white bands separated by a hairline. Persuasion heroes are centred stacks (overview) or a 7/5 text-and-photo split (shop site). Step cards sit in a four-column row on large screens with the inner two dropped 48px so the outer cards ride higher, and become a snap-scrolling swipe row on phones (cards 78% wide). The admin is a 240px white sidebar plus a fluid main area, collapsing to a horizontal scroll nav under 1024px. A fixed pill tour bar floats 16px above the bottom edge on every demo page; the wrapper reserves 96px of bottom padding for it.
+Content sits in a centred wrap (max 1280px) with 20px gutters on phones and 32px from 768px. Sections run 80px vertical on phones and 112px from 768px, separated by hairlines rather than alternating colours. The hero is a two-column split from 1024px (headline left, quick-quote card right) with a three-cell facts strip beneath and, on wide screens, the shop name set vertically in mono down the left edge. A slightly rotated (-0.6°) mono ticker band of services separates hero from content. Services are a chapter list beside a sticky photo card. The admin is a 240px transparent sidebar plus a fluid main area under a sticky translucent header, collapsing below 1024px. The fixed tour bar floats 16px above the bottom; the wrapper reserves 96px of bottom padding for it.
 
 ## Elevation & Depth
 
-A hybrid: tonal layering (daylight ground, white cards, mist wells) plus soft, cool, slate-tinted shadows with long negative-spread falloff. Shadows read as ambient lift, never as hard edges. Cobalt pills carry their own tinted glow.
+Tonal layering (cream ground, lighter card, lightest field cells, oat wells) with soft warm shadows tinted `rgb(60 45 20 / …)` and long negative-spread falloff. Dark readouts carry a deeper, neutral shadow so they sit like a printed slip on the card. The quick-quote card has a blurred orange glow in its top-right corner.
 
 ### Shadow Vocabulary
-- **Rest** (`0 1px 2px rgb(16 32 72 / 0.05), 0 4px 12px -4px rgb(16 32 72 / 0.08)`): chips, secondary pills, timeline nodes.
-- **Lifted** (`0 2px 4px rgb(16 32 72 / 0.04), 0 18px 40px -16px rgb(16 32 72 / 0.18)`): step cards at rest.
-- **Raised** (`0 4px 10px rgb(16 32 72 / 0.05), 0 40px 80px -28px rgb(16 32 72 / 0.28)`): hovered step cards, hero photos, the tour bar.
-- **Cobalt glow** (`0 10px 24px -10px rgb(39 82 231 / 0.7)`): the primary pill on heroes; a smaller variant sits under step-number icons.
-
-### Named Rules
-**The Lift-On-Hover Rule.** Interactive cards rise 4px and step from Lifted to Raised on hover; nothing else moves.
+- **Rest** (`--shadow-sm`: `0 1px 2px rgb(60 45 20 / 0.05), 0 4px 12px -4px rgb(60 45 20 / 0.08)`): small controls.
+- **Lifted** (`--shadow-md`: `0 2px 4px rgb(60 45 20 / 0.04), 0 18px 40px -16px rgb(60 45 20 / 0.2)`).
+- **Raised** (`--shadow-lg`: `0 4px 10px rgb(60 45 20 / 0.05), 0 40px 80px -28px rgb(60 45 20 / 0.3)`): the tour bar.
+- **Card** (`.shop-card`: `0 1px 2px rgb(60 45 20 / 0.05), 0 24px 60px -30px rgb(60 45 20 / 0.28)`).
+- **Nav** (`0 10px 30px -18px rgb(60 45 20 / 0.35)`): the floating site nav.
+- **Readout** (`0 18px 40px -20px rgb(0 0 0 / 0.6)`): dark ticket panels.
+- **Close** (`0 40px 80px -40px rgb(20 15 10 / 0.6)`): the closing panel.
 
 ## Shapes
 
-Two silhouettes. Fully round pills for anything you press or anything that names someone (primary and secondary actions, shop chip, initials discs, step numbers, tour bar). Rounded rectangles for content: 8px segments, status tags and small badges, 12px inputs and admin rows, 20px cards and photos, 28px for the cobalt close panel. The highlight box uses a proportional corner (0.22em) with a 2px stroke so it scales with the headline. Borders are 1px hairlines; the only heavy stroke is the 5px slate phone frame around the quote miniature.
+Rounded rectangles throughout, scaled by size: 2px list ticks, 7px number keys, 10px damage toggles, 11px header buttons and initials tiles, 13px hero buttons and field cells, 14–16px wells, readouts and photos, 18px nav and facts strip, 22px cards and the chapter list, 28px for the closing panel. Full pills only for chips, status dots, the tour bar and its tabs. Borders are 1px hairlines; the active chapter gets a 3px orange rule on its left edge.
 
 ## Components
 
 ### Buttons
-- **Shape:** full pill (`{rounded.pill}`), 48px tall on heroes, 40–44px in headers and confirmations.
-- **Primary:** cobalt fill, white 16px semibold label, trailing arrow that nudges 2px right on hover; hover deepens to Deep Cobalt, press scales to 0.98.
-- **Secondary:** white pill with strong-hairline stroke, slate-ink 15–16px medium label; hover darkens the stroke to ink.
-- **On cobalt:** white pill with slate-ink label inside the close panel.
-- **Quiet link:** slate-ink text with a strong-hairline underline (offset 0.35em) that darkens on hover; used for "Book a walkthrough" beside a primary pill.
+- **Shape:** 11px corners at 40px tall (nav, cards), 13px at 52px tall (hero, close panel). Label 12–12.5px, 600, uppercase, 0.14–0.16em tracking; optional trailing arrow that nudges 2px right on hover; press scales to 0.98.
+- **Primary (`.shop-btn`):** signal fill, white label; hover deepens to Deep Signal.
+- **Ink (`.shop-btn-dark` / hero):** ink fill, card-cream label. Used for the hero's "Get a price" so the orange stays rare above the fold.
+- **Outline:** card fill, strong-hairline stroke, ink label; hover darkens the stroke to ink. Phone numbers use this.
+- **On night:** outline at white/20% on the close panel, hovering to white/50%.
 
 ### Chips
-- **Shop chip:** white pill, hairline border, Rest shadow, slate initials disc on the left, "Built for **Shop**".
-- **Status chips (admin):** small 8px-radius tags (`{rounded.sm}`), 11px medium text with a leading dot, tinted by state: deep mist for new, cobalt wash for quoted and sent, success wash for paid and booked.
+- **Chip (`.shop-chip`):** 26px pill, strong-hairline stroke, card fill, Fragment Mono 10.5px uppercase at 0.12em. Used for "Photo quote", "Example", "Sample", service tags; 24px and 9.5px inside chapters.
+- **Admin counters:** small 4px-radius signal tags with white figures.
 
 ### Cards / Containers
-- **Corner Style:** 20px (`{rounded.lg}`).
-- **Background:** white on daylight; the quote form sits in a mist panel.
-- **Shadow Strategy:** Lifted at rest, Raised on hover (see Elevation).
-- **Border:** 1px hairline.
-- **Internal Padding:** 10px around a framed preview well, then 16px/8px for the caption row.
+- **Card (`.shop-card`):** 22px corners, hairline border, card fill, Card shadow, 20–24px padding.
+- **Field cell:** 13px corners, hairline, field fill, a 9.5px mono label over the value.
+- **Well:** oat fill, hairline, 14–18px corners; holds toggles, the facts strip, the chapter list.
 
-### Inputs / Fields
-- **Style:** 52px tall, white, 12px radius, strong-hairline stroke, 16px slate-ink text, quiet placeholder.
-- **Focus:** stroke turns ink plus a 3px ring of the accent at 20% opacity.
-- **Error:** stroke turns danger, driven by `aria-invalid`.
-- **Segments:** 8px-radius options inside a mist panel; selected fills slate ink with white text.
+### Inputs / Toggles
+- **Selects** inside field cells: transparent, Fragment Mono 14–15px ink, no chrome.
+- **Number keys:** 28px squares, 7px corners, mono; selected fills ink.
+- **Damage toggles:** 36px tall, 10px corners, strong-hairline on field fill; selected fills ink with cream text. All toggles expose `aria-pressed`.
+- **Focus:** the accent outline from `.demo-theme :focus-visible`.
 
 ### Navigation
-- **Demo bar:** slim slate-ink strip, 13px quiet text, shop name in on-night.
-- **Tour bar:** fixed bottom-centre slate pill (95% opacity, blur, night-line ring, Raised shadow); 40px pill tabs with 16px line icons, active tab inverts to on-night with ink text; inactive labels hide below 768px.
-- **Shop header:** sticky, translucent daylight with blur and a hairline; initials disc, shop name and city, text links, a phone pill and a cobalt "Get a price" pill.
-- **Admin nav:** 40px rows, 12px radius, active row on deep mist.
+- **Demo bar:** slim ink strip, 13px on-night-quiet text, shop name in on-night.
+- **Site nav:** sticky floating card 12px from the top, 64px tall, 18px corners, card at 90% with blur, initials tile, shop name over a mono tagline, uppercase tracked text links, outline phone button and orange "Get a price". A 2px orange-to-teal line along its foot fills with scroll progress.
+- **Tour bar:** fixed bottom-centre ink pill (95%, blur, night-line ring, Raised shadow); 40px pill tabs with 16px line icons, active tab inverts to on-night with ink text; inactive labels hide below 640px.
 
-### Highlight Box (signature)
-The emphasised phrase in a headline is boxed: 2px cobalt stroke, cobalt-wash fill, cobalt text, 0.22em corners, tight line-height. On the overview it cycles through enquiry types, gliding to each phrase's width with a blur-and-slide swap (0.5–0.55s, ease-out-expo), and holds still under reduced motion. One per headline.
+### Ticket Readout (signature)
+A near-black 14–16px panel that writes the customer's request (or the shop's text message) back in Fragment Mono: a mono uppercase heading with a pulsing readout-green dot, then lines led by orange arrows with the key words in white. Used in the quick quote, the "What you get back" example and the admin's follow-ups.
 
-### Live Step Card (signature)
-A white 20px card framing a live, scaled miniature of a real demo page in a mist well, captioned by a cobalt number disc, a title and one quiet line. The phone variant frames the miniature in a slate phone bezel rising from the well's bottom edge.
+### Serif Smear (signature)
+The hero's serif word ("yet.") carries `.shop-smear`: a blurred orange gradient stroke riding across its middle. One per page.
 
-### Blueprint Grid (signature)
-56px cobalt grid lines at 7% opacity, masked by a radial fade so they vanish toward the edges. Sits behind hero areas; inverted at 60% opacity inside the cobalt close panel.
+### Ticker Band (signature)
+A full-width oat band rotated -0.6° with a 40s mono marquee of the shop's services and city, separated by orange bullets. Static under reduced motion.
 
-### Cobalt Close Panel
-A 28px-radius full-cobalt panel with the inverted grid, white headline, 85% white supporting line and a white pill. One per page, at the end.
+### Close Panel
+A 28px-radius panel on a dark gradient from warm brown-black to deep teal, with a light cream headline (one serif word), on-night-quiet supporting line, an orange button and an on-night outline phone button. One per page, at the end.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** use `var(--accent)` for every accent use so a shop's own brand colour can replace cobalt.
-- **Do** keep emphasis to weight and the highlight box, one box per headline.
-- **Do** use pills for actions and identity chips, 12px for controls, 20px for cards.
-- **Do** tint shadows with slate (`rgb(16 32 72 / …)`) and keep them soft with negative spread.
-- **Do** keep labels sentence case at 13px semibold.
-- **Do** honour reduced motion on any rotating or animated element.
+- **Do** use `var(--accent)` for every accent use so a shop's own brand colour can replace orange.
+- **Do** keep headlines light (300) and give each at most one serif italic word.
+- **Do** set labels, chips, figures and readouts in Fragment Mono uppercase.
+- **Do** use 11–13px corners for controls and 22px for cards; keep pills for chips and the tour bar.
+- **Do** tint shadows warm (`rgb(60 45 20 / …)`).
+- **Do** honour reduced motion on the marquee, the progress line and any animated element.
 
 ### Don't:
-- **Don't** introduce a second typeface, italics or tracked uppercase mono labels inside `.demo-theme`.
-- **Don't** add a second saturated hue; status colours are state only.
-- **Don't** use hard offset shadows or warm-tinted shadows from the marketing world.
-- **Don't** carry the marketing site's bronze, warm off-white or serif emphasis into demo routes.
+- **Don't** put teal on a button or use it as a second accent for actions.
+- **Don't** use mono for sentences, or more than one serif word per heading.
+- **Don't** use cool grey or slate shadows, white cards or cobalt from the old demo world.
+- **Don't** round buttons into pills.
+- **Don't** let WheelPro branding into the shop's pages beyond the demo bar, tour bar and footer credit.

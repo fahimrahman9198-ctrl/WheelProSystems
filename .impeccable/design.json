@@ -3,49 +3,57 @@
   "generatedAt": "2026-10-22T00:00:00Z",
   "title": "Design System: WheelPro Systems — Shop Demo",
   "extensions": {
-    "scope": "Applies inside the .demo-theme wrapper on /demo/[shop] routes only. The marketing site keeps its own incumbent tokens in app/globals.css :root, not documented here.",
+    "scope": "Applies inside the .demo-theme wrapper on /demo/[shop] routes only (shop website, customer quote, admin). Tokens live in the .demo-theme block at the end of app/globals.css; the marketing site's :root tokens are not documented here.",
     "colorMeta": {
-      "cobalt": { "role": "primary", "displayName": "Cobalt", "canonical": "oklch(51.2% 0.229 265.7)", "cssVar": "--accent", "tonalRamp": ["#0e0068", "#070089", "#102caa", "#2c54d3", "#4c7bfd", "#6ea2ff", "#92caff", "#aee8ff"] },
-      "cobalt-deep": { "role": "primary", "displayName": "Deep Cobalt", "purpose": "Hover on cobalt pills." },
-      "cobalt-wash": { "role": "primary", "displayName": "Cobalt Wash", "cssVar": "--accent-soft" },
-      "daylight": { "role": "neutral", "displayName": "Daylight", "canonical": "oklch(98.1% 0.005 258.3)", "cssVar": "--bg", "tonalRamp": ["#101214", "#27292b", "#414245", "#626366", "#848689", "#a9abae", "#cfd1d4", "#edeff1"] },
-      "paper": { "role": "neutral", "displayName": "Paper" },
-      "mist": { "role": "neutral", "displayName": "Mist", "cssVar": "--bg-subtle" },
-      "mist-deep": { "role": "neutral", "displayName": "Deep Mist", "cssVar": "--bg-muted" },
+      "signal": { "role": "primary", "displayName": "Signal", "cssVar": "--accent" },
+      "signal-deep": { "role": "primary", "displayName": "Deep Signal", "purpose": "Hover on orange buttons (currently a literal #d8431f)." },
+      "signal-wash": { "role": "primary", "displayName": "Signal Wash", "cssVar": "--accent-soft" },
+      "teal": { "role": "secondary", "displayName": "Teal", "cssVar": "--teal", "purpose": "Second line of headings, gradient end, booked bars. Never on a button." },
+      "cream": { "role": "neutral", "displayName": "Cream", "cssVar": "--bg" },
+      "card": { "role": "neutral", "displayName": "Card", "cssVar": "--card" },
+      "field": { "role": "neutral", "displayName": "Field", "purpose": "Lightest cells inside cards." },
+      "oat": { "role": "neutral", "displayName": "Oat", "cssVar": "--bg-subtle" },
+      "oat-deep": { "role": "neutral", "displayName": "Deep Oat", "cssVar": "--bg-muted" },
       "hairline": { "role": "neutral", "displayName": "Hairline", "cssVar": "--line" },
       "hairline-strong": { "role": "neutral", "displayName": "Strong Hairline", "cssVar": "--line-strong" },
-      "slate-ink": { "role": "neutral", "displayName": "Slate Ink", "canonical": "oklch(18.9% 0.037 264.1)", "cssVar": "--ink", "tonalRamp": ["#091122", "#20293b", "#384256", "#596379", "#7b869d", "#9fabc3", "#c5d1ea", "#e2efff"] },
-      "slate-body": { "role": "neutral", "displayName": "Slate Body", "cssVar": "--ink-2" },
-      "slate-quiet": { "role": "neutral", "displayName": "Slate Quiet", "cssVar": "--ink-3" },
+      "ink": { "role": "neutral", "displayName": "Ink", "cssVar": "--ink" },
+      "ink-body": { "role": "neutral", "displayName": "Ink Body", "cssVar": "--ink-2" },
+      "ink-quiet": { "role": "neutral", "displayName": "Ink Quiet", "cssVar": "--ink-3" },
+      "night-2": { "role": "neutral", "displayName": "Night 2", "cssVar": "--dark-2" },
       "night-line": { "role": "neutral", "displayName": "Night Line", "cssVar": "--dark-line" },
       "on-night": { "role": "neutral", "displayName": "On Night", "cssVar": "--on-dark" },
       "on-night-quiet": { "role": "neutral", "displayName": "On Night Quiet", "cssVar": "--on-dark-2" },
-      "success": { "role": "status", "displayName": "Paid Green", "canonical": "oklch(52.7% 0.137 150.1)", "cssVar": "--success", "tonalRamp": ["#001e00", "#003900", "#005512", "#017835", "#3b9d58", "#64c37c", "#8beaa1", "#a8ffbd"] },
+      "readout-green": { "role": "status", "displayName": "Readout Green", "purpose": "Live dot and heading inside dark readouts only." },
+      "success": { "role": "status", "displayName": "Paid Green", "cssVar": "--success" },
       "success-wash": { "role": "status", "displayName": "Paid Wash", "cssVar": "--success-soft" },
-      "danger": { "role": "status", "displayName": "Error Red", "canonical": "oklch(57.7% 0.215 27.3)", "cssVar": "--danger", "tonalRamp": ["#4a0000", "#6d0000", "#900000", "#bb0914", "#e6443c", "#ff6d61", "#ff9586", "#ffb4a3"] }
+      "danger": { "role": "status", "displayName": "Error Red", "cssVar": "--danger" }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Overview and shop-site hero headlines; may contain one highlight box." },
-      "headline": { "displayName": "Headline", "purpose": "Section heads and the close panel." },
-      "title": { "displayName": "Title", "purpose": "Card titles, timeline steps, service names, admin list names. Renders from the 700 cut." },
-      "lead": { "displayName": "Lead", "purpose": "The single sentence under a hero." },
-      "body": { "displayName": "Body", "purpose": "Paragraphs; authored 450, renders from the 500 cut." },
-      "label": { "displayName": "Label", "purpose": "Form legends and admin field labels, sentence case." }
+      "display": { "displayName": "Display", "purpose": "Shop-site hero, three short lines, light 300." },
+      "headline": { "displayName": "Headline", "purpose": "Section heads; second line teal; close panel." },
+      "emphasis": { "displayName": "Serif Word", "purpose": "One Instrument Serif italic word per heading (.shop-serif)." },
+      "title": { "displayName": "Title", "purpose": "Card heads and chapter names." },
+      "lead": { "displayName": "Lead", "purpose": "Paragraph under the hero." },
+      "body": { "displayName": "Body", "purpose": "Paragraphs." },
+      "label": { "displayName": "Label", "purpose": "Fragment Mono uppercase labels, chips, figures (.shop-label, .shop-mono)." },
+      "button": { "displayName": "Button", "purpose": "Uppercase tracked button labels." }
     },
     "shadows": [
-      { "name": "rest", "value": "0 1px 2px rgb(16 32 72 / 0.05), 0 4px 12px -4px rgb(16 32 72 / 0.08)", "purpose": "Chips, secondary pills, timeline nodes." },
-      { "name": "lifted", "value": "0 2px 4px rgb(16 32 72 / 0.04), 0 18px 40px -16px rgb(16 32 72 / 0.18)", "purpose": "Step cards at rest." },
-      { "name": "raised", "value": "0 4px 10px rgb(16 32 72 / 0.05), 0 40px 80px -28px rgb(16 32 72 / 0.28)", "purpose": "Hovered cards, hero photos, the tour bar." },
-      { "name": "cobalt-glow", "value": "0 10px 24px -10px rgb(39 82 231 / 0.7)", "purpose": "Primary pill on heroes." },
-      { "name": "focus-ring", "value": "0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent)", "purpose": "Focused inputs, with the stroke turning ink." }
+      { "name": "rest", "value": "0 1px 2px rgb(60 45 20 / 0.05), 0 4px 12px -4px rgb(60 45 20 / 0.08)", "purpose": "Small controls (--shadow-sm)." },
+      { "name": "lifted", "value": "0 2px 4px rgb(60 45 20 / 0.04), 0 18px 40px -16px rgb(60 45 20 / 0.2)", "purpose": "--shadow-md." },
+      { "name": "raised", "value": "0 4px 10px rgb(60 45 20 / 0.05), 0 40px 80px -28px rgb(60 45 20 / 0.3)", "purpose": "The tour bar (--shadow-lg)." },
+      { "name": "card", "value": "0 1px 2px rgb(60 45 20 / 0.05), 0 24px 60px -30px rgb(60 45 20 / 0.28)", "purpose": ".shop-card." },
+      { "name": "nav", "value": "0 10px 30px -18px rgb(60 45 20 / 0.35)", "purpose": "Floating site nav." },
+      { "name": "readout", "value": "0 18px 40px -20px rgb(0 0 0 / 0.6)", "purpose": "Dark ticket readouts." },
+      { "name": "close", "value": "0 40px 80px -40px rgb(20 15 10 / 0.6)", "purpose": "Closing panel." }
     ],
     "motion": [
-      { "name": "ease-out-expo", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Highlight-box width glide and phrase swap." },
-      { "name": "phrase-swap", "value": "500ms", "purpose": "Blur-and-slide swap of the rotating phrase; disabled under reduced motion." },
-      { "name": "box-glide", "value": "550ms", "purpose": "Highlight box resizing to the next phrase." },
-      { "name": "phrase-interval", "value": "2600ms", "purpose": "Time each phrase holds." },
-      { "name": "card-lift", "value": "300ms, translateY(-4px)", "purpose": "Step-card hover lift." },
-      { "name": "press", "value": "scale(0.98)", "purpose": "Active state of pills." }
+      { "name": "ease-out-expo", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Funnel bar widths in the admin." },
+      { "name": "marquee", "value": "40s linear infinite", "purpose": "Ticker band; disabled under reduced motion." },
+      { "name": "nav-progress", "value": "spring stiffness 140, damping 28, mass 0.4", "purpose": "Orange-to-teal scroll line under the site nav." },
+      { "name": "chapter-swap", "value": "500ms", "purpose": "Active chapter rule scale and photo crossfade." },
+      { "name": "arrow-nudge", "value": "translateX(2px)", "purpose": "Button arrow on hover." },
+      { "name": "press", "value": "scale(0.98)", "purpose": "Active state of buttons." }
     ],
     "breakpoints": [
       { "name": "sm", "value": "640px" },
@@ -56,106 +64,116 @@
   },
   "components": [
     {
-      "name": "Primary Pill",
+      "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Cobalt pill with trailing arrow; the one primary action per view.",
-      "html": "<a class=\"ds-btn-primary\" href=\"#\">Start the tour <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></a>",
-      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; height: 48px; padding: 0 20px 0 24px; border-radius: 9999px; background: var(--accent, #2752e7); color: #fff; font-family: var(--font-body, Satoshi), Arial, sans-serif; font-size: 16px; font-weight: 600; text-decoration: none; box-shadow: 0 10px 24px -10px rgb(39 82 231 / 0.7); transition: transform .2s, background-color .2s; } .ds-btn-primary svg { transition: transform .2s; } .ds-btn-primary:hover { background: #1f45cf; } .ds-btn-primary:hover svg { transform: translateX(2px); } .ds-btn-primary:active { transform: scale(0.98); } .ds-btn-primary:focus-visible { outline: 2px solid var(--accent, #2752e7); outline-offset: 3px; }"
+      "description": "Signal-orange, 11px corners, uppercase tracked label (.shop-btn).",
+      "html": "<a class=\"ds-btn\" href=\"#\">Get a price</a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 22px; border-radius: 11px; background: var(--accent, #ee5131); color: #fff; font-family: \"General Sans\", Arial, sans-serif; font-size: 12.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; transition: background-color .2s, transform .15s; } .ds-btn:hover { background: #d8431f; } .ds-btn:active { transform: scale(0.98); } .ds-btn:focus-visible { outline: 2px solid var(--accent, #ee5131); outline-offset: 3px; }"
     },
     {
-      "name": "Secondary Pill",
+      "name": "Ink Button",
       "kind": "button",
-      "refersTo": "button-secondary",
-      "description": "White pill with a strong hairline; phone and secondary actions.",
-      "html": "<a class=\"ds-btn-secondary\" href=\"#\">Book a walkthrough</a>",
-      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; height: 48px; padding: 0 20px; border-radius: 9999px; border: 1px solid var(--line-strong, #c9d3e1); background: #fff; color: var(--ink, #0b1324); font-family: var(--font-body, Satoshi), Arial, sans-serif; font-size: 16px; font-weight: 500; text-decoration: none; transition: border-color .2s; } .ds-btn-secondary:hover { border-color: var(--ink, #0b1324); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--accent, #2752e7); outline-offset: 3px; }"
+      "refersTo": "button-ink",
+      "description": "Near-black hero button, 13px corners, 52px tall.",
+      "html": "<a class=\"ds-btn-ink\" href=\"#\">Get a price</a>",
+      "css": ".ds-btn-ink { display: inline-flex; align-items: center; height: 52px; padding: 0 24px; border-radius: 13px; background: var(--ink, #141413); color: #f9f6ee; font-family: \"General Sans\", Arial, sans-serif; font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none; transition: transform .15s; } .ds-btn-ink:active { transform: scale(0.98); } .ds-btn-ink:focus-visible { outline: 2px solid var(--accent, #ee5131); outline-offset: 3px; }"
     },
     {
-      "name": "Text Field",
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Card fill with strong hairline; phone numbers.",
+      "html": "<a class=\"ds-btn-outline\" href=\"#\">(519) 555-0142</a>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; height: 52px; padding: 0 24px; border-radius: 13px; border: 1px solid var(--line-strong, #cbc1aa); background: var(--card, #f9f6ee); color: var(--ink, #141413); font-family: \"General Sans\", Arial, sans-serif; font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none; transition: border-color .2s; } .ds-btn-outline:hover { border-color: var(--ink, #141413); }"
+    },
+    {
+      "name": "Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Mono uppercase pill (.shop-chip).",
+      "html": "<span class=\"ds-chip\">Photo quote</span>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; height: 26px; padding: 0 11px; border: 1px solid var(--line-strong, #cbc1aa); border-radius: 999px; background: var(--card, #f9f6ee); font-family: \"Fragment Mono\", ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2, #3b3a36); white-space: nowrap; }"
+    },
+    {
+      "name": "Field Cell",
       "kind": "input",
-      "refersTo": "input-field",
-      "description": "52px white field, 12px radius; ink stroke and accent ring on focus.",
-      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Your name</span><input class=\"ds-input\" placeholder=\"Jordan\" /></label>",
-      "css": ".ds-field { display: grid; gap: 8px; font-family: var(--font-body, Satoshi), Arial, sans-serif; } .ds-field-label { font-size: 13px; font-weight: 600; color: var(--ink-3, #5d6a82); } .ds-input { height: 52px; width: 100%; padding: 0 16px; border-radius: 12px; border: 1px solid var(--line-strong, #c9d3e1); background: #fff; font: inherit; font-size: 16px; color: var(--ink, #0b1324); transition: border-color .2s, box-shadow .2s; } .ds-input::placeholder { color: var(--ink-3, #5d6a82); } .ds-input:hover { border-color: var(--ink-3, #5d6a82); } .ds-input:focus { outline: none; border-color: var(--ink, #0b1324); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent, #2752e7) 20%, transparent); } .ds-input[aria-invalid=true] { border-color: var(--danger, #dc2626); }"
+      "refersTo": "field-cell",
+      "description": "Lightest cell with a mono label over a chromeless mono select.",
+      "html": "<label class=\"ds-cell\"><span class=\"ds-label\">Size</span><select class=\"ds-select\"><option>Not sure</option><option>18\"</option></select></label>",
+      "css": ".ds-cell { display: block; padding: 12px 14px; border: 1px solid var(--line, #ddd5c2); border-radius: 13px; background: #fdfbf6; } .ds-label { display: block; font-family: \"Fragment Mono\", ui-monospace, monospace; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3, #6b675d); } .ds-select { margin-top: 4px; width: 100%; appearance: none; border: 0; background: transparent; font-family: \"Fragment Mono\", ui-monospace, monospace; font-size: 15px; color: var(--ink, #141413); cursor: pointer; } .ds-select:focus-visible { outline: 2px solid var(--accent, #ee5131); outline-offset: 2px; }"
     },
     {
-      "name": "Shop Chip",
-      "kind": "chip",
-      "refersTo": "chip-shop",
-      "description": "Identity pill naming whose demo this is.",
-      "html": "<p class=\"ds-chip-shop\"><span class=\"ds-chip-initials\">LW</span>Built for <b>London Wheel Repair</b></p>",
-      "css": ".ds-chip-shop { display: inline-flex; align-items: center; gap: 10px; margin: 0; padding: 6px 16px 6px 6px; border-radius: 9999px; border: 1px solid var(--line, #e1e7f0); background: #fff; color: var(--ink-2, #34405a); font-family: var(--font-body, Satoshi), Arial, sans-serif; font-size: 14px; box-shadow: 0 1px 2px rgb(16 32 72 / 0.05), 0 4px 12px -4px rgb(16 32 72 / 0.08); } .ds-chip-shop b { color: var(--ink, #0b1324); font-weight: 600; } .ds-chip-initials { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 9999px; background: var(--ink, #0b1324); color: #fff; font-size: 11px; font-weight: 700; }"
-    },
-    {
-      "name": "Status Tag",
-      "kind": "chip",
-      "description": "Admin lead state, 8px radius, tinted by state.",
-      "html": "<span class=\"ds-status ds-status-quoted\"><i></i>Quoted</span> <span class=\"ds-status ds-status-paid\"><i></i>Deposit paid</span>",
-      "css": ".ds-status { display: inline-flex; align-items: center; gap: 6px; padding: 2px 8px; border-radius: 8px; font-family: var(--font-body, Satoshi), Arial, sans-serif; font-size: 11px; font-weight: 500; white-space: nowrap; } .ds-status i { width: 6px; height: 6px; border-radius: 2px; background: currentColor; } .ds-status-quoted { background: var(--accent-soft, #e7edff); color: var(--accent, #2752e7); } .ds-status-paid { background: var(--success-soft, #e8f7ee); color: var(--success, #15803d); }"
-    },
-    {
-      "name": "Live Step Card",
+      "name": "Card",
       "kind": "card",
-      "refersTo": "card-step",
-      "description": "White 20px card framing a live miniature, captioned by a cobalt number disc.",
-      "html": "<a class=\"ds-step\" href=\"#\"><div class=\"ds-step-well\"></div><div class=\"ds-step-cap\"><span class=\"ds-step-n\">1</span><span><b>Your new website</b><small>A fast, modern site in your name.</small></span></div></a>",
-      "css": ".ds-step { display: block; max-width: 280px; padding: 10px; border-radius: 20px; border: 1px solid var(--line, #e1e7f0); background: #fff; color: inherit; text-decoration: none; font-family: var(--font-body, Satoshi), Arial, sans-serif; box-shadow: 0 2px 4px rgb(16 32 72 / 0.04), 0 18px 40px -16px rgb(16 32 72 / 0.18); transition: transform .3s, box-shadow .3s; } .ds-step:hover { transform: translateY(-4px); box-shadow: 0 4px 10px rgb(16 32 72 / 0.05), 0 40px 80px -28px rgb(16 32 72 / 0.28); } .ds-step:focus-visible { outline: 2px solid var(--accent, #2752e7); outline-offset: 3px; } .ds-step-well { aspect-ratio: 4/3; border-radius: 14px; background: var(--bg-subtle, #eef2f8); box-shadow: inset 0 0 0 1px var(--line, #e1e7f0); } .ds-step-cap { display: flex; gap: 12px; padding: 16px 8px 8px; } .ds-step-n { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 9999px; background: var(--accent, #2752e7); color: #fff; font-size: 13px; font-weight: 700; } .ds-step-cap b { display: block; font-size: 16px; font-weight: 600; color: var(--ink, #0b1324); } .ds-step-cap small { display: block; margin-top: 4px; font-size: 14px; color: var(--ink-3, #5d6a82); }"
+      "refersTo": "card",
+      "description": "22px cream card with warm long shadow (.shop-card).",
+      "html": "<div class=\"ds-card\"><p class=\"ds-card-title\">What would yours cost?</p></div>",
+      "css": ".ds-card { padding: 24px; border: 1px solid var(--line, #ddd5c2); border-radius: 22px; background: var(--card, #f9f6ee); box-shadow: 0 1px 2px rgb(60 45 20 / 0.05), 0 24px 60px -30px rgb(60 45 20 / 0.28); } .ds-card-title { margin: 0; font-family: \"General Sans\", Arial, sans-serif; font-size: 22px; letter-spacing: -0.02em; color: var(--ink, #141413); }"
     },
     {
-      "name": "Highlight Box",
+      "name": "Ticket Readout",
       "kind": "custom",
-      "description": "The one emphasised phrase in a headline: cobalt stroke, wash fill, proportional corners.",
-      "html": "<h1 class=\"ds-display\">Wheel repair, priced from <span class=\"ds-mark\">a photo</span>.</h1>",
-      "css": ".ds-display { margin: 0; font-family: var(--font-body, Satoshi), Arial, sans-serif; font-size: 44px; font-weight: 700; line-height: 1.08; letter-spacing: -0.04em; color: var(--ink, #0b1324); } .ds-mark { display: inline-block; padding: 0 0.22em 0.06em; border: 2px solid var(--accent, #2752e7); border-radius: 0.22em; background: var(--accent-soft, #e7edff); color: var(--accent, #2752e7); line-height: 1.04; }"
+      "refersTo": "readout",
+      "description": "Near-black panel echoing the request in mono, led by orange arrows.",
+      "html": "<div class=\"ds-readout\"><p class=\"ds-readout-h\"><i></i>Your request</p><ul><li><b>→</b><span><em>2 wheels</em>, 18\"</span></li><li><b>→</b><span><em>Damage</em> curb rash</span></li></ul></div>",
+      "css": ".ds-readout { padding: 16px; border-radius: 16px; background: #141413; box-shadow: 0 18px 40px -20px rgb(0 0 0 / 0.6); font-family: \"Fragment Mono\", ui-monospace, monospace; } .ds-readout-h { display: flex; align-items: center; gap: 8px; margin: 0 0 14px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #5fd39a; } .ds-readout-h i { width: 6px; height: 6px; border-radius: 999px; background: #5fd39a; } .ds-readout ul { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; font-size: 13px; color: #d8d4c8; } .ds-readout li { display: flex; gap: 8px; } .ds-readout b { font-weight: 400; color: var(--accent, #ee5131); } .ds-readout em { font-style: normal; color: #fff; }"
+    },
+    {
+      "name": "Serif Headline",
+      "kind": "custom",
+      "description": "Light display headline with one Instrument Serif italic word carrying the orange smear.",
+      "html": "<h1 class=\"ds-display\">Don't buy new wheels <span class=\"ds-smear\">yet.</span></h1>",
+      "css": ".ds-display { margin: 0; max-width: 9ch; font-family: \"General Sans\", Arial, sans-serif; font-size: 64px; font-weight: 300; line-height: 0.96; letter-spacing: -0.045em; color: var(--ink, #141413); } .ds-smear { position: relative; isolation: isolate; font-family: \"Instrument Serif\", serif; font-style: italic; font-weight: 400; letter-spacing: -0.01em; } .ds-smear::before { content: \"\"; position: absolute; z-index: -1; left: 0.2em; right: -0.9em; top: 0.5em; height: 0.18em; border-radius: 999px; background: linear-gradient(90deg, transparent, rgb(238 81 49 / 0.45) 30%, rgb(238 81 49 / 0.25) 70%, transparent); filter: blur(4px); }"
     },
     {
       "name": "Tour Bar",
       "kind": "nav",
       "refersTo": "tour-bar",
-      "description": "Floating slate pill nav between overview, website, quote and admin.",
-      "html": "<nav class=\"ds-tour\"><a class=\"ds-tour-tab is-on\" href=\"#\">Overview</a><a class=\"ds-tour-tab\" href=\"#\">Website</a><a class=\"ds-tour-tab\" href=\"#\">Your admin</a></nav>",
-      "css": ".ds-tour { display: inline-flex; gap: 4px; padding: 6px; border-radius: 9999px; background: rgb(11 19 36 / 0.95); box-shadow: 0 0 0 1px var(--dark-line, #26324a), 0 4px 10px rgb(16 32 72 / 0.05), 0 40px 80px -28px rgb(16 32 72 / 0.28); backdrop-filter: blur(8px); font-family: var(--font-body, Satoshi), Arial, sans-serif; } .ds-tour-tab { display: inline-flex; align-items: center; height: 40px; padding: 0 16px; border-radius: 9999px; font-size: 14px; font-weight: 500; color: var(--on-dark-2, #a6b1c6); text-decoration: none; transition: color .2s; } .ds-tour-tab:hover { color: var(--on-dark, #f5f8fd); } .ds-tour-tab.is-on { background: var(--on-dark, #f5f8fd); color: var(--ink, #0b1324); } .ds-tour-tab:focus-visible { outline: 2px solid var(--accent, #2752e7); outline-offset: 2px; }"
+      "description": "Floating ink pill nav between website, customer quote and admin.",
+      "html": "<nav class=\"ds-tour\"><a class=\"ds-tour-tab is-on\" href=\"#\">Website</a><a class=\"ds-tour-tab\" href=\"#\">Customer quote</a><a class=\"ds-tour-tab\" href=\"#\">Your admin</a></nav>",
+      "css": ".ds-tour { display: inline-flex; gap: 4px; padding: 6px; border-radius: 9999px; background: rgb(20 20 19 / 0.95); box-shadow: 0 0 0 1px var(--dark-line, #34312b), 0 4px 10px rgb(60 45 20 / 0.05), 0 40px 80px -28px rgb(60 45 20 / 0.3); backdrop-filter: blur(8px); font-family: \"General Sans\", Arial, sans-serif; } .ds-tour-tab { display: inline-flex; align-items: center; height: 40px; padding: 0 16px; border-radius: 9999px; font-size: 14px; font-weight: 500; color: var(--on-dark-2, #bdb7a8); text-decoration: none; transition: color .2s; } .ds-tour-tab:hover { color: var(--on-dark, #f3efe3); } .ds-tour-tab.is-on { background: var(--on-dark, #f3efe3); color: var(--ink, #141413); } .ds-tour-tab:focus-visible { outline: 2px solid var(--accent, #ee5131); outline-offset: 2px; }"
     },
     {
-      "name": "Cobalt Close Panel",
+      "name": "Close Panel",
       "kind": "card",
       "refersTo": "panel-close",
-      "description": "Full-cobalt end panel with inverted blueprint grid and a white pill.",
-      "html": "<section class=\"ds-close\"><h2>See it working in 20 minutes.</h2><a class=\"ds-close-btn\" href=\"#\">Book a walkthrough</a></section>",
-      "css": ".ds-close { position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; padding: 64px 24px; border-radius: 28px; background-color: var(--accent, #2752e7); background-image: linear-gradient(rgb(255 255 255 / 0.06) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.06) 1px, transparent 1px); background-size: 56px 56px; text-align: center; font-family: var(--font-body, Satoshi), Arial, sans-serif; } .ds-close h2 { margin: 0; max-width: 18ch; font-size: 40px; font-weight: 700; line-height: 1.06; letter-spacing: -0.04em; color: #fff; } .ds-close-btn { margin-top: 32px; display: inline-flex; align-items: center; height: 48px; padding: 0 24px; border-radius: 9999px; background: #fff; color: var(--ink, #0b1324); font-size: 16px; font-weight: 600; text-decoration: none; transition: transform .2s; } .ds-close-btn:active { transform: scale(0.98); } .ds-close-btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }"
+      "description": "Dark brown-to-teal gradient end panel with a serif word and an orange button.",
+      "html": "<section class=\"ds-close\"><h2>What will it cost? Find out from your <em>couch</em>.</h2><a class=\"ds-btn\" href=\"#\">Get a price</a></section>",
+      "css": ".ds-close { padding: 56px 24px; border-radius: 28px; background: linear-gradient(135deg, #1c1714 0%, #141413 55%, #0f2a28 100%); box-shadow: 0 40px 80px -40px rgb(20 15 10 / 0.6); font-family: \"General Sans\", Arial, sans-serif; } .ds-close h2 { margin: 0 0 36px; max-width: 16ch; font-size: 44px; font-weight: 300; line-height: 1.02; letter-spacing: -0.035em; color: #f3efe3; } .ds-close em { font-family: \"Instrument Serif\", serif; font-weight: 400; letter-spacing: -0.01em; }"
     }
   ],
   "narrative": {
-    "northStar": "The Cobalt Blueprint",
-    "overview": "The demo reads as a clean working drawing of a shop's own system: cool daylight paper, slate ink, a faint blueprint grid that fades out behind hero areas, and a single cobalt accent spent with full commitment. The proof is the working product itself, so the world stays quiet and lets live miniatures, real forms and a real admin carry the page.\n\nDensity is calm on persuasion surfaces (overview, shop website) and denser in the admin, but both share one family, one accent and one shape language. Emphasis comes from weight and from the outlined cobalt highlight box, never from a second typeface, italics or tracked mono labels.\n\nPills carry action and identity; rounded rectangles carry content. Depth is soft, cool and slate-tinted, lifting cards gently off the daylight ground.",
+    "northStar": "The Shop Counter",
+    "overview": "The demo is the shop's own website and back office, so it should feel like a good independent workshop's counter: warm cream paper, near-black ink, a printed ticket readout, and one signal-orange mark where the customer should press. The shop is the brand; WheelPro only signs the footer.\n\nPersuasion surfaces (website, quote) are big and airy: light 300-weight headlines at display sizes, one serif italic word, generous cream bands. The admin is denser but uses the same cards, labels and buttons. Small text that names or measures something is set in tracked uppercase Fragment Mono, which gives the world its spec-sheet voice.\n\nRounded rectangles carry everything: 11–13px for controls, 13–16px for wells, 22px for cards, 28px for the closing panel. Pills are reserved for chips, dots and the floating tour bar. Depth is soft and warm, brown-tinted rather than grey.",
     "keyCharacteristics": [
-      "Cool daylight ground with white cards and hairline borders",
-      "One cobalt accent: highlight box, step numbers, primary pill, close panel",
-      "Satoshi only, bold display with tight negative tracking",
-      "Pills for actions, chips and the tour bar; 12px controls; 20px cards",
-      "Soft slate-tinted shadows; a fading blueprint grid behind heroes"
+      "Warm cream ground, lighter cream cards, oat wells and hairlines",
+      "One signal orange for action and markers; teal only for second lines of headings and secondary data",
+      "Light 300 display weight with tight tracking; one Instrument Serif italic word per heading",
+      "Fragment Mono uppercase labels, chips and readouts",
+      "Uppercase tracked buttons on 11–13px corners; ink buttons for the hero, orange elsewhere",
+      "Near-black ticket readouts that echo the request or message back in mono"
     ],
     "rules": [
-      { "name": "The One Cobalt Rule", "body": "Cobalt is the only hue with saturation. Status green and red appear only as state, never as decoration.", "section": "colors" },
-      { "name": "The Accent Is a Variable Rule", "body": "Every accent use reads `var(--accent)`, because a shop may supply its own brand colour; new surfaces must not hard-code cobalt.", "section": "colors" },
-      { "name": "The One Family Rule", "body": "Satoshi everywhere. Emphasis is weight or the highlight box; never italics, a serif, or a mono face.", "section": "typography" },
-      { "name": "The Sentence-Case Label Rule", "body": "Labels are plain sentence case at 13px; no uppercase, no letter-spacing.", "section": "typography" },
-      { "name": "The Lift-On-Hover Rule", "body": "Interactive cards rise 4px and step from Lifted to Raised on hover; nothing else moves.", "section": "elevation" }
+      { "name": "The One Signal Rule", "body": "Orange is the only loud colour. Teal is a quieter second voice for words and data, never for actions; status green and red are state only.", "section": "colors" },
+      { "name": "The Accent Is a Variable Rule", "body": "Every accent use reads `var(--accent)`, because a shop can supply its own brand colour; the literal #d8431f hover should become a token if a shop overrides the accent.", "section": "colors" },
+      { "name": "The One Serif Word Rule", "body": "At most one Instrument Serif italic word per heading, and nowhere else. It may carry the orange smear only in the hero.", "section": "typography" },
+      { "name": "The Mono Is for Facts Rule", "body": "Mono uppercase is for labels, chips, figures and readouts, never for sentences a customer has to read.", "section": "typography" }
     ],
     "dos": [
-      "**Do** use `var(--accent)` for every accent use so a shop's own brand colour can replace cobalt.",
-      "**Do** keep emphasis to weight and the highlight box, one box per headline.",
-      "**Do** use pills for actions and identity chips, 12px for controls, 20px for cards.",
-      "**Do** tint shadows with slate (`rgb(16 32 72 / …)`) and keep them soft with negative spread.",
-      "**Do** keep labels sentence case at 13px semibold.",
-      "**Do** honour reduced motion on any rotating or animated element."
+      "**Do** use `var(--accent)` for every accent use so a shop's own brand colour can replace orange.",
+      "**Do** keep headlines light (300) and give each at most one serif italic word.",
+      "**Do** set labels, chips, figures and readouts in Fragment Mono uppercase.",
+      "**Do** use 11–13px corners for controls and 22px for cards; keep pills for chips and the tour bar.",
+      "**Do** tint shadows warm (`rgb(60 45 20 / …)`).",
+      "**Do** honour reduced motion on the marquee, the progress line and any animated element."
     ],
     "donts": [
-      "**Don't** introduce a second typeface, italics or tracked uppercase mono labels inside `.demo-theme`.",
-      "**Don't** add a second saturated hue; status colours are state only.",
-      "**Don't** use hard offset shadows or warm-tinted shadows from the marketing world.",
-      "**Don't** carry the marketing site's bronze, warm off-white or serif emphasis into demo routes."
+      "**Don't** put teal on a button or use it as a second accent for actions.",
+      "**Don't** use mono for sentences, or more than one serif word per heading.",
+      "**Don't** use cool grey or slate shadows, white cards or cobalt from the old demo world.",
+      "**Don't** round buttons into pills.",
+      "**Don't** let WheelPro branding into the shop's pages beyond the demo bar, tour bar and footer credit."
     ]
   }
 }
